@@ -69,4 +69,17 @@ public class Words{
     public void setUpdatedDate(LocalDateTime updatedDate) {
         this.updatedDate = updatedDate;
     }
+
+    @Override
+    public String toString() {
+        return "Words{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", userID=" + userID +
+                ", content=" + content +
+                ", createdDate=" + createdDate  +
+                ", updatedDate=" + updatedDate +
+                "}";
+    }
 }
+
