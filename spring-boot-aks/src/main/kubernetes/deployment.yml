@@ -26,7 +26,7 @@ spec:
         - name: docker-reg-credential
       containers:
         - name: aks-sample
-          image: team0registory.azurecr.io/aks-sample/spring-boot-sample:0.0.1
+          image: team4registory.azurecr.io/aks-sample/spring-boot-sample:0.0.1
           env:
             - name: TZ
               value: JST-9
@@ -35,17 +35,17 @@ spec:
             - name: SPRING_PROFILES_ACTIVE
               value: "pr"
             - name: DATASOURCE_URL
-              value: "jdbc:sqlserver://team0-sqlsrv.database.windows.net:1433;database=pbldb"
+              value: "jdbc:sqlserver://team4-sqlsrv.database.windows.net:1433;database=pbldb"
             - name: DATASOURCE_USER
               value: "ServerAdmin"
             - name: DATASOURCE_PASSWORD
               value: "welcome1#"
             - name: REDIS_HOST
-              value: "team0-redis.redis.cache.windows.net"
+              value: "team4-redis.redis.cache.windows.net"
             - name: REDIS_PORT
               value: "6379"
             - name: REDIS_PASSWORD
-              value: "21AZaO5N0hl92OMbU3M7ANpjrZyx6g9jKqfEpAmzmRk="
+              value: "S2awUx06n2uKq4liQCsvpVzLB4XfWj4KfAt+iBByEM4="
           livenessProbe:
             httpGet:
               path: /spring-boot-aks/actuator/health
