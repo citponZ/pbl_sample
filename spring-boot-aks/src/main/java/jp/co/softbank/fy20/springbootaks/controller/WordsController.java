@@ -53,4 +53,27 @@ public class WordsController {
         model.addAttribute("id", id);
         return "words/search";
     }
+
+
+    //削除画面に移動
+    @GetMapping("/delete")
+    public String delete(Model model) {
+        Words words = null;
+        model.addAttribute("words", words);
+        model.addAttribute("id", null);
+        return "words/delete";
+    }
+    //ID削除
+    @GetMapping("/deleteId")
+    public String deleteId(@RequestParam String id, Model model) {
+    boolean check = wordsService.delete(Integer.parseInt(id));
+    if (check){
+        model.addAttribute("message", "削除できました");
+    }else{
+        model.addAttribute("message", "削除できませんでした");
+    }
+    return "words/deleteResult";
+}
+
+
 }
