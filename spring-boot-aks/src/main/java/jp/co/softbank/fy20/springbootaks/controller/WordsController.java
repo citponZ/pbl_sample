@@ -67,7 +67,7 @@ public class WordsController {
         return "words/delete";
     }
     //ID削除
-    @GetMapping("/deleteId")
+    @PostMapping("/deleteId")
     public String deleteId(@RequestParam String id, Model model) {
     boolean check = wordsService.delete(Integer.parseInt(id));
     if (check){

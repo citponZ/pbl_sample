@@ -14,12 +14,12 @@
     <h1>削除</h1>
 
 
-    <form action="index.html" th:action="@{index}">
+    <form action="index.html" th:action="@{index}" >
 	    <input type="submit" value="メインメニューに戻る">
     </form>
     <br>
 
-    <form action="index.html" th:action="@{deleteId}">
+    <form action="index.html" th:action="@{deleteId}" method=POST>
         ID: <input type="text" name="id" th:value="${id}">
         <input type="submit" value="削除">
     </form>
