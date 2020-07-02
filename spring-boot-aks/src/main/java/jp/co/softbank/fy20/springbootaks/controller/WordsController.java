@@ -36,4 +36,21 @@ public class WordsController {
     public String index(Model model) {
         return "words/index";
     }
+
+    //検索画面に移動
+    @GetMapping("/search")
+    public String search(Model model) {
+        Words words = null;
+        model.addAttribute("words", words);
+        model.addAttribute("id", null);
+        return "words/search";
+    }
+    //ID検索
+    @GetMapping("/searchId")
+    public String searchId(@RequestParam String id, Model model) {
+        Words words = wordsService.find(Integer.parseInt(id));
+        model.addAttribute("words", words);
+        model.addAttribute("id", id);
+        return "words/search";
+    }
 }
