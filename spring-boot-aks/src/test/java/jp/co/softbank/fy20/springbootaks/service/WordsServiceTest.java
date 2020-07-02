@@ -11,7 +11,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class WordsServiceTest {
-
     public static void main(String[] args) {
         // DIコンテナの作成
         SpringApplication application = new SpringApplication(SampleApplication.class);
@@ -28,6 +27,45 @@ public class WordsServiceTest {
         for (Words Words : WordsList1) {
             System.out.println(Words);
         }
+
+        //新規追加のテスト
+        System.out.println("==== 新規追加 ====");
+        wordsService.insert(new Words("Azure", 1, "Azuerはクラウドです。"));
+
+        // 全件検索のテスト
+        System.out.println("==== 全件検索 ====");
+        List<Words> wordsList1 = wordsService.findAll();
+        for (Words words : wordsList1) {
+            System.out.println(words);
+        }
+
+        // 更新のテスト
+        System.out.println("==== 更新 ====");
+        int checkUpdate = wordsService.update("アップデートしました。", 2);
+        System.out.println(checkUpdate);
+
+        // 1検索
+        System.out.println("==== 1検索 ====");
+        Words rs = wordsService.find(2);
+        System.out.println(rs);
+
+        // 削除のテスト
+        System.out.println("==== 削除 ====");
+        boolean checkDelete = wordsService.delete(2);
+        if (checkDelete){
+            System.out.println("削除されました。");
+        }
+        else{
+            System.out.println("削除できませんでした。");
+        }
+        
+        // 全件検索のテスト
+        System.out.println("==== 全件検索 ====");
+        List<Words> wordsList2 = wordsService.findAll();
+        for (Words words : wordsList2) {
+            System.out.println(words);
+        }
+
     }
 
     

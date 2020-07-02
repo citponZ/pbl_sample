@@ -9,5 +9,11 @@ public interface WordsService {
 
     //List<Words> findByNameLike(String keyword);
 
-    //void insert(Words employee);
+    void insert(Words words);
+
+    boolean delete(Integer id);
+
+    int update(String content, Integer id);
+
+    Words find(Integer id);
 }
