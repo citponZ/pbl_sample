@@ -31,4 +31,9 @@ public class WordsController {
         model.addAttribute("wordsList", wordsList);
         return "words/findAll";
     }
+
+    @GetMapping("/index")
+    public String test(Model model) {
+        return "words/index";
+    }
 }
