@@ -19,9 +19,9 @@ public class WordsMapperTest {
         // EmployeeMapperのBeanを取得
         WordsMapper wordsMapper = context.getBean(WordsMapper.class);
 
-        // 新規追加のテスト
-        //System.out.println("==== 新規追加 ====");
-        //WordsMapper.insert(new Employee("和田三郎", LocalDate.of(2019, 1, 1), 10));
+        //新規追加のテスト
+        System.out.println("==== 新規追加 ====");
+        wordsMapper.insert(new Words("Azuer", 1, "Azuerはクラウドです。"));
 
         // 全件検索のテスト
         System.out.println("==== 全件検索 ====");
