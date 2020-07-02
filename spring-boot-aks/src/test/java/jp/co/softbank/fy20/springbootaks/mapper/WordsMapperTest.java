@@ -32,13 +32,14 @@ public class WordsMapperTest {
 
         // 更新のテスト
         System.out.println("==== 更新 ====");
-        boolean checkUpdate = wordsMapper.update("アップデートしました。", 3);
-        if (checkUpdate){
+        int checkUpdate = wordsMapper.update("アップデートしました。", 3);
+        /*if (checkUpdate){
             System.out.println("更新されました。");
         }
         else{
             System.out.println("更新できませんでした。");
-        }
+        }*/
+        System.out.println(checkUpdate);
 
         // 1検索
         System.out.println("==== 1検索 ====");
@@ -62,6 +63,7 @@ public class WordsMapperTest {
             System.out.println(words);
         }
 
+        //いつか作りたいね
         // 名前キーワード検索のテスト
         //System.out.println("==== 名前キーワード検索 ====");
         //List<Employee> employeeList2 = employeeMapper.findByNameLike("%田%");
