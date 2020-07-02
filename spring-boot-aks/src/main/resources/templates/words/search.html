@@ -21,6 +21,10 @@
         ID: <input type="text" name="id" th:value="${id}">
         <input type="submit" value="id検索">
     </form>
+    <div th:if="${message}">
+        <br>
+        <td th:text="*{message}">鈴木太郎</td>
+    </div>
 
     <div th:if="${words}">
     <table border="1">

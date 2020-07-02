@@ -51,6 +51,9 @@ public class WordsController {
         Words words = wordsService.find(Integer.parseInt(id));
         model.addAttribute("words", words);
         model.addAttribute("id", id);
+        if(words==null){
+            model.addAttribute("message", "そのIDは存在しません");
+        }
         return "words/search";
     }
 
