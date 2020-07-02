@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+<meta charset="UTF-8">
+<title>メインメニュー</title>
+</head>
+
+<body>
+  <div align="center">
+    <h1>ソフぺディア</h1>
+    <h1>表示一覧</h1>
+
+
+    <form action="index.html" th:action="@{index}">
+	    <input type="submit" value="メインメニューに戻る">
+    </form>
+
+    <table border="1">
+      <tr>
+        <th>ID</th>
+        <th>氏名</th>
+        <th>ユーザID</th>
+        <th>内容</th>
+        <th>作成日時</th>
+        <th>編集日時</th>
+      </tr>
+      <tr th:each="words : ${wordsList}" th:object="${words}">
+        <td th:text="*{id}">111</td>
+        <td th:text="*{name}">鈴木太郎</td>
+        <td th:text="*{userID}">222</td>
+        <td th:text="*{content}">鈴木です。</td>
+        <td th:text="*{createdDate}">2020-07-01</td>
+        <td th:text="*{updatedDate}">2020-07-02</td>
+      </tr>
+      <!--/*-->
+      <tr>
+        <td>222</td>
+        <td>鈴木二郎</td>
+        <td>20</td>
+        <td>開発部</td>
+        <td>2000-01-02</td>
+        <td>2000-01-02</td>
+      </tr>
+      <!--*/-->
+    </table>
+  </div>
+
+</body>
+</html>
