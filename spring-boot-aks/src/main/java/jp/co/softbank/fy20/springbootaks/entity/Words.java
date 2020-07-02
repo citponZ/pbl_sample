@@ -12,14 +12,12 @@ public class Words{
 
     public Words(){}
 
-    public Words(Integer id,String name,Integer userID,String content
-    ,LocalDateTime createdDate,LocalDateTime updatedDate){
-        this.id = id;
+    public Words(String name,Integer userID,String content){
         this.name = name;
         this.userID = userID;
         this.content = content;
-        this.createdDate = createdDate;
-        this.updatedDate = updatedDate;
+        //this.createdDate = createdDate;
+        //this.updatedDate = updatedDate;
     }
     
     public Integer getId() {

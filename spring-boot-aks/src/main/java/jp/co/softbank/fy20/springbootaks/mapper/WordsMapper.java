@@ -12,7 +12,11 @@ public interface WordsMapper {
     @Select("SELECT * FROM Words")
     List<Words> findAll();
 
-    //@Insert("INSERT INTO ")
+    @Insert("INSERT INTO Words(name,userID,content,createdDate,updatedDate) " +
+    "VALUES(#{name},#{userID},#{content},GETDATE(),GETDATE())")
+    @Options(useGeneratedKeys = true, keyColumn = "id", keyProperty = "id")
+    void insert(Words word);
+    
     
     
 }
