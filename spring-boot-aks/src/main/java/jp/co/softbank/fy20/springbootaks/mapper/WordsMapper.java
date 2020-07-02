@@ -23,7 +23,7 @@ public interface WordsMapper {
     boolean delete(Integer id);
 
     @Update("UPDATE Words SET content=#{content}, updatedDate=GETDATE() WHERE id=#{id}")
-    boolean update(String content, Integer id);
+    int update(String content, Integer id);
 
     @Select("SELECT * FROM Words WHERE id=#{id}")
     Words find(Integer id);
