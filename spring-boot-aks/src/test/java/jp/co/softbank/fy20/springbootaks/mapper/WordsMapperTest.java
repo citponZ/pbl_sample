@@ -30,6 +30,38 @@ public class WordsMapperTest {
             System.out.println(words);
         }
 
+        // 更新のテスト
+        System.out.println("==== 更新 ====");
+        boolean checkUpdate = wordsMapper.update("アップデートしました。", 3);
+        if (checkUpdate){
+            System.out.println("更新されました。");
+        }
+        else{
+            System.out.println("更新できませんでした。");
+        }
+
+        // 1検索
+        System.out.println("==== 1検索 ====");
+        Words rs = wordsMapper.find(3);
+        System.out.println(rs);
+
+        // 削除のテスト
+        System.out.println("==== 削除 ====");
+        boolean checkDelete = wordsMapper.delete(3);
+        if (checkDelete){
+            System.out.println("削除されました。");
+        }
+        else{
+            System.out.println("削除できませんでした。");
+        }
+        
+        // 全件検索のテスト
+        System.out.println("==== 全件検索 ====");
+        List<Words> wordsList2 = wordsMapper.findAll();
+        for (Words words : wordsList2) {
+            System.out.println(words);
+        }
+
         // 名前キーワード検索のテスト
         //System.out.println("==== 名前キーワード検索 ====");
         //List<Employee> employeeList2 = employeeMapper.findByNameLike("%田%");
