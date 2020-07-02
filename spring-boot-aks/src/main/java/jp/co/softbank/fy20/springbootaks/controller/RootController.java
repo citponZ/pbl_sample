@@ -8,6 +8,6 @@ public class RootController {
     @GetMapping("/")
     public String root() {
         // "redirect:"を先頭につけるとリダイレクトになる
-        return "/words/index";
+        return "redirect:words/index";
     }
 }

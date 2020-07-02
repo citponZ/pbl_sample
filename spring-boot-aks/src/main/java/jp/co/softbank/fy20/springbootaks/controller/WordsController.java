@@ -26,14 +26,14 @@ public class WordsController {
      * 全件検索を行い、一覧画面に遷移する。
      */
     @GetMapping("/findAll")
-    public String index(Model model) {
+    public String find(Model model) {
         List<Words> wordsList = wordsService.findAll();
         model.addAttribute("wordsList", wordsList);
         return "words/findAll";
     }
 
     @GetMapping("/index")
-    public String test(Model model) {
+    public String index(Model model) {
         return "words/index";
     }
 }
