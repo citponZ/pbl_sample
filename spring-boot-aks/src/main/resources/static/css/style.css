@@ -5,3 +5,7 @@ th {
     font-size: large ; 
     color: red;
 }
+input#submit_button {
+    width: 200px;
+    height:30px; 
+}

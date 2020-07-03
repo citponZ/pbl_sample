@@ -13,25 +13,45 @@
     <h1>ソフぺディア</h1>
     <h1>メインメニュー</h1>
 
-
-    <form action="index.html" th:action="@{findAll}">
-	    <input type="submit" value="全表示">
-    </form>
-    <br>
-    <form action="index.html" th:action="@{search}">
-	    <input type="submit" value="検索">
-    </form>
-    <br>
-    <form action="index.html" th:action="@{delete}">
-	    <input type="submit" value="削除">
-    </form>
-    <br>
-    <form action="index.html" th:action="@{insertMain}">
-	    <input type="submit" value="追加">
-    </form>
-    <form action="index.html" th:action="@{updateMain}">
-	    <input type="submit" value="更新">
-    </form>
+    
+    <table>
+      <!-- ボタン -->
+      <tr>
+        <td>
+          <form action="index.html" th:action="@{findAll}">
+            <input type="submit" value="全表示" id="submit_button">
+          </form>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <form action="index.html" th:action="@{search}">
+            <input type="submit" value="検索" id="submit_button">
+          </form>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <form action="index.html" th:action="@{insertMain}">
+            <input type="submit" value="追加" id="submit_button">
+          </form>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <form action="index.html" th:action="@{updateMain}">
+            <input type="submit" value="更新" id="submit_button">
+          </form>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <form action="index.html" th:action="@{delete}">
+            <input type="submit" value="削除" id="submit_button">
+          </form>
+        </td>
+      </tr>
+    </table>
   </div>
 
 </body>

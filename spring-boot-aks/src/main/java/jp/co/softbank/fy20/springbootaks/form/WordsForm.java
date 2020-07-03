@@ -2,12 +2,12 @@ package jp.co.softbank.fy20.springbootaks.form;
 
 import jp.co.softbank.fy20.springbootaks.entity.Words;
 import javax.validation.constraints.NotBlank;
-import lombok.NonNull;
+import javax.validation.constraints.NotNull;
 
 public class WordsForm {
     @NotBlank
     private String name;
-
+    @NotNull
     private Integer userID;
     @NotBlank
     private String content;
