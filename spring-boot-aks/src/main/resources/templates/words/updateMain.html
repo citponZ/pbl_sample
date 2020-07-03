@@ -37,24 +37,15 @@
     </div>
     <form action="index.html" method="POST" th:action="@{updateComplete}">
     <div th:if="${words}">
+    <br>
+    語句：<tr th:object="${words}"><td th:text="*{name}">鈴木太郎</td>
     <table border="1">
-      <tr>
-        <th>ID</th>
-        <th>語句</th>
-        <th>ユーザID</th>
-        <th>内容</th>
-        <th>作成日時</th>
-        <th>編集日時</th>
-      </tr>
+      <tr><th>内容</th></tr>
       <tr th:object="${words}">
-        <td th:text="*{id}">111</td>
-        <td th:text="*{name}">鈴木太郎</td>
-        <td th:text="*{userID}">222</td>
-        <td> <input type="text" name="content" th:value="*{content}"></td>
-        <td th:text="*{createdDate}">2020-07-01</td>
-        <td th:text="*{updatedDate}">2020-07-02</td>
-      </tr>
+      <td><textarea name="content" cols="40" rows="8" th:field="*{content}"></textarea></td></tr>
+
     </table>
+
     <input type="hidden" th:value="*{id}" name="id">
     <input type="submit" value="更新">
     </div>
