@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="../../static/css/style.css"
+          th:href="@{/css/style.css}">
+<head>
+    <meta charset="UTF-8">
+    <title>RuntimeException画面</title>
+</head>
+<body>
+    <h1>RuntimeException画面</h1>
+    <p th:text="${message}">ダミーのエラーメッセージ</p>
+    <a href="index.html" th:href="@{/}">メインメニューへ</a>
+</body>
+</html>

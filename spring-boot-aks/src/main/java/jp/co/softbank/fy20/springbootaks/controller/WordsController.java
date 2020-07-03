@@ -9,8 +9,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
+import java.io.IOException;
 
 @Controller
 @RequestMapping("/words")
@@ -69,14 +72,47 @@ public class WordsController {
     //ID削除
     @PostMapping("/deleteId")
     public String deleteId(@RequestParam String id, Model model) {
-    boolean check = wordsService.delete(Integer.parseInt(id));
-    if (check){
-        model.addAttribute("message", "削除できました");
-    }else{
-        model.addAttribute("message", "削除できませんでした");
+        boolean check = wordsService.delete(Integer.parseInt(id));
+        if (check){
+            model.addAttribute("message", "削除できました");
+        }else{
+            model.addAttribute("message", "削除できませんでした");
+        }
+        return "words/deleteResult";
     }
-    return "words/deleteResult";
-}
+
+    //insertMain
+    @GetMapping("/insertMain")
+    public String insert(Model model) {
+        Words words = null;
+        model.addAttribute("words", words);
+        model.addAttribute("id", null);
+        model.addAttribute("wordsForm", new WordsForm());
+        return "words/insertMain";
+    }
+
+    //追加insert(deleteID的な) エラー処理も
+    @PostMapping("/insertComplete")
+    public String insertComplet(@Validated WordsForm wordsForm, BindingResult bindingResult, Model model) throws Exception {
+        if (bindingResult.hasErrors()) {
+            //return "redirect:insertMain";
+            return "words/insertMain";
+        }
+        Words words = wordsForm.convertToEntity();
+        wordsService.insert(words);
+        model.addAttribute("name", wordsForm.getName());
+        model.addAttribute("userId", wordsForm.getUserID());
+        model.addAttribute("content", wordsForm.getContent());
+        
+        return "redirect:insertResult";
+    }
+    
+    //insertResult
+    @GetMapping("/insertResult")
+    public String insertResult(Model model) {
+        model.addAttribute("message", "追加できました");
+        return "words/insertResult";
+    }
 
 
 }
