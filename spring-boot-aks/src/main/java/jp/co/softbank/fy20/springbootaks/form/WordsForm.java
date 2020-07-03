@@ -1,15 +1,15 @@
 package jp.co.softbank.fy20.springbootaks.form;
 
 import jp.co.softbank.fy20.springbootaks.entity.Words;
-//import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotBlank;
 import lombok.NonNull;
 
 public class WordsForm {
-    //@NotBlank
+    @NotBlank
     private String name;
 
     private Integer userID;
-    //@NotBlank
+    @NotBlank
     private String content;
     
     public Words convertToEntity(){

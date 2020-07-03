@@ -1,7 +1,7 @@
 th {
     background-color: orange;
 }
-p.redmessage {
+.redmessage {
     font: large ; 
     color: red;
 }

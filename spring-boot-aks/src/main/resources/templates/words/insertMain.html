@@ -11,7 +11,17 @@
 <form action="index.html" th:action="@{index}">
     <input type="submit" value="メインメニューに戻る">
 </form>
-<form method="post" action="index.html" th:action="@{insertComplete}">
+<form method="post" action="index.html" th:action="@{insertComplete}" th:object="${wordsForm}">
+    <div th:errors="*{name}" class="redmessage">
+        ダミーメッセージ
+    </div>
+    <div th:errors="*{userID}" class="redmessage">
+        ダミーメッセージ
+    </div>
+    <div th:errors="*{content}" class="redmessage">
+        ダミーメッセージ
+    </div>
+    
     <table border="1">
         <tr>
             <th>ID</th>
@@ -20,19 +30,19 @@
         <tr>
             <th>語句</th>
             <td>
-                <input type="text" name="name">
+                <input type="text" name="name" th:field="*{name}">
             </td>
         </tr>
         <tr>
             <th>ユーザーID</th>
             <td>
-                <input type="text" name="userID">
+                <input type="text" name="userID" th:field="*{userID}">
             </td>
         </tr>
         <tr>
             <th>内容</th>
             <td>
-                <input type="text" name="content">
+                <input type="text" name="content" th:field="*{content}">
             </td>
         </tr>
     </table>

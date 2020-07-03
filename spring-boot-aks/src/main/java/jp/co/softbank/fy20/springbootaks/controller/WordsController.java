@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 import java.io.IOException;
@@ -85,14 +87,22 @@ public class WordsController {
         Words words = null;
         model.addAttribute("words", words);
         model.addAttribute("id", null);
+        model.addAttribute("wordsForm", new WordsForm());
         return "words/insertMain";
     }
 
     //追加insert(deleteID的な) エラー処理も
     @PostMapping("/insertComplete")
-    public String insertComplet(WordsForm wordsForm, Model model) throws Exception {
+    public String insertComplet(@Validated WordsForm wordsForm, BindingResult bindingResult, Model model) throws Exception {
+        if (bindingResult.hasErrors()) {
+            //return "redirect:insertMain";
+            return "words/insertMain";
+        }
         Words words = wordsForm.convertToEntity();
         wordsService.insert(words);
+        model.addAttribute("name", wordsForm.getName());
+        model.addAttribute("userId", wordsForm.getUserID());
+        model.addAttribute("content", wordsForm.getContent());
         
         return "redirect:insertResult";
     }
