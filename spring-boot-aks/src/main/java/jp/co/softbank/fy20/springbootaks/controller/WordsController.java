@@ -19,6 +19,7 @@ import java.io.IOException;
 @RequestMapping("/words")
 public class WordsController {
     private final WordsService wordsService;
+    private String updateMessage;
 
     // EmployeeServiceをDIする（@Autowiredは省略）
     public WordsController(WordsService wordsService) {
@@ -114,5 +115,57 @@ public class WordsController {
         return "words/insertResult";
     }
 
+    //updateMain
+    @GetMapping("/updateMain")
+    public String update(Model model) {
+        Words words = null;
+        model.addAttribute("words", words);
+        model.addAttribute("id", null);
+        //model.addAttribute("wordsForm", new WordsForm());
+        return "words/updateMain";
+    }
+
+    //ID検索
+    @GetMapping("/updateSearchId")
+    public String updateSearchId(@RequestParam String id, Model model) {
+        Words words = wordsService.find(Integer.parseInt(id));
+        model.addAttribute("words", words);
+        model.addAttribute("id", id);
+        if(words==null){
+            model.addAttribute("message", "そのIDは存在しません");
+        }
+        return "words/updateMain";
+    }
+
+
+
+    //update(deleteID的な) エラー処理も
+    @PostMapping("/updateComplete")
+    public String updateComplete(@RequestParam String id,@RequestParam String content,Model model) throws Exception {
+        int check = wordsService.update(content, Integer.parseInt(id));
+        if(check >= 1){
+            updateMessage = "更新しました。";
+        }else{
+            updateMessage =  "更新できませんでした。";
+        }
+               
+        return "redirect:updateResult";
+    }
+    
+    //updateResult
+    @GetMapping("/updateResult")
+    public String updateResult(Model model) {
+        model.addAttribute("message",updateMessage);
+        return "words/updateResult";
+    }
+
+    //updateResult
+    /*
+    @GetMapping("/badUpdateResult")
+    public String badUpdateResult(Model model) {
+        model.setAttribute("message","更新できませんでした。");
+        return "words/updateResult";
+    }
+    */
 
 }

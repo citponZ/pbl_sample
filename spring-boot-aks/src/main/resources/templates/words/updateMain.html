@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="../../static/css/style.css"
+          th:href="@{/css/style.css}">
+<html>
+<head>
+<meta charset="UTF-8">
+<title>メインメニュー</title>
+</head>
+
+<body>
+  <div align="center">
+    <h1>ソフぺディア</h1>
+    <h1>更新</h1>
+
+
+    <form action="index.html" th:action="@{index}">
+	    <input type="submit" value="メインメニューに戻る">
+    </form>
+    <br>
+
+    <form action="index.html" th:action="@{updateSearchId}">
+        ID: <input type="text" name="id" th:value="${id}">
+        <input type="submit" value="id検索">
+    </form>
+    <div th:if="${message}">
+        <br>
+        <p class="redmessage">
+            <td th:text="*{message}">鈴木太郎</td>
+        </p>
+    </div>
+    <form action="index.html" method="POST" th:action="@{updateComplete}">
+    <div th:if="${words}">
+    <table border="1">
+      <tr>
+        <th>ID</th>
+        <th>語句</th>
+        <th>ユーザID</th>
+        <th>内容</th>
+        <th>作成日時</th>
+        <th>編集日時</th>
+      </tr>
+      <tr th:object="${words}">
+        <td th:text="*{id}">111</td>
+        <td th:text="*{name}">鈴木太郎</td>
+        <td th:text="*{userID}">222</td>
+        <td> <input type="text" name="content" th:value="*{content}"></td>
+        <td th:text="*{createdDate}">2020-07-01</td>
+        <td th:text="*{updatedDate}">2020-07-02</td>
+      </tr>
+    </table>
+    <input type="hidden" th:value="*{id}" name="id">
+    <input type="submit" value="更新">
+    </div>
+    </form>
+  </div>
+
+</body>
+</html>
