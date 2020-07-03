@@ -51,6 +51,9 @@ public class WordsController {
         Words words = wordsService.find(Integer.parseInt(id));
         model.addAttribute("words", words);
         model.addAttribute("id", id);
+        if(words==null){
+            model.addAttribute("message", "そのIDは存在しません");
+        }
         return "words/search";
     }
 
@@ -64,7 +67,7 @@ public class WordsController {
         return "words/delete";
     }
     //ID削除
-    @GetMapping("/deleteId")
+    @PostMapping("/deleteId")
     public String deleteId(@RequestParam String id, Model model) {
     boolean check = wordsService.delete(Integer.parseInt(id));
     if (check){
