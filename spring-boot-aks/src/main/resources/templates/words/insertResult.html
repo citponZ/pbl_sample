@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="../../static/css/style.css"
+          th:href="@{/css/style.css}">
+<html>
+<head>
+<meta charset="UTF-8">
+<title>メインメニュー</title>
+</head>
+
+<body>
+  <div align="center">
+    <h1>ソフぺディア</h1>
+    <h1>追加結果</h1>
+
+
+    <form action="index.html" th:action="@{index}">
+	    <input type="submit" value="メインメニューに戻る">
+    </form>
+    <br>
+
+
+    <td th:text="*{message}">鈴木太郎</td>
+  </div>
+
+</body>
+</html>

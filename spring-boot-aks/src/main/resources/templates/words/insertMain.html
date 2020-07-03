@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>新規追加画面</title>
+    <link rel="stylesheet" href="../../static/css/style.css"
+          th:href="@{/css/style.css}">
+</head>
+<body>
+<h1>新規追加</h1>
+<form action="index.html" th:action="@{index}">
+    <input type="submit" value="メインメニューに戻る">
+</form>
+<form method="post" action="index.html" th:action="@{insertComplete}">
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <td>(自動採番されます)</td>
+        </tr>
+        <tr>
+            <th>語句</th>
+            <td>
+                <input type="text" name="name">
+            </td>
+        </tr>
+        <tr>
+            <th>ユーザーID</th>
+            <td>
+                <input type="text" name="userID">
+            </td>
+        </tr>
+        <tr>
+            <th>内容</th>
+            <td>
+                <input type="text" name="content">
+            </td>
+        </tr>
+    </table>
+    <input type="submit" value="登録">
+</form>
+</body>
+</html>

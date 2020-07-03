@@ -69,14 +69,32 @@ public class WordsController {
     //ID削除
     @PostMapping("/deleteId")
     public String deleteId(@RequestParam String id, Model model) {
-    boolean check = wordsService.delete(Integer.parseInt(id));
-    if (check){
-        model.addAttribute("message", "削除できました");
-    }else{
-        model.addAttribute("message", "削除できませんでした");
+        boolean check = wordsService.delete(Integer.parseInt(id));
+        if (check){
+            model.addAttribute("message", "削除できました");
+        }else{
+            model.addAttribute("message", "削除できませんでした");
+        }
+        return "words/deleteResult";
     }
-    return "words/deleteResult";
-}
+
+    //insertMain
+    @GetMapping("/insertMain")
+    public String insert(Model model) {
+        Words words = null;
+        model.addAttribute("words", words);
+        model.addAttribute("id", null);
+        return "words/insertMain";
+    }
+
+    //追加insert(deleteID的な)
+    @PostMapping("/insertComplete")
+    public String insertComplet(WordsForm wordsForm) {
+        Words words = wordsForm.convertToEntity();
+        wordsService.insert(words);
+        return "redirect:words/insertResult";
+    }
+    
 
 
 }
