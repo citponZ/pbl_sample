@@ -8,10 +8,21 @@
 </head>
 <body>
     <div align="center">
+        <div id=header-fixed>
+            <div id=header-wh>
+                <img th:src="@{/images/logo.png}" height=95%>
+                <!--<h1>ソフぺディア</h1>-->
+                <h3>Exception画面</h3>
+              </div>
+            </div>
         
-        <h1>Exception画面</h1>
+        
+            <div id =body-bk>
+              <div id=body>
         <p class="redmessage" th:text="${message}">ダミーのエラーメッセージ</p>
         <a href="index.html" th:href="@{/}">メインメニューへ</a>
     </div>
+</div>
+</div>
 </body>
 </html>
