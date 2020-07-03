@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.io.IOException;
 
 @Controller
 @RequestMapping("/words")
@@ -87,14 +88,21 @@ public class WordsController {
         return "words/insertMain";
     }
 
-    //追加insert(deleteID的な)
+    //追加insert(deleteID的な) エラー処理も
     @PostMapping("/insertComplete")
-    public String insertComplet(WordsForm wordsForm) {
+    public String insertComplet(WordsForm wordsForm, Model model) throws Exception {
         Words words = wordsForm.convertToEntity();
         wordsService.insert(words);
-        return "redirect:words/insertResult";
+        
+        return "redirect:insertResult";
     }
     
+    //insertResult
+    @GetMapping("/insertResult")
+    public String insertResult(Model model) {
+        model.addAttribute("message", "追加できました");
+        return "words/insertResult";
+    }
 
 
 }
