@@ -1,7 +1,7 @@
 package jp.co.softbank.fy20.springbootaks.mapper;
 
 import jp.co.softbank.fy20.springbootaks.SampleApplication;
-import jp.co.softbank.fy20.springbootaks.entity.Words;
+import jp.co.softbank.fy20.springbootaks.entity.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.context.ApplicationContext;
@@ -21,7 +21,7 @@ public class WordsMapperTest {
 
         //新規追加のテスト
         System.out.println("==== 新規追加 ====");
-        wordsMapper.insert(new Words("Azuer", 1, "Azuerはクラウドです。"));
+        //wordsMapper.insert(new Words("Azuer", 1, "Azuerはクラウドです。"));
 
         // 全件検索のテスト
         System.out.println("==== 全件検索 ====");
@@ -60,6 +60,19 @@ public class WordsMapperTest {
         System.out.println("==== 全件検索 ====");
         List<Words> wordsList2 = wordsMapper.findAll();
         for (Words words : wordsList2) {
+            System.out.println(words);
+        }
+
+        System.out.println("==== name検索 ====");
+        List<WordsByAbb> List = wordsMapper.findByName("word1");
+        for (WordsByAbb words : List) {
+            System.out.println(words);
+        }
+
+        //mapper関数の引数の前と後ろに”％”を入れる必要がある
+        System.out.println("==== name検索 部分一致 ====");
+        List<WordsByAbb> List2 = wordsMapper.findByNameAsInclude("%"+"word"+"%");
+        for (WordsByAbb words : List2) {
             System.out.println(words);
         }
 
