@@ -192,13 +192,13 @@ drwxrwxr-x 3 tatsutas40 tatsutas40     4096  6月 28 22:49 maven-status
 
 ### サンプルのコンテナの作成
 
-jar ファイルを docker の下にコピーし、コンテナをビルドします。tag に指定する team0registory
+jar ファイルを docker の下にコピーし、コンテナをビルドします。tag に指定する team4registory
 は自分のチームの ACR 名を指定するようにしてください。
 
 ```
 $ cp target/spring-boot-sample.jar src/main/docker/
 $ cd src/main/docker/
-$ docker build --tag=team0registory.azurecr.io/aks-sample/spring-boot-sample:0.0.1 .
+$ docker build --tag=team4registory.azurecr.io/aks-sample/spring-boot-sample:0.0.1 .
 Sending build context to Docker daemon  35.27MB
 Step 1/16 : FROM azul/zulu-openjdk-alpine:11.0.7 AS java-build
  ---> 02aa98c5b8f0
@@ -276,7 +276,7 @@ Step 16/16 : CMD ["java", "-jar", "/opt/spring-boot/spring-boot-sample.jar"]
 Removing intermediate container b27b53f1d68e
  ---> 1ec2faf475aa
 Successfully built 1ec2faf475aa
-Successfully tagged team0registory.azurecr.io/aks-sample/spring-boot-sample:0.0.1
+Successfully tagged team4registory.azurecr.io/aks-sample/spring-boot-sample:0.0.1
 ```
 
 以下のコマンドを実行し、指定したリポジトリ、タグでコンテナが作成されていることを確認します。
@@ -285,7 +285,7 @@ Successfully tagged team0registory.azurecr.io/aks-sample/spring-boot-sample:0.0.
 ```
 $ docker images
 REPOSITORY                                                TAG                      IMAGE ID            CREATED              SIZE
-team0registory.azurecr.io/aks-sample/spring-boot-sample   0.0.1                    1ec2faf475aa        About a minute ago   134MB
+team4registory.azurecr.io/aks-sample/spring-boot-sample   0.0.1                    1ec2faf475aa        About a minute ago   134MB
 <none>                                                    <none>                   fa5f0006bae6        2 minutes ago        323MB
 redis                                                     6.0.5                    235592615444        2 weeks ago          104MB
 alpine                                                    3.12.0                   a24bb4013296        4 weeks ago          5.57MB
@@ -300,8 +300,8 @@ ACR にコンテナ・イメージをプッシュする前に、まず、ACR に
 ログイン・サーバー、ユーザー名、パスワードは後述のとおり Azure Portal より確認できます。
 
 ```
-$ docker login https://team0registory.azurecr.io
-Username: team0registory
+$ docker login https://team4registory.azurecr.io
+Username: team4registory
 Password: 
 WARNING! Your password will be stored unencrypted in /home/tatsutas40/.docker/config.json.
 Configure a credential helper to remove this warning. See
@@ -333,8 +333,8 @@ Azure Portal にログインし、画面上の検索バーで「コンテナ」�
 ACR に docker login しているなら、以下のコマンドを実行して、コンテナ・イメージをプッシュします。
 
 ```
-$ docker push team0registory.azurecr.io/aks-sample/spring-boot-sample:0.0.1
-The push refers to repository [team0registory.azurecr.io/aks-sample/spring-boot-sample]
+$ docker push team4registory.azurecr.io/aks-sample/spring-boot-sample:0.0.1
+The push refers to repository [team4registory.azurecr.io/aks-sample/spring-boot-sample]
 51b2b68a6663: Pushed 
 f12df877ab35: Pushed 
 863c37317c2e: Pushed 
@@ -358,7 +358,7 @@ spring-boot-aks/src/main/kubernetes 下に移動し、deployment.yml の以下�
 ```
 containers:
   - name: aks-sample
-    image: team0registory.azurecr.io/aks-sample/spring-boot-sample:0.0.1
+    image: team4registory.azurecr.io/aks-sample/spring-boot-sample:0.0.1
     env:
       - name: TZ
         value: JST-9
@@ -367,13 +367,13 @@ containers:
       - name: SPRING_PROFILES_ACTIVE
         value: "pr"
       - name: DATASOURCE_URL
-        value: "jdbc:sqlserver://team0-sqlsrv.database.windows.net:1433;database=pbldb"
+        value: "jdbc:sqlserver://team4-sqlsrv.database.windows.net:1433;database=pbldb"
       - name: DATASOURCE_USER
         value: "ServerAdmin"
       - name: DATASOURCE_PASSWORD
         value: "welcome1#"
       - name: REDIS_HOST
-        value: "team0-redis.redis.cache.windows.net"
+        value: "team4-redis.redis.cache.windows.net"
       - name: REDIS_PORT
         value: "6379"
       - name: REDIS_PASSWORD

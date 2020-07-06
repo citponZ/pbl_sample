@@ -16,4 +16,8 @@ public interface WordsService {
     int update(String content, Integer id);
 
     Words find(Integer id);
+
+    List<WordsByAbb> findByName(String name);
+
+    List<WordsByAbb> findByNameAsInclude(String name);
 }
