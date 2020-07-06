@@ -2,22 +2,71 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <link rel="stylesheet" href="../../static/css/style.css"
           th:href="@{/css/style.css}">
+<!-- Custom styles for this template -->
+<link th:href="@{/css/sticky-footer.css}" rel="stylesheet">
+
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
 <title>メインメニュー</title>
 
 </head>
 
 <body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+      <img th:src="@{/images/logo.png}" width="100" height="50" class="d-inline-block align-top" alt="ブランド">
+    </a>
+    <button type="button" class="navbar-toggler"
+     data-toggle="collapse" data-target="#Navber" 
+     aria-controls="Navber" aria-expanded="false" 
+     aria-label="ナビゲーションの切替">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="Navber">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">ホーム <span class="sr-only">(現位置)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">ユーザ情報</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            マニュアル
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">メニュー1</a>
+            <a class="dropdown-item" href="#">メニュー2</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">その他</a>
+          </div>
+        </li>
+      </ul>
+
+      <form class="form-inline my-2 my-lg-0">
+        <input type="search" class="form-control mr-sm-2" placeholder="検索..." aria-label="検索...">
+        <button type="submit" class="btn btn-outline-success my-2 my-sm-0">検索</button>
+      </form>
+    </div><!-- /.navbar-collapse -->
+  </nav>
+
   <div align="center">
-    <div id=header-fixed>
+   <!--
+    <div id=header-fixed>  
     <div id=header-wh>
-        <img th:src="@{/images/logo.png}" height=95%>
-        <!--<h1>ソフぺディア</h1>-->
-        <h3>メインメニュー</h3>
-      </div>
+    <img class="d-block mx-auto" th:src="@{/images/logo.png}" height=95%>
+    <h1>ソフぺディア</h1>
     </div>
+    </div>
+   -->   
+     <div id=picture1>
+        <img class="d-block mx-auto" th:src="@{/images/logo.png}" >     
+        <h3 class="text-center d-block">メインメニュー</h3>
+      </div>  
 
     <div id =body-bk>
       <div id=body>
@@ -62,11 +111,15 @@
   </div>
 </div>
 </div>
-<div id=footer-fixed align="right">
-  <div id=footer-wh>
-      <img th:src="@{/images/teamlogo.png}" height=110%>
-      <!--<h1>ソフぺディア</h1>-->
-    </div>
+
+<!--footer-->
+<footer class="footer">
+  <div class="container">
+    <p class="text-muted">Copyright@ sofpedia, 2020 All Right Reserved.</p>
   </div>
+</footer>
+<script th:src="@{/webjars/jquery/3.4.1-1/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+
 </body>
 </html>

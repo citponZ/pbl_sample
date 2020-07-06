@@ -16,6 +16,7 @@ html, body{
     width:100%;
     height:100%;
 }
+/*
 div#header-fixed
 {
     position: fixed;
@@ -31,6 +32,13 @@ div#header-wh{
     height: 110px;
     width: 100%;
 }
+*/
+
+div#picture1{
+    position:relative;
+    top:60px; 
+}
+
 
 div#footer-fixed
 {
