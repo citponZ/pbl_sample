@@ -10,8 +10,20 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import jp.co.softbank.fy20.springbootaks.entity.Words;
+import jp.co.softbank.fy20.springbootaks.entity.WordsByAbb;
+import jp.co.softbank.fy20.springbootaks.service.WordsService;
+
+import java.util.List;
+
 @ControllerAdvice
 public class GlobalExceptionHandler {
+    private final WordsService wordsService;
+
+    // EmployeeServiceをDIする（@Autowiredは省略）
+    public GlobalExceptionHandler(WordsService wordsService) {
+        this.wordsService = wordsService;
+    }
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -24,10 +36,13 @@ public class GlobalExceptionHandler {
     /*
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public String handleRuntimeException(RuntimeException e, Model model) {
-        String message = e.getMessage();
+    public String duplicateKeyException(DuplicateKeyException e, HttpSession session,Model model) {
+        String message = "この語句は登録されています。";
         model.addAttribute("message", message);
-        return "exception/exception";
+        String storedName = (String) session.getAttribute("name"); //words or name
+        List<WordsByAbb> wordsList = wordsService.findByName(name);
+
+        return "words/id/"+storedName;
     }
     */
 

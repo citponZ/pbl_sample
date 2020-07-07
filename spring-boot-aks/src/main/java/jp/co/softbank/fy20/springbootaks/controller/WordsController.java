@@ -1,6 +1,7 @@
 package jp.co.softbank.fy20.springbootaks.controller;
 
 import jp.co.softbank.fy20.springbootaks.entity.Words;
+import jp.co.softbank.fy20.springbootaks.entity.WordsByAbb;
 import jp.co.softbank.fy20.springbootaks.service.WordsService;
 import jp.co.softbank.fy20.springbootaks.form.WordsForm;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.io.IOException;
@@ -60,6 +62,32 @@ public class WordsController {
         }
         return "words/search";
     }
+    //Name検索
+    @GetMapping("/searchName")
+    public String searchName(@RequestParam String name, Model model) {
+        List<WordsByAbb> wordsList = wordsService.findByName(name);
+        if(wordsList != null){
+            model.addAttribute("wordsList", wordsList);
+            return "単語ページ";
+        }
+
+        wordsList = wordsService.findByNameAsInclude(name);
+        model.addAttribute("wordsList", wordsList);
+        //model.addAttribute("numOfSearch", wordsList.size());
+        if(wordsList==null){
+            model.addAttribute("message", name+"との一致はありません。");
+        }
+        return "候補ページ";
+    }
+    //単語ページ
+    @GetMapping("/id/{name}")
+    public String showWord(@PathVariable String name, Model model) {
+        
+        // sessionでもらったwordsListをMedelに追加
+        return "単語ページ.html";
+    }
+
+
 
 
     //削除画面に移動
