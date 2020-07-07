@@ -129,7 +129,7 @@
   <img class="d-block mx-auto" th:src="@{/images/logo.png}" > 
      <p>コンテンツ</p>
      <h1>iframe要素の使用例</h1>
-    <iframe src="findAll.html" width="900" height="600" sandbox="allow-forms"></iframe>
+    <iframe th:src="@{findAll}" width="900" height="600" sandbox="allow-forms"></iframe>
 
  </div>
  <div class="localNavigation">
@@ -138,6 +138,24 @@
 </div>
 
 
+<dl id="accordion">
+  <dt><a href="">メニュー1</a></dt>
+  <dd>
+      <a href="#">サブメニュー1-1</a>
+      <a href="#">サブメニュー1-2</a>
+  </dd>
+  <dt><a href="">メニュー2</a></dt>
+  <dd>
+      <a href="#">サブメニュー2-1</a>
+      <a href="#">サブメニュー2-2</a>
+  </dd>
+  <dt><a href="">メニュー3</a></dt>
+  <dd>
+      <a href="#">サブメニュー3-1</a>
+      <a href="#">サブメニュー3-2</a>
+  </dd>
+</dl>
+
 
 <!--footer-->
 <footer class="footer">
@@ -145,8 +163,8 @@
     <p class="text-muted">Copyright@ sofpedia, 2020 All Right Reserved.</p>
   </div>
 </footer>
-<script th:src="@{/webjars/jquery/3.4.1-1/jquery.min.js}"></script>
+<script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
 <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
-<script th:src="@{js/demo.js}"></script>
+<script th:src="@{/js/demo.js}"></script>
 </body>
 </html>

@@ -1,16 +1,11 @@
-
-$(function(){
-     GOOD 
-    $(document).on('click', '.clickme_btn', function(){
-      alert('Button is clicked');
-    });
-    
-    $('#add_clickme_btn_btn').on('click', function(){
-      $('#btns_box').append(
-        '<button class="clickme_btn">Click Me</button>'
-      );
-    });
-  });
+$(function() {
+  $('#accordion dd').hide();
+  $('#accordion dt a').click(function(){
+       $('#accordion dd').slideUp();
+       $(this).parent().next().slideDown();
+       return false;
+   });
+});
   /*
  window.onload = function() {
   setInterval(function() {
