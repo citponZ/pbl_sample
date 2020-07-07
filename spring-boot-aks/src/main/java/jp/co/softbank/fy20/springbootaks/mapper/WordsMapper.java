@@ -1,6 +1,6 @@
 package jp.co.softbank.fy20.springbootaks.mapper;
 
-import jp.co.softbank.fy20.springbootaks.entity.Words;
+import jp.co.softbank.fy20.springbootaks.entity.*;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
@@ -27,5 +27,19 @@ public interface WordsMapper {
 
     @Select("SELECT * FROM Words WHERE id=#{id}")
     Words find(Integer id);
+
+    //名前によるWordsの検索：完全一致
+    @Select("SELECT Words.id as id, Words.name as name,Words.content as content, "+
+    "Words.updatedDate as updatedDate, Abbreviations.name as abbName FROM Words, Abbreviations "+
+    "WHERE Words.name like #{name} and Words.id = Abbreviations.wordID")
+    List<WordsByAbb> findByName(String name);
+
+    //名前によるWordsの検索：部分一致
+    @Select("select Words.id as id, Words.name as name, Words.content as content, "+
+    "Abbreviations.name as abbName from Words, Abbreviations,"+
+    " (select id,name from Words where name like #{name} UNION select wordID as id,name "+
+    "from Abbreviations where name like #{name} ) rs "+
+    "where Words.id = rs.id and Words.id = Abbreviations.wordID")
+    List<WordsByAbb> findByNameAsInclude(String name);
     
 }

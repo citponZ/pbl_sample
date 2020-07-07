@@ -51,5 +51,19 @@ public class WordsServiceImpl implements WordsService {
         return rs;
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public List<WordsByAbb> findByName(String name){
+        List<WordsByAbb> wordsList = wordsMapper.findByName(name);
+        return wordsList;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<WordsByAbb> findByNameAsInclude(String name){
+        List<WordsByAbb> wordsList = wordsMapper.findByNameAsInclude("%"+name+"%");
+        return wordsList;
+    }
+
 
 }
