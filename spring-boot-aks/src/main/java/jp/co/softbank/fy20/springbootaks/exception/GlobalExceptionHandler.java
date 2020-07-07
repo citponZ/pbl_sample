@@ -1,6 +1,5 @@
 package jp.co.softbank.fy20.springbootaks.exception;
 
-
 import java.sql.SQLException;
 import org.springframework.dao.DuplicateKeyException;
 
@@ -15,6 +14,8 @@ import jp.co.softbank.fy20.springbootaks.entity.WordsByAbb;
 import jp.co.softbank.fy20.springbootaks.service.WordsService;
 
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -33,24 +34,26 @@ public class GlobalExceptionHandler {
         return "exception/exception";
     }
 
-    /*
+    
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public String duplicateKeyException(DuplicateKeyException e, HttpSession session,Model model) {
+    public String duplicateKeyException(DuplicateKeyException e, HttpSession session) {
         String message = "この語句は登録されています。";
-        model.addAttribute("message", message);
+        //model.addAttribute("message", message);
         String storedName = (String) session.getAttribute("name"); //words or name
-        List<WordsByAbb> wordsList = wordsService.findByName(name);
+        List<WordsByAbb> wordsList = wordsService.findByName(storedName);
+        
 
         return "words/id/"+storedName;
     }
-    */
+    
 
+    /*
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public String duplicateKeyException(DuplicateKeyException e, Model model) {
         String message = "この語句は登録されています。";
         model.addAttribute("message", message);
         return "exception/exception";
-    }
+    }*/
 }

@@ -128,6 +128,12 @@ public class WordsController {
             return "words/insertMain";
         }
         Words words = wordsForm.convertToEntity();
+        //searchId(String.valueOf(words.getId()));
+        Words words2 = wordsService.find(words.getId());
+        if (words.getName() == words2.getName()){
+            return "単語ページ";
+        }
+
         wordsService.insert(words);
         model.addAttribute("name", wordsForm.getName());
         model.addAttribute("userId", wordsForm.getUserID());
