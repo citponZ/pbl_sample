@@ -11,7 +11,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
 <title>メインメニュー</title>
-
 </head>
 
 <body>
@@ -47,100 +46,44 @@
         </li>
       </ul>
 
-      <form class="form-inline my-2 my-lg-0" >
-        <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Sign out</button>
-      </form>
-      <!--移動先のactionが出来次第、th:actionを変更 action="index.html" th:action="@{findAll}"-->
-      <form class="form-inline my-2 my-lg-0" >
+      <form class="form-inline my-2 my-lg-0">
         <input type="search" class="form-control mr-sm-2" placeholder="検索..." aria-label="検索...">
         <button type="submit" class="btn btn-outline-success my-2 my-sm-0">検索</button>
       </form>
     </div><!-- /.navbar-collapse -->
   </nav>
-<!--
- <div align="center">
-     <div id=header-fixed>  
-     <div id=header-wh>
-     <img class="d-block mx-auto" th:src="@{/images/logo.png}" height=95%>
-     <h1>ソフぺディア</h1>
-     </div>
-     </div>   
-      <div id=picture1>
-         <img class="d-block mx-auto" th:src="@{/images/logo.png}" >     
-         <h3 class="text-center d-block">メインメニュー</h3>
-      </div>  
-    
- </div>
-  -->
- 
 
-
-
-  <div class ="gridbu">
-  <div class="grovalNavigation">
-    <p>グローバルナビゲーション</p><br>
-    <p>操作メニュー</p>
     <div align="center">
+        <!--
+            <div id=header-fixed>  
+            <div id=header-wh>
+            <img class="d-block mx-auto" th:src="@{/images/logo.png}" height=95%>
+            <h1>ソフぺディア</h1>
+            </div>
+            </div>
+        -->   
+        <div id=picture1>
+            <img class="d-block mx-auto" th:src="@{/images/logo.png}" >     
+            <h3 class="text-center d-block">メインメニュー</h3>
+        </div>
 
-    <table>
-      <tr>
-        <td>
-          <form action="index.html" th:action="@{findAll}">
-            <input type="submit" value="全表示" id="submit_button">
-          </form>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <form action="index.html" th:action="@{search}">
-            <input type="submit" value="検索" id="submit_button">
-          </form>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <form action="index.html" th:action="@{insertMain}">
-            <input type="submit" value="追加" id="submit_button">
-          </form>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <form action="index.html" th:action="@{updateMain}">
-            <input type="submit" value="更新" id="submit_button">
-          </form>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <form action="index.html" th:action="@{delete}">
-            <input type="submit" value="削除" id="submit_button">
-          </form>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <form action="index.html" th:action="@{test}">
-            <input type="submit" value="テスト" id="submit_button">
-          </form>
-        </td>
-      </tr>
-    </table>
-  </div>
- </div>
- <div class="content">
-  <img class="d-block mx-auto" th:src="@{/images/logo.png}" > 
-     <p>コンテンツ</p>
-     <h1>iframe要素の使用例</h1>
-    <iframe src="findAll.html" width="900" height="600" sandbox="allow-forms"></iframe>
-
- </div>
- <div class="localNavigation">
-     <p>ローカルナビゲーション</p>
- </div>
-</div>
-
-
+        <div th:if="${words}">
+            <table border="1">
+              <tr>                
+                <th>語句</th>
+                <th>略語</th>
+                <th>内容</th>
+                <th>編集日時</th>
+              </tr>
+              <tr th:object="${words}">
+                <td th:text="*{name}">鈴木一郎</td>
+                <td th:text="*{add}">Isuzuki</td>
+                <td th:text="*{content}">鈴木一郎です。</td>
+                <td th:text="*{updatedDate}">2020-07-02</td>
+              </tr>
+            </table>
+          </div>
+      </div>
 
 <!--footer-->
 <footer class="footer">
@@ -150,8 +93,5 @@
 </footer>
 <script th:src="@{/webjars/jquery/3.4.1-1/jquery.min.js}"></script>
 <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
-
-<script th:src="@{js/demo.js}"></script>
-
 </body>
 </html>
