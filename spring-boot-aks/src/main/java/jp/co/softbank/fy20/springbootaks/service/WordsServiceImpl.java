@@ -65,5 +65,11 @@ public class WordsServiceImpl implements WordsService {
         return wordsList;
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public Words checkByName(String name){
+        return wordsMapper.checkByName(name);
+    }
+
 
 }

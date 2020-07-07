@@ -76,6 +76,26 @@ public class WordsMapperTest {
             System.out.println(words);
         }
 
+        //nameのものがあるかないか
+        System.out.println("==== あるかないか ====");
+        Words words = wordsMapper.checkByName("word1");
+        if (words != null){
+            System.out.println("aru");
+        }
+        else{
+            System.out.println("nai");
+        }
+
+        words = wordsMapper.checkByName("word8888");
+        if (words != null){
+            System.out.println("aru");
+        }
+        else{
+            System.out.println("nai");
+        }
+
+
+
         //いつか作りたいね
         // 名前キーワード検索のテスト
         //System.out.println("==== 名前キーワード検索 ====");

@@ -41,5 +41,9 @@ public interface WordsMapper {
     "from Abbreviations where name like #{name} ) rs "+
     "where Words.id = rs.id and Words.id = Abbreviations.wordID")
     List<WordsByAbb> findByNameAsInclude(String name);
+
+    @Select("SELECT TOP (1) * FROM Words WHERE name like #{name}")
+    Words checkByName(String name);
+
     
 }

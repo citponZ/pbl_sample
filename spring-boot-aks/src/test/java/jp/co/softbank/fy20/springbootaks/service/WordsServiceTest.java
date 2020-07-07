@@ -79,6 +79,24 @@ public class WordsServiceTest {
         for (WordsByAbb words : List2) {
             System.out.println(words);
         }
+
+        //nameのものがあるかないか
+        System.out.println("==== あるかないか ====");
+        Words words = wordsService.checkByName("word1");
+        if (words != null){
+            System.out.println("aru");
+        }
+        else{
+            System.out.println("nai");
+        }
+
+        words = wordsService.checkByName("word8888");
+        if (words != null){
+            System.out.println("aru");
+        }
+        else{
+            System.out.println("nai");
+        }
     }
 
     
