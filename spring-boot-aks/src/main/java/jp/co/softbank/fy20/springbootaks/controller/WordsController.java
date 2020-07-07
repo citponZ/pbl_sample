@@ -7,9 +7,11 @@ import jp.co.softbank.fy20.springbootaks.form.WordsForm;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,7 +33,7 @@ public class WordsController {
     /**
      * 全件検索を行い、一覧画面に遷移する。
      */
-    @GetMapping("/findAll")
+    @PostMapping("/findAll")
     public String find(Model model) {
         List<Words> wordsList = wordsService.findAll();
         model.addAttribute("wordsList", wordsList);
@@ -63,15 +65,17 @@ public class WordsController {
         return "words/search";
     }
     //Name検索
-    @GetMapping("/searchName")
-    public String searchName(@RequestParam String name, Model model) {
-        List<WordsByAbb> wordsList = wordsService.findByName(name);
-        if(wordsList != null){
-            model.addAttribute("wordsList", wordsList);
-            return "単語ページ";
+    @PostMapping("/searchName")
+    public String searchName(@RequestParam String name, Model model, RedirectAttributes attributes) {
+        
+        
+        //語句名が同じものが存在したらその語句のページに遷移
+        if (wordsService.checkByName(name) != null){
+            attributes.addFlashAttribute("message", null);
+            return "redirect:id/"+name;
         }
 
-        wordsList = wordsService.findByNameAsInclude(name);
+        List<WordsByAbb> wordsList = wordsService.findByNameAsInclude(name);
         model.addAttribute("wordsList", wordsList);
         //model.addAttribute("numOfSearch", wordsList.size());
         if(wordsList==null){
@@ -81,14 +85,21 @@ public class WordsController {
     }
     //単語ページ
     @GetMapping("/id/{name}")
-    public String showWord(@PathVariable String name, Model model) {
+    public String showWord(@PathVariable String name, @ModelAttribute("message") String message, Model model) {
         
+        
+        List<WordsByAbb> wordsList = wordsService.findByName(name);
+        if (wordsList.size() == 0){
+            return "redirect:../../words/index";
+        }
+        //ページ名
+        model.addAttribute("pageName", name);
+        model.addAttribute("wordsList", wordsList);
+        model.addAttribute("message");
+
         // sessionでもらったwordsListをMedelに追加
-        return "単語ページ.html";
+        return "words/showWords";
     }
-
-
-
 
     //削除画面に移動
     @GetMapping("/delete")
@@ -122,18 +133,20 @@ public class WordsController {
 
     //追加insert(deleteID的な) エラー処理も
     @PostMapping("/insertComplete")
-    public String insertComplet(@Validated WordsForm wordsForm, BindingResult bindingResult, Model model) throws Exception {
+    public String insertComplet(@Validated WordsForm wordsForm, BindingResult bindingResult, 
+                                Model model, RedirectAttributes attributes) throws Exception {
         if (bindingResult.hasErrors()) {
             //return "redirect:insertMain";
             return "words/insertMain";
         }
-        Words words = wordsForm.convertToEntity();
-        //searchId(String.valueOf(words.getId()));
-        Words words2 = wordsService.find(words.getId());
-        if (words.getName() == words2.getName()){
-            return "単語ページ";
+
+        //語句名が同じものが存在したらその語句のページに遷移
+        if (wordsService.checkByName(wordsForm.getName()) != null){
+            attributes.addFlashAttribute("message", "この語句は登録されています。");
+            return "redirect:id/"+wordsForm.getName();
         }
 
+        Words words = wordsForm.convertToEntity();
         wordsService.insert(words);
         model.addAttribute("name", wordsForm.getName());
         model.addAttribute("userId", wordsForm.getUserID());

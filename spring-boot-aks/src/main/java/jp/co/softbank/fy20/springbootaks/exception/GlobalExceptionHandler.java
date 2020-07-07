@@ -34,7 +34,7 @@ public class GlobalExceptionHandler {
         return "exception/exception";
     }
 
-    
+    /*
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public String duplicateKeyException(DuplicateKeyException e, HttpSession session) {
@@ -45,15 +45,15 @@ public class GlobalExceptionHandler {
         
 
         return "words/id/"+storedName;
-    }
+    }*/
     
 
-    /*
+    
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public String duplicateKeyException(DuplicateKeyException e, Model model) {
         String message = "この語句は登録されています。";
         model.addAttribute("message", message);
         return "exception/exception";
-    }*/
+    }
 }

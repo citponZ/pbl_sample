@@ -47,8 +47,8 @@
         </li>
       </ul>
 
-      <form class="form-inline my-2 my-lg-0">
-        <input type="search" class="form-control mr-sm-2" placeholder="検索..." aria-label="検索...">
+      <form class="form-inline my-2 my-lg-0" th:action="@{searchName}" method="POST">
+        <input type="search" class="form-control mr-sm-2" placeholder="検索..." aria-label="検索..." name="name">
         <button type="submit" class="btn btn-outline-success my-2 my-sm-0">検索</button>
       </form>
     </div><!-- /.navbar-collapse -->
@@ -74,7 +74,7 @@
       <!-- ボタン -->
       <tr>
         <td>
-          <form action="index.html" th:action="@{findAll}">
+          <form action="index.html" th:action="@{findAll}" method="post">
             <input type="submit" value="全表示" id="submit_button">
           </form>
         </td>

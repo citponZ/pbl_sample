@@ -20,4 +20,6 @@ public interface WordsService {
     List<WordsByAbb> findByName(String name);
 
     List<WordsByAbb> findByNameAsInclude(String name);
+
+    Words checkByName(String name);
 }

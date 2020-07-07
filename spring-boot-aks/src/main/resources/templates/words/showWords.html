@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="../../static/css/style.css"
+          th:href="@{/css/style.css}">
+<!-- Custom styles for this template -->
+<link th:href="@{/css/sticky-footer.css}" rel="stylesheet">
+
+<html>
+<head>
+    <script th:inline="javascript">
+    /*<![CDATA[*/
+        document.title = /*[[${pageName}]]*/ 'error';
+    /*]]>*/
+    </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
+<title>document.title</title>
+</head>
+
+<body>
+  <!--<div th:if="${message}">鈴木</div>-->
+
+
+  <div align="center">
+    <h2 class="normal"> <span th:text="${wordsList.get(0).name}">メイン</span> </h2>
+    <br>
+    
+    略語：<th:block th:each="words, iterStat:${wordsList}"> <!-- ステータス変数はカンマ区切りで2つ目の引数として受け取れる -->
+      <span th:text="${words.abbName}">略語</span>
+      <span th:unless="${iterStat.last}">, </span><!-- last変数はループの最後でtrueを返します -->
+    </th:block>
+
+    <br>
+    <br>
+    <h3>内容</h3>
+    <br>
+    <script th:inline="javascript">
+      var str = /*[[${wordsList.get(0).content}]]*/ '内容';
+      str = str.replace(/\r?\n/g, '<br>');
+      document.write(str);
+    </script>
+    <br>
+    <br>
+    <p class="normal">編集日時：<span th:text="${#temporals.format(wordsList.get(0).updatedDate, 'yyyy/MM/dd HH:mm:ss.SSS')}">メイン</span></p>
+
+
+  </div>
+
+<!--footer-->
+<footer class="footer">
+    <div class="container">
+      <p class="text-muted">Copyright@ sofpedia, 2020 All Right Reserved.</p>
+    </div>
+  </footer>
+  <script th:src="@{/webjars/jquery/3.4.1-1/jquery.min.js}"></script>
+  <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+</body>
+</html>
