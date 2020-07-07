@@ -206,6 +206,19 @@ public class WordsController {
         return "words/updateResult";
     }
 
+
+        //検索画面に移動
+        @GetMapping("/test")
+        public String test(Model model) {
+            return "words/test";
+        }
+
+        //検索画面に移動
+        @GetMapping("/word")
+        public String words(Model model) {
+            return "words/word";
+        }
+        
     //updateResult
     /*
     @GetMapping("/badUpdateResult")

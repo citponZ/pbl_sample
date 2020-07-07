@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{words/common.html}">
 <link rel="stylesheet" href="../../static/css/style.css"
           th:href="@{/css/style.css}">
 <!-- Custom styles for this template -->
 <link th:href="@{/css/sticky-footer.css}" rel="stylesheet">
 
-<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -15,6 +16,12 @@
 </head>
 
 <body>
+  <!-- <div th:include="common :: header"></div> -->
+  <div layout:fragment="content"></div>
+  <!--<
+  <div th:replace="common :: header"></div>
+  
+  <div th:include="common :: header"></div>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">
       <img th:src="@{/images/logo.png}" width="100" height="50" class="d-inline-block align-top" alt="ブランド">
@@ -47,31 +54,42 @@
         </li>
       </ul>
 
+      <form class="form-inline my-2 my-lg-0" >
+        <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Sign out</button>
+      </form>
       <form class="form-inline my-2 my-lg-0" th:action="@{searchName}" method="POST">
-        <input type="search" class="form-control mr-sm-2" placeholder="検索..." aria-label="検索..." name="name">
+        <input type="search" class="form-control mr-sm-2" placeholder="検索..." aria-label="検索..."　name="name">
+
         <button type="submit" class="btn btn-outline-success my-2 my-sm-0">検索</button>
       </form>
-    </div><!-- /.navbar-collapse -->
+    </div>///.navbar-collapse 
   </nav>
 
-  <div align="center">
-   <!--
-    <div id=header-fixed>  
-    <div id=header-wh>
-    <img class="d-block mx-auto" th:src="@{/images/logo.png}" height=95%>
-    <h1>ソフぺディア</h1>
-    </div>
-    </div>
-   -->   
-     <div id=picture1>
-        <img class="d-block mx-auto" th:src="@{/images/logo.png}" >     
-        <h3 class="text-center d-block">メインメニュー</h3>
+ <div align="center">
+     <div id=header-fixed>  
+     <div id=header-wh>
+     <img class="d-block mx-auto" th:src="@{/images/logo.png}" height=95%>
+     <h1>ソフぺディア</h1>
+     </div>
+     </div>   
+      <div id=picture1>
+         <img class="d-block mx-auto" th:src="@{/images/logo.png}" >     
+         <h3 class="text-center d-block">メインメニュー</h3>
       </div>  
+    
+ </div>
+  
+ 
 
-    <div id =body-bk>
-      <div id=body>
+
+
+  <div class ="gridbu">
+  <div class="grovalNavigation">
+    <p>グローバルナビゲーション</p><br>
+    <p>操作メニュー</p>
+    <div align="center">
+
     <table>
-      <!-- ボタン -->
       <tr>
         <td>
           <form action="index.html" th:action="@{findAll}" method="post">
@@ -107,10 +125,44 @@
           </form>
         </td>
       </tr>
+      <tr>
+        <td>
+          <form action="index.html" th:action="@{test}">
+            <input type="submit" value="テスト" id="submit_button">
+          </form>
+        </td>
+      </tr>
     </table>
   </div>
+ </div>
+ <div class="content">
+  <img class="d-block mx-auto" th:src="@{/images/logo.png}" > 
+     <p>コンテンツ</p>
+ </div>
+ <div class="localNavigation">
+     <p>ローカルナビゲーション</p>
+ </div>
 </div>
-</div>
+
+
+<dl id="accordion">
+  <dt><a href="">メニュー1</a></dt>
+  <dd>
+      <a href="#">サブメニュー1-1</a>
+      <a href="#">サブメニュー1-2</a>
+  </dd>
+  <dt><a href="">メニュー2</a></dt>
+  <dd>
+      <a href="#">サブメニュー2-1</a>
+      <a href="#">サブメニュー2-2</a>
+  </dd>
+  <dt><a href="">メニュー3</a></dt>
+  <dd>
+      <a href="#">サブメニュー3-1</a>
+      <a href="#">サブメニュー3-2</a>
+  </dd>
+</dl>
+-->
 
 <!--footer-->
 <footer class="footer">
@@ -118,8 +170,11 @@
     <p class="text-muted">Copyright@ sofpedia, 2020 All Right Reserved.</p>
   </div>
 </footer>
-<script th:src="@{/webjars/jquery/3.4.1-1/jquery.min.js}"></script>
+<script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
 <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/demo.js}"></script>
+
+
 
 </body>
 </html>
