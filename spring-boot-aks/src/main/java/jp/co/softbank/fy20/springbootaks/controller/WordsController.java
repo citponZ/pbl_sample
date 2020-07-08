@@ -209,7 +209,7 @@ public class WordsController {
         Words words = wordsService.find(Integer.parseInt(id));
         String name = words.getName();
                
-        return "redirect:id/"+name;
+        return "redirect:id/"+ URLEncoder.encode(name, "UTF-8");
     }
     
     //updateResult
