@@ -87,7 +87,7 @@ public class WordsController {
     @GetMapping("/id/{name}")
     public String showWord(@PathVariable String name, @ModelAttribute("message") String message, Model model) {
         
-        
+
         List<WordsByAbb> wordsList = wordsService.findByName(name);
         if (wordsList.size() == 0){
             return "redirect:../../words/index";
@@ -124,15 +124,12 @@ public class WordsController {
     //insertMain
     @GetMapping("/insertMain")
     public String insert(Model model) {
-        //Words words = null;
-        //model.addAttribute("words", words);
-        model.addAttribute("id", null);
-        //model.addAttribute("wordsForm", new WordsForm());
+        model.addAttribute("name", null);
         return "words/insertMain";
     }
 
     //check insert or update
-    @GetMapping("/inputContent")
+    @PostMapping("/inputContent")
     public String inputContent(@RequestParam String name, Model model) {
         // nameにブランク確認
         //語句名が同じものが存在したらその語句の更新ページに遷移
@@ -140,11 +137,11 @@ public class WordsController {
         if (wordsService.checkByName(name) != null){
             List<WordsByAbb> wordsList = wordsService.findByName(name);
             model.addAttribute("wordsList", wordsList);
-            return "words/更新ページ";
+            return "words/updatecontent";
         }
         //追加ページに遷移
         model.addAttribute("wordsForm", new WordsForm());
-        return "words/追加ページ";
+        return "words/insertcontent";
     }
 
     //追加insert(deleteID的な) エラー処理も
@@ -158,11 +155,9 @@ public class WordsController {
 
         Words words = wordsForm.convertToEntity();
         wordsService.insert(words);
-        model.addAttribute("name", wordsForm.getName());
-        model.addAttribute("userId", wordsForm.getUserID());
-        model.addAttribute("content", wordsForm.getContent());
+        String name = wordsForm.getName();
         
-        return "redirect:id/"+wordsForm.getName();
+        return "redirect:id/"+name;
     }
     
     //insertResult
@@ -183,7 +178,7 @@ public class WordsController {
     }
 
     //ID検索
-    @GetMapping("/updateSearchId")
+    @PostMapping("/updateSearchId")
     public String updateSearchId(@RequestParam String id, Model model) {
         Words words = wordsService.find(Integer.parseInt(id));
         model.addAttribute("words", words);

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="../../static/css/style.css"
+          th:href="@{/css/style.css}">
+<!-- Custom styles for this template -->
+<link th:href="@{/css/sticky-footer.css}" rel="stylesheet">
+
+<html>
+<head>
+    <script th:inline="javascript">
+    /*<![CDATA[*/
+        document.title = /*[[${pageName}]]*/ 'error';
+    /*]]>*/
+    </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
+<title>更新画面</title>
+</head>
+
+<body>
+  <div align="center">
+    <div id=header-fixed>
+      <div id=header-wh>
+          <img th:src="@{/images/logo.png}" height=95%>
+          <!--<h1>ソフぺディア</h1>-->
+          <h3>更新画面</h3>
+        </div>
+      </div>
+
+      <div id =body-bk>
+        <div id=body>
+    <form action="index.html" th:action="@{/}">
+	    <input type="submit" value="メインメニューに戻る">
+    </form>
+    <br>
+
+    
+    
+    <form action="index.html" method="POST" th:action="@{updateSearchId}">
+    <br>
+    語句：<td th:text="${wordsList.get(0).name}">鈴木太郎</td>
+    <br>
+    
+    <div th:if="${wordsList.get(0).content}">
+    略語：<th:block th:each="words, iterStat:${wordsList}"> <!-- ステータス変数はカンマ区切りで2つ目の引数として受け取れる -->
+      <span th:text="${words.abbName}">略語</span>
+      <span th:unless="${iterStat.last}">, </span><!-- last変数はループの最後でtrueを返します -->
+    </th:block>
+    </div>
+    <br>
+
+    <table border="1">
+        <tr><th>内容</th></tr>
+        <tr>
+        <td><textarea name="content" cols="40" rows="8" class="form-control" th:inline="text">
+            [[${wordsList.get(0).content}]]</textarea></td></tr>
+  
+      </table>
+
+
+    <input type="hidden" th:value="*{wordsList.get(0).id}" name="id">
+    <input type="submit" value="更新">
+    </form>
+  </div>
+</div>
+</div>
+<div id=footer-fixed align="right">
+  <div id=footer-wh>
+      <img th:src="@{/images/teamlogo.png}" height=110%>
+      <!--<h1>ソフぺディア</h1>-->
+    </div>
+  </div>
+</body>
+</html>

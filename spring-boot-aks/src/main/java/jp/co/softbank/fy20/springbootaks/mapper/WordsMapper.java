@@ -29,9 +29,14 @@ public interface WordsMapper {
     Words find(Integer id);
 
     //名前によるWordsの検索：完全一致
-    @Select("SELECT Words.id as id, Words.name as name,Words.content as content, "+
-    "Words.updatedDate as updatedDate, Abbreviations.name as abbName FROM Words, Abbreviations "+
-    "WHERE Words.name like #{name} and Words.id = Abbreviations.wordID")
+    //@Select("SELECT Words.id as id, Words.name as name,Words.content as content, "+
+    //"Words.updatedDate as updatedDate, Abbreviations.name as abbName FROM Words, Abbreviations "+
+    //"WHERE Words.name like #{name} and Words.id = Abbreviations.wordID")
+    @Select("IF EXISTS(SELECT * FROM Words,Abbreviations WHERE  Words.name like #{name} and Words.id = Abbreviations.wordID) "+
+    "(SELECT Words.id as id, Words.name as name, Words.content as content,Words.updatedDate as updatedDate, "+
+    "Abbreviations.name as abbName FROM Words, Abbreviations WHERE Words.name like #{name} and Words.id = Abbreviations.wordID) "+
+    "ELSE (SELECT Words.id as id, Words.name as name, Words.content as content, Words.updatedDate as updatedDate, null as abbName "+
+    "FROM Words WHERE Words.name like #{name})")
     List<WordsByAbb> findByName(String name);
 
     //名前によるWordsの検索：部分一致

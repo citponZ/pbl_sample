@@ -14,41 +14,40 @@
       <div id=header-wh>
           <img th:src="@{/images/logo.png}" height=95%>
           <!--<h1>ソフぺディア</h1>-->
-          <h3>更新</h3>
+          <h3>追加画面</h3>
         </div>
       </div>
 
       <div id =body-bk>
         <div id=body>
-    <form action="index.html" th:action="@{index}">
+    <form action="index.html" th:action="@{/}">
 	    <input type="submit" value="メインメニューに戻る">
     </form>
     <br>
 
-    <form action="index.html" th:action="@{updateSearchId}" method="POST">
-        ID: <input type="text" name="id" th:value="${id}">
-        <input type="submit" value="id検索">
-    </form>
     <div th:if="${message}">
         <br>
         <p class="redmessage">
             <td th:text="*{message}">鈴木太郎</td>
         </p>
     </div>
-    <form action="index.html" method="POST" th:action="@{updateComplete}">
-    <div th:if="${words}">
+    
+    
+    <form action="index.html" method="POST" th:action="@{insertComplete}" th:object="${wordsForm}">
+        <div th:errors="${name}" class="redmessage">
+            ダミーメッセージ
+        </div>
     <br>
-    語句：<tr th:object="${words}"><td th:text="*{name}">鈴木太郎</td>
+    語句：<td th:text="${name}">鈴木太郎</td>
     <table border="1">
       <tr><th>内容</th></tr>
-      <tr th:object="${words}">
-      <td><textarea name="content" cols="40" rows="8" th:field="*{content}"></textarea></td></tr>
+      <td><textarea name="content" cols="40" rows="8" th:field="*{content}"></textarea></td>
 
     </table>
 
-    <input type="hidden" th:value="*{id}" name="id">
-    <input type="submit" value="更新">
-    </div>
+    <input type="hidden" th:value="${name}" name="name">
+    <input type="hidden" th:value="1" name="userID">
+    <input type="submit" value="追加">
     </form>
   </div>
 </div>
