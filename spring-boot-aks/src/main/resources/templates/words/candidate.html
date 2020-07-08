@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{words/common.html}">
+
 <link rel="stylesheet" href="../../static/css/style.css"
           th:href="@{/css/style.css}">
 <!-- Custom styles for this template -->
@@ -20,14 +23,17 @@
 </head>
 
 <body>
+  <!--テンプレ-->
+  <div layout:fragment="content">
   <div align="center">
 
-    <form action="index.html" th:action="@{/}">
-	    <input type="submit" value="メインメニューに戻る">
-    </form>
-    <br>
+
+    <div th:if="${message}">
+      <h4><p th:text="${message}">test</p></h4>
+    </div>
+
     <tr th:each="words : ${wordsList}" th:object="${words}">
-      <div class="container">
+      <div class="nomal">
       <table>
         <tr >
           <td align="left" width="600">
@@ -45,11 +51,14 @@
     </tr>
 
 </div>
-<div id=footer-fixed align="right">
-  <div id=footer-wh>
-      <img th:src="@{/images/teamlogo.png}" height=110%>
-      <!--<h1>ソフぺディア</h1>-->
-    </div>
-  </div>
+
+</div>
+
+
+<!--jqueryとか-->
+<script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/demo.js}"></script>
+
 </body>
 </html>

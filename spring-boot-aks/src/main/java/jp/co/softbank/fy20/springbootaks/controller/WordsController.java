@@ -78,7 +78,7 @@ public class WordsController {
         List<WordsByAbb> wordsList = wordsService.findByNameAsInclude(name);
         model.addAttribute("wordsList", wordsList);
         //model.addAttribute("numOfSearch", wordsList.size());
-        if(wordsList==null){
+        if(wordsList.size()==0){
             model.addAttribute("message", name+"との一致はありません。");
         }
         model.addAttribute("searchName", name+" - 検索");
@@ -197,13 +197,15 @@ public class WordsController {
     @PostMapping("/updateComplete")
     public String updateComplete(@RequestParam String id,@RequestParam String content,Model model) throws Exception {
         int check = wordsService.update(content, Integer.parseInt(id));
-        if(check >= 1){
+        /*if(check >= 1){
             updateMessage = "更新しました。";
         }else{
             updateMessage =  "更新できませんでした。";
-        }
+        }*/
+        Words words = wordsService.find(Integer.parseInt(id));
+        String name = words.getName();
                
-        return "redirect:updateResult";
+        return "redirect:id/"+name;
     }
     
     //updateResult
