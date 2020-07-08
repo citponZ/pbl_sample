@@ -65,7 +65,7 @@ public class WordsController {
         return "words/search";
     }
     //Name検索
-    @PostMapping("/searchName")
+    @GetMapping("/searchName")
     public String searchName(@RequestParam String name, Model model, RedirectAttributes attributes) {
         
         
@@ -81,7 +81,8 @@ public class WordsController {
         if(wordsList==null){
             model.addAttribute("message", name+"との一致はありません。");
         }
-        return "候補ページ";
+        model.addAttribute("searchName", name+" - 検索");
+        return "words/candidate";
     }
     //単語ページ
     @GetMapping("/id/{name}")
