@@ -1,6 +1,6 @@
 th {
     background-color: #fedcd2;
-    color: #ffffff;
+    color: #535353;
     font-family: "YuMincho +36p Kana","游明朝体+36ポかな";
 }
 .redmessage {
@@ -35,13 +35,13 @@ input#submit_button {
     flex: 1;
     text-align: center;
     background-color: #bfd8d2;
-    color: #f9fcfb;
+    color: #535353;
 }
 .localNavigation{
     flex: 1;
     text-align: center;
     background-color: #fedcd2;
-    color: #f9fcfb;;
+    color: #535353;
 }
 .content{
     flex: 2;
@@ -92,8 +92,8 @@ div#manu{
     padding: 0px 75px;
 }
 
-div#fontcolor{
-    color: #243743;
+div#fontcolor{ /*基本的な文字の色*/
+    color: #535353;
 }
 
 #colorbutton{

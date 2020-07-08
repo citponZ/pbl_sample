@@ -19,7 +19,7 @@
 <body>
   <!--テンプレ-->
   <div layout:fragment="content">
-  <div align="center">
+  <div align="center"　id="fontcolor">
     <h3>更新結果</h3>
     <form action="index.html" th:action="@{index}">
 	    <input id="colorbutton" type="submit" value="メインメニューに戻る">
@@ -29,7 +29,7 @@
     <td th:text="*{message}">鈴木太郎</td>
   </div>
 </div>
-  <!--jqueryとか-->>
+  <!--jqueryとか-->
 <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
 <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
 <script th:src="@{/js/demo.js}"></script>
