@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 @Controller
 @RequestMapping("/words")
@@ -66,13 +68,14 @@ public class WordsController {
     }
     //Name検索
     @GetMapping("/searchName")
-    public String searchName(@RequestParam String name, Model model, RedirectAttributes attributes) {
+    public String searchName(@RequestParam String name, Model model, RedirectAttributes attributes) throws UnsupportedEncodingException {
         
         
         //語句名が同じものが存在したらその語句のページに遷移
         if (wordsService.checkByName(name) != null){
             attributes.addFlashAttribute("message", null);
-            return "redirect:id/"+name;
+            //return "redirect:id/"+name;
+            return "redirect:id/"+ URLEncoder.encode(name, "UTF-8");
         }
 
         List<WordsByAbb> wordsList = wordsService.findByNameAsInclude(name);
@@ -159,7 +162,8 @@ public class WordsController {
         wordsService.insert(words);
         String name = wordsForm.getName();
         
-        return "redirect:id/"+name;
+        //return "redirect:id/"+name;
+        return "redirect:id/"+ URLEncoder.encode(name, "UTF-8");
     }
     
     //insertResult
