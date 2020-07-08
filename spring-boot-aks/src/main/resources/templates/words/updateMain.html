@@ -4,17 +4,15 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{words/common.html}">
 
-<link rel="stylesheet" href="../../static/css/style.css"
+  <link rel="stylesheet" href="../../static/css/style.css"
           th:href="@{/css/style.css}">
 <html>
 <head>
-<meta charset="UTF-8">
-
-<!--ブートストラップ-->
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
-
-<title>メインメニュー</title>
+  <meta charset="UTF-8">
+  <!--ブートストラップ-->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
+  <title>メインメニュー</title>
 </head>
 
 <body>
@@ -22,9 +20,6 @@
   <div layout:fragment="content">
   <div align="center">
     <h3>更新</h3>
-
-      <div id =body-bk>
-        <div id=body>
     <form action="index.html" th:action="@{index}">
 	    <input type="submit" value="メインメニューに戻る">
     </form>
@@ -35,36 +30,31 @@
         <input type="submit" value="id検索">
     </form>
     <div th:if="${message}">
-        <br>
-        <p class="redmessage">
-            <td th:text="*{message}">鈴木太郎</td>
-        </p>
+      <br>
+      <p class="redmessage">
+        <td th:text="*{message}">鈴木太郎</td>
+      </p>
     </div>
     <form action="index.html" method="POST" th:action="@{updateComplete}">
-    <div th:if="${words}">
-    <br>
-    語句：<tr th:object="${words}"><td th:text="*{name}">鈴木太郎</td>
-    <table border="1">
-      <tr><th>内容</th></tr>
-      <tr th:object="${words}">
-      <td><textarea name="content" cols="40" rows="8" th:field="*{content}"></textarea></td></tr>
+      <div th:if="${words}">
+      <br>
+      語句：<tr th:object="${words}"><td th:text="*{name}">鈴木太郎</td>
+      <table border="1">
+        <tr><th>内容</th></tr>
+        <tr th:object="${words}">
+        <td><textarea name="content" cols="40" rows="8" th:field="*{content}"></textarea></td></tr>
+      </table>
 
-    </table>
-
-    <input type="hidden" th:value="*{id}" name="id">
-    <input type="submit" value="更新">
-    </div>
+      <input type="hidden" th:value="*{id}" name="id">
+      <input type="submit" value="更新">
+      </div>
     </form>
   </div>
-</div>
-</div>
-</div>
+  </div>
 
   <!--jqueryとか-->>
-<script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
-<script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
-<script th:src="@{/js/demo.js}"></script>
-
-
+  <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+  <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+  <script th:src="@{/js/demo.js}"></script>
 </body>
 </html>

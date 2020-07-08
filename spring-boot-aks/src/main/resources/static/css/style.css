@@ -23,14 +23,14 @@ input#submit_button {
 .grovalNavigation{
     flex: 1;
     text-align: center;
-    background-color: #ffa0ec;
-    color: #fff;
+    background-color: #8a949b;
+    color: #fafafa;
 }
 .localNavigation{
     flex: 1;
     text-align: center;
-    background-color: #888;
-    color: #fff;
+    background-color: #8a949b;
+    color: #888888;
 }
 .content{
     flex: 2;
@@ -42,6 +42,27 @@ div#picture1{
     position:relative;
     /*top:60px; */
 }
+
+/* ここから下がボタンのCSS　*/
+.btn-border {
+    display: inline-block;
+    max-width: 300px;
+    text-align: center;
+    border: 2px solid #28b78d;
+    font-size: 16px;
+    color: #28b78d;
+    text-decoration: none;
+    font-weight: bold;
+    /*padding: 0px 75px;*/
+    border-radius: 4px;
+    transition: .4s;
+  }
+  
+  .btn-border:hover {
+    background-color: #28b78d;
+    border-color: #28b78d;
+    color: #fafafa;
+  }
 
 div#footer-bk{
     background-color: #444;

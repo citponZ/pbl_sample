@@ -3,27 +3,21 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{words/common.html}">
-<link rel="stylesheet" href="../../static/css/style.css"
+  <link rel="stylesheet" href="../../static/css/style.css"
           th:href="@{/css/style.css}">
 <html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
-<title>メインメニュー</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
+  <title>メインメニュー</title>
 </head>
 
 <body>
   <!--テンプレ-->
   <div layout:fragment="content">
-
   <div align="center">
-
-          <h3>表示一覧</h3>
-
-
-    <div id =body-bk>
-      <div id=body>
+    <h3>表示一覧</h3>
     <form action="index.html" th:action="@{/}">
 	    <input type="submit" value="メインメニューに戻る">
     </form>
@@ -58,9 +52,7 @@
       <!--*/-->
     </table>
   </div>
-</div>
-</div>
-</div>
+  </div>
 
   <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
   <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
