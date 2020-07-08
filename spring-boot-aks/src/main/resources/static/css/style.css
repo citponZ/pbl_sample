@@ -1,5 +1,7 @@
 th {
-    background-color: orange;
+    background-color: #fedcd2;
+    color: #ffffff;
+    font-family: "YuMincho +36p Kana","游明朝体+36ポかな";
 }
 .redmessage {
     font-size: large ; 
@@ -32,14 +34,14 @@ input#submit_button {
 .grovalNavigation{
     flex: 1;
     text-align: center;
-    background-color: #ffa0ec;
-    color: #fff;
+    background-color: #bfd8d2;
+    color: #f9fcfb;
 }
 .localNavigation{
     flex: 1;
     text-align: center;
-    background-color: #888;
-    color: #fff;
+    background-color: #fedcd2;
+    color: #f9fcfb;;
 }
 .content{
     flex: 2;
@@ -51,6 +53,27 @@ div#picture1{
     position:relative;
     /*top:60px; */
 }
+
+/* ここから下がボタンのCSS　*/
+.btn-border {
+    display: inline-block;
+    max-width: 300px;
+    text-align: center;
+    border: 2px solid #bfd8d2;
+    font-size: 16px;
+    color: #96b9b1;
+    text-decoration: none;
+    font-weight: bold;
+    /*padding: 0px 75px;*/
+    border-radius: 4px;
+    transition: .4s;
+  }
+  
+  .btn-border:hover {
+    background-color: #df744a;
+    border-color: #f9fcfb;
+    color: #f9fcfb;
+  }
 
 div#footer-bk{
     background-color: #444;
@@ -65,51 +88,31 @@ div#footer{
     width: 960px;
     margin: auto;
 }
-/*
-div#body-bk{
-    padding: 180px 0 180px 0;
+div#manu{
+    padding: 0px 75px;
 }
 
-div#body{
-    width: 960px;
-    margin: auto;
-}
-*/
-/*
-html, body{
-    margin: 0;
-    padding: 0;
-    width:100%;
-    height:100%;
-}
-*/
-/*
-div#header-fixed
-{
-    position: fixed;
-    top: opx;
-    left: opx;
-    width: 100%;
-    height: 180px;
+div#fontcolor{
+    color: #243743;
 }
 
-div#header-wh{
-    background-color: #fff;
-    padding: 10px 0 20px;
-    height: 110px;
-    width: 100%;
+#colorbutton{
+    display: inline-block;
+    max-width: 300px;
+    text-align: center;
+    border: 2px solid #bfd8d2;
+    font-size: 16px;
+    color: #bfd8d2;
+    text-decoration: none;
+    font-weight: bold;
+    /*padding: 0px 75px;*/
+    border-radius: 4px;
+    transition: .4s;
+    background-color: #ffffff;
 }
-*/
 
-/*
-div#footer-fixed
-{
-    position: fixed;
-    bottom: 0px;
-    left: 0px;
-    width: 100%;
-    height: 180px;
+#textcolor{
+    color: #8e9190;
 }
-*/
 
 

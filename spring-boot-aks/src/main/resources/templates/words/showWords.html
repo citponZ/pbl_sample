@@ -1,25 +1,30 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<link rel="stylesheet" href="../../static/css/style.css"
-          th:href="@{/css/style.css}">
-<!-- Custom styles for this template -->
-<link th:href="@{/css/sticky-footer.css}" rel="stylesheet">
+<!--テンプレ-->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{words/common.html}">
 
+  <link rel="stylesheet" href="../../static/css/style.css"
+          th:href="@{/css/style.css}">
+  <!-- Custom styles for this template -->
+  <link th:href="@{/css/sticky-footer.css}" rel="stylesheet">
 <html>
 <head>
-    <script th:inline="javascript">
+  <script th:inline="javascript">
     /*<![CDATA[*/
-        document.title = /*[[${pageName}]]*/ 'error';
+      document.title = /*[[${pageName}]]*/ 'error';
     /*]]>*/
-    </script>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
-<title>document.title</title>
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
+  <title>document.title</title>
 </head>
 
 <body>
   <!--<div th:if="${message}">鈴木</div>-->
+  <!--テンプレ-->
+  <div layout:fragment="content">
 
 
   <div align="center">
@@ -46,16 +51,14 @@
     <br>
     <p class="normal">編集日時：<span th:text="${#temporals.format(wordsList.get(0).updatedDate, 'yyyy/MM/dd HH:mm:ss.SSS')}">メイン</span></p>
 
-
+  </div>
   </div>
 
-<!--footer-->
-<footer class="footer">
-    <div class="container">
-      <p class="text-muted">Copyright@ sofpedia, 2020 All Right Reserved.</p>
-    </div>
-  </footer>
-  <script th:src="@{/webjars/jquery/3.4.1-1/jquery.min.js}"></script>
+
+  <!--jqueryとか-->
+  <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
   <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+  <script th:src="@{/js/demo.js}"></script>
+
 </body>
 </html>

@@ -1,35 +1,33 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<link rel="stylesheet" href="../../static/css/style.css"
+<!--テンプレ-->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{words/common.html}">
+
+  <link rel="stylesheet" href="../../static/css/style.css"
           th:href="@{/css/style.css}">
 <html>
 <head>
-<meta charset="UTF-8">
-<title>メインメニュー</title>
+  <meta charset="UTF-8">
+  <!--ブートストラップ-->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
+  <title>メインメニュー</title>
 </head>
 
 <body>
-  <div id=header-fixed align="center">
-    <div id=header-wh>
-        <img th:src="@{/images/logo.png}" height=95%>
-        <!--<h1>ソフぺディア</h1>-->
-        <h3>削除</h3>
-      </div>
-    </div>
+  <div layout:fragment="content">
+  
 
-  <div id =body-bk>
-    <div id=body>
   <div align="center">
-
-
+    <h3>削除</h3>
     <form action="index.html" th:action="@{index}" >
-	    <input type="submit" value="メインメニューに戻る">
+	    <input id="colorbutton" type="submit" value="メインメニューに戻る">
     </form>
     <br>
-
     <form action="index.html" th:action="@{deleteId}" method=POST>
         ID: <input type="text" name="id" th:value="${id}">
-        <input type="submit" value="削除">
+        <input id="colorbutton" type="submit" value="削除">
     </form>
 
     <div th:if="${words}">
@@ -53,13 +51,10 @@
     </table>
     </div>
   </div>
-</div>
-</div>
-<div id=footer-fixed align="right">
-  <div id=footer-wh>
-      <img th:src="@{/images/teamlogo.png}" height=110%>
-      <!--<h1>ソフぺディア</h1>-->
-    </div>
   </div>
+  <!--jqueryとか-->
+  <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+  <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+  <script th:src="@{/js/demo.js}"></script>
 </body>
 </html>
