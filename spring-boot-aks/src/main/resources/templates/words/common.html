@@ -10,7 +10,7 @@
 <!-- (1)共通にしたいheadをfragment化する -->
 
 <body>
-    <div layout:fragment="content"></div>
+    
     <!-- (5)body内で共通化したい部品をfragment化する -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">
@@ -60,7 +60,7 @@
       <div class="grovalNavigation">
         <p>グローバルナビゲーション</p><br>
         <p>操作メニュー</p>
-        <div class="text-center">
+        <div align="center">
         <table>
           <tr>
             <td>
@@ -109,12 +109,33 @@
      </div>
      <div class="content">
       <img class="d-block mx-auto" th:src="@{/images/logo.png}" > 
-         <p>コンテンツ</p>
+         <!--コンテンツ-->
+         <div layout:fragment="content"></div>
+
+         <div id=footer-fixed align="right">
+          <div id=footer-wh>
+              <img th:src="@{/images/teamlogo.png}" height=110%>
+            </div>
+          </div>
+          
      </div>
+     
      <div class="localNavigation">
          <p>ローカルナビゲーション</p>
      </div>
     </div>
+
+<!--footer-->
+<footer class="footer">
+  <div class="container">
+    <p class="text-muted">Copyright@ sofpedia, 2020 All Right Reserved.</p>
+  </div>
+</footer>
+
+
+    
     <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
 </body>
+
+
 </html>
