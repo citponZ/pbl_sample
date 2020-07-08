@@ -9,8 +9,7 @@
 <!--<html xmlns:th="http://www.thymeleaf.org"></html>-->
 <!-- (1)共通にしたいheadをfragment化する -->
 
-<body>
-    
+<body> 
     <!-- (5)body内で共通化したい部品をfragment化する -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">
@@ -26,7 +25,7 @@
         <div class="collapse navbar-collapse" id="Navber">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="#">ホーム <span class="sr-only">(現位置)</span></a>
+              <a class="nav-link" th:href="@{index}">ホーム <span class="sr-only">(現位置)</span></a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">ユーザ情報</a>
@@ -52,7 +51,6 @@
             <input type="search" class="form-control mr-sm-2" placeholder="検索..." aria-label="検索..." name="name">
             <button type="submit" class="btn btn-outline-success my-2 my-sm-0">検索</button>
           </form>
-
         </div>
       </nav>
      
@@ -62,6 +60,50 @@
         <p>操作メニュー</p>
         <div align="center">
         <table>
+
+            <tr>
+              <td>
+                <form action="index.html" th:action="@{findAll}"　method="post">
+                  <input type="submit" value="全表示" id="submit_button" class="btn-border">
+                </form>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <form action="index.html" th:action="@{search}">
+                  <input type="submit" value="検索" id="submit_button" class="btn-border">
+                </form>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <form action="index.html" th:action="@{insertMain}">
+                  <input type="submit" value="追加" id="submit_button" class="btn-border">
+                </form>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <form action="index.html" th:action="@{updateMain}">
+                  <input type="submit" value="更新" id="submit_button" class="btn-border">
+                </form>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <form action="index.html" th:action="@{delete}">
+                  <input type="submit" value="削除" id="submit_button" class="btn-border">
+                </form>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <form action="index.html" th:action="@{test}">
+                  <input type="submit" value="テスト" id="submit_button" class="btn-border">
+                </form>
+              </td>
+            </tr>
+          <!--
           <tr>
             <td>
               <form action="index.html" th:action="@{findAll}"　method="post">
@@ -104,33 +146,34 @@
               </form>
             </td>
           </tr>
+        -->
         </table>
       </div>
-     </div>
-     <div class="content">
+    </div>
+    <div class="content">
       <img class="d-block mx-auto" th:src="@{/images/logo.png}" > 
-         <!--コンテンツ-->
-         <div layout:fragment="content"></div>
+        <!--コンテンツ-->
+        <div layout:fragment="content"></div>
 
-         <div id=footer-fixed align="right">
+        <div id=footer-fixed align="right">
           <div id=footer-wh>
-              <img th:src="@{/images/teamlogo.png}" height=110%>
-            </div>
+            <img th:src="@{/images/teamlogo.png}" height=110%>
           </div>
+        </div>
           
-     </div>
+    </div>
      
      <div class="localNavigation">
-         <p>ローカルナビゲーション</p>
+        <p>ローカルナビゲーション</p>
      </div>
-    </div>
-
-<!--footer-->
-<footer class="footer">
-  <div class="container">
-    <p class="text-muted">Copyright@ sofpedia, 2020 All Right Reserved.</p>
   </div>
-</footer>
+
+  <!--footer-->
+  <footer class="footer">
+    <div class="container">
+      <p class="text-muted">Copyright@ sofpedia, 2020 All Right Reserved.</p>
+    </div>
+  </footer>
 
 
     
