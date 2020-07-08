@@ -18,7 +18,18 @@
 
 <body>
   <!--テンプレ-->
-  <div layout:fragment="content"></div>
+  <div layout:fragment="content">
+    <div id="fontcolor">
+    <font size="5">マニュアル</font><br><br>
+    <div align="left" id="manu">
+      ・全表示：用語すべて表示します。<br>
+      ・検索：調べたい用語を調べることができます。<br>
+      ・追加：追加したい用語を追加できます。<br>
+      ・更新：訂正したい内容を訂正して更新できます。<br>
+      ・削除：削除したい用語を削除できます。<br>
+    </div>
+  </div>
+</div>
 
   <!--jqueryとか-->
   <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
