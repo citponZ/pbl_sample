@@ -31,13 +31,15 @@
     <h2 class="normal"> <span th:text="${wordsList.get(0).name}">メイン</span> </h2>
     <br>
     
+    <div th:if="${wordsList.get(0).abbName}">
     略語：<th:block th:each="words, iterStat:${wordsList}"> <!-- ステータス変数はカンマ区切りで2つ目の引数として受け取れる -->
       <span th:text="${words.abbName}">略語</span>
       <span th:unless="${iterStat.last}">, </span><!-- last変数はループの最後でtrueを返します -->
     </th:block>
+    <br>
+    <br>
+    </div>
 
-    <br>
-    <br>
     <h3>内容</h3>
     <br>
     <script th:inline="javascript">

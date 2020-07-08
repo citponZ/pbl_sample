@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+<link rel="stylesheet" href="../../static/css/style.css"
+          th:href="@{/css/style.css}">
+<!-- Custom styles for this template -->
+<link th:href="@{/css/sticky-footer.css}" rel="stylesheet">
+
+<head>
+    <script th:inline="javascript">
+
+        /*<![CDATA[*/
+            document.title = /*[[${searchName}]]*/ 'error';
+        /*]]>*/
+        </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
+<title>document.title</title>
+
+</head>
+
+<body>
+  <div align="center">
+
+    <form action="index.html" th:action="@{/}">
+	    <input type="submit" value="メインメニューに戻る">
+    </form>
+    <br>
+    <tr th:each="words : ${wordsList}" th:object="${words}">
+      <div class="container">
+      <table>
+        <tr >
+          <td align="left" width="600">
+            <h5><a th:href="@{'/words/id/'+ *{name}}"><span th:text="*{name}">メイン</span></a></h5>
+          </td>
+        </tr>
+        <tr >
+          <td align="left" width="600">
+            <!--ある程度文章が長くなると[...]で省略したい-->
+            <p th:text="*{content}">test</p>
+          </td>
+        </tr>
+      </table>
+    </div>
+    </tr>
+
+</div>
+<div id=footer-fixed align="right">
+  <div id=footer-wh>
+      <img th:src="@{/images/teamlogo.png}" height=110%>
+      <!--<h1>ソフぺディア</h1>-->
+    </div>
+  </div>
+</body>
+</html>

@@ -17,6 +17,15 @@ input#submit_button {
     word-break: normal;
 }
 
+
+.container {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+} 
+
+
+
 .gridbu{
     min-height: 100vh;
     display: flex;

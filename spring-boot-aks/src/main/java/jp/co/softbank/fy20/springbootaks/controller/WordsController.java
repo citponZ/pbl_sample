@@ -65,7 +65,7 @@ public class WordsController {
         return "words/search";
     }
     //Name検索
-    @PostMapping("/searchName")
+    @GetMapping("/searchName")
     public String searchName(@RequestParam String name, Model model, RedirectAttributes attributes) {
         
         
@@ -81,13 +81,14 @@ public class WordsController {
         if(wordsList==null){
             model.addAttribute("message", name+"との一致はありません。");
         }
-        return "候補ページ";
+        model.addAttribute("searchName", name+" - 検索");
+        return "words/candidate";
     }
     //単語ページ
     @GetMapping("/id/{name}")
     public String showWord(@PathVariable String name, @ModelAttribute("message") String message, Model model) {
         
-        
+
         List<WordsByAbb> wordsList = wordsService.findByName(name);
         if (wordsList.size() == 0){
             return "redirect:../../words/index";
@@ -124,11 +125,25 @@ public class WordsController {
     //insertMain
     @GetMapping("/insertMain")
     public String insert(Model model) {
-        Words words = null;
-        model.addAttribute("words", words);
-        model.addAttribute("id", null);
-        model.addAttribute("wordsForm", new WordsForm());
+        model.addAttribute("name", null);
         return "words/insertMain";
+    }
+
+    //check insert or update
+    @PostMapping("/inputContent")
+    public String inputContent(@RequestParam String name, Model model) {
+        // nameにブランク確認
+        //語句名が同じものが存在したらその語句の更新ページに遷移
+        model.addAttribute("name", name);
+        if (wordsService.checkByName(name) != null){
+            List<WordsByAbb> wordsList = wordsService.findByName(name);
+            model.addAttribute("wordsList", wordsList);
+            model.addAttribute("error", "この語句はすでに登録されています。");
+            return "words/updatecontent";
+        }
+        //追加ページに遷移
+        model.addAttribute("wordsForm", new WordsForm());
+        return "words/insertcontent";
     }
 
     //追加insert(deleteID的な) エラー処理も
@@ -140,19 +155,11 @@ public class WordsController {
             return "words/insertMain";
         }
 
-        //語句名が同じものが存在したらその語句のページに遷移
-        if (wordsService.checkByName(wordsForm.getName()) != null){
-            attributes.addFlashAttribute("message", "この語句は登録されています。");
-            return "redirect:id/"+wordsForm.getName();
-        }
-
         Words words = wordsForm.convertToEntity();
         wordsService.insert(words);
-        model.addAttribute("name", wordsForm.getName());
-        model.addAttribute("userId", wordsForm.getUserID());
-        model.addAttribute("content", wordsForm.getContent());
+        String name = wordsForm.getName();
         
-        return "redirect:insertResult";
+        return "redirect:id/"+name;
     }
     
     //insertResult
@@ -173,7 +180,7 @@ public class WordsController {
     }
 
     //ID検索
-    @GetMapping("/updateSearchId")
+    @PostMapping("/updateSearchId")
     public String updateSearchId(@RequestParam String id, Model model) {
         Words words = wordsService.find(Integer.parseInt(id));
         model.addAttribute("words", words);
