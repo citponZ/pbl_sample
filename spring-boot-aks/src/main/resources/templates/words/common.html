@@ -25,7 +25,7 @@
         <div class="collapse navbar-collapse" id="Navber">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" th:href="@{index}">ホーム <span class="sr-only">(現位置)</span></a>
+              <a class="nav-link" th:href="@{/}">ホーム <span class="sr-only">(現位置)</span></a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">ユーザ情報</a>
@@ -47,7 +47,7 @@
             <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Sign out</button>
           </form>
           <!--移動先のactionが出来次第、th:actionを変更 action="index.html" th:action="@{findAll}"-->
-          <form class="form-inline my-2 my-lg-0" th:action="@{searchName}">
+          <form class="form-inline my-2 my-lg-0" th:action="@{/words/searchName}">
             <input type="search" class="form-control mr-sm-2" placeholder="検索..." aria-label="検索..." name="name">
             <button type="submit" class="btn btn-outline-success my-2 my-sm-0">検索</button>
           </form>
@@ -63,90 +63,33 @@
 
             <tr>
               <td>
-                <form action="index.html" th:action="@{findAll}"　method="post">
+                <form action="index.html" th:action="@{/words/findAll}"　method="post">
                   <input type="submit" value="全表示" id="submit_button" class="btn-border">
                 </form>
               </td>
             </tr>
             <tr>
               <td>
-                <form action="index.html" th:action="@{search}">
-                  <input type="submit" value="検索" id="submit_button" class="btn-border">
-                </form>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <form action="index.html" th:action="@{insertMain}">
+                <form action="index.html" th:action="@{/words/insertMain}">
                   <input type="submit" value="追加" id="submit_button" class="btn-border">
                 </form>
               </td>
             </tr>
             <tr>
               <td>
-                <form action="index.html" th:action="@{updateMain}">
+                <form action="index.html" th:action="@{/words/updateMain}">
                   <input type="submit" value="更新" id="submit_button" class="btn-border">
                 </form>
               </td>
             </tr>
             <tr>
               <td>
-                <form action="index.html" th:action="@{delete}">
+                <form action="index.html" th:action="@{/words/delete}">
                   <input type="submit" value="削除" id="submit_button" class="btn-border">
                 </form>
               </td>
             </tr>
-            <tr>
-              <td>
-                <form action="index.html" th:action="@{test}">
-                  <input type="submit" value="テスト" id="submit_button" class="btn-border">
-                </form>
-              </td>
-            </tr>
-          <!--
-          <tr>
-            <td>
-              <form action="index.html" th:action="@{findAll}"　method="post">
-                <input type="submit" value="全表示" id="submit_button">
-              </form>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <form action="index.html" th:action="@{search}">
-                <input type="submit" value="検索" id="submit_button">
-              </form>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <form action="index.html" th:action="@{insertMain}">
-                <input type="submit" value="追加" id="submit_button">
-              </form>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <form action="index.html" th:action="@{updateMain}">
-                <input type="submit" value="更新" id="submit_button">
-              </form>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <form action="index.html" th:action="@{delete}">
-                <input type="submit" value="削除" id="submit_button">
-              </form>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <form action="index.html" th:action="@{test}">
-                <input type="submit" value="テスト" id="submit_button">
-              </form>
-            </td>
-          </tr>
-        -->
+          
         </table>
       </div>
     </div>
