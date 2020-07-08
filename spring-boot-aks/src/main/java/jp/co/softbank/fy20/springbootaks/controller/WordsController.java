@@ -138,6 +138,7 @@ public class WordsController {
         if (wordsService.checkByName(name) != null){
             List<WordsByAbb> wordsList = wordsService.findByName(name);
             model.addAttribute("wordsList", wordsList);
+            model.addAttribute("error", "この語句はすでに登録されています。");
             return "words/updatecontent";
         }
         //追加ページに遷移
