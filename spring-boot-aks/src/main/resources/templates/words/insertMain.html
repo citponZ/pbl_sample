@@ -1,21 +1,26 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<!--テンプレ-->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{words/common.html}">
 <head>
     <meta charset="UTF-8">
     <title>新規追加画面</title>
     <link rel="stylesheet" href="../../static/css/style.css"
           th:href="@{/css/style.css}">
+          
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
+
 </head>
 <body>
 
-    <div id=header-fixed align="center">
-        <div id=header-wh>
-            <img th:src="@{/images/logo.png}" height=95%>
-            <!--<h1>ソフぺディア</h1>-->
-            <h3>新規追加</h3>
-          </div>
-        </div>
+
+
+    <div layout:fragment="content">
+
     <div align="center">
+        <h3>新規追加</h3>
 
         <div id =body-bk>
             <div id=body>
@@ -62,11 +67,12 @@
 </div>
 </div>
 </div>
-<div id=footer-fixed align="right">
-    <div id=footer-wh>
-        <img th:src="@{/images/teamlogo.png}" height=110%>
-        <!--<h1>ソフぺディア</h1>-->
-      </div>
-    </div>
+</div>
+
+
+    <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/demo.js}"></script>
+
 </body>
 </html>
