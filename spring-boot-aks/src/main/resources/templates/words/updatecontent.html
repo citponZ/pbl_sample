@@ -9,6 +9,11 @@
 <link th:href="@{/css/sticky-footer.css}" rel="stylesheet">
 <html>
 <head>
+  <script th:inline="javascript">
+    /*<![CDATA[*/
+    var str = /*[[${error}]]*/ null;
+    /*]]>*/
+  </script>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -21,14 +26,12 @@
     <div layout:fragment="content">
   <div align="center"　id="fontcolor">
 
-      <div th:if=${error}>
       <!--jqueryとかでもっといいポップアップにしたい-->
       <script th:inline="javascript">
-        /*<![CDATA[*/
-        alert(/*[[${error}]]*/);
-        /*]]>*/
-        </script>
-      </div>
+        if (str != null){
+        alert(str);
+        }
+      </script>
 
     
     
