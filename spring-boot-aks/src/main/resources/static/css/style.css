@@ -43,7 +43,7 @@ input#submit_button {
     background-color: #fedcd2;
     color: #535353;
 }
-.content{
+.contents {
     flex: 2;
     text-align: center;
     background-color: #ffffff;
@@ -114,5 +114,36 @@ div#fontcolor{ /*基本的な文字の色*/
 #textcolor{
     color: #8e9190;
 }
+/*
+body {
+    padding:40px;
+  }
+*/  
+  .more {
+      background: #dcb239;
+      color: #fff;
+      width: 200px;
+      text-align: center;
+      padding: 5px;
+      cursor: pointer;
+  }
+  li {
+      margin: 0 0 5px;
+  }
 
 
+
+
+/*
+#tileList {
+    list-style: none;
+  }
+
+#tileList .content {
+    display: none;
+  }
+
+  .readMoreBtn {
+    display: none;
+  }
+  */
