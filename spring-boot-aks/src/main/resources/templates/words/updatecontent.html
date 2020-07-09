@@ -21,12 +21,14 @@
     <div layout:fragment="content">
   <div align="center"　id="fontcolor">
 
+      <div th:if=${error}>
       <!--jqueryとかでもっといいポップアップにしたい-->
       <script th:inline="javascript">
         /*<![CDATA[*/
         alert(/*[[${error}]]*/);
         /*]]>*/
         </script>
+      </div>
 
     
     

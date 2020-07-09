@@ -2,6 +2,7 @@ package jp.co.softbank.fy20.springbootaks.controller;
 
 import jp.co.softbank.fy20.springbootaks.entity.Words;
 import jp.co.softbank.fy20.springbootaks.entity.WordsByAbb;
+import jp.co.softbank.fy20.springbootaks.entity.WordsListAbb;
 import jp.co.softbank.fy20.springbootaks.service.WordsService;
 import jp.co.softbank.fy20.springbootaks.form.WordsForm;
 import org.springframework.stereotype.Controller;
@@ -79,7 +80,12 @@ public class WordsController {
         }
 
         List<WordsByAbb> wordsList = wordsService.findByNameAsInclude(name);
-        model.addAttribute("wordsList", wordsList);
+
+        //List<WordsByAbb> -> List<WordsListAbb>
+        //name,content,List<Abb>
+        List<WordsListAbb> wordsAbbList = wordsService.converToWordsListAbb(wordsList);
+
+        model.addAttribute("wordsList", wordsAbbList);
         //model.addAttribute("numOfSearch", wordsList.size());
         if(wordsList.size()==0){
             model.addAttribute("message", name+"との一致はありません。");
@@ -110,14 +116,22 @@ public class WordsController {
     public String delete(Model model) {
         Words words = null;
         model.addAttribute("words", words);
-        model.addAttribute("id", null);
-        //model.addAttribute("name", null);
+        model.addAttribute("name", null);
+
         return "words/delete";
     }
     //ID削除
-    @PostMapping("/deleteId")
-    public String deleteId(@RequestParam String id, Model model) {
-        boolean check = wordsService.delete(Integer.parseInt(id));
+    @PostMapping("/deleteName")
+    public String deleteId(@RequestParam String name, Model model) {
+        model.addAttribute("name", name);
+        if (wordsService.checkByName(name) == null){
+            //なかった時
+            model.addAttribute("message", "この語句は存在しません。");
+            return "words/delete";
+        }
+        //ある
+        List<WordsByAbb> wordsList = wordsService.findByName(name);
+        boolean check = wordsService.delete(wordsList.get(0).getId());
         if (check){
             model.addAttribute("message", "削除できました");
         }else{
@@ -179,23 +193,24 @@ public class WordsController {
     public String update(Model model) {
         Words words = null;
         model.addAttribute("words", words);
-        model.addAttribute("id", null);
-        //model.addAttribute("name", null);
+        model.addAttribute("name", null);
         //model.addAttribute("wordsForm", new WordsForm());
         return "words/updateMain";
     }
 
     //ID検索
     @PostMapping("/updateSearchId")
-    public String updateSearchId(@RequestParam String id, Model model) {
-        Words words = wordsService.find(Integer.parseInt(id));
-        model.addAttribute("words", words);
-        model.addAttribute("id", id);
-        //model.addAttribute("name", name);
-        if(words==null){
-            model.addAttribute("message", "そのIDは存在しません");
+    public String updateSearchId(@RequestParam String name, Model model) {
+
+        model.addAttribute("name", name);
+        if(wordsService.checkByName(name) == null){
+            model.addAttribute("message", "その語句は存在しません");
+            return "words/updateMain";
         }
-        return "words/updateMain";
+        List<WordsByAbb> wordsList = wordsService.findByName(name);
+        model.addAttribute("wordsList", wordsList);
+        model.addAttribute("error", null);
+        return "words/updateContent";
     }
 
 

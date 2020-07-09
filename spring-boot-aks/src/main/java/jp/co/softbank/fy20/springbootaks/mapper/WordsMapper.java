@@ -22,6 +22,7 @@ public interface WordsMapper {
     @Delete("DELETE FROM Words WHERE id=#{id}")
     boolean delete(Integer id);
 
+    //更新
     @Update("UPDATE Words SET content=#{content}, updatedDate=GETDATE() WHERE id=#{id}")
     int update(String content, Integer id);
 
@@ -49,7 +50,7 @@ public interface WordsMapper {
     //"from Abbreviations where name like #{name} ) rs "+
     //"where Words.id = rs.id and Words.id = Abbreviations.wordID")
 
-    @Select("select Words.id as id, Words.name as name, Words.content as content, Abbreviations.name as abbName "+
+    @Select("select Words.id as id, Words.name as name, Words.content as content, Words.updatedDate as updatedDate, Abbreviations.name as abbName "+
     "from (select id,name from Words where name like #{name} UNION "+
     "select wordID as id,name from Abbreviations where name like #{name}) rs, "+
     "Words LEFT OUTER JOIN Abbreviations ON Words.id = Abbreviations.wordID where Words.id = rs.id")
