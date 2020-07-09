@@ -213,7 +213,7 @@ public class WordsController {
         List<WordsByAbb> wordsList = wordsService.findByName(name);
         model.addAttribute("wordsList", wordsList);
         model.addAttribute("error", null);
-        return "words/updateContent";
+        return "words/updatecontent";
     }
 
 
