@@ -18,11 +18,15 @@ public class WordsListAbb {
         this.name = wordsByAbb.getName();
         this.content = wordsByAbb.getContent();
         this.updatedDate = wordsByAbb.getUpdatedDate();
-        this.abbName.add(wordsByAbb.getAbbName());
+        if (wordsByAbb.getAbbName() != null){
+            this.abbName.add(wordsByAbb.getAbbName());
+        }
     }
 
     public void addAbbName(String abbName){
-        this.abbName.add(abbName);
+        if (abbName != null){
+            this.abbName.add(abbName);
+        }
     }
 
     public Integer getId() {

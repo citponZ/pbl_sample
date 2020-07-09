@@ -17,6 +17,10 @@ input#submit_button {
     word-break: normal;
 }
 
+.large{
+    font-size: x-large ; 
+}
+
 
 .container {
     overflow: hidden;

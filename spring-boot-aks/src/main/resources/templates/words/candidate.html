@@ -43,7 +43,13 @@
           <table>
             <tr >                  
               <td align="left" width="600">
-                <h5><a th:href="@{'/words/id/'+ *{name}}"><span style="color:#bfd8d2;" th:text="*{name}">メイン</span></a></h5>
+                <a class="large" th:href="@{'/words/id/'+ *{name}}"><span style="color:#bfd8d2;" th:text="*{name}">メイン</span></a>
+                <th:block th:if="${words.abbName.size()}">
+               　<th:block th:each="abb, iterStat:*{abbName}"> <!-- ステータス変数はカンマ区切りで2つ目の引数として受け取れる -->
+                  <span th:text="${abb}">略語</span>
+                  <span th:unless="${iterStat.last}">, </span><!-- last変数はループの最後でtrueを返します -->
+                </th:block>
+                </th:block>
               </td>
             </tr>
             <tr >

@@ -88,7 +88,10 @@ public class WordsController {
         model.addAttribute("wordsList", wordsAbbList);
         //model.addAttribute("numOfSearch", wordsList.size());
         if(wordsList.size()==0){
-            model.addAttribute("message", name+"との一致はありません。");
+            model.addAttribute("message", "「"+name+"」"+"との一致はありません。");
+        }
+        else{
+            model.addAttribute("message", "「"+name+"」"+"の検索結果："+wordsList.size()+"件");
         }
         model.addAttribute("searchName", name+" - 検索");
         return "words/candidate";
