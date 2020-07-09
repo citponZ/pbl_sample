@@ -97,6 +97,15 @@ public class WordsServiceTest {
         else{
             System.out.println("nai");
         }
+
+        System.out.println("==== convert ====");
+        List2 = wordsService.findByNameAsInclude("ソフトバンク");
+        List<WordsListAbb> testlist = wordsService.converToWordsListAbb(List2);
+        for (WordsListAbb test : testlist) {
+            System.out.println(test);
+        }
+
+
     }
 
     
