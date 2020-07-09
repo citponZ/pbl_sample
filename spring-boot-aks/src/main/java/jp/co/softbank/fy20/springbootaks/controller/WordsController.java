@@ -111,6 +111,7 @@ public class WordsController {
         Words words = null;
         model.addAttribute("words", words);
         model.addAttribute("id", null);
+        //model.addAttribute("name", null);
         return "words/delete";
     }
     //ID削除
@@ -179,6 +180,7 @@ public class WordsController {
         Words words = null;
         model.addAttribute("words", words);
         model.addAttribute("id", null);
+        //model.addAttribute("name", null);
         //model.addAttribute("wordsForm", new WordsForm());
         return "words/updateMain";
     }
@@ -189,6 +191,7 @@ public class WordsController {
         Words words = wordsService.find(Integer.parseInt(id));
         model.addAttribute("words", words);
         model.addAttribute("id", id);
+        //model.addAttribute("name", name);
         if(words==null){
             model.addAttribute("message", "そのIDは存在しません");
         }
