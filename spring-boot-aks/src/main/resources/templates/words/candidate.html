@@ -23,7 +23,7 @@
   <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
   <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
   <script th:src="@{/js/wordLimit.js}"></script>
-  <!--<script th:src="@{/js/moreLook.js}"></script>-->
+  <script th:src="@{/js/moreLook.js}"></script>
   <title>document.title</title>
 
 </head>
@@ -32,18 +32,18 @@
   <!--テンプレ-->
   <div layout:fragment="content">
     <div align="center">
+    <div th:if="${message}">
+      <h4><p th:text="${message}">test</p></h4>
+    </div>
 
-
-      <div th:if="${message}">
-        <h4><p th:text="${message}">test</p></h4>
-      </div>
-      
+    <div class="content">
+      <script>var num=0;</script>
       <tr th:each="words : ${wordsList}" th:object="${words}">
         <div class="nomal">
           <table>
             <tr >                  
               <td align="left" width="600">
-                <a class="large" th:href="@{'/words/id/'+ *{name}}"><span th:text="*{name}">メイン</span></a>
+                <a class="large" th:href="@{'/words/id/'+ *{name}}"><span style="color:#bfd8d2;" th:text="*{name}">メイン</span></a>
                 <th:block th:if="${words.abbName.size()}">
                　<th:block th:each="abb, iterStat:*{abbName}"> <!-- ステータス変数はカンマ区切りで2つ目の引数として受け取れる -->
                   <span th:text="${abb}">略語</span>
@@ -58,48 +58,20 @@
                 <p class="text_limit" th:text="*{content}">test</p>
               </td>
             </tr>
-
           </table>
-        
-        </div>
-      </tr>
-
-
-<!-- //もっと見る実装したかった
-      <div id="wrapper">
-        <ul id="tileList" class="tileList">
-
-          <tr th:each="words : ${wordsList}" th:object="${words}">
-            <div class="nomal">
-              <table>
-
-                <tr >                  
-                  <td align="left" width="600">
-                    <h5><a th:href="@{'/words/id/'+ *{name}}"><span th:text="*{name}">メイン</span></a></h5>
-                  </td>
-                </tr>
-                <tr >
-                  <td align="left" width="600">
-                  //20文字以上の文章で[...]で省略
-                    <p class="text_limit" th:text="*{content}">test</p>
-                  </td>
-                </tr>
-
-              </table>
-            </div>
-          </tr>
-        </ul>
-
-        <a href="#" class="readMoreBtn">
-          <span class="moreText">もっと見る</span><span class="arrowDown"></span>
-        </a>
+          </div>
+          <script>
+            num=num+1;
+            if (3 < num && num%3==0) {
+              document.write('</div>');
+              document.write('<div class="more">もっと見る</div>');
+              document.write('<div class="content">');
+            }
+          </script>
+      </tr>   
       </div>
-
--->
     </div>
   </div>
-
-
 
 </body>
 </html>

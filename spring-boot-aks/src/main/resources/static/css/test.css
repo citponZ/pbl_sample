@@ -1,0 +1,15 @@
+body {
+    padding:40px;
+  }
+  
+  .more {
+      background: #0058B0;
+      color: #fff;
+      width: 200px;
+      text-align: center;
+      padding: 5px;
+      cursor: pointer;
+  }
+  li {
+      margin: 0 0 5px;
+  }
