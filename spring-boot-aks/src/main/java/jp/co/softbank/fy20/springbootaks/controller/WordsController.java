@@ -117,6 +117,7 @@ public class WordsController {
         Words words = null;
         model.addAttribute("words", words);
         model.addAttribute("name", null);
+
         return "words/delete";
     }
     //ID削除
