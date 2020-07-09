@@ -99,10 +99,11 @@ public class WordsServiceTest {
         }
 
         System.out.println("==== convert ====");
-        List2 = wordsService.findByNameAsInclude("ソフトバンク");
+        List2 = wordsService.findByNameAsInclude("word");
         List<WordsListAbb> testlist = wordsService.converToWordsListAbb(List2);
         for (WordsListAbb test : testlist) {
             System.out.println(test);
+            //System.out.println();
         }
 
 
