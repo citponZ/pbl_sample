@@ -5,7 +5,10 @@ import jp.co.softbank.fy20.springbootaks.mapper.*;
 import jp.co.softbank.fy20.springbootaks.entity.*;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @Service
@@ -69,6 +72,27 @@ public class WordsServiceImpl implements WordsService {
     @Transactional(readOnly = true)
     public Words checkByName(String name){
         return wordsMapper.checkByName(name);
+    }
+
+    @Override
+    public List<WordsListAbb> converToWordsListAbb(List<WordsByAbb> wordsAbbList){
+        Map<String, WordsListAbb> wordsmap= new HashMap<>();
+
+        for (WordsByAbb words : wordsAbbList){
+            if (wordsmap.containsKey(words.getName())){
+                wordsmap.get(words.getName()).addAbbName(words.getAbbName());
+            }
+            else{
+                wordsmap.put(words.getName(),new WordsListAbb(words));
+            }
+        }
+        //map -> list
+        List<WordsListAbb> wordsList = new ArrayList<WordsListAbb>();
+        for(Map.Entry<String, WordsListAbb> entry : wordsmap.entrySet()){
+            wordsList.add(entry.getValue());
+        }
+        //wordsList.add(new WordsListAbb());
+        return wordsList;
     }
 
 

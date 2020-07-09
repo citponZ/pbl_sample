@@ -22,4 +22,6 @@ public interface WordsService {
     List<WordsByAbb> findByNameAsInclude(String name);
 
     Words checkByName(String name);
+
+    List<WordsListAbb> converToWordsListAbb(List<WordsByAbb> wordsAbbList);
 }
