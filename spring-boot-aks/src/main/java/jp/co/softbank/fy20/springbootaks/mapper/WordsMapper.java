@@ -15,7 +15,7 @@ public interface WordsMapper {
     List<Words> findAll();
 
     @Insert("INSERT INTO Words(name,userID,content,createdDate,updatedDate) " +
-    "VALUES(#{name},#{userID},#{content},GETDATE(),GETDATE())")
+    "VALUES(#{name},#{userID},#{content},DATEADD(hour,9,GETDATE()),DATEADD(hour,9,GETDATE()))")
     @Options(useGeneratedKeys = true, keyColumn = "id", keyProperty = "id")
     void insert(Words word);
 
@@ -23,7 +23,7 @@ public interface WordsMapper {
     boolean delete(Integer id);
 
     //更新
-    @Update("UPDATE Words SET content=#{content}, updatedDate=GETDATE() WHERE id=#{id}")
+    @Update("UPDATE Words SET content=#{content}, updatedDate=DATEADD(hour,9,GETDATE()) WHERE id=#{id}")
     int update(String content, Integer id);
 
     @Select("SELECT * FROM Words WHERE id=#{id}")

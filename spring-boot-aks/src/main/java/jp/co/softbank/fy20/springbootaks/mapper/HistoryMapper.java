@@ -18,7 +18,7 @@ public interface HistoryMapper {
     @Select("SELECT * FROM History WHERE historyType like #{historyType}")
     List<History> findType(String historyType);
 
-    @Insert("INSERT INTO History(historyType, userID, wordID, historyDate) VALUES(#{historyType}, #{userID}, #{wordID}, GETDATE())")
+    @Insert("INSERT INTO History(historyType, userID, wordID, historyDate) VALUES(#{historyType}, #{userID}, #{wordID}, DATEADD(hour,9,GETDATE()))")
     @Options(useGeneratedKeys = true, keyColumn = "id", keyProperty = "id")
     void insert(History history);
     
