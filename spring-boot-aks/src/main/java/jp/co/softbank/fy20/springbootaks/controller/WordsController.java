@@ -3,7 +3,7 @@ package jp.co.softbank.fy20.springbootaks.controller;
 import jp.co.softbank.fy20.springbootaks.entity.Words;
 import jp.co.softbank.fy20.springbootaks.entity.WordsByAbb;
 import jp.co.softbank.fy20.springbootaks.entity.WordsListAbb;
-import jp.co.softbank.fy20.springbootaks.service.WordsService;
+import jp.co.softbank.fy20.springbootaks.service.*;
 import jp.co.softbank.fy20.springbootaks.form.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,11 +26,13 @@ import java.net.URLEncoder;
 @RequestMapping("/words")
 public class WordsController {
     private final WordsService wordsService;
+    private final HistoryService historyService;
     private String updateMessage;
 
-    // EmployeeServiceをDIする（@Autowiredは省略）
-    public WordsController(WordsService wordsService) {
+    // ServiceをDIする（@Autowiredは省略）
+    public WordsController(WordsService wordsService, HistoryService historyService) {
         this.wordsService = wordsService;
+        this.historyService = historyService;
     }
 
     /**
@@ -111,7 +113,8 @@ public class WordsController {
         model.addAttribute("pageName", name);
         model.addAttribute("wordsList", wordsList);
         model.addAttribute("message");
-
+        //userIDは現状1を入力しているが本来はsessonからログイン情報を入手して代入
+        historyService.findInsert(1, wordsList.get(0).getId());
         return "words/showWords";
     }
 
@@ -135,7 +138,8 @@ public class WordsController {
         }
         //ある
         List<WordsByAbb> wordsList = wordsService.findByName(name);
-        boolean check = wordsService.delete(wordsList.get(0).getId());
+        //userIDは現状1を入力しているが本来はsessonからログイン情報を入手して代入
+        boolean check = wordsService.delete(wordsList.get(0).getId(), 1);
         if (check){
             model.addAttribute("message", "削除できました");
         }else{
@@ -232,7 +236,8 @@ public class WordsController {
     //update(deleteID的な) エラー処理も
     @PostMapping("/updateComplete")
     public String updateComplete(@RequestParam String id,@RequestParam String content,Model model) throws Exception {
-        int check = wordsService.update(content, Integer.parseInt(id));
+        //userIDは現状1を入力しているが本来はsessonからログイン情報を入手して代入
+        int check = wordsService.update(content, Integer.parseInt(id), 1);
         /*if(check >= 1){
             updateMessage = "更新しました。";
         }else{
