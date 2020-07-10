@@ -182,9 +182,6 @@ public class WordsController {
     public String insertComplet(@Validated WordsForm wordsForm, BindingResult bindingResult, 
                                 Model model, RedirectAttributes attributes) throws Exception {
         
-        System.out.println(wordsForm.getName());
-        System.out.println(wordsForm.getUserID());
-        System.out.println(wordsForm.getContent());
         if (bindingResult.hasErrors()) {
             //return "redirect:insertMain";
             model.addAttribute("name", wordsForm.getName());
