@@ -4,7 +4,7 @@ import jp.co.softbank.fy20.springbootaks.entity.Words;
 import jp.co.softbank.fy20.springbootaks.entity.WordsByAbb;
 import jp.co.softbank.fy20.springbootaks.entity.WordsListAbb;
 import jp.co.softbank.fy20.springbootaks.service.WordsService;
-import jp.co.softbank.fy20.springbootaks.form.WordsForm;
+import jp.co.softbank.fy20.springbootaks.form.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -94,7 +94,6 @@ public class WordsController {
             model.addAttribute("message", "「"+name+"」"+"の検索結果："+wordsAbbList.size()+"件");
         }
         model.addAttribute("searchName", name+" - 検索");
-        model.addAttribute("test", null);
         return "words/candidate";
     }
     //単語ページ
@@ -149,17 +148,22 @@ public class WordsController {
     @GetMapping("/insertMain")
     public String insert(Model model) {
         model.addAttribute("name", null);
+        model.addAttribute("nameForm", new NameForm());
         return "words/insertMain";
     }
 
     //check insert or update
     @PostMapping("/inputContent")
-    public String inputContent(@RequestParam String name, Model model) {
+    public String inputContent(@Validated NameForm nameForm, BindingResult bindingResult, Model model) {
         // nameにブランク確認
+        if (bindingResult.hasErrors()) {
+            //return "redirect:insertMain";
+            return "words/insertMain";
+        }
         //語句名が同じものが存在したらその語句の更新ページに遷移
-        model.addAttribute("name", name);
-        if (wordsService.checkByName(name) != null){
-            List<WordsByAbb> wordsList = wordsService.findByName(name);
+        model.addAttribute("name", nameForm.getName());
+        if (wordsService.checkByName(nameForm.getName()) != null){
+            List<WordsByAbb> wordsList = wordsService.findByName(nameForm.getName());
             model.addAttribute("wordsList", wordsList);
             model.addAttribute("error", "この語句はすでに登録されています。");
             return "words/updatecontent";
@@ -173,9 +177,14 @@ public class WordsController {
     @PostMapping("/insertComplete")
     public String insertComplet(@Validated WordsForm wordsForm, BindingResult bindingResult, 
                                 Model model, RedirectAttributes attributes) throws Exception {
+        
+        System.out.println(wordsForm.getName());
+        System.out.println(wordsForm.getUserID());
+        System.out.println(wordsForm.getContent());
         if (bindingResult.hasErrors()) {
             //return "redirect:insertMain";
-            return "words/insertMain";
+            model.addAttribute("name", wordsForm.getName());
+            return "words/insertcontent";
         }
 
         Words words = wordsForm.convertToEntity();

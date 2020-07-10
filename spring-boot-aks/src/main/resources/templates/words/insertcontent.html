@@ -28,7 +28,7 @@
     
     
     <form action="index.html" method="POST" th:action="@{insertComplete}" th:object="${wordsForm}">
-        <div th:errors="${name}" class="redmessage">
+        <div th:errors="*{content}" class="redmessage">
             ダミーメッセージ
         </div>
     <br>
