@@ -27,21 +27,23 @@
   <!--テンプレ-->
   <div layout:fragment="content">
 
-
-    <div align="left" id="fontcolor">
-      <h2 class="normal"> <span th:text="${wordsList.get(0).name}">メイン</span> </h2>
-      
-      <form action="index.html" th:action="@{/words/updateSearchId}" method="POST" style="display: inline;">
-        <input type="hidden" name="name" th:value="${name}">
-        <input id="colorbutton" class="small" type="submit" value="編集">
-      </form>
-    
-
-      <div align="right" id="fontcolor">
-        <!--yyyy/MM/dd HH:mm:ss.SSSの表記を分までに短縮中-->
-        <p class="normal">編集日時：<span th:text="${#temporals.format(wordsList.get(0).updatedDate, 'yyyy/MM/dd HH:mm')}">メイン</span></p>
-      </div>
-    </div> 
+    <table id="fontcolor" align="center">
+      <tr>
+        <th width="10%" align="left">
+          <h2 class="normal"> <span th:text="${wordsList.get(0).name}">メイン</span> </h2>
+        </th>
+        <th width="10%">
+          <form action="index.html" th:action="@{/words/updateSearchId}" method="POST" style="display: inline;">
+            <input type="hidden" name="name" th:value="${name}">
+            <input id="colorbutton" type="submit" value="編集">
+          </form>
+      </th>
+      <th width="80%">
+      </th>
+    </tr>
+  </table>
+  <!--yyyy/MM/dd HH:mm:ss.SSSの表記を分までに短縮中-->
+  <p class="normal" align="right">編集日時：<span th:text="${#temporals.format(wordsList.get(0).updatedDate, 'yyyy/MM/dd HH:mm')}">メイン</span></p>
 
     <!--一本線-->
     <hr color="#535353">
