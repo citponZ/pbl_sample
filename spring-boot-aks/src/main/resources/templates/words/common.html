@@ -27,7 +27,7 @@
             <li class="nav-item active">
               <a class="nav-link" th:href="@{/}">ホーム <span class="sr-only">(現位置)</span></a>
             </li>
-            <li class="nav-item">
+            <!--<li class="nav-item">
               <a class="nav-link" href="#">ユーザ情報</a>
             </li>
             <li class="nav-item dropdown">
@@ -40,12 +40,13 @@
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">その他</a>
               </div>
-            </li>
+            </li>-->
           </ul>
-    
+          
+          <!--
           <form class="form-inline my-2 my-lg-0" >
             <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Sign out</button>
-          </form>
+          </form>-->
           <!--移動先のactionが出来次第、th:actionを変更 action="index.html" th:action="@{findAll}"-->
           <form class="form-inline my-2 my-lg-0" th:action="@{/words/searchName}">
             <input type="search" class="form-control mr-sm-2" placeholder="検索..." aria-label="検索..." name="name">
@@ -61,13 +62,14 @@
         <div align="center">
         <table>
 
+          <!--
             <tr>
               <td>
                 <form action="index.html" th:action="@{/words/findAll}"　method="post">
                   <input type="submit" value="全表示" id="submit_button" class="btn-border">
                 </form>
               </td>
-            </tr>
+            </tr>-->
             <tr>
               <td>
                 <form action="index.html" th:action="@{/words/insertMain}">

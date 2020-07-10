@@ -41,7 +41,7 @@ public class WordsServiceTest {
 
         // 更新のテスト
         System.out.println("==== 更新 ====");
-        int checkUpdate = wordsService.update("アップデートしました。", 2);
+        int checkUpdate = wordsService.update("アップデートしました。", 2,1);
         System.out.println(checkUpdate);
 
         // 1検索
@@ -51,7 +51,7 @@ public class WordsServiceTest {
 
         // 削除のテスト
         System.out.println("==== 削除 ====");
-        boolean checkDelete = wordsService.delete(2);
+        boolean checkDelete = wordsService.delete(2,1);
         if (checkDelete){
             System.out.println("削除されました。");
         }
