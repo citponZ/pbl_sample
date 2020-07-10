@@ -7,6 +7,7 @@ import java.util.List;
 public class WordsListAbb {
     private Integer id;
     private String name;
+    private String nameByURL;
     private String content;
     private LocalDateTime updatedDate;
     private List<String> abbName = new ArrayList<String>();
@@ -16,6 +17,7 @@ public class WordsListAbb {
     public WordsListAbb(WordsByAbb wordsByAbb){
         this.id = wordsByAbb.getId();
         this.name = wordsByAbb.getName();
+        this.nameByURL = name.replace(" ", "_");
         this.content = wordsByAbb.getContent();
         this.updatedDate = wordsByAbb.getUpdatedDate();
         if (wordsByAbb.getAbbName() != null){
@@ -43,6 +45,13 @@ public class WordsListAbb {
 
     public void setName(String name) {
         this.name = name;
+    }
+    public String getNameByURL() {
+        return nameByURL;
+    }
+
+    public void setNameByURL(String nameByURL) {
+        this.nameByURL = nameByURL;
     }
 
     public String getContent() {

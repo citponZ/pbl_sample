@@ -76,7 +76,7 @@ public class WordsController {
         if (wordsService.checkByName(name) != null){
             attributes.addFlashAttribute("message", null);
             //return "redirect:id/"+name;
-            return "redirect:id/"+ URLEncoder.encode(name, "UTF-8");
+            return "redirect:id/"+ URLEncoder.encode(name.replace(" ", "_"), "UTF-8");
         }
 
         List<WordsByAbb> wordsList = wordsService.findByNameAsInclude(name);
@@ -94,13 +94,16 @@ public class WordsController {
             model.addAttribute("message", "「"+name+"」"+"の検索結果："+wordsAbbList.size()+"件");
         }
         model.addAttribute("searchName", name+" - 検索");
+        model.addAttribute("test", null);
         return "words/candidate";
     }
     //単語ページ
     @GetMapping("/id/{name}")
-    public String showWord(@PathVariable String name, @ModelAttribute("message") String message, Model model) {
+    public String showWord(@PathVariable String name, @ModelAttribute("message") String message, Model model) throws UnsupportedEncodingException{
         
-
+        if(name.contains(" ")){
+            return "redirect:"+ URLEncoder.encode(name.replace(" ", "_"), "UTF-8");
+        }
         List<WordsByAbb> wordsList = wordsService.findByName(name);
         if (wordsList.size() == 0){
             return "redirect:../../words/index";
@@ -110,7 +113,6 @@ public class WordsController {
         model.addAttribute("wordsList", wordsList);
         model.addAttribute("message");
 
-        // sessionでもらったwordsListをMedelに追加
         return "words/showWords";
     }
 
@@ -181,7 +183,7 @@ public class WordsController {
         String name = wordsForm.getName();
         
         //return "redirect:id/"+name;
-        return "redirect:id/"+ URLEncoder.encode(name, "UTF-8");
+        return "redirect:id/"+ URLEncoder.encode(name.replace(" ", "_"), "UTF-8");
     }
     
     //insertResult
@@ -230,7 +232,7 @@ public class WordsController {
         Words words = wordsService.find(Integer.parseInt(id));
         String name = words.getName();
                
-        return "redirect:id/"+ URLEncoder.encode(name, "UTF-8");
+        return "redirect:id/"+ URLEncoder.encode(name.replace(" ", "_"), "UTF-8");
     }
     
     //updateResult
