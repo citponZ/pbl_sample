@@ -32,7 +32,7 @@
   <!--テンプレ-->
   <div layout:fragment="content">
     <div align="center">
-    <h4><p th:text="${message}">test</p></h4>
+      <h4 id="top"><p th:text="${message}">test</p></h4>
 
     <div class="content">
       <script>var num=0;</script>
@@ -58,15 +58,27 @@
             </tr>
           </table>
           </div>
-          <script>
-            num=num+1;
-            if (3 < num && num%3==0) {
-              document.write('</div>');
-              document.write('<div class="more">もっと見る</div>');
-              document.write('<div class="content">');
-            }
-          </script>
-      </tr>   
+
+
+
+            <script　th:inline="javascript">
+              num=num+1;
+              
+              var len = /*[[${wordsList.size()}]]*/ '0';
+
+              if (3 < num && num%3==0 && num!=len) {
+                  document.write('</div>');
+                  document.write('<div class="more">もっと見る</div>');
+                  document.write('<div class="content">');                  
+              }
+                
+              if(num==len){
+                document.write('<a class="topButtonCor" href="#top">トップに戻る</a>');
+              }
+            </script>
+        </tr>
+        
+
       </div>
     </div>
   </div>

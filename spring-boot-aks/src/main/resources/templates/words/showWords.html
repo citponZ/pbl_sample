@@ -28,31 +28,44 @@
   <div layout:fragment="content">
 
 
-  <div align="center" id="fontcolor">
-    <h2 class="normal"> <span th:text="${wordsList.get(0).name}">メイン</span> </h2>
-    <br>
+    <div align="left" id="fontcolor">
+      <h2 class="normal"> <span th:text="${wordsList.get(0).name}">メイン</span> </h2>
+      
+      <form action="index.html" th:action="@{/words/updateSearchId}" method="POST" style="display: inline;">
+        <input type="hidden" name="name" th:value="${name}">
+        <input id="colorbutton" class="small" type="submit" value="編集">
+      </form>
     
+
+      <div align="right" id="fontcolor">
+        <!--yyyy/MM/dd HH:mm:ss.SSSの表記を分までに短縮中-->
+        <p class="normal">編集日時：<span th:text="${#temporals.format(wordsList.get(0).updatedDate, 'yyyy/MM/dd HH:mm')}">メイン</span></p>
+      </div>
+    </div> 
+
+    <!--一本線-->
+    <hr color="#535353">
+
+
+  
+      
     <div th:if="${wordsList.get(0).abbName}">
-    略語：<th:block th:each="words, iterStat:${wordsList}"> <!-- ステータス変数はカンマ区切りで2つ目の引数として受け取れる -->
+      略語：<th:block th:each="words, iterStat:${wordsList}"> <!-- ステータス変数はカンマ区切りで2つ目の引数として受け取れる -->
       <span th:text="${words.abbName}">略語</span>
       <span th:unless="${iterStat.last}">, </span><!-- last変数はループの最後でtrueを返します -->
-    </th:block>
-    <br>
-    <br>
+      </th:block>
+      <br>
+      <br>
     </div>
 
-    <h3>内容</h3>
     <br>
     <script th:inline="javascript">
       var str = /*[[${wordsList.get(0).content}]]*/ '内容';
       str = str.replace(/\r?\n/g, '<br>');
       document.write(str);
     </script>
-    <br>
-    <br>
-    <p class="normal">編集日時：<span th:text="${#temporals.format(wordsList.get(0).updatedDate, 'yyyy/MM/dd HH:mm:ss.SSS')}">メイン</span></p>
-
-  </div>
+      <br>
+      <br>
   </div>
 
 

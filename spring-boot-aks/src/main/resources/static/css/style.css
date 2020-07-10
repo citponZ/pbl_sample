@@ -21,6 +21,10 @@ input#submit_button {
     font-size: x-large ; 
 }
 
+.small{
+    font-size: x-small；
+}
+
 
 .container {
     overflow: hidden;
@@ -116,13 +120,15 @@ div#fontcolor{ /*基本的な文字の色*/
 }
 
 #textcolor{
-    color: #8e9190;
+    color: #535353;
 }
 /*
 body {
     padding:40px;
   }
-*/  
+*/
+
+/*もっと見る関係の配色*/ 
   .more {
       background: #dcb239;
       color: #fff;
@@ -135,7 +141,18 @@ body {
       margin: 0 0 5px;
   }
 
-
+  .topButtonCor {
+    text-decoration: none;
+    background: #dcb239;
+    color: #fff;
+    width: 200px;
+    text-align: center;
+    padding: 8px 60px;
+  }
+  .topButtonCor:hover{
+      text-decoration: none;
+      color: #535353;
+    }
 
 
 /*
