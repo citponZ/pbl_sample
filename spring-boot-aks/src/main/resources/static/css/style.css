@@ -21,6 +21,10 @@ input#submit_button {
     font-size: x-large ; 
 }
 
+.small{
+    font-size: x-small；
+}
+
 
 .container {
     overflow: hidden;
