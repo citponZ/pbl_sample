@@ -35,7 +35,11 @@
       <input type="hidden" name="name" th:value="${name}">
       <input id="colorbutton" class="small" type="submit" value="編集">
     </form>
-    
+
+    <div align="right" id="fontcolor">
+      <!--yyyy/MM/dd HH:mm:ss.SSSの表記を分までに短縮中-->
+      <p class="normal">編集日時：<span th:text="${#temporals.format(wordsList.get(0).updatedDate, 'yyyy/MM/dd HH:mm')}">メイン</span></p>
+    </div>
 
     <!--
     <form action="index.html" th:action="@{/words/updateSearchId}"　method="POST">
@@ -55,7 +59,6 @@
     <br>
     </div>
 
-    <h3>内容</h3>
     <br>
     <script th:inline="javascript">
       var str = /*[[${wordsList.get(0).content}]]*/ '内容';
@@ -64,7 +67,6 @@
     </script>
     <br>
     <br>
-    <p class="normal">編集日時：<span th:text="${#temporals.format(wordsList.get(0).updatedDate, 'yyyy/MM/dd HH:mm:ss.SSS')}">メイン</span></p>
   </div>
 
 
