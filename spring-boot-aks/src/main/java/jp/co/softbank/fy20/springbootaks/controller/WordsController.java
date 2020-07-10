@@ -3,8 +3,8 @@ package jp.co.softbank.fy20.springbootaks.controller;
 import jp.co.softbank.fy20.springbootaks.entity.Words;
 import jp.co.softbank.fy20.springbootaks.entity.WordsByAbb;
 import jp.co.softbank.fy20.springbootaks.entity.WordsListAbb;
-import jp.co.softbank.fy20.springbootaks.service.WordsService;
-import jp.co.softbank.fy20.springbootaks.form.WordsForm;
+import jp.co.softbank.fy20.springbootaks.service.*;
+import jp.co.softbank.fy20.springbootaks.form.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,11 +26,13 @@ import java.net.URLEncoder;
 @RequestMapping("/words")
 public class WordsController {
     private final WordsService wordsService;
+    private final HistoryService historyService;
     private String updateMessage;
 
-    // EmployeeServiceをDIする（@Autowiredは省略）
-    public WordsController(WordsService wordsService) {
+    // ServiceをDIする（@Autowiredは省略）
+    public WordsController(WordsService wordsService, HistoryService historyService) {
         this.wordsService = wordsService;
+        this.historyService = historyService;
     }
 
     /**
@@ -76,7 +78,7 @@ public class WordsController {
         if (wordsService.checkByName(name) != null){
             attributes.addFlashAttribute("message", null);
             //return "redirect:id/"+name;
-            return "redirect:id/"+ URLEncoder.encode(name, "UTF-8");
+            return "redirect:id/"+ URLEncoder.encode(name.replace(" ", "_"), "UTF-8");
         }
 
         List<WordsByAbb> wordsList = wordsService.findByNameAsInclude(name);
@@ -98,9 +100,11 @@ public class WordsController {
     }
     //単語ページ
     @GetMapping("/id/{name}")
-    public String showWord(@PathVariable String name, @ModelAttribute("message") String message, Model model) {
+    public String showWord(@PathVariable String name, @ModelAttribute("message") String message, Model model) throws UnsupportedEncodingException{
         
-
+        if(name.contains(" ")){
+            return "redirect:"+ URLEncoder.encode(name.replace(" ", "_"), "UTF-8");
+        }
         List<WordsByAbb> wordsList = wordsService.findByName(name);
         if (wordsList.size() == 0){
             return "redirect:../../words/index";
@@ -109,8 +113,8 @@ public class WordsController {
         model.addAttribute("pageName", name);
         model.addAttribute("wordsList", wordsList);
         model.addAttribute("message");
-
-        // sessionでもらったwordsListをMedelに追加
+        //userIDは現状1を入力しているが本来はsessonからログイン情報を入手して代入
+        historyService.findInsert(1, wordsList.get(0).getId());
         return "words/showWords";
     }
 
@@ -134,7 +138,8 @@ public class WordsController {
         }
         //ある
         List<WordsByAbb> wordsList = wordsService.findByName(name);
-        boolean check = wordsService.delete(wordsList.get(0).getId());
+        //userIDは現状1を入力しているが本来はsessonからログイン情報を入手して代入
+        boolean check = wordsService.delete(wordsList.get(0).getId(), 1);
         if (check){
             model.addAttribute("message", "削除できました");
         }else{
@@ -147,17 +152,22 @@ public class WordsController {
     @GetMapping("/insertMain")
     public String insert(Model model) {
         model.addAttribute("name", null);
+        model.addAttribute("nameForm", new NameForm());
         return "words/insertMain";
     }
 
     //check insert or update
     @PostMapping("/inputContent")
-    public String inputContent(@RequestParam String name, Model model) {
+    public String inputContent(@Validated NameForm nameForm, BindingResult bindingResult, Model model) {
         // nameにブランク確認
+        if (bindingResult.hasErrors()) {
+            //return "redirect:insertMain";
+            return "words/insertMain";
+        }
         //語句名が同じものが存在したらその語句の更新ページに遷移
-        model.addAttribute("name", name);
-        if (wordsService.checkByName(name) != null){
-            List<WordsByAbb> wordsList = wordsService.findByName(name);
+        model.addAttribute("name", nameForm.getName());
+        if (wordsService.checkByName(nameForm.getName()) != null){
+            List<WordsByAbb> wordsList = wordsService.findByName(nameForm.getName());
             model.addAttribute("wordsList", wordsList);
             model.addAttribute("error", "この語句はすでに登録されています。");
             return "words/updatecontent";
@@ -171,9 +181,14 @@ public class WordsController {
     @PostMapping("/insertComplete")
     public String insertComplet(@Validated WordsForm wordsForm, BindingResult bindingResult, 
                                 Model model, RedirectAttributes attributes) throws Exception {
+        
+        System.out.println(wordsForm.getName());
+        System.out.println(wordsForm.getUserID());
+        System.out.println(wordsForm.getContent());
         if (bindingResult.hasErrors()) {
             //return "redirect:insertMain";
-            return "words/insertMain";
+            model.addAttribute("name", wordsForm.getName());
+            return "words/insertcontent";
         }
 
         Words words = wordsForm.convertToEntity();
@@ -181,7 +196,7 @@ public class WordsController {
         String name = wordsForm.getName();
         
         //return "redirect:id/"+name;
-        return "redirect:id/"+ URLEncoder.encode(name, "UTF-8");
+        return "redirect:id/"+ URLEncoder.encode(name.replace(" ", "_"), "UTF-8");
     }
     
     //insertResult
@@ -221,7 +236,8 @@ public class WordsController {
     //update(deleteID的な) エラー処理も
     @PostMapping("/updateComplete")
     public String updateComplete(@RequestParam String id,@RequestParam String content,Model model) throws Exception {
-        int check = wordsService.update(content, Integer.parseInt(id));
+        //userIDは現状1を入力しているが本来はsessonからログイン情報を入手して代入
+        int check = wordsService.update(content, Integer.parseInt(id), 1);
         /*if(check >= 1){
             updateMessage = "更新しました。";
         }else{
@@ -230,7 +246,7 @@ public class WordsController {
         Words words = wordsService.find(Integer.parseInt(id));
         String name = words.getName();
                
-        return "redirect:id/"+ URLEncoder.encode(name, "UTF-8");
+        return "redirect:id/"+ URLEncoder.encode(name.replace(" ", "_"), "UTF-8");
     }
     
     //updateResult

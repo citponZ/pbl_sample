@@ -11,9 +11,9 @@ public interface WordsService {
 
     void insert(Words words);
 
-    boolean delete(Integer id);
+    boolean delete(Integer id, Integer userID);
 
-    int update(String content, Integer id);
+    int update(String content, Integer id, Integer userID);
 
     Words find(Integer id);
 

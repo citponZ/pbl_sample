@@ -15,9 +15,11 @@ import java.util.Map;
 public class WordsServiceImpl implements WordsService {
     
     private final WordsMapper wordsMapper;
+    private final HistoryMapper historyMapper;
 
-    public WordsServiceImpl(WordsMapper wordsMapper) {
+    public WordsServiceImpl(WordsMapper wordsMapper, HistoryMapper historyMapper) {
         this.wordsMapper = wordsMapper;
+        this.historyMapper = historyMapper;
     }
 
     @Override
@@ -31,19 +33,22 @@ public class WordsServiceImpl implements WordsService {
     @Transactional(readOnly = false)
     public void insert(Words words){
         wordsMapper.insert(words);
+        historyMapper.insert(new History("insert",words.getUserID(),words.getId()));
     }
 
     @Override
     @Transactional(readOnly = false)
-    public boolean delete(Integer id){
+    public boolean delete(Integer id, Integer userID){
         boolean checkDelete = wordsMapper.delete(id);
+        historyMapper.insert(new History("delete", userID, id));
         return checkDelete;
     }
 
     @Override
     @Transactional(readOnly = false)
-    public int update(String content, Integer id){
+    public int update(String content, Integer id, Integer userID){
         int checkUpdate = wordsMapper.update(content, id);
+        historyMapper.insert(new History("update", userID, id));
         return checkUpdate;
     }
 
