@@ -67,9 +67,10 @@ div#picture1{
     display: inline-block;
     max-width: 300px;
     text-align: center;
-    border: 2px solid #bfd8d2;
+    border: 2px solid #96b9b1;
     font-size: 16px;
     color: #96b9b1;
+    background-color: #fff;
     text-decoration: none;
     font-weight: bold;
     /*padding: 0px 75px;*/
