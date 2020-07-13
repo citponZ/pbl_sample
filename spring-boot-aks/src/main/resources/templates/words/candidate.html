@@ -24,6 +24,7 @@
   <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
   <script th:src="@{/js/wordLimit.js}"></script>
   <script th:src="@{/js/moreLook.js}"></script>
+  <script th:src="@{/js/backToTop.js}"></script>
   <title>document.title</title>
 
 </head>
@@ -66,20 +67,20 @@
               
               var len = /*[[${wordsList.size()}]]*/ '0';
 
-              if (3 < num && num%3==0 && num!=len) {
+              if (4 < num && num%5==0 && num!=len) {
                   document.write('</div>');
                   document.write('<div class="more">もっと見る</div>');
                   document.write('<div class="content">');                  
-              }
-                
+              } 
               if(num==len){
                 document.write('<a class="topButtonCor" href="#top">トップに戻る</a>');
               }
             </script>
         </tr>
         
-
+        
       </div>
+      <div id="page_top"><a href="#"></a></div>
     </div>
   </div>
 

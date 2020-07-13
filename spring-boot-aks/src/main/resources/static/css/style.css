@@ -12,6 +12,15 @@ input#submit_button {
     height:30px; 
 }
 
+#wordBlank {
+    /*padding: 10px 0 20px;*/
+    margin: 0 0 0 20px;
+}
+
+#contentBlank {
+    /*padding: 10px 0 20px;*/
+    margin: 0 0 0 40px;
+}
 
 .nomal{
     word-break: normal;
@@ -80,8 +89,8 @@ div#picture1{
   
   .btn-border:hover {
     background-color: #df744a;
-    border-color: #f9fcfb;
-    color: #f9fcfb;
+    border-color: #df744a;
+    color: #fff;
   }
 
 div#footer-bk{
@@ -155,17 +164,36 @@ body {
       color: #535353;
     }
 
-
-/*
-#tileList {
-    list-style: none;
-  }
-
-#tileList .content {
-    display: none;
-  }
-
-  .readMoreBtn {
-    display: none;
-  }
-  */
+    #page_top{
+        width: 50px;
+        height: 50px;
+        position: fixed;
+        right: 0;
+        bottom: -50px;
+        background: #ef3f98;
+        opacity: 0.6;
+        border-radius: 50%;
+      }
+      #page_top a{
+        position: relative;
+        display: block;
+        width: 50px;
+        height: 50px;
+        text-decoration: none;
+      }
+      #page_top a::before{
+        font-family: 'Font Awesome 5 Free';
+        font-weight: 900;
+        content: '\f102';
+        font-size: 25px;
+        color: #fff;
+        position: absolute;
+        width: 25px;
+        height: 25px;
+        top: -5px;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        margin: auto;
+        text-align: center;
+      }
