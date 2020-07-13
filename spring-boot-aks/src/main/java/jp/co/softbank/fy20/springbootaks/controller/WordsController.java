@@ -38,7 +38,7 @@ public class WordsController {
     /**
      * 全件検索を行い、一覧画面に遷移する。
      */
-    @PostMapping("/findAll")
+    @GetMapping("/findAll")
     public String find(Model model) {
         List<Words> wordsList = wordsService.findAll();
         model.addAttribute("wordsList", wordsList);
