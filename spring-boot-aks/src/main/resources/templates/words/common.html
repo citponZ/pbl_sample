@@ -104,6 +104,17 @@
      
      <div class="localNavigation">
         <p>ローカルナビゲーション</p>
+        <div align="center">
+          <table>
+            <th:block th:each="newWords : ${session['newWordsList']}">
+            <tr>
+              <td>
+                <a class="large" th:href="@{'/words/id/'+ ${newWords}}"><span style="color:#bfd8d2;" th:text="${newWords}">メイン</span></a>
+              </td>
+            </tr>
+          </th:block>
+          </table>
+        </div>
         <div id=footer-fixed align="right">
           <div id=footer-wh>
             <img th:src="@{/images/team_logo.png}" width="30%" height="30%">

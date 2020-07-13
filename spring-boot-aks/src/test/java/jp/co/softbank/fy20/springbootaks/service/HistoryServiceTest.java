@@ -1,4 +1,4 @@
-package jp.co.softbank.fy20.springbootaks.mapper;
+package jp.co.softbank.fy20.springbootaks.service;
 
 import jp.co.softbank.fy20.springbootaks.SampleApplication;
 import jp.co.softbank.fy20.springbootaks.entity.*;
@@ -9,32 +9,22 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.context.ApplicationContext;
 
-public class HistoryMapperTest {
+public class HistoryServiceTest {
     public static void main(String[] args) {
+        // DIコンテナの作成
         SpringApplication application = new SpringApplication(SampleApplication.class);
         application.setWebApplicationType(WebApplicationType.NONE); // Webアプリケーション環境を無効化
         ApplicationContext context = application.run(args);
 
         // EmployeeMapperのBeanを取得
-        HistoryMapper historyMapper = context.getBean(HistoryMapper.class);
+        HistoryService historyService = context.getBean(HistoryService.class);
 
-        //履歴追加のテスト
-        System.out.println("==== 履歴追加 ====");
-        //historyMapper.insert(new History("select",1,1));
-
-
-        System.out.println("==== 検索 ====");
-        List<History> historyList = historyMapper.findType("select");
-        for (History history : historyList) {
-            System.out.println(history);
-        }
 
         System.out.println("==== 新着のお言葉 ====");
-        List<String> newList = historyMapper.findNewWordsTen();
+        List<String> newList = historyService.findNewWordsTen();
         for (String num : newList) {
             System.out.println(num);
         }
-        
 
     }
     

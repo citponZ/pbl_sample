@@ -21,5 +21,12 @@ public interface HistoryMapper {
     @Insert("INSERT INTO History(historyType, userID, wordID, historyDate) VALUES(#{historyType}, #{userID}, #{wordID}, DATEADD(hour,9,GETDATE()))")
     @Options(useGeneratedKeys = true, keyColumn = "id", keyProperty = "id")
     void insert(History history);
+
+    //新着の言葉
+    @Select("SELECT TOP 10 Words.name as name FROM Words, History " +
+    "WHERE Words.id = wordID and historyType like 'insert' ORDER BY historyDate DESC")
+    List<String> findNewWordsTen();
+
+
     
 }

@@ -1,5 +1,7 @@
 package jp.co.softbank.fy20.springbootaks.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +21,12 @@ public class HistoryServiceImpl implements HistoryService {
     @Transactional(readOnly = false)
     public void findInsert(Integer userID, Integer wordID){
         historyMapper.insert(new History("select", userID, wordID));
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<String> findNewWordsTen(){
+        return historyMapper.findNewWordsTen();   
     }
     
 }
