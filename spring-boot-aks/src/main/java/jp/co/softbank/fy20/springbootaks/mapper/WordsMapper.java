@@ -14,7 +14,8 @@ public interface WordsMapper {
     @Select("SELECT * FROM Words")
     List<Words> findAll();
 
-    @Select("SELECT name FROM Words ORDER BY LEN(name) DESC")
+    //@Select("SELECT name FROM Words ORDER BY LEN(name) DESC")
+    @Select("SELECT name FROM Words ORDER BY LEN(name)")
     List<String> findAllName();
 
     @Insert("INSERT INTO Words(name,userID,content,createdDate,updatedDate) " +
