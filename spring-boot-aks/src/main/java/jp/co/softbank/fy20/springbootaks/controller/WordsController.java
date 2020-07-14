@@ -111,8 +111,8 @@ public class WordsController {
     public String showWord(@PathVariable String name, @ModelAttribute("message") String message, 
                             Model model, HttpSession session) throws UnsupportedEncodingException{
         
+        //半角スペースがあった場合、アンダーバーに置換してリダイレクト
         if(name.contains(" ")){
-            historyService.sessionSet(session);
             return "redirect:"+ URLEncoder.encode(name.replace(" ", "_"), "UTF-8");
         }
         List<WordsByAbb> wordsList = wordsService.findByName(name);
@@ -120,9 +120,11 @@ public class WordsController {
             historyService.sessionSet(session);
             return "redirect:../../words/index";
         }
+        List<String> dict = wordsService.findAllName();
         //ページ名
         model.addAttribute("pageName", name);
         model.addAttribute("wordsList", wordsList);
+        model.addAttribute("dict", dict);
         model.addAttribute("message");
         //userIDは現状1を入力しているが本来はsessonからログイン情報を入手して代入
         historyService.findInsert(1, wordsList.get(0).getId());

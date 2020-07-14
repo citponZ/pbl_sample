@@ -34,6 +34,12 @@ public class HistoryMapperTest {
         for (String num : newList) {
             System.out.println(num);
         }
+
+        System.out.println("==== 検索ランキング ====");
+        List<String> rankList = historyMapper.findRankingTen();
+        for (String num : rankList) {
+            System.out.println(num);
+        }
         
 
     }

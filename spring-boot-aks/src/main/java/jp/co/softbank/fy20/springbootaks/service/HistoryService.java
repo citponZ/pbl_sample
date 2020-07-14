@@ -10,6 +10,8 @@ public interface HistoryService {
 
     List<String> findNewWordsTen();
 
+    List<String> findRankingTen();
+
     void sessionSet(HttpSession session);
 
 }

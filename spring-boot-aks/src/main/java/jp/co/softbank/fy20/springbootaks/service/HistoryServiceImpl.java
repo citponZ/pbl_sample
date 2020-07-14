@@ -30,9 +30,17 @@ public class HistoryServiceImpl implements HistoryService {
     public List<String> findNewWordsTen(){
         return historyMapper.findNewWordsTen();   
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<String> findRankingTen(){
+        return historyMapper.findRankingTen();   
+    }
+
     @Override
     public void sessionSet(HttpSession session){
         session.setAttribute("newWordsList", findNewWordsTen());
+        session.setAttribute("rankingList", findRankingTen());
 
     }
     

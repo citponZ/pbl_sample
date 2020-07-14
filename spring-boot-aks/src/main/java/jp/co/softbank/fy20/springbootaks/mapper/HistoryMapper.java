@@ -27,6 +27,17 @@ public interface HistoryMapper {
     "WHERE Words.id = wordID and historyType like 'insert' ORDER BY historyDate DESC")
     List<String> findNewWordsTen();
 
+    /*  検索数も表示するパターン
+    @Select("SELECT TOP 10 name, count(*) as count FROM  Words, History "+
+    "WHERE Words.id = History.wordID and historyType like 'select' "+
+    "GROUP BY name ORDER BY count(*) DESC")*/
+
+    //累計ランキング
+    @Select("SELECT TOP 10 name FROM  Words, History "+
+    "WHERE Words.id = History.wordID and historyType like 'select' "+
+    "GROUP BY name ORDER BY count(*) DESC")
+    List<String> findRankingTen();
+
 
     
 }
