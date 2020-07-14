@@ -6,6 +6,8 @@
     lang="ja">
     <link rel="stylesheet" href="../../static/css/style.css"
           th:href="@{/css/style.css}">
+    <link rel="stylesheet" href="../../static/css/newWords.css"
+          th:href="@{/css/newWords.css}">
 <!--<html xmlns:th="http://www.thymeleaf.org"></html>-->
 <!-- (1)共通にしたいheadをfragment化する -->
 
@@ -105,11 +107,16 @@
      <div class="localNavigation">
         <p>ローカルナビゲーション</p>
         <div align="center">
-          <table>
+          <table border="1" valign="bottom">
             <th:block th:each="newWords : ${session['newWordsList']}">
             <tr>
               <td>
-                <a class="large" th:href="@{'/words/id/'+ ${newWords}}"><span style="color:#bfd8d2;" th:text="${newWords}">メイン</span></a>
+                <div class="ribbon16-wrapper">
+                  <div class="ribbon16-content">
+                  <span class="ribbon16">NEW</span>
+                  </div>
+                    <a class="large" th:href="@{'/words/id/'+ ${newWords}}"><span style="color: #96b9b1;" th:text="${newWords}">メイン</span></a>
+                </div>
               </td>
             </tr>
           </th:block>

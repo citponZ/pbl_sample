@@ -10,6 +10,21 @@
 
 <html>
 <head>
+  <!--削除ポップアップ-->
+  <script>
+    function confirmDelete(){
+      flag = confirm("本当に削除しますか？");
+
+      // 「はい」が押されたときの処理
+      if ( flag == true ){
+        return true;
+      }else{    // 「いいえ」が押されたときの処理
+        return false;
+      }
+    };
+
+  </script>
+
   <script th:inline="javascript">
     /*<![CDATA[*/
       document.title = /*[[${pageName}]]*/ 'error';
@@ -43,8 +58,22 @@
     </tr>
   </table>
   <!--yyyy/MM/dd HH:mm:ss.SSSの表記を分までに短縮中-->
-  <p class="normal" align="right">編集日時：<span th:text="${#temporals.format(wordsList.get(0).updatedDate, 'yyyy/MM/dd HH:mm')}">メイン</span></p>
-
+  <table align="right">
+    <div>
+      <tr>
+        <th>
+          <form action="index.html" th:action="@{/words/deleteName}" method="POST">
+            <input type="hidden" name="name" th:value="${name}">
+            <input onclick="return confirmDelete()" class="delete-button" type="submit" value="削除">
+          </form>
+        </th>
+        <th valign="bottom">
+          <p class="normal">編集日時：<span th:text="${#temporals.format(wordsList.get(0).updatedDate, 'yyyy/MM/dd HH:mm')}">メイン</span></p>
+        </th>
+      </tr>
+    </div>
+  </table>
+    <br>
     <!--一本線-->
     <hr color="#535353">
 
