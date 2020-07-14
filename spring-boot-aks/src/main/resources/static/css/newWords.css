@@ -1,21 +1,20 @@
+
 .ribbon16-wrapper {  
     display: block;
     position: relative;
-    /*
-    margin: 15px auto;
-    padding: 10px 0;
-    */
+
     width: 200px;
     height: 50px;
-    background: #fff;
+    /*background: #fff;*/
     box-sizing: border-box;
     }
+
   
   .ribbon16 {  
     display: inline-block;
     position: absolute;
     top: -6px;
-    right: 10px;
+    right: 180px;
     margin: 0;
     padding: 10px 0 7px;
     z-index: 2;
@@ -27,16 +26,18 @@
     border-radius: 2px 0 0 0;
     }
   
-  .ribbon16:before {
-    position: absolute;
-    content: '';
-    top: 0;
-    right: -5px;
-    border: none;
-    border-bottom: solid 6px #d07676;
-    border-right: solid 5px transparent;
-  }
-  
+/*立体的に見せるやつ
+    .ribbon16:before {
+      position: absolute;
+      content: '';
+      top: 0;
+      right: -5px;
+      border: none;
+      border-bottom: solid 6px #d07676;
+      border-right: solid 5px transparent;
+    }
+*/
+
   .ribbon16:after {
     content: '';
     position: absolute;
