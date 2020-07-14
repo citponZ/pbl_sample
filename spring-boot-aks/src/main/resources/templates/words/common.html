@@ -107,21 +107,29 @@
      <div class="localNavigation">
         <p>ローカルナビゲーション</p>
         <div align="center">
-          <table border="1" valign="bottom">
-            <th:block th:each="newWords : ${session['newWordsList']}">
-            <tr>
-              <td>
-                <div class="ribbon16-wrapper">
-                  <div class="ribbon16-content">
-                  <span class="ribbon16">NEW</span>
-                  </div>
+          
+          <table valign="bottom">
+            
+            <div class="ribbon16-wrapper">
+              <div class="ribbon16-content">
+                <h3>新着の語句</h3>
+                <span class="ribbon16">NEW</span>
+              </div>
+
+              <th:block th:each="newWords : ${session['newWordsList']}">
+                <tr>
+                  <td>
                     <a class="large" th:href="@{'/words/id/'+ ${newWords}}"><span style="color: #96b9b1;" th:text="${newWords}">メイン</span></a>
-                </div>
-              </td>
-            </tr>
-          </th:block>
+                    <hr color="#535353"> 
+                  </td>
+                   
+                </tr>
+
+              </th:block>
+            </div>
           </table>
         </div>
+        
         <div id=footer-fixed align="right">
           <div id=footer-wh>
             <img th:src="@{/images/team_logo.png}" width="30%" height="30%">
