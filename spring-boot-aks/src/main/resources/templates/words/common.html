@@ -10,6 +10,10 @@
           th:href="@{/css/newWords.css}">
 <!--<html xmlns:th="http://www.thymeleaf.org"></html>-->
 <!-- (1)共通にしたいheadをfragment化する -->
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
+<script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<script th:src="@{/js/wordLimit.js}"></script>
 
 <body> 
     <!-- (5)body内で共通化したい部品をfragment化する -->
@@ -19,37 +23,22 @@
         </a>
         <button type="button" class="navbar-toggler"
          data-toggle="collapse" data-target="#Navber" 
-         aria-controls="Navber" aria-expanded="false" 
+         aria-controls="Navber" aria-expanded="false"
          aria-label="ナビゲーションの切替">
           <span class="navbar-toggler-icon"></span>
         </button>
       
-        <div class="collapse navbar-collapse" id="Navber">
+        <div class="collapse navbar-collapse" id="Navber"> 
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
+            <li class="nav-item">
               <a class="nav-link" th:href="@{/}">ホーム <span class="sr-only">(現位置)</span></a>
             </li>
-            <!--<li class="nav-item">
+            <!--
+            <li class="nav-item">
               <a class="nav-link" href="#">ユーザ情報</a>
             </li>
-            <li class="nav-item dropdown">
-              <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                マニュアル
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">メニュー1</a>
-                <a class="dropdown-item" href="#">メニュー2</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">その他</a>
-              </div>
-            </li>-->
+            -->
           </ul>
-          
-          <!--
-          <form class="form-inline my-2 my-lg-0" >
-            <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Sign out</button>
-          </form>-->
-          <!--移動先のactionが出来次第、th:actionを変更 action="index.html" th:action="@{findAll}"-->
           <form class="form-inline my-2 my-lg-0" th:action="@{/words/searchName}">
             <input type="search" class="form-control mr-sm-2" placeholder="検索..." aria-label="検索..." name="name">
             <button type="submit" class="btn btn-outline-success my-2 my-sm-0">検索</button>
@@ -58,7 +47,9 @@
       </nav>
      
       <div class ="gridbu">
+        <div class="d-none d-lg-block">
       <div class="grovalNavigation">
+        
         <p>グローバルナビゲーション</p><br>
         <p>操作メニュー</p>
         <div align="center">
@@ -95,6 +86,8 @@
             </tr>
           
         </table>
+        </div>
+        
       </div>
     </div>
     <div class="contents">
@@ -104,7 +97,9 @@
           
     </div>
      
+    <div class="d-none d-lg-block">
      <div class="localNavigation">
+      
         <p>ローカルナビゲーション</p>
         <div align="center">
           
@@ -143,6 +138,7 @@
           <div id=footer-wh>
             <img th:src="@{/images/team_logo.png}" width="30%" height="30%">
           </div>
+        </div>
         </div>
      </div>
   </div>
