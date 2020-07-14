@@ -92,9 +92,15 @@
     <br>
     <div align ="left" id="contentBlank">
     <script th:inline="javascript">
+      var dictlist = /*[[${dict}]]*/ [];
       var str = /*[[${wordsList.get(0).content}]]*/ '内容';
       var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
       str = str.replace(/\r?\n/g, '<br>').replace(exp, "<a href='$1'>$1</a>");
+      for (var dict in dictlist){
+
+        str = str.replace(new RegExp(dictlist[dict], 'g'),"<a href=\"/spring-boot-aks/words/id/"+dictlist[dict]+"\">"+dictlist[dict]+"</a>");
+      }
+
       document.write(str);
     </script>
     </div>
