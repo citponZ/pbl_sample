@@ -12,6 +12,27 @@ input#submit_button {
     height:30px; 
 }
 
+.delete-button{
+    display: inline-block;
+    max-width: 300px;
+    text-align: center;
+    border: 2px solid #df744a;
+    font-size: 16px;
+    color: #df744a;
+    background-color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    /*padding: 0px 75px;*/
+    border-radius: 4px;
+    transition: .4s;
+  }
+  
+  .delete-button:hover {
+    background-color: #96b9b1;
+    border-color: #96b9b1;
+    color: #fff;
+  }
+
 #wordBlank {
     /*padding: 10px 0 20px;*/
     margin: 0 0 0 20px;
@@ -28,6 +49,7 @@ input#submit_button {
 
 .large{
     font-size: x-large ; 
+    margin: 5px 0 0 20px;
 }
 
 .small{
