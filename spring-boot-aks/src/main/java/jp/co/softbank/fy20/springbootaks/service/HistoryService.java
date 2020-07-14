@@ -2,12 +2,16 @@ package jp.co.softbank.fy20.springbootaks.service;
 
 import java.util.List;
 
-import jp.co.softbank.fy20.springbootaks.entity.History;
+import javax.servlet.http.HttpSession;
 
 public interface HistoryService {
     
     void findInsert(Integer userID, Integer wordID);
 
     List<String> findNewWordsTen();
+
+    List<String> findRankingTen();
+
+    void sessionSet(HttpSession session);
 
 }

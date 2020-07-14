@@ -14,6 +14,9 @@ public interface WordsMapper {
     @Select("SELECT * FROM Words")
     List<Words> findAll();
 
+    @Select("SELECT name FROM Words")
+    List<String> findAllName();
+
     @Insert("INSERT INTO Words(name,userID,content,createdDate,updatedDate) " +
     "VALUES(#{name},#{userID},#{content},DATEADD(hour,9,GETDATE()),DATEADD(hour,9,GETDATE()))")
     @Options(useGeneratedKeys = true, keyColumn = "id", keyProperty = "id")

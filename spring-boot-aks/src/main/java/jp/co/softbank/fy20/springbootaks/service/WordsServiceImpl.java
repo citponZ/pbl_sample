@@ -30,6 +30,13 @@ public class WordsServiceImpl implements WordsService {
     }
 
     @Override
+    @Transactional(readOnly = true)
+    public List<String> findAllName(){
+        List<String> nameList = wordsMapper.findAllName();
+        return nameList;
+    }
+
+    @Override
     @Transactional(readOnly = false)
     public void insert(Words words){
         wordsMapper.insert(words);

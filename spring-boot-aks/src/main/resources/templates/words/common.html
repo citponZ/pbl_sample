@@ -129,7 +129,19 @@
             </div>
           </table>
         </div>
-        
+        <p>検索ランキング</p>
+        <div align="center">
+          <table>
+            <th:block th:each="rank : ${session['rankingList']}">
+            <tr>
+              <td>
+                <a class="large" th:href="@{'/words/id/'+ ${rank}}"><span style="color:#bfd8d2;" th:text="${rank}">メイン</span></a>
+              </td>
+            </tr>
+          </th:block>
+          </table>
+        </div>
+
         <div id=footer-fixed align="right">
           <div id=footer-wh>
             <img th:src="@{/images/team_logo.png}" width="30%" height="30%">

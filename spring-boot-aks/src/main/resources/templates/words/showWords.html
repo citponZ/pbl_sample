@@ -93,7 +93,8 @@
     <div align ="left" id="contentBlank">
     <script th:inline="javascript">
       var str = /*[[${wordsList.get(0).content}]]*/ '内容';
-      str = str.replace(/\r?\n/g, '<br>');
+      var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+      str = str.replace(/\r?\n/g, '<br>').replace(exp, "<a href='$1'>$1</a>");
       document.write(str);
     </script>
     </div>

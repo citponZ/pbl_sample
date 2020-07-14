@@ -7,6 +7,8 @@ public interface WordsService {
 
     List<Words> findAll();
 
+    List<String> findAllName();
+    
     //List<Words> findByNameLike(String keyword);
 
     void insert(Words words);

@@ -26,6 +26,12 @@ public class HistoryServiceTest {
             System.out.println(num);
         }
 
+        System.out.println("==== 検索ランキング ====");
+        List<String> rankList = historyService.findRankingTen();
+        for (String num : rankList) {
+            System.out.println(num);
+        }
+
     }
     
 }
