@@ -20,7 +20,7 @@ public class RootController {
     
     @GetMapping("/")
     public String root(HttpSession session) {
-        session.setAttribute("newWordsList", historyService.findNewWordsTen());
+        historyService.sessionSet(session);
         // "redirect:"を先頭につけるとリダイレクトになる
         return "redirect:words/index";
     }

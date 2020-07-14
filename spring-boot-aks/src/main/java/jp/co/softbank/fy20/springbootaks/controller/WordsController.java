@@ -1,8 +1,6 @@
 package jp.co.softbank.fy20.springbootaks.controller;
 
-import jp.co.softbank.fy20.springbootaks.entity.Words;
-import jp.co.softbank.fy20.springbootaks.entity.WordsByAbb;
-import jp.co.softbank.fy20.springbootaks.entity.WordsListAbb;
+import jp.co.softbank.fy20.springbootaks.entity.*;
 import jp.co.softbank.fy20.springbootaks.service.*;
 import jp.co.softbank.fy20.springbootaks.form.*;
 import org.springframework.stereotype.Controller;
@@ -18,7 +16,9 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
-import java.io.IOException;
+
+import javax.servlet.http.HttpSession;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
@@ -39,45 +39,52 @@ public class WordsController {
      * 全件検索を行い、一覧画面に遷移する。
      */
     @GetMapping("/findAll")
-    public String find(Model model) {
+    public String find(Model model, HttpSession session) {
         List<Words> wordsList = wordsService.findAll();
         model.addAttribute("wordsList", wordsList);
+        historyService.sessionSet(session);
         return "words/findAll";
     }
 
     @GetMapping("/index")
-    public String index(Model model) {
+    public String index(Model model, HttpSession session) {
+        historyService.sessionSet(session);
         return "words/index";
     }
 
     //検索画面に移動
     @GetMapping("/search")
-    public String search(Model model) {
+    public String search(Model model, HttpSession session) {
         Words words = null;
         model.addAttribute("words", words);
         model.addAttribute("id", null);
+        historyService.sessionSet(session);
         return "words/search";
     }
     //ID検索
     @GetMapping("/searchId")
-    public String searchId(@RequestParam String id, Model model) {
+    public String searchId(@RequestParam String id, Model model, HttpSession session) {
         Words words = wordsService.find(Integer.parseInt(id));
         model.addAttribute("words", words);
         model.addAttribute("id", id);
         if(words==null){
             model.addAttribute("message", "そのIDは存在しません");
         }
+        historyService.sessionSet(session);
         return "words/search";
     }
     //Name検索
     @GetMapping("/searchName")
-    public String searchName(@RequestParam String name, Model model, RedirectAttributes attributes) throws UnsupportedEncodingException {
+    public String searchName(@RequestParam String name, Model model, 
+                                RedirectAttributes attributes, HttpSession session)
+                                    throws UnsupportedEncodingException {
         
         
         //語句名が同じものが存在したらその語句のページに遷移
         if (wordsService.checkByName(name) != null){
             attributes.addFlashAttribute("message", null);
             //return "redirect:id/"+name;
+            historyService.sessionSet(session);
             return "redirect:id/"+ URLEncoder.encode(name.replace(" ", "_"), "UTF-8");
         }
 
@@ -96,17 +103,21 @@ public class WordsController {
             model.addAttribute("message", "「"+name+"」"+"の検索結果："+wordsAbbList.size()+"件");
         }
         model.addAttribute("searchName", name+" - 検索");
+        historyService.sessionSet(session);
         return "words/candidate";
     }
     //単語ページ
     @GetMapping("/id/{name}")
-    public String showWord(@PathVariable String name, @ModelAttribute("message") String message, Model model) throws UnsupportedEncodingException{
+    public String showWord(@PathVariable String name, @ModelAttribute("message") String message, 
+                            Model model, HttpSession session) throws UnsupportedEncodingException{
         
         if(name.contains(" ")){
+            historyService.sessionSet(session);
             return "redirect:"+ URLEncoder.encode(name.replace(" ", "_"), "UTF-8");
         }
         List<WordsByAbb> wordsList = wordsService.findByName(name);
         if (wordsList.size() == 0){
+            historyService.sessionSet(session);
             return "redirect:../../words/index";
         }
         //ページ名
@@ -115,25 +126,27 @@ public class WordsController {
         model.addAttribute("message");
         //userIDは現状1を入力しているが本来はsessonからログイン情報を入手して代入
         historyService.findInsert(1, wordsList.get(0).getId());
+        historyService.sessionSet(session);
         return "words/showWords";
     }
 
     //削除画面に移動
     @GetMapping("/delete")
-    public String delete(Model model) {
+    public String delete(Model model, HttpSession session) {
         Words words = null;
         model.addAttribute("words", words);
         model.addAttribute("name", null);
-
+        historyService.sessionSet(session);
         return "words/delete";
     }
     //ID削除
     @PostMapping("/deleteName")
-    public String deleteId(@RequestParam String name, Model model) {
+    public String deleteId(@RequestParam String name, Model model, HttpSession session) {
         model.addAttribute("name", name);
         if (wordsService.checkByName(name) == null){
             //なかった時
             model.addAttribute("message", "この語句は存在しません。");
+            historyService.sessionSet(session);
             return "words/delete";
         }
         //ある
@@ -145,23 +158,27 @@ public class WordsController {
         }else{
             model.addAttribute("message", "削除できませんでした");
         }
+        historyService.sessionSet(session);
         return "words/deleteResult";
     }
 
     //insertMain
     @GetMapping("/insertMain")
-    public String insert(Model model) {
+    public String insert(Model model, HttpSession session) {
         model.addAttribute("name", null);
         model.addAttribute("nameForm", new NameForm());
+        historyService.sessionSet(session);
         return "words/insertMain";
     }
 
     //check insert or update
     @PostMapping("/inputContent")
-    public String inputContent(@Validated NameForm nameForm, BindingResult bindingResult, Model model) {
+    public String inputContent(@Validated NameForm nameForm, BindingResult bindingResult, 
+                                Model model, HttpSession session) {
         // nameにブランク確認
         if (bindingResult.hasErrors()) {
             //return "redirect:insertMain";
+            historyService.sessionSet(session);
             return "words/insertMain";
         }
         //語句名が同じものが存在したらその語句の更新ページに遷移
@@ -170,21 +187,25 @@ public class WordsController {
             List<WordsByAbb> wordsList = wordsService.findByName(nameForm.getName());
             model.addAttribute("wordsList", wordsList);
             model.addAttribute("error", "この語句はすでに登録されています。");
+            historyService.sessionSet(session);
             return "words/updatecontent";
         }
         //追加ページに遷移
         model.addAttribute("wordsForm", new WordsForm());
+        historyService.sessionSet(session);
         return "words/insertcontent";
     }
 
     //追加insert(deleteID的な) エラー処理も
     @PostMapping("/insertComplete")
     public String insertComplet(@Validated WordsForm wordsForm, BindingResult bindingResult, 
-                                Model model, RedirectAttributes attributes) throws Exception {
+                                Model model, RedirectAttributes attributes, HttpSession session) 
+                                    throws Exception {
         
         if (bindingResult.hasErrors()) {
             //return "redirect:insertMain";
             model.addAttribute("name", wordsForm.getName());
+            historyService.sessionSet(session);
             return "words/insertcontent";
         }
 
@@ -192,39 +213,44 @@ public class WordsController {
         wordsService.insert(words);
         String name = wordsForm.getName();
         
+        historyService.sessionSet(session);
         //return "redirect:id/"+name;
         return "redirect:id/"+ URLEncoder.encode(name.replace(" ", "_"), "UTF-8");
     }
     
     //insertResult
     @GetMapping("/insertResult")
-    public String insertResult(Model model) {
+    public String insertResult(Model model, HttpSession session) {
         model.addAttribute("message", "追加できました");
+        historyService.sessionSet(session);
         return "words/insertResult";
     }
 
     //updateMain
     @GetMapping("/updateMain")
-    public String update(Model model) {
+    public String update(Model model, HttpSession session) {
         Words words = null;
         model.addAttribute("words", words);
         model.addAttribute("name", null);
         //model.addAttribute("wordsForm", new WordsForm());
+        historyService.sessionSet(session);
         return "words/updateMain";
     }
 
     //ID検索
     @PostMapping("/updateSearchId")
-    public String updateSearchId(@RequestParam String name, Model model) {
+    public String updateSearchId(@RequestParam String name, Model model, HttpSession session) {
 
         model.addAttribute("name", name);
         if(wordsService.checkByName(name) == null){
             model.addAttribute("message", "その語句は存在しません");
+            historyService.sessionSet(session);
             return "words/updateMain";
         }
         List<WordsByAbb> wordsList = wordsService.findByName(name);
         model.addAttribute("wordsList", wordsList);
         model.addAttribute("error", null);
+        historyService.sessionSet(session);
         return "words/updatecontent";
     }
 
@@ -232,7 +258,8 @@ public class WordsController {
 
     //update(deleteID的な) エラー処理も
     @PostMapping("/updateComplete")
-    public String updateComplete(@RequestParam String id,@RequestParam String content,Model model) throws Exception {
+    public String updateComplete(@RequestParam String id,@RequestParam String content,Model model, 
+                                    HttpSession session) throws Exception {
         //userIDは現状1を入力しているが本来はsessonからログイン情報を入手して代入
         int check = wordsService.update(content, Integer.parseInt(id), 1);
         /*if(check >= 1){
@@ -242,14 +269,15 @@ public class WordsController {
         }*/
         Words words = wordsService.find(Integer.parseInt(id));
         String name = words.getName();
-               
+        historyService.sessionSet(session);
         return "redirect:id/"+ URLEncoder.encode(name.replace(" ", "_"), "UTF-8");
     }
     
     //updateResult
     @GetMapping("/updateResult")
-    public String updateResult(Model model) {
+    public String updateResult(Model model, HttpSession session) {
         model.addAttribute("message",updateMessage);
+        historyService.sessionSet(session);
         return "words/updateResult";
     }
 
