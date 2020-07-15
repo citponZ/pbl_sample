@@ -6,9 +6,12 @@ import jp.co.softbank.fy20.springbootaks.entity.*;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 @Service
@@ -107,5 +110,35 @@ public class WordsServiceImpl implements WordsService {
         return wordsList;
     }
 
+    @Override
+    public String makeLink(String content){
+        List<String> dictList = findAllName();
+        //URLをaタグに変換
+        content = content.replaceAll("(http://|https://){1}[\\w\\.\\-/:]+", "<a target=\"_blank\" href='$0'>$0</a>");
+        Pattern p = Pattern.compile("<a.*?<\\/a>");
 
+        for (String dict : dictList){
+            //aタグを使っていないところで比較
+            //split分割
+            List<String> splitList = Arrays.asList(content.split("<a.*?<\\/a>",-1));
+            Matcher m = p.matcher(content);
+            List<String> tagList= new ArrayList<>();
+            while (m.find()) {
+                tagList.add(m.group());
+            }
+            //replase
+            for (int i=0; i<splitList.size() ; i++){
+                splitList.set(i, splitList.get(i).replace(dict, 
+                            "<a href=\"/spring-boot-aks/words/id/"+dict+"\">"+dict+"</a>"));
+            }
+            String tmp = "";
+            //　くっつける //list[0] -> list2[0] -> list[1] -> list2[1] -> list[2]
+            for (int i=0; i<tagList.size() ; i++){
+                tmp += splitList.get(i) + tagList.get(i);
+            }
+            tmp += splitList.get(splitList.size()-1);
+            content = tmp;
+        }
+        return content;
+    }
 }
