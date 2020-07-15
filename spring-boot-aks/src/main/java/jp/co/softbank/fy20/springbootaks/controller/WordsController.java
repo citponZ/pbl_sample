@@ -120,11 +120,11 @@ public class WordsController {
             historyService.sessionSet(session);
             return "redirect:../../words/index";
         }
-        List<String> dict = wordsService.findAllName();
+        String content = wordsService.makeLink(wordsList.get(0).getContent());
+        wordsList.get(0).setContent(content);
         //ページ名
         model.addAttribute("pageName", name);
         model.addAttribute("wordsList", wordsList);
-        model.addAttribute("dict", dict);
         model.addAttribute("message");
         //userIDは現状1を入力しているが本来はsessonからログイン情報を入手して代入
         historyService.findInsert(1, wordsList.get(0).getId());

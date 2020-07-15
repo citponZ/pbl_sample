@@ -14,8 +14,8 @@ public interface WordsMapper {
     @Select("SELECT * FROM Words")
     List<Words> findAll();
 
-    //@Select("SELECT name FROM Words ORDER BY LEN(name) DESC")
-    @Select("SELECT name FROM Words ORDER BY LEN(name)")
+    //@Select("SELECT name FROM Words ORDER BY LEN(name)")
+    @Select("SELECT name FROM Words ORDER BY LEN(name) DESC")
     List<String> findAllName();
 
     @Insert("INSERT INTO Words(name,userID,content,createdDate,updatedDate) " +
@@ -40,8 +40,8 @@ public interface WordsMapper {
 
     //名前によるWordsの検索：部分一致
     @Select("select Words.id as id, Words.name as name, Words.content as content, Words.updatedDate as updatedDate, Abbreviations.name as abbName "+
-    "from (select id,name from Words where name like #{name} UNION "+
-    "select wordID as id,name from Abbreviations where name like #{name}) rs, "+
+    "from (select id from Words where name like #{name} UNION "+
+    "select wordID as id from Abbreviations where name like #{name}) rs, "+
     "Words LEFT OUTER JOIN Abbreviations ON Words.id = Abbreviations.wordID where Words.id = rs.id")
     List<WordsByAbb> findByNameAsInclude(String name);
 

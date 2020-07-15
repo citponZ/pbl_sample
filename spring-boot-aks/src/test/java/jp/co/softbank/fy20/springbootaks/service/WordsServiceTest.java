@@ -39,16 +39,19 @@ public class WordsServiceTest {
             System.out.println(words);
         }
 
+        /*
         // 更新のテスト
         System.out.println("==== 更新 ====");
         int checkUpdate = wordsService.update("アップデートしました。", 2,1);
         System.out.println(checkUpdate);
+        */
 
         // 1検索
         System.out.println("==== 1検索 ====");
         Words rs = wordsService.find(2);
         System.out.println(rs);
 
+        /*
         // 削除のテスト
         System.out.println("==== 削除 ====");
         boolean checkDelete = wordsService.delete(2,1);
@@ -57,7 +60,7 @@ public class WordsServiceTest {
         }
         else{
             System.out.println("削除できませんでした。");
-        }
+        }*/
         
         // 全件検索のテスト
         System.out.println("==== 全件検索 ====");
@@ -99,12 +102,16 @@ public class WordsServiceTest {
         }
 
         System.out.println("==== convert ====");
-        List2 = wordsService.findByNameAsInclude("word");
+        List2 = wordsService.findByNameAsInclude("AP");
         List<WordsListAbb> testlist = wordsService.converToWordsListAbb(List2);
         for (WordsListAbb test : testlist) {
             System.out.println(test);
-            //System.out.println();
         }
+
+        System.out.println("==== link ====");
+        List2 = wordsService.findByName("google翻訳");
+        String test = wordsService.makeLink(List2.get(0).getContent());
+
 
 
     }

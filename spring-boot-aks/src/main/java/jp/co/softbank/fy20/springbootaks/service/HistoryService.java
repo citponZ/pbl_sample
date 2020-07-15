@@ -12,6 +12,12 @@ public interface HistoryService {
 
     List<String> findRankingTen();
 
+    List<String> findMonthRankingTen();
+
+    List<String> findWeekRankingTen();
+
+    List<String> findDayRankingTen();
+
     void sessionSet(HttpSession session);
 
 }

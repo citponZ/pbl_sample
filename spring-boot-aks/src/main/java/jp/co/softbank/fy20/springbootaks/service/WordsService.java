@@ -8,7 +8,7 @@ public interface WordsService {
     List<Words> findAll();
 
     List<String> findAllName();
-    
+
     //List<Words> findByNameLike(String keyword);
 
     void insert(Words words);
@@ -26,4 +26,6 @@ public interface WordsService {
     Words checkByName(String name);
 
     List<WordsListAbb> converToWordsListAbb(List<WordsByAbb> wordsAbbList);
+
+    String makeLink(String content);
 }
