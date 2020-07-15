@@ -40,6 +40,21 @@ public class HistoryMapperTest {
         for (String num : rankList) {
             System.out.println(num);
         }
+        System.out.println("==== 月間検索ランキング ====");
+        rankList = historyMapper.findMonthRankingTen();
+        for (String num : rankList) {
+            System.out.println(num);
+        }
+        System.out.println("==== 週間検索ランキング ====");
+        rankList = historyMapper.findWeekRankingTen();
+        for (String num : rankList) {
+            System.out.println(num);
+        }
+        System.out.println("==== 日間検索ランキング ====");
+        rankList = historyMapper.findDayRankingTen();
+        for (String num : rankList) {
+            System.out.println(num);
+        }
         
 
     }

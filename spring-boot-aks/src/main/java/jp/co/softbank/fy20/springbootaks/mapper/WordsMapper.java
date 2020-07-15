@@ -40,8 +40,8 @@ public interface WordsMapper {
 
     //名前によるWordsの検索：部分一致
     @Select("select Words.id as id, Words.name as name, Words.content as content, Words.updatedDate as updatedDate, Abbreviations.name as abbName "+
-    "from (select id,name from Words where name like #{name} UNION "+
-    "select wordID as id,name from Abbreviations where name like #{name}) rs, "+
+    "from (select id from Words where name like #{name} UNION "+
+    "select wordID as id from Abbreviations where name like #{name}) rs, "+
     "Words LEFT OUTER JOIN Abbreviations ON Words.id = Abbreviations.wordID where Words.id = rs.id")
     List<WordsByAbb> findByNameAsInclude(String name);
 

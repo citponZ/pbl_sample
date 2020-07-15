@@ -38,6 +38,23 @@ public interface HistoryMapper {
     "GROUP BY name ORDER BY count(*) DESC")
     List<String> findRankingTen();
 
+    //月間
+    @Select("SELECT TOP 10 name FROM  Words, History "+
+    "WHERE Words.id = History.wordID and historyType like 'select' and "+
+    "historyDate > DATEADD(month,-1,DATEADD(hour,9,GETDATE())) GROUP BY name ORDER BY count(*) DESC")
+    List<String> findMonthRankingTen();
+
+    //週間
+    @Select("SELECT TOP 10 name FROM  Words, History "+
+    "WHERE Words.id = History.wordID and historyType like 'select' and "+
+    "historyDate > DATEADD(week,-1,DATEADD(hour,9,GETDATE())) GROUP BY name ORDER BY count(*) DESC")
+    List<String> findWeekRankingTen();
+
+    //日間
+    @Select("SELECT TOP 10 name FROM  Words, History "+
+    "WHERE Words.id = History.wordID and historyType like 'select' and "+
+    "historyDate > DATEADD(day,-1,DATEADD(hour,9,GETDATE())) GROUP BY name ORDER BY count(*) DESC")
+    List<String> findDayRankingTen();
 
     
 }

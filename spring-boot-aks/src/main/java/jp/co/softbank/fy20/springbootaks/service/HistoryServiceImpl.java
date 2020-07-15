@@ -38,6 +38,24 @@ public class HistoryServiceImpl implements HistoryService {
     }
 
     @Override
+    @Transactional(readOnly = true)
+    public List<String> findMonthRankingTen(){
+        return historyMapper.findMonthRankingTen();  
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<String> findWeekRankingTen(){
+        return historyMapper.findWeekRankingTen();  
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<String> findDayRankingTen(){
+        return historyMapper.findDayRankingTen();  
+    }
+
+    @Override
     public void sessionSet(HttpSession session){
         session.setAttribute("newWordsList", findNewWordsTen());
         session.setAttribute("rankingList", findRankingTen());
