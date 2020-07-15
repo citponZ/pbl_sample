@@ -68,24 +68,37 @@ input#submit_button {
 .gridbu{
     min-height: 100vh;
     display: flex;
+    
 }
 
 .grovalNavigation{
+    position: fixed;
     flex: 1;
+    /*width: 25%;*/
     text-align: center;
     background-color: #bfd8d2;
-    height: 1000px;
+    
+    min-height: 100vh;
     width: 300px;
+    
     color: #535353;
 }
 .localNavigation{
+    position:absolute; 
+    right:0;
+    z-index: -1;
     flex: 1;
+    /*width: 25%;*/
+    width:300px;
     text-align: center;
     background-color: #fedcd2;
     color: #535353;
 }
 .contents {
-    flex: 2;
+    position: absolute;
+    left: 300px;
+    flex: 1;
+    /*width: 50%;*/
     text-align: center;
     background-color: #ffffff;
 }
