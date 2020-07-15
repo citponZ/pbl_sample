@@ -72,6 +72,7 @@ input#submit_button {
 
 .grovalNavigation{
     flex: 1;
+    position: fixed;
     text-align: center;
     background-color: #bfd8d2;
     height: 1000px;
@@ -79,12 +80,22 @@ input#submit_button {
     color: #535353;
 }
 .localNavigation{
+
     flex: 1;
+    position: fixed;
+    top: 78px;
+    right: 0;
+    height:100%;
+    overflow-y: scroll;
+    
     text-align: center;
     background-color: #fedcd2;
+    height: 100% auto;
+    width: 300px;
     color: #535353;
 }
 .contents {
+
     flex: 2;
     text-align: center;
     background-color: #ffffff;
