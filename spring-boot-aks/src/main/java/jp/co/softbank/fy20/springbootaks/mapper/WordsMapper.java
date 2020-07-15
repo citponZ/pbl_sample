@@ -48,5 +48,18 @@ public interface WordsMapper {
     @Select("SELECT TOP (1) * FROM Words WHERE name like #{name}")
     Words checkByName(String name);
 
+    //略語の追加
+    @Insert("INSERT INTO Abbreviations(name,wordID) VALUES(#{abbName},(SELECT id FROM Words WHERE name like #{wordName}))")
+    void insertAbb(String wordName, String abbName);
+
+    //略語の削除
+    @Delete("DELETE FROM Abbreviations WHERE name like #{abbName} and wordID like (SELECT id FROM Words WHERE name like #{wordName})")
+    boolean deleteAbb(String wordName, String abbName);
+
+    //略語の確認
+    @Select("SELECT TOP (1) name FROM Abbreviations WHERE name like #{abbName} and wordID like (SELECT id FROM Words WHERE name like #{wordName})")
+    String checkByNameAbb(String wordName, String abbName);
+
+
     
 }
