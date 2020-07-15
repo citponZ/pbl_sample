@@ -75,18 +75,17 @@ input#submit_button {
     position: fixed;
     flex: 1;
     position: fixed;
-
+    top: 78px;
     text-align: center;
-    background-color: #bfd8d2;
-    
+    background-color: #bfd8d2;   
     min-height: 100vh;
-    width: 300px;
-    
+    width: 300px;   
     color: #535353;
 }
 .localNavigation{
     flex: 1;
     position: fixed;
+
     top: 78px;
     right: 0;
     height:100%;
@@ -98,8 +97,12 @@ input#submit_button {
     color: #535353;
 }
 .contents {
-    flex: 2;
-
+    /*flex: 2;*/
+    position: relative;
+    top: 78px;
+    /*z-index: -1;*/
+    left: 25%;
+    width: 50%;
     text-align: center;
     background-color: #ffffff;
 }
@@ -145,7 +148,8 @@ div#footer{
     margin: auto;
 }
 div#manu{
-    padding: 0px 75px;
+    padding: 0px 375px;
+    text-align: left;
 }
 
 div#fontcolor{ /*基本的な文字の色*/
@@ -195,7 +199,7 @@ body {
     color: #fff;
     width: 200px;
     text-align: center;
-    padding: 8px 60px;
+    padding: 8px 0px;
   }
   .topButtonCor:hover{
       text-decoration: none;
@@ -206,12 +210,15 @@ body {
         width: 50px;
         height: 50px;
         position: fixed;
-        right: 0;
+        right: 2%;
         bottom: -50px;
         background: #ef3f98;
         opacity: 0.6;
         border-radius: 50%;
+        
       }
+
+
       #page_top a{
         position: relative;
         display: block;
@@ -219,10 +226,11 @@ body {
         height: 50px;
         text-decoration: none;
       }
+
       #page_top a::before{
         font-family: 'Font Awesome 5 Free';
         font-weight: 900;
-        content: '\f102';
+        content: '\f106';
         font-size: 25px;
         color: #fff;
         position: absolute;

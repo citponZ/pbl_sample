@@ -8,15 +8,19 @@
           th:href="@{/css/style.css}">
     <link rel="stylesheet" href="../../static/css/newWords.css"
           th:href="@{/css/newWords.css}">
+    <!--トップに戻るボタンが三角になるやつ-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.4/css/all.css">
+    
 <!--<html xmlns:th="http://www.thymeleaf.org"></html>-->
 <!-- (1)共通にしたいheadをfragment化する -->
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
 <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
 <script th:src="@{/js/wordLimit.js}"></script>
+<script th:src="@{/js/backToTop.js}"></script>
 
 <body>
-  <!--<div class='fixed-top'>-->
+  <div class='fixed-top'>
     <!-- (5)body内で共通化したい部品をfragment化する -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" th:href="@{/}">
@@ -46,6 +50,7 @@
           </form>
         </div>
       </nav>
+  </div>
 
      
       <div class ="gridbu">
@@ -159,8 +164,8 @@
     </div>
   </footer>
   -->
+  <div id="page_top"><a href="#"></a></div>
 
-    
     <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
 </body>
 
