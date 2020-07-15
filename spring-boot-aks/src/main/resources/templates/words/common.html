@@ -15,7 +15,8 @@
 <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
 <script th:src="@{/js/wordLimit.js}"></script>
 
-<body> 
+<body>
+  <!--<div class='fixed-top'>-->
     <!-- (5)body内で共通化したい部品をfragment化する -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" th:href="@{/}">
@@ -45,10 +46,11 @@
           </form>
         </div>
       </nav>
+
      
       <div class ="gridbu">
         <div class="d-none d-lg-block">
-      <div class="grovalNavigation">
+        <div class="grovalNavigation">
         
         <p>グローバルナビゲーション</p><br>
         <p>操作メニュー</p>
@@ -94,7 +96,6 @@
       <img class="d-block mx-auto" th:src="@{/images/logo.png}" > 
         <!--コンテンツ-->
         <div layout:fragment="content"></div>
-          
     </div>
      
     <div class="d-none d-lg-block">
@@ -120,17 +121,24 @@
               </th:block>
             </div>
           </table>
-        </div>
-        <p>検索ランキング</p>
-        <div align="center">
-          <table>
-            <th:block th:each="rank : ${session['rankingList']}">
-            <tr>
-              <td>
-                <a class="large" th:href="@{'/words/id/'+ ${rank}}"><span style="color:#bfd8d2;" th:text="${rank}">メイン</span></a>
-              </td>
-            </tr>
-          </th:block>
+        
+
+          <table valign="bottom">          
+            <div class="ribbon16-wrapper">
+              <div class="ribbon16-content">
+                <h3><nobr>ランキング</nobr></h3>
+                <span class="ribbon16">ランク</span>
+              </div>
+              
+                <th:block th:each="rank : ${session['rankingList']}">
+                  <tr>
+                    <td>
+                      <a class="text_limit2 large" style="color:#bfd8d2;" th:href="@{'/words/id/'+ ${rank}}"><span th:text="${rank}">test</span></a>
+                      <!--<a class="large" th:href="@{'/words/id/'+ ${rank}}"><span style="color:#bfd8d2;" th:text="${rank}">メイン</span></a>-->
+                    </td>
+                  </tr>
+                </th:block>
+            </div>
           </table>
         </div>
 
@@ -144,12 +152,13 @@
   </div>
 
   <!--footer-->
+  <!--
   <footer class="footer">
     <div class="container">
       <p class="text-muted">Copyright@ sofpedia, 2020 All Right Reserved.</p>
     </div>
   </footer>
-
+  -->
 
     
     <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
