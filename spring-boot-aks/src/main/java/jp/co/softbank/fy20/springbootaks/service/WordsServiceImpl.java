@@ -141,4 +141,26 @@ public class WordsServiceImpl implements WordsService {
         }
         return content;
     }
+
+    //略語の追加
+    @Override
+    @Transactional(readOnly = false)
+    public void insertAbb(String wordName, String abbName){
+        wordsMapper.insertAbb(wordName, abbName);
+    }
+
+    //略語の削除
+    @Override
+    @Transactional(readOnly = false)
+    public boolean deleteAbb(String wordName, String abbName){
+        return wordsMapper.deleteAbb(wordName, abbName);
+    }
+
+    //略語の確認
+    //存在確認
+    @Override
+    @Transactional(readOnly = true)
+    public String checkByNameAbb(String wordName, String abbName){
+        return wordsMapper.checkByNameAbb(wordName, abbName);
+    }
 }
