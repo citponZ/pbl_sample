@@ -285,9 +285,9 @@ public class WordsController {
 
 
         //検索画面に移動
-        @GetMapping("/test")
-        public String test(Model model) {
-            return "words/test";
+        @GetMapping("/ranking")
+        public String ranking(Model model) {
+            return "words/ranking";
         }
 
         //検索画面に移動

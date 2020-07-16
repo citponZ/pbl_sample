@@ -21,6 +21,32 @@
   <!--テンプレ-->
   <div layout:fragment="content">
     <p class="d-lg-none">メニューバーをタップすると語句検索できるようになります</p>
+    <div class="d-lg-none">
+      <p>操作メニュー</p>
+      <table align="center">
+          <tr>
+            <td>
+              <form action="index.html" th:action="@{/words/insertMain}">
+                <input type="submit" value="追加" id="submit_button" class="btn-border">
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <form action="index.html" th:action="@{/words/ranking}">
+                <input type="submit" value="ランキング" id="submit_button" class="btn-border">
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <form action="index.html" th:action="@{/words/delete}">
+                <input type="submit" value="削除" id="submit_button" class="btn-border">
+              </form>
+            </td>
+          </tr>
+      </table>
+    </div>
       <div class="d-none d-lg-block">
         <div id="fontcolor">
           <font size="5">マニュアル</font><br><br>

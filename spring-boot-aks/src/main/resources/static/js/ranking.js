@@ -1,0 +1,12 @@
+$(function(){
+    $('.rankTable').fadeOut();
+    $('#rankingButton').click(function(){
+        $('.wordTable').fadeOut();
+        $('.rankTable').fadeIn();
+    });
+    $('.wordTable').fadeOut();
+    $('#wordButton').click(function(){
+        $('.rankTable').fadeOut();
+        $('.wordTable').fadeIn();
+    });
+});
