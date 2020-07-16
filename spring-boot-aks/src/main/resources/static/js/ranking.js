@@ -1,12 +1,15 @@
 $(function(){
-    $('.rankTable').fadeOut();
+    $('.rankTable').hide();
+    $('.wordTable').hide();
+
+
     $('#rankingButton').click(function(){
-        $('.wordTable').fadeOut();
+        $('.wordTable').hide();
         $('.rankTable').fadeIn();
     });
-    $('.wordTable').fadeOut();
+    /*$('.wordTable').fadeOut();*/
     $('#wordButton').click(function(){
-        $('.rankTable').fadeOut();
+        $('.rankTable').hide();
         $('.wordTable').fadeIn();
     });
 });

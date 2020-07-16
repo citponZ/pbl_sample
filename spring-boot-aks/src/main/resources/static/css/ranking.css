@@ -1,0 +1,21 @@
+.rankTable{
+    position: absolute;
+    top: 30%;
+    left: 25%;
+    text-align: center;
+    /*background-color: aqua;*/
+    height:100%;
+    overflow-y: scroll;
+
+}
+.wordTable{
+    position: absolute;
+    top: 30%;
+    right: 25%;
+    /*background-color: aqua;*/
+    z-index: 999;
+    height:100%;
+    overflow-y: scroll;
+}
+
+/*style="width: 100px; height: 30px;"*/
