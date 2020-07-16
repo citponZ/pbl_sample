@@ -57,8 +57,17 @@ public interface WordsMapper {
     boolean deleteAbb(String wordName, String abbName);
 
     //略語の確認
+    //存在確認
     @Select("SELECT TOP (1) name FROM Abbreviations WHERE name like #{abbName} and wordID like (SELECT id FROM Words WHERE name like #{wordName})")
     String checkByNameAbb(String wordName, String abbName);
+
+    //略語の全取得
+    @Select("SELECT name FROM Abbreviations WHERE wordID like (SELECT id FROM Words WHERE name like #{wordName})")
+    List<String> findAllByNameAbb(String wordName);
+
+    //略語の更新
+    //@Update("UPDATE Abbreviations SET name=#{abbName} WHERE wordID like (SELECT id FROM Words WHERE name like #{wordName})")
+    //int updateAbb(String wordName, String abbName);
 
 
     

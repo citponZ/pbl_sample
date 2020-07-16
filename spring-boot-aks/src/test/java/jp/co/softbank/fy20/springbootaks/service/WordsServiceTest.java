@@ -109,9 +109,42 @@ public class WordsServiceTest {
         }
 
         System.out.println("==== link ====");
-        List2 = wordsService.findByName("google翻訳");
+        List2 = wordsService.findByName("APサーバー");
         String test = wordsService.makeLink(List2.get(0).getContent());
 
+
+        //略語追加
+        System.out.println("==== 履歴新規追加 ====");
+        wordsService.insertAbb("リーダブルコード", "RC");
+
+        //略語確認
+        System.out.println("==== 履歴確認 ====");
+        String str = wordsService.checkByNameAbb("リーダブルコード", "RC");
+        if (str == null){
+            System.out.println("ありません");
+        }
+        else{
+            System.out.println("履歴："+str);
+        }
+        //略語削除
+        System.out.println("==== 履歴削除 ====");
+        boolean checkDelete = wordsService.deleteAbb("リーダブルコード", "RC");
+        //boolean checkDelete = false;
+        if (checkDelete){
+            System.out.println("削除されました。");
+        }
+        else{
+            System.out.println("削除できませんでした。");
+        }
+        //略語確認
+        System.out.println("==== 履歴確認 ====");
+        str = wordsService.checkByNameAbb("リーダブルコード", "RC");
+        if (str == null){
+            System.out.println("ありません");
+        }
+        else{
+            System.out.println("履歴："+str);
+        }
 
 
     }

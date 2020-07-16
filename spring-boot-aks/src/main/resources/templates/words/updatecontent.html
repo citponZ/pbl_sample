@@ -13,6 +13,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
+<!--jqueryとか-->
+<script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/demo.js}"></script>
+<script th:src="@{/js/button.js}"></script>
 <title>更新画面</title>
 </head>
 
@@ -30,12 +35,26 @@
     語句：<td th:text="${wordsList.get(0).name}">鈴木太郎</td>
     <br>
     
+    <!-- ステータス変数はカンマ区切りで2つ目の引数として受け取れる -->
+    <!-- last変数はループの最後でtrueを返します -->
+    <!--
     <div th:if="${wordsList.get(0).abbName}">
-    略語：<th:block th:each="words, iterStat:${wordsList}"> <!-- ステータス変数はカンマ区切りで2つ目の引数として受け取れる -->
+    略語：<th:block th:each="words, iterStat:${wordsList}"> 
       <span th:text="${words.abbName}">略語</span>
-      <span th:unless="${iterStat.last}">, </span><!-- last変数はループの最後でtrueを返します -->
+      <span th:unless="${iterStat.last}">, </span>
     </th:block>
+    </div>-->
+
+    <div id="input_pluralBox">
+      <th:block th:each="words, iterStat:${wordsList}">
+        <div id="input_plural">
+          <input type="text" name="array[]" class="form-control" th:value="${words.abbName}" placeholder="略語を入力してください">
+          <input type="button" value="＋" class="add pluralBtn">
+          <input type="button" value="－" class="del pluralBtn">
+        </div>
+      </th:block>
     </div>
+
     <br>
 
     <table border="1">
@@ -51,11 +70,5 @@
     </form>
   </div>
 </div>
-
-
-<!--jqueryとか-->
-<script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
-<script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
-<script th:src="@{/js/demo.js}"></script>
 </body>
 </html>

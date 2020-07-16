@@ -28,4 +28,17 @@ public interface WordsService {
     List<WordsListAbb> converToWordsListAbb(List<WordsByAbb> wordsAbbList);
 
     String makeLink(String content);
+
+    //略語の追加
+    void insertAbb(String wordName, String abbName);
+
+    //略語の削除
+    boolean deleteAbb(String wordName, String abbName);
+
+    //略語の確認
+    //存在確認
+    String checkByNameAbb(String wordName, String abbName);
+
+    //略語全取得
+    List<String> findAllByNameAbb(String wordName);
 }

@@ -10,6 +10,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
+<!--jqueryとか-->
+<script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/demo.js}"></script>
+<script th:src="@{/js/button.js}"></script>
+
 <title>メインメニュー</title>
 </head>
 
@@ -17,7 +23,6 @@
   <!--テンプレ-->
   <div layout:fragment="content">
   <div align="center" id="fontcolor">
-
       
     <div th:if="${message}">
         <br>
@@ -33,6 +38,15 @@
         </div>
     <br>
     語句：<td th:text="${name}">鈴木太郎</td>
+
+    <div id="input_pluralBox">
+      <div id="input_plural">
+        <input type="text" name="array[]" class="form-control" placeholder="略語を入力してください">
+        <input type="button" value="＋" class="add pluralBtn">
+        <input type="button" value="－" class="del pluralBtn">
+      </div>
+    </div>
+
     <table border="1">
       <tr><th>内容</th></tr>
       <td><textarea name="content" cols="40" rows="8" th:field="*{content}"></textarea></td>
@@ -47,10 +61,5 @@
 
 </div>
 
-
-<!--jqueryとか-->
-<script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
-<script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
-<script th:src="@{/js/demo.js}"></script>
 </body>
 </html>
