@@ -45,8 +45,21 @@
     <table id="fontcolor" align="center">
       <tr>
         <th width="10%" align="left">
-          <h2 class="normal" id="wordBlank"><nobr> <span th:text="${wordsList.get(0).name}">メイン</span> </nobr></h2>
+        
+          <div class="d-none d-lg-block">
+            <!--PCの時-->            
+            <h2 class="normal" id="wordBlank"><nobr> <span th:text="${wordsList.get(0).name}">メイン</span> </nobr></h2>           
+          </div>
         </th>
+
+        <th width="90%" align="left">
+
+          <div class="d-lg-none">
+            <!--スマホの時-->           
+            <h4 class="normal" align="left"> <span th:text="${wordsList.get(0).name}">メイン</span></h4>        
+          </div>
+        </th>
+        
         <th width="10%">
           <form action="index.html" th:action="@{/words/updateSearchId}" method="POST" style="display: inline;">
             <input type="hidden" name="name" th:value="${name}">
