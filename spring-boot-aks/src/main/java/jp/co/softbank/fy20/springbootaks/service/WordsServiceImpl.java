@@ -48,7 +48,7 @@ public class WordsServiceImpl implements WordsService {
 
     @Override
     @Transactional(readOnly = false)
-    public boolean delete(Integer id, Integer userID){
+    public boolean delete(Integer id, String userID){
         boolean checkDelete = wordsMapper.delete(id);
         historyMapper.insert(new History("delete", userID, id));
         return checkDelete;
@@ -56,7 +56,7 @@ public class WordsServiceImpl implements WordsService {
 
     @Override
     @Transactional(readOnly = false)
-    public int update(String content, Integer id, Integer userID){
+    public int update(String content, Integer id, String userID){
         int checkUpdate = wordsMapper.update(content, id);
         historyMapper.insert(new History("update", userID, id));
         return checkUpdate;

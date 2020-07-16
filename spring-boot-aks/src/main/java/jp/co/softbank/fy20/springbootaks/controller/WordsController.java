@@ -129,7 +129,7 @@ public class WordsController {
         model.addAttribute("wordsList", wordsList);
         model.addAttribute("message");
         //userIDは現状1を入力しているが本来はsessonからログイン情報を入手して代入
-        historyService.findInsert(1, wordsList.get(0).getId());
+        historyService.findInsert("admin", wordsList.get(0).getId());
         historyService.sessionSet(session);
         return "words/showWords";
     }
@@ -156,7 +156,7 @@ public class WordsController {
         //ある
         List<WordsByAbb> wordsList = wordsService.findByName(name);
         //userIDは現状1を入力しているが本来はsessonからログイン情報を入手して代入
-        boolean check = wordsService.delete(wordsList.get(0).getId(), 1);
+        boolean check = wordsService.delete(wordsList.get(0).getId(), "admin");
         if (check){
             model.addAttribute("message", "削除できました");
         }else{
@@ -270,7 +270,7 @@ public class WordsController {
     public String updateComplete(@RequestParam String id,@RequestParam String content,@RequestParam("array[]") List<String> abbList,
                                     Model model, HttpSession session) throws Exception {
         //userIDは現状1を入力しているが本来はsessonからログイン情報を入手して代入
-        int check = wordsService.update(content, Integer.parseInt(id), 1);
+        int check = wordsService.update(content, Integer.parseInt(id), "admin");
         /*if(check >= 1){
             updateMessage = "更新しました。";
         }else{

@@ -2,13 +2,12 @@ package jp.co.softbank.fy20.springbootaks.form;
 
 import jp.co.softbank.fy20.springbootaks.entity.Words;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 public class WordsForm {
     @NotBlank
     private String name;
-    @NotNull
-    private Integer userID;
+    @NotBlank
+    private String userID;
     @NotBlank
     private String content;
     
@@ -24,11 +23,11 @@ public class WordsForm {
         this.name = name;
     }
 
-    public Integer getUserID() {
+    public String getUserID() {
         return userID;
     }
 
-    public void setUserID(Integer userID) {
+    public void setUserID(String userID) {
         this.userID = userID;
     }
 
