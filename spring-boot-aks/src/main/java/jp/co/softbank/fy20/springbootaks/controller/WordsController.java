@@ -3,6 +3,8 @@ package jp.co.softbank.fy20.springbootaks.controller;
 import jp.co.softbank.fy20.springbootaks.entity.*;
 import jp.co.softbank.fy20.springbootaks.service.*;
 import jp.co.softbank.fy20.springbootaks.form.*;
+
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -201,7 +203,7 @@ public class WordsController {
     //追加insert(deleteID的な) エラー処理も
     @PostMapping("/insertComplete")
     public String insertComplet(@Validated WordsForm wordsForm, BindingResult bindingResult, 
-                                Model model, RedirectAttributes attributes, HttpSession session) 
+        @RequestParam("array[]") List<String> abbList,Model model, RedirectAttributes attributes, HttpSession session) 
                                     throws Exception {
         
         if (bindingResult.hasErrors()) {
@@ -214,7 +216,12 @@ public class WordsController {
         Words words = wordsForm.convertToEntity();
         wordsService.insert(words);
         String name = wordsForm.getName();
-        
+        for (String abb : abbList){
+            String trimAbb = abb.replaceAll("　", " ").trim();
+            if(wordsService.checkByNameAbb(wordsForm.getName(), abb) == null && !StringUtils.isEmpty(trimAbb)){
+                wordsService.insertAbb(wordsForm.getName(), abb);
+            }
+        }
         historyService.sessionSet(session);
         //return "redirect:id/"+name;
         return "redirect:id/"+ URLEncoder.encode(name.replace(" ", "_"), "UTF-8");
@@ -260,8 +267,8 @@ public class WordsController {
 
     //update(deleteID的な) エラー処理も
     @PostMapping("/updateComplete")
-    public String updateComplete(@RequestParam String id,@RequestParam String content,Model model, 
-                                    HttpSession session) throws Exception {
+    public String updateComplete(@RequestParam String id,@RequestParam String content,@RequestParam("array[]") List<String> abbList,
+                                    Model model, HttpSession session) throws Exception {
         //userIDは現状1を入力しているが本来はsessonからログイン情報を入手して代入
         int check = wordsService.update(content, Integer.parseInt(id), 1);
         /*if(check >= 1){
@@ -269,8 +276,20 @@ public class WordsController {
         }else{
             updateMessage =  "更新できませんでした。";
         }*/
+
         Words words = wordsService.find(Integer.parseInt(id));
         String name = words.getName();
+        List<String> oldAbbList = wordsService.findAllByNameAbb(name);
+        for (String abb : oldAbbList){
+            wordsService.deleteAbb(name, abb);
+        }
+        for (String abb : abbList){
+            String trimAbb = abb.replaceAll("　", " ").trim();
+            if(wordsService.checkByNameAbb(name, abb) == null && !StringUtils.isEmpty(trimAbb) ){
+                //空白ではなく、かつ、すでにあるリスト内になかったら
+                wordsService.insertAbb(name, abb);
+            }
+        }
         historyService.sessionSet(session);
         return "redirect:id/"+ URLEncoder.encode(name.replace(" ", "_"), "UTF-8");
     }

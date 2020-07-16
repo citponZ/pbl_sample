@@ -163,4 +163,10 @@ public class WordsServiceImpl implements WordsService {
     public String checkByNameAbb(String wordName, String abbName){
         return wordsMapper.checkByNameAbb(wordName, abbName);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<String> findAllByNameAbb(String wordName){
+        return wordsMapper.findAllByNameAbb(wordName);
+    }
 }

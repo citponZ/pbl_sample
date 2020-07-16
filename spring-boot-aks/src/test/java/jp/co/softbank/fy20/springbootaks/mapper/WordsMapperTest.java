@@ -100,7 +100,7 @@ public class WordsMapperTest {
 
         //履歴追加
         System.out.println("==== 履歴新規追加 ====");
-        wordsMapper.insertAbb("リーダブルコード", "RD");
+        //wordsMapper.insertAbb("リーダブルコード", "RD");
         //履歴確認
         System.out.println("==== 履歴確認 ====");
         String str = wordsMapper.checkByNameAbb("リーダブルコード", "RD");
@@ -130,6 +130,11 @@ public class WordsMapperTest {
             System.out.println("履歴："+str);
         }
 
+        System.out.println("==== 履歴確認 ====");
+        List<String> list = wordsMapper.findAllByNameAbb("word1");
+        for (String words : list) {
+            System.out.println(words);
+        }
 
 
         //いつか作りたいね

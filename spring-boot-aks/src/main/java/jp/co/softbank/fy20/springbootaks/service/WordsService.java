@@ -38,4 +38,7 @@ public interface WordsService {
     //略語の確認
     //存在確認
     String checkByNameAbb(String wordName, String abbName);
+
+    //略語全取得
+    List<String> findAllByNameAbb(String wordName);
 }
