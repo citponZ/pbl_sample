@@ -5,14 +5,14 @@ import java.time.LocalDateTime;
 public class Words{
     private Integer id;
     private String name;
-    private Integer userID;
+    private String userID;
     private String content;
     private LocalDateTime createdDate;
     private LocalDateTime updatedDate;
 
     public Words(){}
 
-    public Words(String name,Integer userID,String content){
+    public Words(String name,String userID,String content){
         this.name = name;
         this.userID = userID;
         this.content = content;
@@ -36,11 +36,11 @@ public class Words{
         this.name = name;
     }
 
-    public Integer getUserID() {
+    public String getUserID() {
         return userID;
     }
 
-    public void setUserID(Integer userID) {
+    public void setUserID(String userID) {
         this.userID = userID;
     }
 
