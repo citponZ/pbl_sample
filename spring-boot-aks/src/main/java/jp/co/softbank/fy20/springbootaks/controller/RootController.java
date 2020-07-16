@@ -1,6 +1,5 @@
 package jp.co.softbank.fy20.springbootaks.controller;
 
-import javax.websocket.Session;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;

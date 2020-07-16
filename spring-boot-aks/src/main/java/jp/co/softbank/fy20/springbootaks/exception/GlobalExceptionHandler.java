@@ -1,6 +1,5 @@
 package jp.co.softbank.fy20.springbootaks.exception;
 
-import java.sql.SQLException;
 import org.springframework.dao.DuplicateKeyException;
 
 import org.springframework.http.HttpStatus;
@@ -9,22 +8,16 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import jp.co.softbank.fy20.springbootaks.entity.Words;
-import jp.co.softbank.fy20.springbootaks.entity.WordsByAbb;
 import jp.co.softbank.fy20.springbootaks.service.WordsService;
-
-import java.util.List;
-
-import javax.servlet.http.HttpSession;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
-    private final WordsService wordsService;
+    /*private final WordsService wordsService;
 
     // EmployeeServiceをDIする（@Autowiredは省略）
     public GlobalExceptionHandler(WordsService wordsService) {
         this.wordsService = wordsService;
-    }
+    }*/
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
