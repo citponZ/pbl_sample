@@ -72,6 +72,13 @@ input#submit_button {
     
 }
 
+.smartRanking{
+    min-height: 100vh;
+    position: relative;
+    top: 78px;
+    /*display: flex;*/
+}
+
 .grovalNavigation{
     position: fixed;
     flex: 1;
