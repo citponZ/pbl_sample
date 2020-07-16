@@ -5,13 +5,13 @@ import java.time.LocalDateTime;
 public class History {
     private Integer id;
     private String historyType;
-    private Integer userID;
+    private String userID;
     private Integer wordID;
     private LocalDateTime historyDate;
 
     public History(){}
 
-    public History(String historyType,Integer userID,Integer wordID){
+    public History(String historyType,String userID,Integer wordID){
         this.historyType = historyType;
         this.userID = userID;
         this.wordID = wordID;
@@ -33,11 +33,11 @@ public class History {
         this.historyType = historyType;
     }
 
-    public Integer getUserID() {
+    public String getUserID() {
         return userID;
     }
 
-    public void setUserID(Integer userID) {
+    public void setUserID(String userID) {
         this.userID = userID;
     }
 

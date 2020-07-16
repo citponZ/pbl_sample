@@ -21,7 +21,7 @@ public class HistoryServiceImpl implements HistoryService {
 
     @Override
     @Transactional(readOnly = false)
-    public void findInsert(Integer userID, Integer wordID){
+    public void findInsert(String userID, Integer wordID){
         historyMapper.insert(new History("select", userID, wordID));
     }
 

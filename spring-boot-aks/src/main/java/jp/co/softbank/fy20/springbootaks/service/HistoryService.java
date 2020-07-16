@@ -6,7 +6,7 @@ import javax.servlet.http.HttpSession;
 
 public interface HistoryService {
     
-    void findInsert(Integer userID, Integer wordID);
+    void findInsert(String userID, Integer wordID);
 
     List<String> findNewWordsTen();
 
