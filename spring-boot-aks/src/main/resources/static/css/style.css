@@ -73,7 +73,8 @@ input#submit_button {
 }
 
 .large{
-    font-size: x-large ; 
+    font-size: x-large ;
+    text-decoration: none;
     /*margin: 5px 0 0 20px;*/
 
 }
@@ -94,7 +95,6 @@ input#submit_button {
 .gridbu{
     min-height: 100vh;
     display: flex;
-    
 }
 
 .smartRanking{
@@ -104,19 +104,31 @@ input#submit_button {
     /*display: flex;*/
 }
 
+div#displayAll{
+    width: 100%;
+}
+
 .grovalNavigation{
+
+    background-color: #bfd8d2;  
+    color: #535353;
+    text-align: center;
+    
     position: fixed;
-    flex: 1;
     position: fixed;
     top: 78px;
-    text-align: center;
-    background-color: #bfd8d2;   
     min-height: 100vh;
-    width: 300px;   
+
+    width: 25%;   
     color: #535353;
+
 }
 .localNavigation{
-    flex: 1;
+
+    color: #535353;
+    background-color: #fedcd2;
+    text-align: center;
+    
     position: fixed;
     top: 78px;
     right: 0;
@@ -124,18 +136,21 @@ input#submit_button {
     overflow-y: scroll;
     text-align: center;
     background-color: #fedcd2;
-    width: 300px;
+    width: 25%;
     color: #535353;
+
 }
 .contents {
-    /*flex: 2;*/
+
+    text-align: center;
+    background-color: #ffffff;
+    
     position: relative;
     top: 78px;
     /*z-index: -1;*/
     left: 25%;
     width: 50%;
-    text-align: center;
-    background-color: #ffffff;
+    
 }
 
 div#picture1{
@@ -213,65 +228,87 @@ body {
 */
 
 /*もっと見る関係の配色*/ 
-  .more {
-      background: #dcb239;
-      color: #fff;
-      width: 200px;
-      text-align: center;
-      padding: 5px;
-      cursor: pointer;
-  }
-  li {
-      margin: 0 0 5px;
-  }
-
-  .topButtonCor {
-    text-decoration: none;
+.more {
     background: #dcb239;
     color: #fff;
     width: 200px;
     text-align: center;
-    padding: 8px 0px;
-  }
-  .topButtonCor:hover{
-      text-decoration: none;
-      color: #535353;
+    padding: 5px;
+    cursor: pointer;
+}
+li {
+    margin: 0 0 5px;
+}
+
+.topButtonCor {
+text-decoration: none;
+background: #dcb239;
+color: #fff;
+width: 200px;
+text-align: center;
+padding: 8px 0px;
+}
+.topButtonCor:hover{
+    text-decoration: none;
+    color: #535353;
+}
+
+#page_top{
+    width: 50px;
+    height: 50px;
+    position: fixed;
+    right: 2%;
+    bottom: -50px;
+    background: #ef3f98;
+    opacity: 0.6;
+    border-radius: 50%;
+    
     }
 
-    #page_top{
-        width: 50px;
-        height: 50px;
-        position: fixed;
-        right: 2%;
-        bottom: -50px;
-        background: #ef3f98;
-        opacity: 0.6;
-        border-radius: 50%;
-        
+
+
+#page_top a{
+    position: relative;
+    display: block;
+    width: 50px;
+    height: 50px;
+    text-decoration: none;
+    }
+
+#page_top a::before{
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    content: '\f106';
+    font-size: 25px;
+    color: #fff;
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    top: -5px;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    text-align: center;
+}
+
+
+/*ローカルナビゲーションのテーブルがキュってなるやつ*/
+.ProductTable {
+    border: solid 1px #fedcd2;
+    border-collapse: separate;
+    border-spacing: 8px 8px;
+    border-radius: 6px;
+    
+}
+.ProductTable td {
+    border-bottom: 1px solid #535353;
+}
+      .leftTo {
+        display: flex;
+        flex-wrap: wrap;
       }
-
-
-      #page_top a{
-        position: relative;
-        display: block;
-        width: 50px;
-        height: 50px;
-        text-decoration: none;
-      }
-
-      #page_top a::before{
-        font-family: 'Font Awesome 5 Free';
-        font-weight: 900;
-        content: '\f106';
-        font-size: 25px;
-        color: #fff;
-        position: absolute;
-        width: 25px;
-        height: 25px;
-        top: -5px;
-        bottom: 0;
-        right: 0;
-        left: 0;
-        margin: auto;
-        text-align: center;
+      
+      .leftTo div {
+        width: 50%;
       }

@@ -12,7 +12,7 @@ $(function() {
  });
 
  $(function() {
-  var count = 5;
+  var count = 10;
 $('.text_limit2').each(function() {
     var thisText = $(this).text();
      var textLength = thisText.length;

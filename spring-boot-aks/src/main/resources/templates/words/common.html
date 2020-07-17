@@ -8,9 +8,16 @@
           th:href="@{/css/style.css}">
     <link rel="stylesheet" href="../../static/css/newWords.css"
           th:href="@{/css/newWords.css}">
+    <link rel="stylesheet" href="../../static/css/newWords.css"
+          th:href="@{/css/test.css}">
+    
     <!--トップに戻るボタンが三角になるやつ-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.4/css/all.css">
     
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"
+  />
 <!--<html xmlns:th="http://www.thymeleaf.org"></html>-->
 <!-- (1)共通にしたいheadをfragment化する -->
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -18,6 +25,7 @@
 <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
 <script th:src="@{/js/wordLimit.js}"></script>
 <script th:src="@{/js/backToTop.js}"></script>
+<script th:src="@{/js/search.js}"></script>
 
 <body>
   <div class='fixed-top'>
@@ -48,7 +56,7 @@
             <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Sign out</button>
           </form>
           <form class="form-inline my-2 my-lg-0" th:action="@{/words/searchName}">
-            <input type="search" class="form-control mr-sm-2" placeholder="検索..." aria-label="検索..." name="name">
+            <input type="search" class="form-control mr-sm-2" placeholder="語句を検索してください..." aria-label="語句を検索してください..." name="name">
             <button type="submit" class="btn btn-outline-success my-2 my-sm-0">検索</button>
           </form>
         </div>
@@ -56,7 +64,7 @@
   </div>
 
      
-      <div class ="gridbu">
+      <div class ="gridbu"><!--container -->
         <div class="d-none d-lg-block">
         <div class="grovalNavigation">
         
@@ -103,6 +111,17 @@
     <div class="contents">
       <img class="d-block mx-auto" th:src="@{/images/logo.png}" > 
         <!--コンテンツ-->
+        <!--
+        <div class="d-block mx-auto">
+        <div class="search-wrapper">
+          <div class="input-holder">
+              <input type="text" class="search-input" placeholder="Type to search" />
+              <button class="search-icon" onclick="searchToggle(this, event);"><span></span></button>
+          </div>
+          <span class="close" onclick="searchToggle(this, event);"></span>
+        </div>
+      </div>
+      -->
         <div layout:fragment="content"></div>
     </div>
      
@@ -112,7 +131,7 @@
         <p>ローカルナビゲーション</p>
         <div align="center">
           
-          <table valign="bottom">          
+          <table valign="bottom" class="ProductTable">          
             <div class="ribbon16-wrapper">
               <div class="ribbon16-content">
                 <h3>新着の語句</h3>
@@ -122,16 +141,18 @@
               <th:block th:each="newWords : ${session['newWordsList']}">
                 <tr>
                   <td>
-                    <a class="large" th:href="@{'/words/id/'+ ${newWords}}"><span style="color: #96b9b1;" th:text="${newWords}">メイン</span></a>
-                    <hr color="#535353"> 
+                    <a class="text_limit2 large" style="color: #fa8383;" th:href="@{'/words/id/'+ ${newWords}}"><span th:text="${newWords}">メイン</span></a>
                   </td>                  
                 </tr>
               </th:block>
             </div>
           </table>
+
+          <br>
+          <br>
         
 
-          <table valign="bottom">          
+          <table valign="bottom" class="ProductTable">          
             <div class="ribbon16-wrapper">
               <div class="ribbon16-content">
                 <h3><nobr>ランキング</nobr></h3>
@@ -141,8 +162,7 @@
                 <th:block th:each="rank : ${session['rankingList']}">
                   <tr>
                     <td>
-                      <a class="text_limit2 large" style="color:#bfd8d2;" th:href="@{'/words/id/'+ ${rank}}"><span th:text="${rank}">test</span></a>
-                      <!--<a class="large" th:href="@{'/words/id/'+ ${rank}}"><span style="color:#bfd8d2;" th:text="${rank}">メイン</span></a>-->
+                      <a class="text_limit2 large" style="color:#fa8383" th:href="@{'/words/id/'+ ${rank}}"><span th:text="${rank}">test</span></a>
                     </td>
                   </tr>
                 </th:block>
