@@ -58,13 +58,13 @@
         <img class="d-block mx-auto" th:src="@{/images/logo.png}">
           <p class="d-lg-none"></p>
             <form class="form-inline my-2 my-lg-0" th:action="@{/words/searchName}"><!-- class="form-control mr-sm-2" -->
-              <input type="search" class="form-control2 mr-sm-2" placeholder="語句を検索してください..." aria-label="語句を検索してください..." name="name"><!--form-controlが悪いß -->
+              <input type="search" id="form-control2" class="form-control mr-sm-2" placeholder="語句を検索してください..." aria-label="語句を検索してください..." name="name"><!--form-controlが悪いß -->
               <button type="submit" class="btn-border2">検索</button>
             </form>
         <table style="margin: auto;">
               <tr style="float: left;">
                 <td>
-                    <button style="width: 100px; height: 30px;" id="rankingButton" class="btn-border">ランキング<br></button>
+                    <button id="rankingButton" class="btn-border">ランキング<br></button>
                         <table valign="bottom" class="rankTable"><br>                          
                               <th:block th:each="rank : ${session['rankingList']}">
                                 <tr>
