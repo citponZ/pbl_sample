@@ -104,6 +104,10 @@ input#submit_button {
     /*display: flex;*/
 }
 
+div#displayAll{
+    width: 100%;
+}
+
 .grovalNavigation{
 
     background-color: #bfd8d2;  
@@ -262,6 +266,7 @@ padding: 8px 0px;
     }
 
 
+
 #page_top a{
     position: relative;
     display: block;
@@ -302,3 +307,11 @@ padding: 8px 0px;
 .ProductTable td {
     border-bottom: 1px solid #535353;
 }
+      .leftTo {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      
+      .leftTo div {
+        width: 50%;
+      }

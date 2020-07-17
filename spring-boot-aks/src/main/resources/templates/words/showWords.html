@@ -32,7 +32,8 @@
   </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
+  <link rel="shortcut icon" th:href="@{/images/favicon.ico}">
 
   <title>document.title</title>
 </head>
@@ -41,24 +42,45 @@
   <!--テンプレ-->
   <div layout:fragment="content">
 
-    <table id="fontcolor" align="center">
+    <div class="leftTo">
+      <div class="d-none d-xl-block">
+        <!--PCの時 -->         
+        <h3 class="normal" id="wordBlank"><nobr> <span th:text="${wordsList.get(0).name}">メイン</span> </nobr></h3>           
+      </div>
+
+      <div class="d-xl-none">
+        <!--スマホの時-->  
+        <h4 class="normal" id="wordBlank"> <span th:text="${wordsList.get(0).name}">メイン</span></h4><!--align="left"-->
+      </div>
+      <form action="index.html" th:action="@{/words/updateSearch}" method="POST" style="display: inline-block;">
+        <input type="hidden" name="name" th:value="${name}">
+        <input style="float: left;" class="btn-border" type="submit" value="編集">
+      </form>
+
+    </div>
+    <br>
+
+  <!--  <table id="fontcolor" align="center">
+
+      
       <tr>
         <th width="10%" align="left">
         
           <div class="d-none d-xl-block">
-            <!--PCの時-->            
-            <h3 class="normal" id="wordBlank"><nobr> <span th:text="${wordsList.get(0).name}">メイン</span> </nobr></h3>           
+            //PCの時          
+            <h3 style="background-color: aqua;" class="normal" id="wordBlank"><nobr> <span th:text="${wordsList.get(0).name}">メイン</span> </nobr></h3>           
 
           </div>
         </th>
+        <div class="d-xl-none">
+          <th width="90%">-->
 
-        <th width="90%" align="left">
-
-          <div class="d-xl-none">
-            <!--スマホの時-->           
+          <!--<div class="d-xl-none"></div>-->
+            <!--スマホの時-->
+          <!--     
             <h4 class="normal" align="left"> <span th:text="${wordsList.get(0).name}">メイン</span></h4>        
-          </div>
-        </th>
+          </th>
+        </div>
         
         <th width="10%">
           <form action="index.html" th:action="@{/words/updateSearch}" method="POST" style="display: inline;">
@@ -66,10 +88,12 @@
             <input class="btn-border" type="submit" value="編集">
           </form>
       </th>
+      
       <th width="80%">
       </th>
     </tr>
-  </table>
+    
+  </table>--> 
   <!--yyyy/MM/dd HH:mm:ss.SSSの表記を分までに短縮中-->
   <table align="right">
     <div>
