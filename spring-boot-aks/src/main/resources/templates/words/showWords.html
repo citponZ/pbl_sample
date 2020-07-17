@@ -32,7 +32,8 @@
   </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
+  <link rel="shortcut icon" th:href="@{/images/favicon.ico}">
 
   <title>document.title</title>
 </head>
@@ -61,7 +62,7 @@
         </th>
         
         <th width="10%">
-          <form action="index.html" th:action="@{/words/updateSearchId}" method="POST" style="display: inline;">
+          <form action="index.html" th:action="@{/words/updateSearch}" method="POST" style="display: inline;">
             <input type="hidden" name="name" th:value="${name}">
             <input class="btn-border" type="submit" value="編集">
           </form>
