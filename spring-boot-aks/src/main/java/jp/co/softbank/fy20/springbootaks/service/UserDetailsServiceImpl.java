@@ -36,10 +36,10 @@ public class UserDetailsServiceImpl implements UserDetailsService{
         //権限を利用する場合は、DB上で権限テーブル、ユーザ権限テーブルを作成し管理が必要
         List<GrantedAuthority> grantList = new ArrayList<GrantedAuthority>();
         GrantedAuthority authority = null;
-        if(user.getUserGroup() == "admin"){
+        if(user.getUserGroup().equals("admin")){
             authority = new SimpleGrantedAuthority("ROLE_ADMIN");
         }
-        else if(user.getUserGroup() == "user"){
+        else if(user.getUserGroup().equals("user")){
             authority = new SimpleGrantedAuthority("ROLE_USER");
         }
         else{
