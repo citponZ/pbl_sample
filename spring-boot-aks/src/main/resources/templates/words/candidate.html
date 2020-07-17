@@ -18,6 +18,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
+  <link rel="shortcut icon" th:href="@{/images/favicon.ico}">
 
   <!--jqueryとか-->
   <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
@@ -34,7 +35,7 @@
   <div layout:fragment="content">
     <div class="d-lg-none">
             <form class="form-inline my-2 my-lg-0" th:action="@{/words/searchName}">
-              <input type="search" class="form-control mr-sm-2" placeholder="検索..." aria-label="検索..." name="name">
+              <input type="search" class="form-control mr-sm-2" placeholder="語句を検索してください..." aria-label="語句を検索してください..." name="name">
               <button type="submit" class="btn-border">検索</button>
             </form>
           </div>
