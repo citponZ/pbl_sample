@@ -45,14 +45,14 @@
     <div class="leftTo">
       <div class="d-none d-xl-block">
         <!--PCの時 -->         
-        <h3 class="normal" id="wordBlank"><nobr> <span th:text="${wordsList.get(0).name}">メイン</span> </nobr></h3>           
+        <h3 class="normal" id="wordBlank"><span th:text="${wordsList.get(0).name}">メイン</span></h3>           
       </div>
 
       <div class="d-xl-none">
         <!--スマホの時-->  
         <h4 class="normal" id="wordBlank"> <span th:text="${wordsList.get(0).name}">メイン</span></h4><!--align="left"-->
       </div>
-      <form action="index.html" th:action="@{/words/updateSearch}" method="POST" style="display: inline-block;">
+      <form action="index.html" th:action="@{/words/updateSearch}" method="POST">
         <input type="hidden" name="name" th:value="${name}">
         <input style="float: left;" class="btn-border" type="submit" value="編集">
       </form>
