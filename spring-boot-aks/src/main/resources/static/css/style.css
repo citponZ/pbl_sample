@@ -103,6 +103,10 @@ input#submit_button {
     /*display: flex;*/
 }
 
+div#displayAll{
+    width: 100%;
+}
+
 .grovalNavigation{
 
     background-color: #bfd8d2;  
@@ -284,4 +288,13 @@ body {
         left: 0;
         margin: auto;
         text-align: center;
+      }
+
+      .leftTo {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      
+      .leftTo div {
+        width: 50%;
       }
