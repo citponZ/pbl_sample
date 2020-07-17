@@ -94,7 +94,6 @@ input#submit_button {
 .gridbu{
     min-height: 100vh;
     display: flex;
-    
 }
 
 .smartRanking{
@@ -105,18 +104,26 @@ input#submit_button {
 }
 
 .grovalNavigation{
-    position: fixed;
     flex: 1;
+    background-color: #bfd8d2;  
+    color: #535353;
+    text-align: center;
+    
+    position: fixed;
     position: fixed;
     top: 78px;
-    text-align: center;
-    background-color: #bfd8d2;   
     min-height: 100vh;
+
     width: 25%;   
     color: #535353;
+
 }
 .localNavigation{
     flex: 1;
+    color: #535353;
+    background-color: #fedcd2;
+    text-align: center;
+    
     position: fixed;
     top: 78px;
     right: 0;
@@ -126,16 +133,19 @@ input#submit_button {
     background-color: #fedcd2;
     width: 25%;
     color: #535353;
+
 }
 .contents {
-    /*flex: 2;*/
+    flex: 2;
+    text-align: center;
+    background-color: #ffffff;
+    
     position: relative;
     top: 78px;
     /*z-index: -1;*/
     left: 25%;
     width: 50%;
-    text-align: center;
-    background-color: #ffffff;
+    
 }
 
 div#picture1{

@@ -55,6 +55,11 @@
 
       <div class="smartRanking">
         <img class="d-block mx-auto" th:src="@{/images/logo.png}">
+          <p class="d-lg-none"></p>
+            <form class="form-inline my-2 my-lg-0" th:action="@{/words/searchName}">
+              <input type="search" class="form-control mr-sm-2" placeholder="検索..." aria-label="検索..." name="name">
+              <button type="submit" class="btn-border">検索</button>
+            </form>
         <table style="margin: auto;">
               <tr style="float: left;">
                 <td>

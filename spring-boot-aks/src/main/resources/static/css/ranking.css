@@ -1,6 +1,6 @@
 .rankTable{
     position: absolute;
-    top: 30%;
+    top: 40%;
     left: 25%;
     text-align: center;
     /*background-color: aqua;*/
@@ -10,7 +10,7 @@
 }
 .wordTable{
     position: absolute;
-    top: 30%;
+    top: 40%;
     right: 25%;
     /*background-color: aqua;*/
     z-index: 999;
