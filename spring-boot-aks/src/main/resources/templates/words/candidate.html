@@ -32,6 +32,12 @@
 <body>
   <!--テンプレ-->
   <div layout:fragment="content">
+    <div class="d-lg-none">
+            <form class="form-inline my-2 my-lg-0" th:action="@{/words/searchName}">
+              <input type="search" class="form-control mr-sm-2" placeholder="検索..." aria-label="検索..." name="name">
+              <button type="submit" class="btn-border">検索</button>
+            </form>
+          </div>
     <div align="center">
       <h4 id="top"><p th:text="${message}">test</p></h4>
 

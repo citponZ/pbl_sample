@@ -260,4 +260,9 @@ public class WordsController {
         public String words(Model model) {
             return "words/word";
         }
+
+        @GetMapping("/test")
+        public String test(Model model) {
+            return "words/test";
+        }
 }
