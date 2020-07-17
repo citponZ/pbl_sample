@@ -1,10 +1,13 @@
 package jp.co.softbank.fy20.springbootaks.entity;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 public class Users {
     private String id;
     private String name;
     private String password;
     private String userGroup;
+
 
     public Users(){}
 
@@ -13,6 +16,12 @@ public class Users {
         this.name = name;
         this.password = password;
         this.userGroup = userGroup;
+    }
+
+
+    public void passwordEncode(){
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        this.password = encoder.encode(password);
     }
     
     public String getId() {

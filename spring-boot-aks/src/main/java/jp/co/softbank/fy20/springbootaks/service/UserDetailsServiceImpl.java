@@ -10,7 +10,6 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import jp.co.softbank.fy20.springbootaks.entity.Users;
@@ -48,10 +47,10 @@ public class UserDetailsServiceImpl implements UserDetailsService{
         grantList.add(authority);
 
         //rawDataのパスワードは渡すことができないので、暗号化
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        //BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
         //UserDetailsはインタフェースなのでUserクラスのコンストラクタで生成したユーザオブジェクトをキャスト
-        UserDetails userDetails = (UserDetails)new User(user.getId(), encoder.encode(user.getPassword()),grantList);
+        UserDetails userDetails = (UserDetails)new User(user.getId(), user.getPassword(),grantList);
 
         return userDetails;
     }

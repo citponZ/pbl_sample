@@ -2,7 +2,6 @@ package jp.co.softbank.fy20.springbootaks.service;
 
 import jp.co.softbank.fy20.springbootaks.SampleApplication;
 import jp.co.softbank.fy20.springbootaks.entity.*;
-import jp.co.softbank.fy20.springbootaks.mapper.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.context.ApplicationContext;
@@ -34,6 +33,7 @@ public class UsersServiceTest {
 
         // 更新のテスト
         System.out.println("==== 更新 ====");
+        /*
         int checkUpdate = usersService.updateName("運用β", "user");
         if (checkUpdate>=1){
             System.out.println("更新されました。");
@@ -50,7 +50,7 @@ public class UsersServiceTest {
         }
         else{
             System.out.println("更新できませんでした。");
-        }
+        }*/
 
         System.out.println("==== 全件検索 ====");
         usersList1 = usersService.findAll();
@@ -65,13 +65,13 @@ public class UsersServiceTest {
 
         // 削除のテスト
         System.out.println("==== 削除 ====");
-        boolean checkDelete = usersService.delete("user");
+        /*boolean checkDelete = usersService.delete("user");
         if (checkDelete){
             System.out.println("削除されました。");
         }
         else{
             System.out.println("削除できませんでした。");
-        }
+        }*/
 
         // 全件検索のテスト
         System.out.println("==== 全件検索 ====");

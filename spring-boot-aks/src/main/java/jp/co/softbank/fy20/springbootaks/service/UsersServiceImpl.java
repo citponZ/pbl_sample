@@ -2,6 +2,7 @@ package jp.co.softbank.fy20.springbootaks.service;
 
 import java.util.List;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import jp.co.softbank.fy20.springbootaks.mapper.*;
 import jp.co.softbank.fy20.springbootaks.entity.*;
@@ -25,6 +26,7 @@ public class UsersServiceImpl implements UsersService {
     @Override
     @Transactional(readOnly = false)
     public void insert(Users users){
+        users.passwordEncode();
         usersMapper.insert(users);
     }
 
@@ -45,7 +47,8 @@ public class UsersServiceImpl implements UsersService {
     @Override
     @Transactional(readOnly = false)
     public int updatePassword(String password, String id){
-        return usersMapper.updatePassword(password, id);
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        return usersMapper.updatePassword(encoder.encode(password), id);
     }
 
     @Override
