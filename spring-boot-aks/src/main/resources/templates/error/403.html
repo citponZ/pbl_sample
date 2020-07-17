@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<!--テンプレ-->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{words/common.html}">
+
+  <link rel="stylesheet" href="../../static/css/style.css"
+          th:href="@{/css/style.css}">
+  <!-- Custom styles for this template -->
+  <link th:href="@{/css/sticky-footer.css}" rel="stylesheet">
+<head>
+  <meta charset="UTF-8">
+  <!--ブートストラップ-->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
+  <link rel="shortcut icon" th:href="@{/images/favicon.ico}">
+  <title>メインメニュー</title>
+</head>
+
+<body>
+  <!--テンプレ-->
+  <div layout:fragment="content">
+    <p class="d-lg-none">メニューバーをタップすると語句検索できるようになります</p>
+    <div class="d-lg-none">
+      <p>操作メニュー</p>
+      <table align="center">
+          <tr>
+            <td>
+              <form action="index.html" th:action="@{/words/insertMain}">
+                <input type="submit" value="追加" id="submit_button" class="btn-border">
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <form action="index.html" th:action="@{/words/ranking}">
+                <input type="submit" value="ランキング" id="submit_button" class="btn-border">
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <form action="index.html" th:action="@{/words/delete}">
+                <input type="submit" value="削除" id="submit_button" class="btn-border">
+              </form>
+            </td>
+          </tr>
+      </table>
+    </div>
+      <div class="d-none d-lg-block">
+        <div id="fontcolor">
+          権限がありません。
+        </div>
+      </div>
+  </div>
+
+  <!--jqueryとか-->
+  <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+  <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+  <script th:src="@{/js/demo.js}"></script>
+</body>
+</html>

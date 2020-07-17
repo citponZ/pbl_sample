@@ -5,6 +5,8 @@ import jp.co.softbank.fy20.springbootaks.service.*;
 import jp.co.softbank.fy20.springbootaks.form.*;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -50,6 +52,12 @@ public class WordsController {
     @GetMapping("/index")
     public String index(Model model, HttpSession session) {
         historyService.sessionSet(session);
+
+        //ログインユーザを取得
+        //ログインしていない場合は「anonymousUser」となる
+        //Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        //Principalからログインユーザの情報を取得
+        //String userName = auth.getName();
         return "words/index";
     }
 
@@ -104,12 +112,21 @@ public class WordsController {
             return "redirect:../../words/index";
         }
         String content = wordsService.makeLink(wordsList.get(0).getContent());
+        List<String> dict = wordsService.findAllName();
+        for (WordsByAbb words : wordsList){
+            if (dict.contains(words.getAbbName())){
+                String tmp = "<a href=\"/spring-boot-aks/words/id/"+words.getAbbName()+"\">"+words.getAbbName()+"</a>";
+                words.setAbbName(tmp);
+            }
+
+        }
         wordsList.get(0).setContent(content);
         //ページ名
         model.addAttribute("pageName", name);
         model.addAttribute("wordsList", wordsList);
         //userIDは現状1を入力しているが本来はsessonからログイン情報を入手して代入
-        historyService.findInsert("admin", wordsList.get(0).getId());
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        historyService.findInsert(auth.getName(), wordsList.get(0).getId());
         historyService.sessionSet(session);
         return "words/showWords";
     }
@@ -135,8 +152,8 @@ public class WordsController {
         }
         //ある
         List<WordsByAbb> wordsList = wordsService.findByName(name);
-        //userIDは現状1を入力しているが本来はsessonからログイン情報を入手して代入
-        boolean check = wordsService.delete(wordsList.get(0).getId(), "admin");
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        boolean check = wordsService.delete(wordsList.get(0).getId(), auth.getName());
         if (check){
             model.addAttribute("message", "削除できました");
         }else{
@@ -190,6 +207,8 @@ public class WordsController {
             return "words/insertcontent";
         }
 
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        wordsForm.setUserID(auth.getName());
         Words words = wordsForm.convertToEntity();
         wordsService.insert(words);
         String name = wordsForm.getName();
@@ -232,7 +251,8 @@ public class WordsController {
     public String updateComplete(@RequestParam String id,@RequestParam String content,@RequestParam("array[]") List<String> abbList,
                                     Model model, HttpSession session) throws Exception {
         //userIDは現状1を入力しているが本来はsessonからログイン情報を入手して代入
-        wordsService.update(content, Integer.parseInt(id), "admin");
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        wordsService.update(content, Integer.parseInt(id), auth.getName());
         Words words = wordsService.find(Integer.parseInt(id));
         String name = words.getName();
         List<String> oldAbbList = wordsService.findAllByNameAbb(name);
@@ -260,9 +280,9 @@ public class WordsController {
         public String words(Model model) {
             return "words/word";
         }
-
         @GetMapping("/test")
         public String test(Model model) {
             return "words/test";
         }
+
 }

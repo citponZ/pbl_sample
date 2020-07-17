@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<!--テンプレ-->
+<html xmlns:th="http://www.thymeleaf.org">
+
+  <link rel="stylesheet" href="../../static/css/style.css"
+          th:href="@{/css/style.css}">
+  <!-- Custom styles for this template -->
+  <link th:href="@{/css/sticky-footer.css}" rel="stylesheet">
+<head>
+    <meta charset="UTF-8">
+    <!--ブートストラップ-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
+    <link rel="shortcut icon" th:href="@{/images/favicon.ico}">
+    <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+    <title>メインメニュー</title>
+</head>
+<body>
+
+    <div th:if="${message}">
+        <br>
+        <p class="redmessage">
+            <td th:text="*{message}">ダミーメッセージ</td>
+        </p>
+    </div>
+    <form action="index.html" method="POST" th:action="@{registerConplete}" th:object="${usersForm}">
+        <div th:errors="*{id}" class="redmessage">
+            ダミーメッセージ
+        </div>
+        <div th:errors="*{userName}" class="redmessage">
+            ダミーメッセージ
+        </div>
+        <div th:errors="*{password}" class="redmessage">
+            ダミーメッセージ
+        </div>
+        <div th:errors="*{confirmPassword}" class="redmessage">
+            ダミーメッセージ
+        </div>
+        <div th:errors="*{samePassword}" class="redmessage">
+            ダミーのエラーメッセージ
+        </div>
+    <br>
+    
+    ID：<input type="text" th:value="*{id}" name="id">
+    <br>
+    名前：<input type="text" th:value="*{userName}" name="userName">
+    <br>
+    パスワード：<input type="password" name="password">
+    <br>
+    パスワード (確認)：<input type="password" name="confirmPassword">
+    <br>
+    <input type="hidden" th:value="user" name="userGroup">
+    <input class="btn-border" type="submit" value="登録">
+    </form>
+
+</body>
+</html>
