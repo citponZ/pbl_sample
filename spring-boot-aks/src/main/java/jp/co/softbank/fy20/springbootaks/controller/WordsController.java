@@ -41,7 +41,7 @@ public class WordsController {
     /**
      * 全件検索を行い、一覧画面に遷移する。
      */
-    @GetMapping("/findAll")
+    @RequestMapping("/findAll")
     public String find(Model model, HttpSession session) {
         List<Words> wordsList = wordsService.findAll();
         model.addAttribute("wordsList", wordsList);
@@ -49,7 +49,7 @@ public class WordsController {
         return "words/findAll";
     }
 
-    @GetMapping("/index")
+    @RequestMapping("/index")
     public String index(Model model, HttpSession session) {
         historyService.sessionSet(session);
 
@@ -62,7 +62,7 @@ public class WordsController {
     }
 
     //検索画面に移動
-    @GetMapping("/search")
+    @RequestMapping("/search")
     public String search(Model model, HttpSession session) {
         model.addAttribute("words", null);
         model.addAttribute("id", null);
@@ -70,7 +70,7 @@ public class WordsController {
         return "words/search";
     }
     //Name検索
-    @GetMapping("/searchName")
+    @RequestMapping("/searchName")
     public String searchName(@RequestParam String name, Model model, 
                                 RedirectAttributes attributes, HttpSession session)
                                     throws UnsupportedEncodingException {
@@ -99,7 +99,7 @@ public class WordsController {
         return "words/candidate";
     }
     //単語ページ
-    @GetMapping("/id/{name}")
+    @RequestMapping("/id/{name}")
     public String showWord(@PathVariable String name, @ModelAttribute("message") String message, 
                             Model model, HttpSession session) throws UnsupportedEncodingException{
         //半角スペースがあった場合、アンダーバーに置換してリダイレクト
@@ -132,7 +132,7 @@ public class WordsController {
     }
 
     //削除画面に移動
-    @GetMapping("/delete")
+    @RequestMapping("/delete")
     public String delete(Model model, HttpSession session) {
         Words words = null;
         model.addAttribute("words", words);
@@ -164,7 +164,7 @@ public class WordsController {
     }
 
     //insertMain
-    @GetMapping("/insertMain")
+    @RequestMapping("/insertMain")
     public String insert(Model model, HttpSession session) {
         model.addAttribute("name", null);
         model.addAttribute("nameForm", new NameForm());
@@ -223,7 +223,7 @@ public class WordsController {
     }
 
     //updateMain
-    @GetMapping("/updateMain")
+    @RequestMapping("/updateMain")
     public String update(Model model, HttpSession session) {
         model.addAttribute("name", null);
         model.addAttribute("nameForm", new NameForm());
@@ -270,17 +270,17 @@ public class WordsController {
         return "redirect:id/"+ URLEncoder.encode(name.replace(" ", "_"), "UTF-8");
     }
         //検索画面に移動
-        @GetMapping("/ranking")
+        @RequestMapping("/ranking")
         public String ranking(Model model) {
             return "words/ranking";
         }
 
         //検索画面に移動
-        @GetMapping("/word")
+        @RequestMapping("/word")
         public String words(Model model) {
             return "words/word";
         }
-        @GetMapping("/test")
+        @RequestMapping("/test")
         public String test(Model model) {
             return "words/test";
         }

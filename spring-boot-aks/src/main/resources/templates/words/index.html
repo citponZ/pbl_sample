@@ -30,21 +30,21 @@
       <table align="center">
           <tr>
             <td>
-              <form action="index.html" th:action="@{/words/insertMain}">
+              <form action="index.html" th:action="@{/words/insertMain}" method="POST">
                 <input type="submit" value="追加" id="submit_button" class="btn-border">
               </form>
             </td>
           </tr>
           <tr>
             <td>
-              <form action="index.html" th:action="@{/words/ranking}">
+              <form action="index.html" th:action="@{/words/ranking}" method="POST">
                 <input type="submit" value="ランキング" id="submit_button" class="btn-border">
               </form>
             </td>
           </tr>
           <tr>
             <td>
-              <form action="index.html" th:action="@{/words/delete}">
+              <form action="index.html" th:action="@{/words/delete}" method="POST">
                 <input type="submit" value="削除" id="submit_button" class="btn-border">
               </form>
             </td>
