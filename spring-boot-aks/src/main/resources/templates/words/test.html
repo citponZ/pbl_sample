@@ -8,12 +8,15 @@
           th:href="@{/css/style.css}">
     <link rel="stylesheet" href="../../static/css/newWords.css"
           th:href="@{/css/newWords.css}">
+    <link rel="stylesheet" href="../../static/css/newWords.css"
+          th:href="@{/css/test.css}">
 <!--<html xmlns:th="http://www.thymeleaf.org"></html>-->
 <!-- (1)共通にしたいheadをfragment化する -->
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
 <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
 <script th:src="@{/js/wordLimit.js}"></script>
+<script th:src="@{/js/search.js}"></script>
 
 <body> 
     <!-- (5)body内で共通化したい部品をfragment化する -->
@@ -83,7 +86,16 @@
           <div class="col-4-sm">
             <img class="d-block mx-auto" th:src="@{/images/logo.png}" > 
             <!--コンテンツ-->
-            <p class="d-none d-sm-block d-md-none">メニューバーをタップすると語句検索できるようになります</p>
+            <div class="d-none d-sm-block d-md-none">
+            <p>メニューバーをタップすると語句検索できるようになります</p>
+              <div class="search-wrapper">
+                <div class="input-holder">
+                    <input type="text" class="search-input" placeholder="Type to search" />
+                    <button class="search-icon" onclick="searchToggle(this, event);"><span></span></button>
+                </div>
+                <span class="close" onclick="searchToggle(this, event);"></span>
+              </div>
+              </div>
             <div layout:fragment="content"></div>
           </div>
 

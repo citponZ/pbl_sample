@@ -8,6 +8,8 @@
           th:href="@{/css/style.css}">
     <link rel="stylesheet" href="../../static/css/newWords.css"
           th:href="@{/css/newWords.css}">
+    <link rel="stylesheet" href="../../static/css/newWords.css"
+          th:href="@{/css/test.css}">
     <!--トップに戻るボタンが三角になるやつ-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.4/css/all.css">
     
@@ -18,6 +20,7 @@
 <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
 <script th:src="@{/js/wordLimit.js}"></script>
 <script th:src="@{/js/backToTop.js}"></script>
+<script th:src="@{/js/search.js}"></script>
 
 <body>
   <div class='fixed-top'>
@@ -53,7 +56,7 @@
   </div>
 
      
-      <div class ="gridbu">
+      <div class ="container gridbu"><!--container -->
         <div class="d-none d-lg-block">
         <div class="grovalNavigation">
         
@@ -97,9 +100,20 @@
         
       </div>
     </div>
-    <div class="contents">
+    <div class="contents" align="center">
       <img class="d-block mx-auto" th:src="@{/images/logo.png}" > 
         <!--コンテンツ-->
+        <!--
+        <div class="d-block mx-auto">
+        <div class="search-wrapper">
+          <div class="input-holder">
+              <input type="text" class="search-input" placeholder="Type to search" />
+              <button class="search-icon" onclick="searchToggle(this, event);"><span></span></button>
+          </div>
+          <span class="close" onclick="searchToggle(this, event);"></span>
+        </div>
+      </div>
+      -->
         <div layout:fragment="content"></div>
     </div>
      
