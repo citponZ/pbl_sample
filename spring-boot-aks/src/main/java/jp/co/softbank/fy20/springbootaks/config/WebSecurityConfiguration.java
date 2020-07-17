@@ -54,7 +54,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
       http.authorizeRequests()
               .mvcMatchers("/").permitAll()
               .mvcMatchers("/mypage/**").permitAll()
-              .mvcMatchers("/words/delete").hasRole("ADMIN")
+              //.mvcMatchers("/words/delete").hasRole("ADMIN")
               .mvcMatchers("/words/**").permitAll()
               .mvcMatchers("/datasource").authenticated()
               //.mvcMatchers("/datasource").hasRole("ADMIN")
