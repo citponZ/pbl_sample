@@ -6,7 +6,6 @@ import javax.validation.constraints.NotBlank;
 public class WordsForm {
     @NotBlank
     private String name;
-    @NotBlank
     private String userID;
     @NotBlank
     private String content;
