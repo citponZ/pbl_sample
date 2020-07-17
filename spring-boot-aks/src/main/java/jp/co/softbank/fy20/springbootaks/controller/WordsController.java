@@ -104,6 +104,14 @@ public class WordsController {
             return "redirect:../../words/index";
         }
         String content = wordsService.makeLink(wordsList.get(0).getContent());
+        List<String> dict = wordsService.findAllName();
+        for (WordsByAbb words : wordsList){
+            if (dict.contains(words.getAbbName())){
+                String tmp = "<a href=\"/spring-boot-aks/words/id/"+words.getAbbName()+"\">"+words.getAbbName()+"</a>";
+                words.setAbbName(tmp);
+            }
+
+        }
         wordsList.get(0).setContent(content);
         //ページ名
         model.addAttribute("pageName", name);
@@ -260,4 +268,7 @@ public class WordsController {
         public String words(Model model) {
             return "words/word";
         }
+
+
+
 }

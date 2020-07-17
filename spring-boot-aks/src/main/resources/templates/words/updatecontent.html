@@ -48,7 +48,7 @@
     <div id="input_pluralBox">
       <th:block th:each="words, iterStat:${wordsList}">
         <div id="input_plural">
-          <input type="text" name="array[]" class="form-control" th:value="${words.abbName}" placeholder="類語を入力してください">
+          <input type="text" name="array[]" class="form-control" th:value="${words.abbName}" placeholder="同意語を入力してください">
           <input type="button" value="＋" class="add pluralBtn">
           <input type="button" value="－" class="del pluralBtn">
         </div>

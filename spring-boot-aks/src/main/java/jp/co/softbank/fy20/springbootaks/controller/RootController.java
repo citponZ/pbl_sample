@@ -23,4 +23,11 @@ public class RootController {
         // "redirect:"を先頭につけるとリダイレクトになる
         return "redirect:words/index";
     }
+
+    @GetMapping("/hello")
+    public String test(HttpSession session) {
+        historyService.sessionSet(session);
+        // "redirect:"を先頭につけるとリダイレクトになる
+        return "/error/test";
+    }
 }
