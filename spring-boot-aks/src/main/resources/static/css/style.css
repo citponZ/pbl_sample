@@ -104,7 +104,7 @@ input#submit_button {
 }
 
 .grovalNavigation{
-    flex: 1;
+
     background-color: #bfd8d2;  
     color: #535353;
     text-align: center;
@@ -119,7 +119,7 @@ input#submit_button {
 
 }
 .localNavigation{
-    flex: 1;
+
     color: #535353;
     background-color: #fedcd2;
     text-align: center;
@@ -136,7 +136,7 @@ input#submit_button {
 
 }
 .contents {
-    flex: 2;
+
     text-align: center;
     background-color: #ffffff;
     
