@@ -10,9 +10,14 @@
           th:href="@{/css/newWords.css}">
     <link rel="stylesheet" href="../../static/css/newWords.css"
           th:href="@{/css/test.css}">
+    
     <!--トップに戻るボタンが三角になるやつ-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.4/css/all.css">
     
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"
+  />
 <!--<html xmlns:th="http://www.thymeleaf.org"></html>-->
 <!-- (1)共通にしたいheadをfragment化する -->
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -123,7 +128,7 @@
         <p>ローカルナビゲーション</p>
         <div align="center">
           
-          <table valign="bottom">          
+          <table valign="bottom" class="ProductTable">          
             <div class="ribbon16-wrapper">
               <div class="ribbon16-content">
                 <h3>新着の語句</h3>
@@ -131,10 +136,9 @@
               </div>
 
               <th:block th:each="newWords : ${session['newWordsList']}">
-                <tr>
+                <tr class="rank">
                   <td>
-                    <a class="large" th:href="@{'/words/id/'+ ${newWords}}"><span style="color: #96b9b1;" th:text="${newWords}">メイン</span></a>
-                    <hr color="#535353"> 
+                    <a class="text_limit2 large" style="color: #fa8383;" th:href="@{'/words/id/'+ ${newWords}}"><span th:text="${newWords}">メイン</span></a>
                   </td>                  
                 </tr>
               </th:block>
@@ -152,8 +156,8 @@
                 <th:block th:each="rank : ${session['rankingList']}">
                   <tr>
                     <td>
-                      <a class="text_limit2 large" style="color:#bfd8d2;" th:href="@{'/words/id/'+ ${rank}}"><span th:text="${rank}">test</span></a>
-                      <!--<a class="large" th:href="@{'/words/id/'+ ${rank}}"><span style="color:#bfd8d2;" th:text="${rank}">メイン</span></a>-->
+                      <a class="text_limit2 large" style="color:#fa8383" th:href="@{'/words/id/'+ ${rank}}"><span th:text="${rank}">test</span></a>
+                      <hr color="#535353">
                     </td>
                   </tr>
                 </th:block>
