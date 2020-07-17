@@ -287,11 +287,8 @@ padding: 8px 0px;
     text-align: center;
 }
 
-.rank{
-    border-spacing: 5px;
-    background-color: rgba(255,255,255,1);
-}
 
+/*ローカルナビゲーションのテーブルがキュってなるやつ*/
 .ProductTable {
     border: solid 1px #fedcd2;
     border-collapse: separate;

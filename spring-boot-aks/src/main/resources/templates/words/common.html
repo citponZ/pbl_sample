@@ -136,7 +136,7 @@
               </div>
 
               <th:block th:each="newWords : ${session['newWordsList']}">
-                <tr class="rank">
+                <tr>
                   <td>
                     <a class="text_limit2 large" style="color: #fa8383;" th:href="@{'/words/id/'+ ${newWords}}"><span th:text="${newWords}">メイン</span></a>
                   </td>                  
@@ -144,9 +144,12 @@
               </th:block>
             </div>
           </table>
+
+          <br>
+          <br>
         
 
-          <table valign="bottom">          
+          <table valign="bottom" class="ProductTable">          
             <div class="ribbon16-wrapper">
               <div class="ribbon16-content">
                 <h3><nobr>ランキング</nobr></h3>
@@ -157,7 +160,6 @@
                   <tr>
                     <td>
                       <a class="text_limit2 large" style="color:#fa8383" th:href="@{'/words/id/'+ ${rank}}"><span th:text="${rank}">test</span></a>
-                      <hr color="#535353">
                     </td>
                   </tr>
                 </th:block>
