@@ -23,9 +23,10 @@
         <div th:errors="*{name}" class="redmessage">
             ダミーメッセージ
         </div>
+        <!--
         <div th:errors="*{containsSlash}" class="redmessage">
             ダミーメッセージ
-        </div>
+        </div>-->
     </th:block>
     <form action="index.html" th:action="@{inputContent}" method=POST>
         語句: <input type="text" name="name" th:value="${name}">

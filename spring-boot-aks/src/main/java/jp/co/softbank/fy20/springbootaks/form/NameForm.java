@@ -16,6 +16,7 @@ public class NameForm {
         this.name = name;
     }
 
+    /*
     @AssertFalse
     public boolean isContainsSlash() {
         if (name == null)
@@ -23,6 +24,6 @@ public class NameForm {
             return false;
         }
         return name.contains("/");
-    }
+    }*/
 
 }
