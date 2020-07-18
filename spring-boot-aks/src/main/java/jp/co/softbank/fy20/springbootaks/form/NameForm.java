@@ -16,14 +16,14 @@ public class NameForm {
         this.name = name;
     }
 
-    /*
+    
     @AssertFalse
     public boolean isContainsSlash() {
         if (name == null)
         {   
             return false;
         }
-        return name.contains("/");
-    }*/
+        return name.contains("%2F");
+    }
 
 }
