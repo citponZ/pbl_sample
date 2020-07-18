@@ -21,7 +21,7 @@ public class RootController {
     public String root(HttpSession session) {
         historyService.sessionSet(session);
         // "redirect:"を先頭につけるとリダイレクトになる
-        return "redirect:words/index";
+        return "forward:words/index";
     }
 
     @GetMapping("/hello")
