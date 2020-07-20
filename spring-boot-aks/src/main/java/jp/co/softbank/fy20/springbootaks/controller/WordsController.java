@@ -115,7 +115,7 @@ public class WordsController {
         List<String> dict = wordsService.findAllName();
         for (WordsByAbb words : wordsList){
             if (dict.contains(words.getAbbName())){
-                String tmp = "<a href=\"/spring-boot-aks/words/id/"+words.getAbbName()+"\">"+words.getAbbName()+"</a>";
+                String tmp = "<a href=\"/words/id/"+words.getAbbName()+"\">"+words.getAbbName()+"</a>";
                 words.setAbbName(tmp);
             }
 
