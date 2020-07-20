@@ -150,21 +150,27 @@ public class WordsController {
     //削除画面に移動
     @RequestMapping("/delete")
     public String delete(Model model, HttpSession session) {
-        Words words = null;
-        model.addAttribute("words", words);
+        return "redirect:/words/deleteMain";
+    }
+    //削除画面に移動
+    @RequestMapping("/deleteMain")
+    public String delete2(Model model, HttpSession session) {
+        model.addAttribute("words", null);
         model.addAttribute("name", null);
         historyService.sessionSet(session);
         return "words/delete";
     }
+
     //ID削除
     @PostMapping("/deleteName")
-    public String deleteId(@RequestParam String name, Model model, HttpSession session) {
+    public String deleteId(@RequestParam String name, Model model, RedirectAttributes attributes, HttpSession session) {
         model.addAttribute("name", name);
         if (wordsService.checkByName(name) == null){
             //なかった時
-            model.addAttribute("message", "この語句は存在しません。");
+            //model.addAttribute("message", "この語句は存在しません。");
+            attributes.addFlashAttribute("message", "この語句は存在しません。");
             historyService.sessionSet(session);
-            return "words/delete";
+            return "redirect/words/deleteMain";
         }
         //ある
         List<WordsByAbb> wordsList = wordsService.findByName(name);
@@ -182,6 +188,11 @@ public class WordsController {
     //insertMain
     @RequestMapping("/insertMain")
     public String insert(Model model, HttpSession session) {
+        return "redirect:/words/insert";
+    }
+    //insertMain
+    @RequestMapping("/insert")
+    public String insert2(Model model, HttpSession session) {
         model.addAttribute("name", null);
         model.addAttribute("nameForm", new NameForm());
         historyService.sessionSet(session);
@@ -241,6 +252,11 @@ public class WordsController {
     //updateMain
     @RequestMapping("/updateMain")
     public String update(Model model, HttpSession session) {
+        return "redirect:/words/update";
+    }
+    //updateMain
+    @RequestMapping("/update")
+    public String update2(Model model, HttpSession session) {
         model.addAttribute("name", null);
         model.addAttribute("nameForm", new NameForm());
         historyService.sessionSet(session);
