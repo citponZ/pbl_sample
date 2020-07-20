@@ -26,7 +26,7 @@ spec:
         - name: docker-reg-credential
       containers:
         - name: aks-sample
-          image: team4registory.azurecr.io/aks-sample/spring-boot-sample:0.1.3
+          image: team4registory.azurecr.io/aks-sample/spring-boot-sample:0.1.5
           env:
             - name: TZ
               value: JST-9
@@ -48,7 +48,7 @@ spec:
               value: "S2awUx06n2uKq4liQCsvpVzLB4XfWj4KfAt+iBByEM4="
           livenessProbe:
             httpGet:
-              path: /spring-boot-aks/actuator/health
+              path: /actuator/health
               port: 8080
             initialDelaySeconds: 30
             periodSeconds: 5
@@ -57,7 +57,7 @@ spec:
             failureThreshold: 3
           readinessProbe:
             httpGet:
-              path: /spring-boot-aks/actuator/health
+              path: /actuator/health
               port: 8080
             initialDelaySeconds: 30
             periodSeconds: 5
