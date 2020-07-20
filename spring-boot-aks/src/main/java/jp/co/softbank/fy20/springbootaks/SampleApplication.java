@@ -15,6 +15,7 @@ public class SampleApplication {
    * @param args メソッドの引数
    */
   public static void main(String[] args) {
+    System.setProperty("org.apache.tomcat.util.buf.UDecoder.ALLOW_ENCODED_SLASH", "true");
     SpringApplication.run(SampleApplication.class, args);
   }
 

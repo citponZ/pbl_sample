@@ -53,7 +53,7 @@
         <h4 class="normal" id="wordBlank"> <span th:text="${wordsList.get(0).name}">メイン</span></h4><!--align="left"-->
       </div>
       <form action="index.html" th:action="@{/words/updateSearch}" method="POST">
-        <input type="hidden" name="name" th:value="${name}">
+        <input type="hidden" name="name" th:value="${wordsList.get(0).name}">
         <input style="float: left;" class="btn-border" type="submit" value="編集">
       </form>
 
@@ -100,7 +100,7 @@
       <tr>
         <th>
           <form action="index.html" th:action="@{/words/deleteName}" method="POST">
-            <input type="hidden" name="name" th:value="${name}">
+            <input type="hidden" name="name" th:value="${wordsList.get(0).name}">
             <input onclick="return confirmDelete()" class="delete-button" type="submit" value="削除">
           </form>
         </th>

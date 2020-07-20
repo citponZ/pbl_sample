@@ -9,11 +9,13 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.AntPathMatcher;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.HandlerMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import java.io.UnsupportedEncodingException;
@@ -98,18 +101,32 @@ public class WordsController {
         historyService.sessionSet(session);
         return "words/candidate";
     }
+
+    
+    /*
+     * リクエストのURLパスから、今回マッチしたパターンを取り除いた文字列を返す。
+     */
+    private static String extractPathFromPattern(final HttpServletRequest request){
+        String path = (String)request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
+        String bestMatchPattern = (String)request.getAttribute(HandlerMapping.BEST_MATCHING_PATTERN_ATTRIBUTE);
+        return new AntPathMatcher().extractPathWithinPattern(bestMatchPattern, path);
+    }
+    
+    //「/」で区切られている語句に対応
+    //「%2F」(/をエンコードした際に出る文字)が語句に入っているとうまくいかない
     //単語ページ
-    @RequestMapping("/id/{name}")
-    public String showWord(@PathVariable String name, @ModelAttribute("message") String message, 
+    @RequestMapping("/id/**")
+    public String showWord(HttpServletRequest request, @ModelAttribute("message") String message, 
                             Model model, HttpSession session) throws UnsupportedEncodingException{
+        final String name = extractPathFromPattern(request);
         //半角スペースがあった場合、アンダーバーに置換してリダイレクト
         if(name.contains(" ")){
-            return "redirect:"+ URLEncoder.encode(name.replace(" ", "_"), "UTF-8");
+            return "redirect:/words/id/"+ URLEncoder.encode(name.replace(" ", "_"), "UTF-8").replace("%2F", "/");
         }
         List<WordsByAbb> wordsList = wordsService.findByName(name);
         if (wordsList.size() == 0){
             historyService.sessionSet(session);
-            return "redirect:../../words/index";
+            return "redirect:/";
         }
         String content = wordsService.makeLink(wordsList.get(0).getContent());
         List<String> dict = wordsService.findAllName();
@@ -118,7 +135,6 @@ public class WordsController {
                 String tmp = "<a href=\"/words/id/"+words.getAbbName()+"\">"+words.getAbbName()+"</a>";
                 words.setAbbName(tmp);
             }
-
         }
         wordsList.get(0).setContent(content);
         //ページ名
@@ -219,7 +235,7 @@ public class WordsController {
             }
         }
         historyService.sessionSet(session);
-        return "redirect:id/"+ URLEncoder.encode(name.replace(" ", "_"), "UTF-8");
+        return "redirect:id/"+ URLEncoder.encode(name.replace(" ", "_"), "UTF-8").replace("%2F", "/");
     }
 
     //updateMain
@@ -267,8 +283,9 @@ public class WordsController {
             }
         }
         historyService.sessionSet(session);
-        return "redirect:id/"+ URLEncoder.encode(name.replace(" ", "_"), "UTF-8");
+        return "redirect:id/"+ URLEncoder.encode(name.replace(" ", "_"), "UTF-8").replace("%2F", "/");
     }
+
         //検索画面に移動
         @RequestMapping("/ranking")
         public String ranking(Model model) {
