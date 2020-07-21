@@ -7,6 +7,7 @@
           th:href="@{/css/style.css}">
 <!-- Custom styles for this template -->
 <link th:href="@{/css/sticky-footer.css}" rel="stylesheet">
+<link th:href="@{/css/page.css}" rel="stylesheet">
 
 <head>
     <script th:inline="javascript">
@@ -22,6 +23,7 @@
 
   <!--jqueryとか-->
   <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.5/pagination.js"></script>
   <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
   <script th:src="@{/js/wordLimit.js}"></script>
   <script th:src="@{/js/moreLook.js}"></script>
@@ -43,13 +45,16 @@
       <h4 id="top"><p th:text="${message}">test</p></h4>
 
     <div class="content">
-      <script>var num=0;</script>
-      <tr th:each="words : ${wordsList}" th:object="${words}">
+      <script>
+        var num=0;
+        var count=0;
+      </script>
+      <tr th:each="words : ${wordsList}" th:object="${words}" class="items">
         <div class="nomal">
           <table>
             <tr >                  
               <td align="left" width="600">
-                <a class="large" th:href="@{'/words/id/'+ *{nameByURL}}"><span style="color:#bfd8d2;" th:text="*{name}">メイン</span></a>
+                <a class="large item" th:href="@{'/words/id/'+ *{nameByURL}}"><span style="color:#bfd8d2;" th:text="*{name}">メイン</span></a>
                 <th:block th:if="${words.abbName.size()}">
                　<th:block th:each="abb, iterStat:*{abbName}"> <!-- ステータス変数はカンマ区切りで2つ目の引数として受け取れる -->
                   <span th:text="${abb}">略語</span>
@@ -66,9 +71,24 @@
             </tr>
           </table>
           </div>
+          <script>
+            $(function() {
+              var $item = $('.items').pagination({
+                  itemElement              : '> .item',
+                  paginationClassName      : 'pagination',
+                  paginationInnerClassName : 'clearfix'
+              });
+          
+              $('.sample-button').on('click', function() {
+                  $item.movePage(3);
+                  return false;
+              });
+            });
+          </script>
+        </tr>
 
 
-
+        <!--
             <script　th:inline="javascript">
               num=num+1;
               
@@ -83,7 +103,7 @@
                 document.write('<a class="topButtonCor" href="#top">トップに戻る</a>');
               }
             </script>
-        </tr>
+          -->
         
         
       </div>

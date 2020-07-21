@@ -17,6 +17,7 @@
   <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
   <script th:src="@{/js/demo.js}"></script>
   <script th:src="@{/js/ranking.js}"></script>
+  <script th:src="@{/js/wordLimit.js}"></script>
   <title>メインメニュー</title>
 </head>
 
@@ -53,14 +54,15 @@
       </nav>
     </div>
 
+    <!--
+
       <div class="smartRanking">
         <div id="displayAll">
         <img class="d-block mx-auto" th:src="@{/images/logo.png}">
           <p class="d-lg-none"></p>
-            <form class="form-inline my-2 my-lg-0" th:action="@{/words/searchName}"><!-- class="form-control mr-sm-2" -->
+            <form class="form-inline my-2 my-lg-0" th:action="@{/words/searchName}">
 
-              <input type="search" id="form-control2" class="form-control mr-sm-2" placeholder="語句検索..." aria-label="語句検索..." name="name"><!--form-controlが悪いß -->
-
+              <input type="search" id="form-control2" class="form-control mr-sm-2" placeholder="語句検索..." aria-label="語句検索..." name="name">
               <button type="submit" class="btn-border2">検索</button>
             </form>
         <table style="margin: auto;">
@@ -72,7 +74,6 @@
                                 <tr>
                                   <td>  
                                 <a class="text_limit2 large" style="color:#bfd8d2;" th:href="@{'/words/id/'+ ${rank}}"><span th:text="${rank}">test</span></a>
-                                <!--<a class="large" th:href="@{'/words/id/'+ ${rank}}"><span style="color:#bfd8d2;" th:text="${rank}">メイン</span></a>-->  
                                 <hr color="#535353">                      
                              </td>
                             </tr>
@@ -99,6 +100,61 @@
           </table>
         </div>
       </div>
+      -->
+
+
+
+      <div class="smartRanking">
+      <img class="d-block mx-auto" th:src="@{/images/logo.png}">
+      <form class="form-inline my-2 my-lg-0" th:action="@{/words/searchName}">
+  
+
+        <input type="search" id="form-control2" class="form-control mr-sm-2" placeholder="語句検索..." aria-label="語句検索..." name="name">
+        <button type="submit" class="btn-border2">検索</button>
+      </form>
+
+      <br>
+
+      <div align="center">
+
+        <table valign="bottom" class="ProductTable">          
+
+              <h3><nobr>ランキング</nobr></h3>
+
+
+            
+              <th:block th:each="rank : ${session['rankingList']}">
+                <tr>
+                  <td>
+                    <a class="text_limit2 large" style="color:#fa8383" th:href="@{'/words/id/'+ ${rank}}"><span th:text="${rank}">test</span></a>
+                  </td>
+                </tr>
+              </th:block>
+        </table>
+
+        <br>
+        <br>
+
+        <table valign="bottom" class="ProductTable">          
+
+          <h3>新着の語句</h3>
+
+
+        <th:block th:each="newWords : ${session['newWordsList']}">
+          <tr>
+            <td>
+              <a class="text_limit2 large" style="color: #fa8383;" th:href="@{'/words/id/'+ ${newWords}}"><span th:text="${newWords}">メイン</span></a>
+            </td>                  
+          </tr>
+        </th:block>
+    </table>
+
+      </div>
+    </div>
+
+
+      
+
 
   <!--jqueryとか-->
   

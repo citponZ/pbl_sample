@@ -42,22 +42,18 @@
   <!--テンプレ-->
   <div layout:fragment="content">
 
-    <div class="leftTo">
-      <div class="d-none d-xl-block">
-        <!--PCの時 -->         
-        <h3 class="normal" id="wordBlank"><span th:text="${wordsList.get(0).name}">メイン</span></h3>           
-      </div>
 
-      <div class="d-xl-none">
-        <!--スマホの時-->  
-        <h4 class="normal" id="wordBlank"> <span th:text="${wordsList.get(0).name}">メイン</span></h4><!--align="left"-->
-      </div>
-      <form action="index.html" th:action="@{/words/updateSearch}" method="POST">
-        <input type="hidden" name="name" th:value="${wordsList.get(0).name}">
-        <input style="float: left;" class="btn-border" type="submit" value="編集">
-      </form>
-
+    <div class="d-none d-xl-block">
+      <!--PCの時 -->         
+      <h3 class="normal" id="wordBlank"><nobr><span th:text="${wordsList.get(0).name}">メイン</span></h3></nobr>          
     </div>
+
+    <div class="d-xl-none">
+      <!--スマホの時-->  
+      <h4 class="normal" id="wordBlank"><span th:text="${wordsList.get(0).name}">メイン</span></h4><!--align="left"-->
+    </div>
+      
+
     <br>
 
   <!--  <table id="fontcolor" align="center">
@@ -95,31 +91,32 @@
     
   </table>--> 
   <!--yyyy/MM/dd HH:mm:ss.SSSの表記を分までに短縮中-->
-  <table align="right">
-    <div>
-      <tr>
-        <th>
-          <th:block th:if="${deleteRequest}">
-            <form action="index.html" th:action="@{/words/deleterequestcancel}" method="POST">
-              <input type="hidden" name="name" th:value="${wordsList.get(0).name}">
-              <input onclick="return confirmDelete()" class="delete-button" type="submit" value="削除申請取消">
-            </form>
-          </th:block>
-          <th:block th:unless="${deleteRequest}">
-            <form action="index.html" th:action="@{/words/deleterequest}" method="POST">
-              <input type="hidden" name="name" th:value="${wordsList.get(0).name}">
-              <input class="delete-button" type="submit" value="削除申請">
-            </form>
-          </th:block>
-        </th>
-        <th valign="bottom">
-          <p class="normal"><nobr>編集日時：<span th:text="${#temporals.format(wordsList.get(0).updatedDate, 'yyyy/MM/dd HH:mm')}">メイン</span></nobr></p>
-        </th>
-      </tr>
+    <div align="right">
+      <div style="display:inline-flex">
+
+      <form action="index.html" th:action="@{/words/updateSearch}" method="POST">
+        <input type="hidden" name="name" th:value="${wordsList.get(0).name}">
+        <input class="btn-border" type="submit" value="編集">
+      </form>
+
+      <th:block th:if="${deleteRequest}">
+        <form action="index.html" th:action="@{/words/deleterequestcancel}" method="POST">
+          <input type="hidden" name="name" th:value="${wordsList.get(0).name}">
+          <input onclick="return confirmDelete()" class="delete-button" type="submit" value="削除申請取消">
+        </form>
+      </th:block>
+      <th:block th:unless="${deleteRequest}">
+        <form action="index.html" th:action="@{/words/deleterequest}" method="POST">
+          <input type="hidden" name="name" th:value="${wordsList.get(0).name}">
+          <input class="delete-button" type="submit" value="削除申請">
+        </form>
+      </th:block>
     </div>
-  </table>
-    <br>
-    <!--一本線-->
+    <p class="normal"><nobr>編集日時：<span th:text="${#temporals.format(wordsList.get(0).updatedDate, 'yyyy/MM/dd HH:mm')}">メイン</span></nobr></p>
+  
+    </div>
+
+    <!--線-->
     <hr color="#535353">
 
 
