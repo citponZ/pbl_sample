@@ -11,8 +11,8 @@ import java.util.List;
 @Mapper
 public interface DeleteRequestMapper {
 
-    @Insert("INSERT INTO Words(name,userID,content,createdDate,updatedDate) " +
-    "VALUES(#{name},#{userID},#{content},DATEADD(hour,9,GETDATE()),DATEADD(hour,9,GETDATE()))")
+    @Insert("INSERT INTO DeleteRequest(userID,wordID,reason,requestDate) " +
+    "VALUES(#{userID},#{wordID},#{reason},DATEADD(hour,9,GETDATE()))")
     void insert(DeleteRequest deleteRequest);
 
     //時間順に並んでいるとよい
@@ -20,8 +20,8 @@ public interface DeleteRequestMapper {
     List<DeleteRequest> findAll();
 
     //名前による検索：部分一致
-    @Select("SELECT Words.id as id, Words.name as name,Words.content as content,Words.updatedDate as updatedDate,Abbreviations.name as abbName "+
-    "FROM Words LEFT OUTER JOIN Abbreviations ON Words.id = Abbreviations.wordID WHERE Words.name like #{name}")
+    @Select("SELECT * "+
+    "FROM DeleteRequest WHERE wordID in (SELECT id FROM Words WHERE name like #{name})")
     List<DeleteRequest> findByName(String name);
 
     //wordIDのものをずべて削除

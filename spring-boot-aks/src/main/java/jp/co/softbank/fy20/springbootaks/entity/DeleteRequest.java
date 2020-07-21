@@ -52,7 +52,7 @@ public class DeleteRequest {
     @Override
     public String toString() {
         return "DeleteRequest{" +
-                ", wordID='" + wordID + '\'' +
+                "wordID='" + wordID + '\'' +
                 ", userID=" + userID +
                 ", content=" + reason +
                 ", requestDate=" + requestDate  +
