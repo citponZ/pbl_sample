@@ -24,10 +24,13 @@
     <div class="d-lg-none">
 
       <p>操作メニュー</p>
-            <form class="form-inline my-2 my-lg-0" th:action="@{/words/searchName}" style="width: 50%;">
-              <nobr><input type="search" class="form-control mr-sm-2" placeholder="語句検索..." aria-label="語句検索..." name="name">
-              <button type="submit" class="btn-border">検索</button></nobr>
-            </form>
+      <div align="center">
+
+        <form action="index.html" th:action="@{/words/searchName}" method="POST" style="width: 45%;">
+          <input type="search" class="form-control mr-sm-2" placeholder="語句検索..." aria-label="語句検索..." name="name">
+          <input class="btn-border" type="submit" value="検索">
+        </form>
+      </div>
       <table align="center">
           <tr>
             <td>
