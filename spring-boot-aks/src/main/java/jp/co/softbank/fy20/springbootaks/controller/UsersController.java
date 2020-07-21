@@ -10,7 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import jp.co.softbank.fy20.springbootaks.entity.Users;
+import jp.co.softbank.fy20.springbootaks.entity.*;
 import jp.co.softbank.fy20.springbootaks.form.UsersForm;
 import jp.co.softbank.fy20.springbootaks.service.*;
 
@@ -20,11 +20,13 @@ public class UsersController {
 
     private final UsersService usersService;
     private final HistoryService historyService;
+    private final DeleteRequestService deleteRequestService;
 
     // ServiceをDIする（@Autowiredは省略）
-    public UsersController(UsersService usersService, HistoryService historyService) {
+    public UsersController(UsersService usersService, HistoryService historyService, DeleteRequestService deleteRequestService) {
         this.usersService = usersService;
         this.historyService = historyService;
+        this.deleteRequestService = deleteRequestService;
     }
     
     /**
@@ -59,5 +61,16 @@ public class UsersController {
         usersService.insert(users);
         historyService.sessionSet(session);
         return "users/test";
+    }
+
+    /**
+     * 削除依頼確認画面にいく
+     */
+    @RequestMapping("deleterequest")
+    public String deleteRequest(Model model, HttpSession session) {
+        List<DeleteRequest> requestList = deleteRequestService.findAll();
+        model.addAttribute("requestList", requestList);
+        
+        return "admin/deleterequest";
     }
 }

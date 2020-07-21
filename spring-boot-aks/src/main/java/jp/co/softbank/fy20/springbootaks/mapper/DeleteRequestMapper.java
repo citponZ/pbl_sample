@@ -24,6 +24,10 @@ public interface DeleteRequestMapper {
     "FROM DeleteRequest WHERE wordName like #{name}")
     List<DeleteRequest> findByName(String name);
 
+    //wordIDとuserIDの一致する１つを削除
+    @Select("SELECT * FROM DeleteRequest WHERE wordName=#{wordName} and userID=#{userID}")
+    DeleteRequest find(String wordName, String userID);
+
     //wordIDのものをずべて削除
     @Delete("DELETE FROM DeleteRequest WHERE wordName=#{wordName}")
     boolean deleteWord(String wordName);

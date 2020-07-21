@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<!--テンプレ-->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{words/common.html}">
+<link rel="stylesheet" href="../../static/css/style.css"
+          th:href="@{/css/style.css}">
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
+<link rel="shortcut icon" th:href="@{/images/favicon.ico}">
+<!--jqueryとか-->
+<script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/demo.js}"></script>
+<script th:src="@{/js/button.js}"></script>
+<!--削除ポップアップ-->
+<script>
+    function confirmDelete(){
+      flag = confirm("削除依頼を申請しますか？");
+
+      // 「はい」が押されたときの処理
+      if ( flag == true ){
+        return true;
+      }else{    // 「いいえ」が押されたときの処理
+        return false;
+      }
+    };
+
+  </script>
+<title>削除申請</title>
+</head>
+
+<body>
+  <!--テンプレ-->
+  <div layout:fragment="content">
+  <div align="center" id="fontcolor">
+    
+    <form action="index.html" method="POST" th:action="@{deleterequestresult}">
+
+    <br>
+    語句：<td th:text="${name}">鈴木太郎</td>
+
+    <table border="1">
+      <tr><th>削除依頼理由を記入してください.</th></tr>
+      <td><textarea name="reason" cols="40" rows="8"></textarea></td>
+
+    </table>
+
+    <input type="hidden" th:value="${name}" name="name">
+    <!--<input type="hidden" th:value="admin" name="userID">-->
+    <input onclick="return confirmDelete()" class="btn-border" type="submit" value="申請">
+    </form>
+  </div>
+
+</div>
+
+</body>
+</html>

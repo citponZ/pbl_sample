@@ -13,6 +13,9 @@ public interface DeleteRequestService {
 
     //単語の名前による検索：部分一致
     List<DeleteRequest> findByName(String name);
+
+    DeleteRequest find(String wordName, String userID);
+
     //wordIDのものをずべて削除
     boolean deleteWord(String wordName);
 

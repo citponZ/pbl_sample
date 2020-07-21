@@ -13,7 +13,7 @@
   <!--削除ポップアップ-->
   <script>
     function confirmDelete(){
-      flag = confirm("本当に削除しますか？");
+      flag = confirm("削除依頼を取り消しますか？");
 
       // 「はい」が押されたときの処理
       if ( flag == true ){
@@ -99,10 +99,18 @@
     <div>
       <tr>
         <th>
-          <form action="index.html" th:action="@{/words/deleteName}" method="POST">
-            <input type="hidden" name="name" th:value="${wordsList.get(0).name}">
-            <input onclick="return confirmDelete()" class="delete-button" type="submit" value="削除">
-          </form>
+          <th:block th:if="${deleteRequest}">
+            <form action="index.html" th:action="@{/words/deleterequestcancel}" method="POST">
+              <input type="hidden" name="name" th:value="${wordsList.get(0).name}">
+              <input onclick="return confirmDelete()" class="delete-button" type="submit" value="削除申請取消">
+            </form>
+          </th:block>
+          <th:block th:unless="${deleteRequest}">
+            <form action="index.html" th:action="@{/words/deleterequest}" method="POST">
+              <input type="hidden" name="name" th:value="${wordsList.get(0).name}">
+              <input class="delete-button" type="submit" value="削除申請">
+            </form>
+          </th:block>
         </th>
         <th valign="bottom">
           <p class="normal"><nobr>編集日時：<span th:text="${#temporals.format(wordsList.get(0).updatedDate, 'yyyy/MM/dd HH:mm')}">メイン</span></nobr></p>

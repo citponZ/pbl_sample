@@ -38,6 +38,12 @@ public class DeleteRequestServiceImpl implements DeleteRequestService{
         return deleteRequestMapper.findByName("%"+name+"%");
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public DeleteRequest find(String wordName, String userID){
+        return deleteRequestMapper.find(wordName,userID);
+    }
+
     //wordIDのものをずべて削除
     @Override
     @Transactional(readOnly = false)

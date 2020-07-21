@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<!--テンプレ-->
+<html xmlns:th="http://www.thymeleaf.org">
+
+  <link rel="stylesheet" href="../../static/css/style.css"
+          th:href="@{/css/style.css}">
+  <!-- Custom styles for this template -->
+  <link th:href="@{/css/sticky-footer.css}" rel="stylesheet">
+<head>
+    <meta charset="UTF-8">
+    <!--ブートストラップ-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
+    <link rel="shortcut icon" th:href="@{/images/favicon.ico}">
+    <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+    <title>削除依頼</title>
+</head>
+<body>
+
+    <table border="1">
+        <tr>
+          <th>ユーザID</th>
+          <th>語句名</th>
+          <th>削除理由</th>
+          <th>日時</th>
+        </tr>
+        <tr th:each="deleteRequest : ${requestList}" th:object="${deleteRequest}">
+          <td th:text="*{userID}">222</td>
+          <td th:text="*{wordName}">鈴木です。</td>
+          <td th:text="*{reason}">2020-07-01</td>
+          <td th:text="*{requestDate}">2020-07-02</td>
+        </tr>
+        <!--/*-->
+        <tr>
+          <td>20</td>
+          <td>開発部</td>
+          <td>2000-01-02</td>
+          <td>2000-01-02</td>
+        </tr>
+        <!--*/-->
+      </table>
+
+</body>
+</html>
