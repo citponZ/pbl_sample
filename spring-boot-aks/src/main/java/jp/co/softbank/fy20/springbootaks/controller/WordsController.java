@@ -34,11 +34,14 @@ import java.net.URLEncoder;
 public class WordsController {
     private final WordsService wordsService;
     private final HistoryService historyService;
+    private final DeleteRequestService deleteRequestService;
+    
 
     // ServiceをDIする（@Autowiredは省略）
-    public WordsController(WordsService wordsService, HistoryService historyService) {
+    public WordsController(WordsService wordsService, HistoryService historyService, DeleteRequestService deleteRequestService) {
         this.wordsService = wordsService;
         this.historyService = historyService;
+        this.deleteRequestService = deleteRequestService;
     }
 
     /**
@@ -142,6 +145,8 @@ public class WordsController {
         model.addAttribute("wordsList", wordsList);
         //userIDは現状1を入力しているが本来はsessonからログイン情報を入手して代入
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        DeleteRequest deleteRequest = deleteRequestService.find(name,auth.getName());
+        model.addAttribute("deleteRequest", deleteRequest);
         historyService.findInsert(auth.getName(), wordsList.get(0).getId());
         historyService.sessionSet(session);
         return "words/showWords";
@@ -301,6 +306,32 @@ public class WordsController {
         historyService.sessionSet(session);
         return "redirect:id/"+ URLEncoder.encode(name.replace(" ", "_"), "UTF-8").replace("%2F", "/");
     }
+
+    //削除依頼画面に遷移
+    @RequestMapping("/deleterequest")
+    public String deleteRequest(@RequestParam String name, Model model, HttpSession session) throws Exception {
+        model.addAttribute("name", name);
+        historyService.sessionSet(session);
+        return "words/deleteRequest";
+    }
+
+    //削除依頼を受け付けて単語ページに戻す
+    @RequestMapping("/deleterequestresult")
+    public String deleteRequestResult(@RequestParam String name, @RequestParam String reason, Model model) throws Exception {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        deleteRequestService.insert(new DeleteRequest(auth.getName(), name, reason));
+        return "redirect:id/"+ URLEncoder.encode(name.replace(" ", "_"), "UTF-8").replace("%2F", "/");
+    }
+
+    //削除依頼を取り消して単語ページに戻す
+    @RequestMapping("/deleterequestcancel")
+    public String deleteRequestCancel(@RequestParam String name, Model model) throws Exception {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        deleteRequestService.delete(name, auth.getName());
+        return "redirect:id/"+ URLEncoder.encode(name.replace(" ", "_"), "UTF-8").replace("%2F", "/");
+    }
+
+
 
         //検索画面に移動
         @RequestMapping("/ranking")
