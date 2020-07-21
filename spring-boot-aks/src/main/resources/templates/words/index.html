@@ -8,12 +8,14 @@
           th:href="@{/css/style.css}">
   <!-- Custom styles for this template -->
   <link th:href="@{/css/sticky-footer.css}" rel="stylesheet">
+  
 <head>
   <meta charset="UTF-8">
   <!--ブートストラップ-->
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
   <link rel="shortcut icon" th:href="@{/images/favicon.ico}">
+  <link th:href="@{/css/ranking.css}" rel="stylesheet">
   <title>メインメニュー</title>
 </head>
 
@@ -26,19 +28,48 @@
       <p>操作メニュー</p>
       <div align="center">
 
-        <form action="index.html" th:action="@{/words/searchName}" method="POST" style="width: 45%;">
-          <input type="search" class="form-control mr-sm-2" placeholder="語句検索..." aria-label="語句検索..." name="name">
+        <form action="index.html" th:action="@{/words/searchName}" method="POST">
+          <input type="search" id="form-control2" class="mr-sm-2" placeholder="語句検索..." aria-label="語句検索..." name="name">
           <input class="btn-border" type="submit" value="検索">
         </form>
       </div>
-      <table align="center">
+      <div align="center">
+        <br>
+        <table valign="bottom" class="ProductTable">          
+
+              <h3><nobr>ランキング</nobr></h3>
+
+
+            
+              <th:block th:each="rank : ${session['rankingList']}">
+                <tr>
+                  <td>
+                    <a class="text_limit2 large" style="color:#fa8383" th:href="@{'/words/id/'+ ${rank}}"><span th:text="${rank}">test</span></a>
+                  </td>
+                </tr>
+              </th:block>
+        </table>
+
+        <br>
+        <br>
+
+        <table valign="bottom" class="ProductTable">          
+
+          <h3>新着の語句</h3>
+
+
+        <th:block th:each="newWords : ${session['newWordsList']}">
           <tr>
             <td>
-              <form action="index.html" th:action="@{/words/insertMain}" method="POST">
-                <input type="submit" value="追加" id="submit_button" class="btn-border">
-              </form>
-            </td>
+              <a class="text_limit2 large" style="color: #fa8383;" th:href="@{'/words/id/'+ ${newWords}}"><span th:text="${newWords}">メイン</span></a>
+            </td>                  
           </tr>
+        </th:block>
+    </table>
+
+      </div>
+      <!--
+      <table align="center">
           <tr>
             <td>
               <form action="index.html" th:action="@{/words/ranking}" method="POST">
@@ -46,14 +77,8 @@
               </form>
             </td>
           </tr>
-          <tr>
-            <td>
-              <form action="index.html" th:action="@{/words/delete}" method="POST">
-                <input type="submit" value="削除" id="submit_button" class="btn-border">
-              </form>
-            </td>
-          </tr>
       </table>
+      -->
     </div>
       <div class="d-none d-lg-block">
         <div id="fontcolor">

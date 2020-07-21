@@ -20,6 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
   <link rel="shortcut icon" th:href="@{/images/favicon.ico}">
+  <link th:href="@{/css/ranking.css}" rel="stylesheet">
 
   <!--jqueryとか-->
   <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
@@ -36,10 +37,12 @@
   <!--テンプレ-->
   <div layout:fragment="content">
     <div class="d-lg-none">
-            <form class="form-inline my-2 my-lg-0" th:action="@{/words/searchName}">
-              <input type="search" class="form-control mr-sm-2" placeholder="語句検索..." aria-label="語句検索..." name="name">
-              <button type="submit" class="btn-border">検索</button>
-            </form>
+      <div align="center">
+        <form action="index.html" th:action="@{/words/searchName}" method="POST">
+        <input type="search" id="form-control2" class="mr-sm-2" placeholder="語句検索..." aria-label="語句検索..." name="name">
+    　    <button type="submit" class="btn btn-outline-success my-2 my-sm-0">検索</button>
+        </form>
+      </div>
           </div>
     <div align="center">
       <h4 id="top"><p th:text="${message}">test</p></h4>
@@ -71,6 +74,7 @@
             </tr>
           </table>
           </div>
+          <!--
           <script>
             $(function() {
               var $item = $('.items').pagination({
@@ -85,25 +89,27 @@
               });
             });
           </script>
+          -->
+          <script　th:inline="javascript">
+            num=num+1;
+            
+            var len = /*[[${wordsList.size()}]]*/ '0';
+
+            if (4 < num && num%5==0 && num!=len) {
+                document.write('</div>');
+                document.write('<div class="more">もっと見る</div>');
+                document.write('<div class="content">');                  
+            } 
+            if(num==len){
+              document.write('<a class="topButtonCor" href="#top">トップに戻る</a>');
+            }
+          </script>
         </tr>
 
 
-        <!--
-            <script　th:inline="javascript">
-              num=num+1;
-              
-              var len = /*[[${wordsList.size()}]]*/ '0';
-
-              if (4 < num && num%5==0 && num!=len) {
-                  document.write('</div>');
-                  document.write('<div class="more">もっと見る</div>');
-                  document.write('<div class="content">');                  
-              } 
-              if(num==len){
-                document.write('<a class="topButtonCor" href="#top">トップに戻る</a>');
-              }
-            </script>
-          -->
+        
+            
+          
         
         
       </div>
