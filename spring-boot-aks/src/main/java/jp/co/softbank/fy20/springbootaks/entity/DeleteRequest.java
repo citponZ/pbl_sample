@@ -4,25 +4,25 @@ import java.time.LocalDateTime;
 
 public class DeleteRequest {
     private String userID;
-    private Integer wordID;
+    private String wordName;
     private String reason;
     private LocalDateTime requestDate;
 
     public DeleteRequest(){}
 
-    public DeleteRequest(String userID,Integer wordID,String reason){
-        this.wordID = wordID;
+    public DeleteRequest(String userID,String wordName,String reason){
+        this.wordName = wordName;
         this.userID = userID;
         this.reason = reason;
         //this.requestDate = requestDate;
     }
     
-    public Integer getWordID() {
-        return wordID;
+    public String getWordName() {
+        return wordName;
     }
 
-    public void setWordID(Integer wordID) {
-        this.wordID = wordID;
+    public void setWordName(String wordName) {
+        this.wordName = wordName;
     }
 
     public String getUserID() {
@@ -52,7 +52,7 @@ public class DeleteRequest {
     @Override
     public String toString() {
         return "DeleteRequest{" +
-                "wordID='" + wordID + '\'' +
+                "wordName='" + wordName + '\'' +
                 ", userID=" + userID +
                 ", content=" + reason +
                 ", requestDate=" + requestDate  +

@@ -19,8 +19,8 @@ public class DeleteRequestServiceTest {
         DeleteRequestService deleteRequestService = context.getBean(DeleteRequestService.class);
 
         System.out.println("==== 新規追加 ====");
-        deleteRequestService.insert(new DeleteRequest("admin",1,"あってもしょうがないから"));
-        deleteRequestService.insert(new DeleteRequest("user",1,"あってもしょうがないから"));
+        deleteRequestService.insert(new DeleteRequest("admin","APサーバー","あってもしょうがないから"));
+        deleteRequestService.insert(new DeleteRequest("user","APサーバー","あってもしょうがないから"));
 
         System.out.println("==== 全件検索 ====");
         List<DeleteRequest> list = deleteRequestService.findAll();
@@ -29,7 +29,7 @@ public class DeleteRequestServiceTest {
         }
 
         System.out.println("==== 新規追加 ====");
-        deleteRequestService.insert(new DeleteRequest("admin",2,"あってもしょうがないから"));
+        deleteRequestService.insert(new DeleteRequest("admin","追い付き","あってもしょうがないから"));
 
         System.out.println("==== 部分一致検索 ====");
         list = deleteRequestService.findByName("AP");
@@ -44,7 +44,7 @@ public class DeleteRequestServiceTest {
         }
 
         System.out.println("==== 1個削除 ====");
-        deleteRequestService.delete(2, "admin");
+        deleteRequestService.delete("追い付き", "admin");
 
         System.out.println("==== 全件検索 ====");
         list = deleteRequestService.findAll();
@@ -52,8 +52,8 @@ public class DeleteRequestServiceTest {
             System.out.println(data);
         }
 
-        //System.out.println("==== 新規追加 ====");
-        //deleteRequestService.insert(new DeleteRequest("user",2,"あaaaaa"));
+        System.out.println("==== 新規追加 ====");
+        deleteRequestService.insert(new DeleteRequest("user","追い付き","あaaaaa"));
 
         System.out.println("==== 全件検索 ====");
         list = deleteRequestService.findAll();
@@ -62,7 +62,7 @@ public class DeleteRequestServiceTest {
         }
 
         System.out.println("==== wordID削除 ====");
-        deleteRequestService.deleteWord(1);
+        deleteRequestService.deleteWord("APサーバー");
 
         System.out.println("==== 全件検索 ====");
         list = deleteRequestService.findAll();

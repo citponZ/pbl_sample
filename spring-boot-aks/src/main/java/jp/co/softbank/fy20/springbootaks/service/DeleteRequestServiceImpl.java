@@ -41,15 +41,15 @@ public class DeleteRequestServiceImpl implements DeleteRequestService{
     //wordIDのものをずべて削除
     @Override
     @Transactional(readOnly = false)
-    public boolean deleteWord(Integer wordID){
-        return deleteRequestMapper.deleteWord(wordID);
+    public boolean deleteWord(String wordName){
+        return deleteRequestMapper.deleteWord(wordName);
     }
 
     //wordIDとuserIDの一致する１つを削除
     @Override
     @Transactional(readOnly = false)
-    public boolean delete(Integer wordID, String userID){
-        return deleteRequestMapper.delete(wordID, userID);
+    public boolean delete(String wordName, String userID){
+        return deleteRequestMapper.delete(wordName, userID);
     }
     
 }

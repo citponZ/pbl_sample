@@ -11,8 +11,8 @@ import java.util.List;
 @Mapper
 public interface DeleteRequestMapper {
 
-    @Insert("INSERT INTO DeleteRequest(userID,wordID,reason,requestDate) " +
-    "VALUES(#{userID},#{wordID},#{reason},DATEADD(hour,9,GETDATE()))")
+    @Insert("INSERT INTO DeleteRequest(userID,wordName,reason,requestDate) " +
+    "VALUES(#{userID},#{wordName},#{reason},DATEADD(hour,9,GETDATE()))")
     void insert(DeleteRequest deleteRequest);
 
     //時間順に並んでいるとよい
@@ -21,16 +21,16 @@ public interface DeleteRequestMapper {
 
     //名前による検索：部分一致
     @Select("SELECT * "+
-    "FROM DeleteRequest WHERE wordID in (SELECT id FROM Words WHERE name like #{name})")
+    "FROM DeleteRequest WHERE wordName like #{name}")
     List<DeleteRequest> findByName(String name);
 
     //wordIDのものをずべて削除
-    @Delete("DELETE FROM DeleteRequest WHERE wordID=#{wordID}")
-    boolean deleteWord(Integer wordID);
+    @Delete("DELETE FROM DeleteRequest WHERE wordName=#{wordName}")
+    boolean deleteWord(String wordName);
 
     //wordIDとuserIDの一致する１つを削除
-    @Delete("DELETE FROM DeleteRequest WHERE wordID=#{wordID} and userID=#{userID}")
-    boolean delete(Integer wordID, String userID);
+    @Delete("DELETE FROM DeleteRequest WHERE wordName=#{wordName} and userID=#{userID}")
+    boolean delete(String wordName, String userID);
 
 
 
