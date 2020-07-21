@@ -41,56 +41,18 @@
 <body>
   <!--テンプレ-->
   <div layout:fragment="content">
-
-
+    
     <div class="d-none d-xl-block">
       <!--PCの時 -->         
-      <h3 class="normal" id="wordBlank"><nobr><span th:text="${wordsList.get(0).name}">メイン</span></h3></nobr>          
+      <h3 align="left" class="normal" id="wordBlank"><nobr><span th:text="${wordsList.get(0).name}">メイン</span></h3></nobr>          
     </div>
 
     <div class="d-xl-none">
       <!--スマホの時-->  
-      <h4 class="normal" id="wordBlank"><span th:text="${wordsList.get(0).name}">メイン</span></h4><!--align="left"-->
+      <h4 align="left" class="normal" id="wordBlank"><span th:text="${wordsList.get(0).name}">メイン</span></h4><!--align="left"-->
     </div>
-      
 
-    <br>
-
-  <!--  <table id="fontcolor" align="center">
-
-      
-      <tr>
-        <th width="10%" align="left">
-        
-          <div class="d-none d-xl-block">
-            //PCの時          
-            <h3 style="background-color: aqua;" class="normal" id="wordBlank"><nobr> <span th:text="${wordsList.get(0).name}">メイン</span> </nobr></h3>           
-
-          </div>
-        </th>
-        <div class="d-xl-none">
-          <th width="90%">-->
-
-          <!--<div class="d-xl-none"></div>-->
-            <!--スマホの時-->
-          <!--     
-            <h4 class="normal" align="left"> <span th:text="${wordsList.get(0).name}">メイン</span></h4>        
-          </th>
-        </div>
-        
-        <th width="10%">
-          <form action="index.html" th:action="@{/words/updateSearch}" method="POST" style="display: inline;">
-            <input type="hidden" name="name" th:value="${name}">
-            <input class="btn-border" type="submit" value="編集">
-          </form>
-      </th>
-      
-      <th width="80%">
-      </th>
-    </tr>
-    
-  </table>--> 
-  <!--yyyy/MM/dd HH:mm:ss.SSSの表記を分までに短縮中-->
+    <!--yyyy/MM/dd HH:mm:ss.SSSの表記を分までに短縮中-->
     <div align="right">
       <div style="display:inline-flex">
 
@@ -135,7 +97,7 @@
     </div>
 
     <br>
-    <div align ="left" id="contentBlank">
+    <div align ="center" id="contentBlank">
     <script th:inline="javascript">
       var str = /*[[${wordsList.get(0).content}]]*/ '内容';
       str = str.replace(/\r?\n/g, '<br>');
