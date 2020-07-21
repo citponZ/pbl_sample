@@ -10,12 +10,11 @@
 <link th:href="@{/css/page.css}" rel="stylesheet">
 
 <head>
-    <script th:inline="javascript">
-
-        /*<![CDATA[*/
-            document.title = /*[[${searchName}]]*/ 'error';
-        /*]]>*/
-        </script>
+  <script th:inline="javascript">
+    /*<![CDATA[*/
+      document.title = /*[[${searchName}]]*/ 'error';
+    /*]]>*/
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
@@ -39,42 +38,42 @@
     <div class="d-lg-none">
       <div align="center">
         <form action="index.html" th:action="@{/words/searchName}" method="POST">
-        <input type="search" id="form-control2" class="mr-sm-2" placeholder="語句検索..." aria-label="語句検索..." name="name">
-    　    <button type="submit" class="btn btn-outline-success my-2 my-sm-0">検索</button>
+          <input type="search" id="form-control2" class="mr-sm-2" placeholder="語句検索..." aria-label="語句検索..." name="name">
+          <button type="submit" class="btn btn-outline-success my-2 my-sm-0">検索</button>
         </form>
       </div>
-          </div>
+    </div>
     <div align="center">
       <h4 id="top"><p th:text="${message}">test</p></h4>
 
-    <div class="content">
-      <script>
-        var num=0;
-        var count=0;
-      </script>
-      <tr th:each="words : ${wordsList}" th:object="${words}" class="items">
-        <div class="nomal">
-          <table>
-            <tr >                  
-              <td align="left" width="600">
-                <a class="large item" th:href="@{'/words/id/'+ *{nameByURL}}"><span style="color:#bfd8d2;" th:text="*{name}">メイン</span></a>
-                <th:block th:if="${words.abbName.size()}">
-               　<th:block th:each="abb, iterStat:*{abbName}"> <!-- ステータス変数はカンマ区切りで2つ目の引数として受け取れる -->
-                  <span th:text="${abb}">略語</span>
-                  <span th:unless="${iterStat.last}">, </span><!-- last変数はループの最後でtrueを返します -->
-                </th:block>
-                </th:block>
-              </td>
-            </tr>
-            <tr >
-              <td align="left" width="600">
-              <!--//20文字以上の文章で[...]で省略-->
-                <p class="text_limit" th:text="*{content}">test</p>
-              </td>
-            </tr>
-          </table>
+      <div class="content">
+        <script>
+          var num=0;
+          var count=0;
+        </script>
+        <tr th:each="words : ${wordsList}" th:object="${words}" class="items">
+          <div class="nomal">
+            <table>
+              <tr >                  
+                <td align="left" width="600">
+                  <a class="large item" th:href="@{'/words/id/'+ *{nameByURL}}"><span style="color:#bfd8d2;" th:text="*{name}">メイン</span></a>
+                  <th:block th:if="${words.abbName.size()}">
+                    <th:block th:each="abb, iterStat:*{abbName}"> <!-- ステータス変数はカンマ区切りで2つ目の引数として受け取れる -->
+                      <span th:text="${abb}">略語</span>
+                      <span th:unless="${iterStat.last}">, </span><!-- last変数はループの最後でtrueを返します -->
+                    </th:block>
+                  </th:block>
+                </td>
+              </tr>
+              <tr>
+                <td align="left" width="600">
+                  <!--//20文字以上の文章で[...]で省略-->
+                  <p class="text_limit" th:text="*{content}">test</p>
+                </td>
+              </tr>
+            </table>
           </div>
-          <!--
+          <!-- ページネーションうまくいってない
           <script>
             $(function() {
               var $item = $('.items').pagination({
@@ -105,15 +104,8 @@
             }
           </script>
         </tr>
-
-
-        
-            
-          
-        
-        
+  
       </div>
-      <!--<div id="page_top"><a href="#"></a></div>-->
     </div>
   </div>
 
