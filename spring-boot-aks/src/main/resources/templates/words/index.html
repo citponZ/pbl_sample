@@ -22,10 +22,11 @@
   <div layout:fragment="content">
     <!--<p class="d-lg-none">メニューバーをタップすると語句検索できるようになります</p>-->
     <div class="d-lg-none">
+
       <p>操作メニュー</p>
-            <form class="form-inline my-2 my-lg-0" th:action="@{/words/searchName}">
-              <input type="search" class="form-control mr-sm-2" placeholder="語句検索..." aria-label="語句検索..." name="name">
-              <button type="submit" class="btn-border">検索</button>
+            <form class="form-inline my-2 my-lg-0" th:action="@{/words/searchName}" style="width: 50%;">
+              <nobr><input type="search" class="form-control mr-sm-2" placeholder="語句検索..." aria-label="語句検索..." name="name">
+              <button type="submit" class="btn-border">検索</button></nobr>
             </form>
       <table align="center">
           <tr>

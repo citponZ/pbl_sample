@@ -70,13 +70,16 @@
      
   <div class ="gridbu">
 
+
+    <div class="d-block d-lg-none" style="width: 0;">
+    </div>
     <div class="d-none d-lg-block">
       <div class="localNavigation">
-       
+        
          <!--<p>ローカルナビゲーション</p>-->
        
          <br>
-         <div align="center">
+         <div align="left">
            
            <table valign="bottom" class="ProductTable">          
              <div class="ribbon16-wrapper">
@@ -128,7 +131,7 @@
 
 
 
-    <div class="contents">
+    <div class="contents d-none d-lg-block">
       <img class="d-block mx-auto" th:src="@{/images/logo.png}" > 
         <!--コンテンツ-->
         <!--
@@ -144,7 +147,12 @@
       -->
         <div layout:fragment="content"></div>
     </div>
-    
+
+    <div class="contents2 d-block d-lg-none">
+      <img class="d-block mx-auto" th:src="@{/images/logo.png}" > 
+      <div layout:fragment="content"></div>
+    </div>
+
 
     <div class="d-none d-lg-block">
       <div class="grovalNavigation">

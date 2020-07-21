@@ -137,7 +137,7 @@ div#displayAll{
     overflow-y: scroll;
     text-align: center;
     background-color: #fedcd2;
-    width: 25%;
+    width: 20%;
     color: #535353;
 
 }
@@ -150,7 +150,19 @@ div#displayAll{
     top: 78px;
     /*z-index: -1;*/
     left: 25%;
-    width: 65%;
+    width: 60%;
+    
+}
+
+.contents2 {
+
+    text-align: center;
+    background-color: #ffffff;
+    
+    position: relative;
+    top: 78px;
+    /*z-index: -1;*/
+    width: 100%;
     
 }
 
