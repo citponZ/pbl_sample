@@ -3,6 +3,7 @@ package jp.co.softbank.fy20.springbootaks.entity;
 import java.time.LocalDateTime;
 
 public class DeleteRequest {
+    private Integer id;
     private String userID;
     private String wordName;
     private String reason;
@@ -15,6 +16,14 @@ public class DeleteRequest {
         this.userID = userID;
         this.reason = reason;
         //this.requestDate = requestDate;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
     
     public String getWordName() {
@@ -52,6 +61,7 @@ public class DeleteRequest {
     @Override
     public String toString() {
         return "DeleteRequest{" +
+                "ID='" + id + '\'' +
                 "wordName='" + wordName + '\'' +
                 ", userID=" + userID +
                 ", content=" + reason +

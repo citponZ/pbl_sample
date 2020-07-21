@@ -44,6 +44,13 @@ public class DeleteRequestServiceImpl implements DeleteRequestService{
         return deleteRequestMapper.find(wordName,userID);
     }
 
+    //IDの一致する１つを検索
+    @Override
+    @Transactional(readOnly = true)
+    public DeleteRequest findId(Integer id){
+        return deleteRequestMapper.findId(id);
+    }
+
     //wordIDのものをずべて削除
     @Override
     @Transactional(readOnly = false)
@@ -56,6 +63,13 @@ public class DeleteRequestServiceImpl implements DeleteRequestService{
     @Transactional(readOnly = false)
     public boolean delete(String wordName, String userID){
         return deleteRequestMapper.delete(wordName, userID);
+    }
+
+    //IDの一致する１つを削除
+    @Override
+    @Transactional(readOnly = false)
+    public boolean deleteId(Integer id){
+        return deleteRequestMapper.deleteId(id);
     }
     
 }

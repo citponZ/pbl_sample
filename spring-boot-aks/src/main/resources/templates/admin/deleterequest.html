@@ -8,28 +8,68 @@
   <link th:href="@{/css/sticky-footer.css}" rel="stylesheet">
   <link th:href="@{/css/deleteReqestTable.css}" rel="stylesheet">
 <head>
-    <meta charset="UTF-8">
-    <!--ブートストラップ-->
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
-    <link rel="shortcut icon" th:href="@{/images/favicon.ico}">
-    <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
-    <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
-    <title>削除依頼</title>
+
+  <script>
+    function confirmDelete(){
+      flag = confirm("削除依頼を承認してよろしいですか？");
+      document.inform.typeProcess.value = true;
+      // 「はい」が押されたときの処理
+      if ( flag == true ){
+        return true;
+      }else{    // 「いいえ」が押されたときの処理
+        return false;
+      }
+    };
+
+    function confirmCancel(){
+      flag = confirm("削除依頼を取り消しますか？");
+      document.inform.typeProcess.value = false;
+      // 「はい」が押されたときの処理
+      if ( flag == true ){
+        return true;
+      }else{    // 「いいえ」が押されたときの処理
+        return false;
+      }
+    };
+
+  </script>
+  <meta charset="UTF-8">
+  <!--ブートストラップ-->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
+  <link rel="shortcut icon" th:href="@{/images/favicon.ico}">
+  <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+  <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+  <script th:src="@{/js/button.js}"></script>
+  <title>削除依頼</title>
 </head>
 <body>
+  <a th:href="@{/}">ホーム <span class="sr-only">(現位置)</span></a>
+  <br>
+  <form action="index.html" th:action="@{requestsearch}">
+    <input type="text" name="searchName" th:value="${searchName}">
+    <input class="btn-border" type="submit" value="絞り込み">
+  </form>
 
+  <form action="index.html" method="POST" name="inform" th:action="@{requestresponse}">
+    <input type="hidden" name="typeProcess" value="">
+    <input class="btn-border" type="submit" onclick="return confirmDelete()" value="削除">
+    <input class="btn-border" type="submit" onclick="return confirmCancel()" value="申請却下">
     <table border="1" class="osare-table col5t" align="center">
       <thead>
         <tr>
+          <th><label>全選択<br /><input type="checkbox" id="all"></label></th>
           <th>ユーザID</th>
           <th>語句名</th>
           <th>削除理由</th>
           <th>日時</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody id="boxes">
         <tr th:each="deleteRequest : ${requestList}" th:object="${deleteRequest}">
+          <td >
+            <input type="checkbox" name="deletedata[]" th:value="*{id}" />
+          </td>
           <td th:text="*{userID}">222</td>
           <td th:text="*{wordName}">鈴木です。</td>
           <td th:text="*{reason}">2020-07-01</td>
@@ -44,7 +84,8 @@
         </tr>
         <!--*/-->
       </tbody>
-      </table>
+    </table>
+  </form>
 
 </body>
 </html>
