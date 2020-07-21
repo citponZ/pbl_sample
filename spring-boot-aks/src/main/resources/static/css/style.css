@@ -60,7 +60,12 @@ input#submit_button {
 }
 
 #contentBlank {
-    margin: 0 0 0 40px;
+    margin: 0 40px 0 40px;
+}
+
+#contentBlank2 {
+    /*削除依頼の右側の余白*/
+    margin: 0 40px 0 0;
 }
 
 .nomal{
