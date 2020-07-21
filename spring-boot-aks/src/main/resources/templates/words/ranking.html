@@ -22,124 +22,113 @@
 </head>
 
 <body>
-    <div class='fixed-top'>
-      <!-- (5)body内で共通化したい部品をfragment化する -->
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" th:href="@{/}">
-          <img th:src="@{/images/logo.png}" width="100" height="50" class="d-inline-block align-top" alt="ブランド">
-        </a>
-        <button type="button" class="navbar-toggler"
-         data-toggle="collapse" data-target="#Navber" 
-         aria-controls="Navber" aria-expanded="false"
-         aria-label="ナビゲーションの切替">
-  　     <span class="navbar-toggler-icon"></span>
-        </button>
-          
-        <div class="collapse navbar-collapse" id="Navber"> 
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-             <a class="nav-link" th:href="@{/}">ホーム <span class="sr-only">(現位置)</span></a>
-  　         </li>
-                <!--
-                <li class="nav-item">
-                  <a class="nav-link" href="#">ユーザ情報</a>
-                </li>
-                -->
-    　     </ul>
+  <div class='fixed-top'>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" th:href="@{/}">
+        <img th:src="@{/images/logo.png}" width="100" height="50" class="d-inline-block align-top" alt="ブランド">
+      </a>
+      <button type="button" class="navbar-toggler"
+        data-toggle="collapse" data-target="#Navber" 
+        aria-controls="Navber" aria-expanded="false"
+        aria-label="ナビゲーションの切替">
+　      <span class="navbar-toggler-icon"></span>
+      </button>
+        
+      <div class="collapse navbar-collapse" id="Navber"> 
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/}">ホーム <span class="sr-only">(現位置)</span></a>
+          </li>
+              <!--
+              <li class="nav-item">
+                <a class="nav-link" href="#">ユーザ情報</a>
+              </li>
+              -->
+        </ul>
+        <form class="form-inline my-2 my-lg-0" th:action="@{/words/searchName}">
+          <input type="search" class="form-control mr-sm-2" placeholder="語句検索..." aria-label="語句検索..." name="name">
+          <button type="submit" class="btn btn-outline-success my-2 my-sm-0">検索</button>
+        </form>
+      </div>
+    </nav>
+  </div>
+
+  <!--ボタン押したらランキングとか切り替わるやつ
+
+    <div class="smartRanking">
+      <div id="displayAll">
+      <img class="d-block mx-auto" th:src="@{/images/logo.png}">
+        <p class="d-lg-none"></p>
           <form class="form-inline my-2 my-lg-0" th:action="@{/words/searchName}">
-             <input type="search" class="form-control mr-sm-2" placeholder="語句検索..." aria-label="語句検索..." name="name">
-        　    <button type="submit" class="btn btn-outline-success my-2 my-sm-0">検索</button>
-           </form>
-        </div>
-      </nav>
+
+            <input type="search" id="form-control2" class="form-control mr-sm-2" placeholder="語句検索..." aria-label="語句検索..." name="name">
+            <button type="submit" class="btn-border2">検索</button>
+          </form>
+      <table style="margin: auto;">
+            <tr style="float: left;">
+              <td>
+                  <button id="rankingButton" class="btn-border">ランキング<br></button>
+                      <table valign="bottom" class="rankTable"><br>                          
+                            <th:block th:each="rank : ${session['rankingList']}">
+                              <tr>
+                                <td>  
+                              <a class="text_limit2 large" style="color:#bfd8d2;" th:href="@{'/words/id/'+ ${rank}}"><span th:text="${rank}">test</span></a>
+                              <hr color="#535353">                      
+                            </td>
+                          </tr>
+                        </th:block>
+                      </table>                   
+              </td>
+            </tr>
+            <tr style="float: left;">
+              <td>
+                  <button id="wordButton" class="btn-border">新着の言葉</button>
+                  <table valign="bottom" class="wordTable">              
+                        <th:block th:each="newWords : ${session['newWordsList']}">
+                          <tr>
+                            <td>
+                              <a class="large" th:href="@{'/words/id/'+ ${newWords}}"><span style="color: #96b9b1;" th:text="${newWords}">メイン</span></a>
+                              <hr color="#535353"> 
+                            </td>                  
+                          </tr>
+                        </th:block>
+                      
+                    </table>
+              </td>
+            </tr>
+        </table>
+      </div>
+    </div>
+    -->
+
+  <div class="smartRanking">
+    <img class="d-block mx-auto" th:src="@{/images/logo.png}">
+    <div align="center">
+      <form action="index.html" th:action="@{/words/searchName}" method="POST">
+        <input type="search" id="form-control2" class="mr-sm-2" placeholder="語句検索..." aria-label="語句検索..." name="name">
+        <button type="submit" class="btn btn-outline-success my-2 my-sm-0">検索</button>
+      </form>
     </div>
 
-    <!--
+    <br>
 
-      <div class="smartRanking">
-        <div id="displayAll">
-        <img class="d-block mx-auto" th:src="@{/images/logo.png}">
-          <p class="d-lg-none"></p>
-            <form class="form-inline my-2 my-lg-0" th:action="@{/words/searchName}">
-
-              <input type="search" id="form-control2" class="form-control mr-sm-2" placeholder="語句検索..." aria-label="語句検索..." name="name">
-              <button type="submit" class="btn-border2">検索</button>
-            </form>
-        <table style="margin: auto;">
-              <tr style="float: left;">
-                <td>
-                    <button id="rankingButton" class="btn-border">ランキング<br></button>
-                        <table valign="bottom" class="rankTable"><br>                          
-                              <th:block th:each="rank : ${session['rankingList']}">
-                                <tr>
-                                  <td>  
-                                <a class="text_limit2 large" style="color:#bfd8d2;" th:href="@{'/words/id/'+ ${rank}}"><span th:text="${rank}">test</span></a>
-                                <hr color="#535353">                      
-                             </td>
-                            </tr>
-                          </th:block>
-                        </table>                   
-                </td>
-              </tr>
-              <tr style="float: left;">
-                <td>
-                    <button id="wordButton" class="btn-border">新着の言葉</button>
-                    <table valign="bottom" class="wordTable">              
-                          <th:block th:each="newWords : ${session['newWordsList']}">
-                            <tr>
-                              <td>
-                                <a class="large" th:href="@{'/words/id/'+ ${newWords}}"><span style="color: #96b9b1;" th:text="${newWords}">メイン</span></a>
-                                <hr color="#535353"> 
-                              </td>                  
-                            </tr>
-                          </th:block>
-                        
-                      </table>
-                </td>
-              </tr>
-          </table>
-        </div>
-      </div>
-      -->
-
-
-
-      <div class="smartRanking">
-      <img class="d-block mx-auto" th:src="@{/images/logo.png}">
-      <div align="center">
-              <form action="index.html" th:action="@{/words/searchName}" method="POST">
-              <input type="search" id="form-control2" class="mr-sm-2" placeholder="語句検索..." aria-label="語句検索..." name="name">
-          　    <button type="submit" class="btn btn-outline-success my-2 my-sm-0">検索</button>
-              </form>
-      </div>
+    <div align="center">
+      <table valign="bottom" class="ProductTable">
+        <h3><nobr>ランキング</nobr></h3>
+        <th:block th:each="rank : ${session['rankingList']}">
+          <tr>
+            <td>
+              <a class="text_limit2 large" style="color:#fa8383" th:href="@{'/words/id/'+ ${rank}}"><span th:text="${rank}">test</span></a>
+            </td>
+          </tr>
+        </th:block>
+      </table>
 
       <br>
+      <br>
 
-      <div align="center">
-
-        <table valign="bottom" class="ProductTable">          
-
-              <h3><nobr>ランキング</nobr></h3>
-
-
-            
-              <th:block th:each="rank : ${session['rankingList']}">
-                <tr>
-                  <td>
-                    <a class="text_limit2 large" style="color:#fa8383" th:href="@{'/words/id/'+ ${rank}}"><span th:text="${rank}">test</span></a>
-                  </td>
-                </tr>
-              </th:block>
-        </table>
-
-        <br>
-        <br>
-
-        <table valign="bottom" class="ProductTable">          
-
-          <h3>新着の語句</h3>
-
-
+      <table valign="bottom" class="ProductTable">
+        <h3>新着の語句</h3>
         <th:block th:each="newWords : ${session['newWordsList']}">
           <tr>
             <td>
@@ -147,16 +136,10 @@
             </td>                  
           </tr>
         </th:block>
-    </table>
+      </table>
 
-      </div>
     </div>
+  </div>
 
-
-      
-
-
-  <!--jqueryとか-->
-  
 </body>
 </html>

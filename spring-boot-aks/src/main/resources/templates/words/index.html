@@ -22,12 +22,10 @@
 <body>
   <!--テンプレ-->
   <div layout:fragment="content">
-    <!--<p class="d-lg-none">メニューバーをタップすると語句検索できるようになります</p>-->
+    <!--スマホ用-->
     <div class="d-lg-none">
-
       <p>操作メニュー</p>
       <div align="center">
-
         <form action="index.html" th:action="@{/words/searchName}" method="POST">
           <input type="search" id="form-control2" class="mr-sm-2" placeholder="語句検索..." aria-label="語句検索..." name="name">
           <input class="btn-border" type="submit" value="検索">
@@ -36,11 +34,7 @@
       <div align="center">
         <br>
         <table valign="bottom" class="ProductTable">          
-
               <h3><nobr>ランキング</nobr></h3>
-
-
-            
               <th:block th:each="rank : ${session['rankingList']}">
                 <tr>
                   <td>
@@ -54,45 +48,31 @@
         <br>
 
         <table valign="bottom" class="ProductTable">          
-
           <h3>新着の語句</h3>
-
-
-        <th:block th:each="newWords : ${session['newWordsList']}">
-          <tr>
-            <td>
-              <a class="text_limit2 large" style="color: #fa8383;" th:href="@{'/words/id/'+ ${newWords}}"><span th:text="${newWords}">メイン</span></a>
-            </td>                  
-          </tr>
-        </th:block>
-    </table>
+          <th:block th:each="newWords : ${session['newWordsList']}">
+            <tr>
+              <td>
+                <a class="text_limit2 large" style="color: #fa8383;" th:href="@{'/words/id/'+ ${newWords}}"><span th:text="${newWords}">メイン</span></a>
+              </td>                  
+            </tr>
+          </th:block>
+        </table>
 
       </div>
-      <!--
-      <table align="center">
-          <tr>
-            <td>
-              <form action="index.html" th:action="@{/words/ranking}" method="POST">
-                <input type="submit" value="ランキング" id="submit_button" class="btn-border">
-              </form>
-            </td>
-          </tr>
-      </table>
-      -->
     </div>
-      <div class="d-none d-lg-block">
-        <div id="fontcolor">
-          <font size="5">マニュアル</font><br><br>
-          <div id="manu">
-            <!--・全表示：用語すべて表示します。<br>-->
-            ・ホーム：このページに戻ります。<br>
-            ・検索：調べたい用語を調べることができます。<br>
-            ・追加：追加したい用語を追加できます。<br>
-            ・更新：訂正したい内容を訂正して更新できます。<br>
-            ・削除：削除したい用語を削除できます。<br>
-          </div>
+    <div class="d-none d-lg-block">
+      <div id="fontcolor">
+        <font size="5">マニュアル</font><br><br>
+        <div id="manu">
+          <!--・全表示：用語すべて表示します。<br>-->
+          ・ホーム：このページに戻ります。<br>
+          ・検索：調べたい用語を調べることができます。<br>
+          ・新規追加：追加したい用語を追加できます。<br>
+          ・編集：内容を編集できます。<br>
+          ・削除申請：削除したい用語の削除申請が送れます。<br>
         </div>
       </div>
+    </div>
   </div>
 
   <!--jqueryとか-->
