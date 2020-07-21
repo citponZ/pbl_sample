@@ -16,10 +16,16 @@ public interface DeleteRequestService {
 
     DeleteRequest find(String wordName, String userID);
 
+    //IDの一致する１つを検索
+    DeleteRequest findId(Integer id);
+
     //wordIDのものをずべて削除
     boolean deleteWord(String wordName);
 
     //wordIDとuserIDの一致する１つを削除
     boolean delete(String wordName, String userID);
+
+    //IDの一致する１つを削除
+    boolean deleteId(Integer id);
     
 }
