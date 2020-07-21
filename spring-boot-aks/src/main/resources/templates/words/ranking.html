@@ -106,12 +106,12 @@
 
       <div class="smartRanking">
       <img class="d-block mx-auto" th:src="@{/images/logo.png}">
-      <form class="form-inline my-2 my-lg-0" th:action="@{/words/searchName}">
-  
-
-        <input type="search" id="form-control2" class="form-control mr-sm-2" placeholder="語句検索..." aria-label="語句検索..." name="name">
-        <button type="submit" class="btn-border2">検索</button>
-      </form>
+      <div align="center">
+              <form action="index.html" th:action="@{/words/searchName}" method="POST">
+              <input type="search" id="form-control2" class="mr-sm-2" placeholder="語句検索..." aria-label="語句検索..." name="name">
+          　    <button type="submit" class="btn btn-outline-success my-2 my-sm-0">検索</button>
+              </form>
+      </div>
 
       <br>
 

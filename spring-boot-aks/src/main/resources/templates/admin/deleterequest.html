@@ -6,6 +6,7 @@
           th:href="@{/css/style.css}">
   <!-- Custom styles for this template -->
   <link th:href="@{/css/sticky-footer.css}" rel="stylesheet">
+  <link th:href="@{/css/deleteReqestTable.css}" rel="stylesheet">
 <head>
     <meta charset="UTF-8">
     <!--ブートストラップ-->
@@ -18,13 +19,16 @@
 </head>
 <body>
 
-    <table border="1">
+    <table border="1" class="osare-table col5t" align="center">
+      <thead>
         <tr>
           <th>ユーザID</th>
           <th>語句名</th>
           <th>削除理由</th>
           <th>日時</th>
         </tr>
+      </thead>
+      <tbody>
         <tr th:each="deleteRequest : ${requestList}" th:object="${deleteRequest}">
           <td th:text="*{userID}">222</td>
           <td th:text="*{wordName}">鈴木です。</td>
@@ -39,6 +43,7 @@
           <td>2000-01-02</td>
         </tr>
         <!--*/-->
+      </tbody>
       </table>
 
 </body>
