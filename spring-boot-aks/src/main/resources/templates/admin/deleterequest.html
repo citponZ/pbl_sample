@@ -6,6 +6,7 @@
           th:href="@{/css/style.css}">
   <!-- Custom styles for this template -->
   <link th:href="@{/css/sticky-footer.css}" rel="stylesheet">
+  <link th:href="@{/css/deleteReqestTable.css}" rel="stylesheet">
 <head>
 
   <script>
@@ -54,7 +55,8 @@
     <input type="hidden" name="typeProcess" value="">
     <input class="btn-border" type="submit" onclick="return confirmDelete()" value="削除">
     <input class="btn-border" type="submit" onclick="return confirmCancel()" value="申請却下">
-    <table border="1">
+    <table border="1" class="osare-table col5t" align="center">
+      <thead>
         <tr>
           <th><label>全選択<br /><input type="checkbox" id="all"></label></th>
           <th>ユーザID</th>
@@ -62,7 +64,8 @@
           <th>削除理由</th>
           <th>日時</th>
         </tr>
-        <tbody id="boxes">
+      </thead>
+      <tbody id="boxes">
         <tr th:each="deleteRequest : ${requestList}" th:object="${deleteRequest}">
           <td >
             <input type="checkbox" name="deletedata[]" th:value="*{id}" />
@@ -83,7 +86,6 @@
       </tbody>
     </table>
   </form>
-  
 
 </body>
 </html>

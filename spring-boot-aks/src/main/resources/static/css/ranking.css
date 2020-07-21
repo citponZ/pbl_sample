@@ -1,48 +1,51 @@
 .rankTable{
-    position: absolute;
-    top: 40%;
-    left: 25%;
-    text-align: center;
-    /*background-color: aqua;*/
-    height:100%;
-    overflow-y: scroll;
+  position: absolute;
+  top: 40%;
+  left: 25%;
+  text-align: center;
+  height:100%;
+  overflow-y: scroll;
 
 }
 .wordTable{
-    position: absolute;
-    top: 40%;
-    right: 25%;
-    /*background-color: aqua;*/
-    z-index: 999;
-    height:100%;
-    overflow-y: scroll;
+  position: absolute;
+  top: 40%;
+  right: 25%;
+  z-index: 999;
+  height:100%;
+  overflow-y: scroll;
 }
 
 #form-control2{
-    display: inline-block;
-    /*border: 2px solid #96b9b1;*/
-    width: 30%;
-    height: 34px;
-    padding: 6px 12px;
-    font-size: 14px;
-    /*color: #555;*/
-    margin: 0 0 0 150px;
+  display: inline-block;
+  border: 1px solid #535353;
+  width: 30%;
+  height: 34px;
+  font-size: 14px;
+}
+
+#form-control3{
+  display: inline-block;
+  border: 1px solid #535353;
+  width: 30%;
+  height: 34px;
+  font-size: 14px;
+  margin: 0 0 0 150px;
 }
 
 .btn-border2 {
-    display: inline-block;
-    max-width: 300px;
-    text-align: center;
-    border: 2px solid #96b9b1;
-    font-size: 16px;
-    color: #96b9b1;
-    background-color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-    /*padding: 0px 75px;*/
-    border-radius: 4px;
-    transition: .4s;
-    margin: 0 0 0 10px;
+  display: inline-block;
+  max-width: 300px;
+  text-align: center;
+  border: 2px solid #96b9b1;
+  font-size: 16px;
+  color: #96b9b1;
+  background-color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 4px;
+  transition: .4s;
+  margin: 0 0 0 10px;
   }
   
   .btn-border2:hover {
@@ -50,5 +53,3 @@
     border-color: #df744a;
     color: #fff;
   }
-
-/*style="width: 100px; height: 30px;"*/
