@@ -45,7 +45,6 @@
       <br>
       <h4>語句：<td th:text="${name}">鈴木太郎</td></h4>
       <br>
-
       <div>
         <table border="1">
           <tr><th>削除依頼理由を記入してください.</th></tr>
@@ -53,10 +52,15 @@
         </table>
       </div>
 
+      <div style="display:inline-flex">
       <input type="hidden" th:value="${name}" name="name">
       <!--<input type="hidden" th:value="admin" name="userID">-->
       <input onclick="return confirmDelete()" class="btn-border" type="submit" value="申請">
     </form>
+    <form action="index.html" th:action="@{backURL}">
+      <input class="btn-border" type="submit" value="戻る">
+    </form>
+    </div>
   </div>
 </div>
 

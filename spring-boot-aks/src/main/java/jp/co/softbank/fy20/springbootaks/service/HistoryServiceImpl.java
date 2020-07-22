@@ -68,5 +68,13 @@ public class HistoryServiceImpl implements HistoryService {
         session.setAttribute("rankingList", findRankingTen());
         session.setAttribute("referer", referer);
     }
+
+    @Override
+    public void sessionSet(HttpSession session,String referer,String name){
+        session.setAttribute("newWordsList", findNewWordsTen());
+        session.setAttribute("rankingList", findRankingTen());
+        session.setAttribute("referer", referer);
+        session.setAttribute("wordsName", name);
+    }
     
 }
