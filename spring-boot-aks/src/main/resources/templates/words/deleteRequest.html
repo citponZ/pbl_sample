@@ -48,11 +48,15 @@
       <td><textarea name="reason" cols="40" rows="8"></textarea></td>
 
     </table>
-
+    <div style="display:inline-flex">
     <input type="hidden" th:value="${name}" name="name">
     <!--<input type="hidden" th:value="admin" name="userID">-->
     <input onclick="return confirmDelete()" class="btn-border" type="submit" value="申請">
     </form>
+    <form action="index.html" th:action="@{backURL}">
+      <input class="btn-border" type="submit" value="戻る">
+    </form>
+    </div>
   </div>
 
 </div>

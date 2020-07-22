@@ -21,6 +21,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -137,7 +138,7 @@ public class WordsController {
         return "redirect:/words/id/" + URLEncode(name);
     }
 
-    private String URLEncode(String name) throws UnsupportedEncodingException{
+    public static String URLEncode(String name) throws UnsupportedEncodingException{
         return URLEncoder.encode(name.replace(" ", "_"), "UTF-8").replace("%2F", "/").replace("%28", "(").replace("%29", ")");
     }
 
@@ -150,7 +151,6 @@ public class WordsController {
                             Model model, HttpSession session) throws UnsupportedEncodingException{
         final String name = extractPathFromPattern(request);
         String referer = request.getHeader("Referer");
-        System.out.println(referer);
         //半角スペースがあった場合、アンダーバーに置換してリダイレクト
         if(name.contains(" ")){
             //return "redirect:/words/id/"+ URLEncoder.encode(name.replace(" ", "_"), "UTF-8").replace("%2F", "/");
@@ -249,12 +249,12 @@ public class WordsController {
         if (wordsService.checkByName(nameForm.getName()) != null){
             model.addAttribute("wordsList", wordsService.findByName(nameForm.getName()));
             model.addAttribute("error", "この語句はすでに登録されています。");
-            historyService.sessionSet(session,referer);
+            historyService.sessionSet(session,referer,nameForm.getName());
             return "words/updatecontent";
         }
         //追加ページに遷移
         model.addAttribute("wordsForm", new WordsForm());
-        historyService.sessionSet(session,referer);
+        historyService.sessionSet(session,referer,nameForm.getName());
         return "words/insertcontent";
     }
 
@@ -312,7 +312,7 @@ public class WordsController {
         String referer = request.getHeader("Referer");
         model.addAttribute("wordsList", wordsService.findByName(name));
         model.addAttribute("error", null);
-        historyService.sessionSet(session,referer);
+        historyService.sessionSet(session,referer,name);
         return "words/updatecontent";
     }
 
@@ -342,15 +342,16 @@ public class WordsController {
     }
 
     //削除依頼画面に遷移
-    @RequestMapping("/deleterequest")
-    public String deleteRequest(@RequestParam String name, Model model, HttpSession session) throws Exception {
+    @PostMapping("/deleterequest")
+    public String deleteRequest(@RequestParam String name, Model model, HttpServletRequest request, HttpSession session) throws Exception {
         model.addAttribute("name", name);
-        historyService.sessionSet(session);
+        String referer = request.getHeader("Referer");
+        historyService.sessionSet(session,referer,name);
         return "words/deleteRequest";
     }
 
     //削除依頼を受け付けて単語ページに戻す
-    @RequestMapping("/deleterequestresult")
+    @PostMapping("/deleterequestresult")
     public String deleteRequestResult(@RequestParam String name, @RequestParam String reason, Model model) throws Exception {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         deleteRequestService.insert(new DeleteRequest(auth.getName(), name, reason));
@@ -373,6 +374,30 @@ public class WordsController {
         String referer = (String)session.getAttribute("referer");
         return "redirect:" + referer;
     }
+
+    @RequestMapping("/backwords")
+    public String backWords(Model model, HttpSession session) throws Exception {
+        String referer = (String)session.getAttribute("referer");
+        List<String> splitList = Arrays.asList(referer.split("/"));
+        String refererData = splitList.get(splitList.size()-1);
+        historyService.sessionSet(session);
+        if(refererData.equals("deleterequest")){
+            String wordsName = (String)session.getAttribute("wordsName");
+            return "redirect:/words/id/" + URLEncode(wordsName);
+        }
+        else if(refererData.equals("updateSearch")){
+            String wordsName = (String)session.getAttribute("wordsName");
+            return "redirect:/words/id/" + URLEncode(wordsName);
+        }
+        else if(refererData.equals("inputContent") || refererData.equals("insertComplete")){
+            return "redirect:/words/insert";
+        }
+        return "redirect:" + referer;
+    }
+
+
+
+    
 
 
         //検索画面に移動

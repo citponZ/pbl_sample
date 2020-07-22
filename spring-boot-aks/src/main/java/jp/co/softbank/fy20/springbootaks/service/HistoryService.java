@@ -20,5 +20,6 @@ public interface HistoryService {
 
     void sessionSet(HttpSession session);
     void sessionSet(HttpSession session,String referer);
+    void sessionSet(HttpSession session,String referer,String name);
 
 }
