@@ -37,11 +37,15 @@
   <!--テンプレ-->
   <div layout:fragment="content">
   <div align="center" id="fontcolor">
+
+    <h3>削除申請依頼</h3>
+    <br>
     
     <form action="index.html" method="POST" th:action="@{deleterequestresult}">
 
     <br>
-    語句：<td th:text="${name}">鈴木太郎</td>
+    <h4>語句：<td th:text="${name}">鈴木太郎</td></h4>
+    <br>
 
     <table border="1">
       <tr><th>削除依頼理由を記入してください.</th></tr>
@@ -54,7 +58,6 @@
     <input onclick="return confirmDelete()" class="btn-border" type="submit" value="申請">
     </form>
   </div>
-
 </div>
 
 </body>

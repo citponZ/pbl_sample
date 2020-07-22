@@ -17,6 +17,12 @@
   <link rel="shortcut icon" th:href="@{/images/favicon.ico}">
   <link th:href="@{/css/ranking.css}" rel="stylesheet">
   <title>メインメニュー</title>
+
+    <!--jqueryとか-->
+    <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/demo.js}"></script>
+    <script th:src="@{/js/ranking.js}"></script>
 </head>
 
 <body>
@@ -33,30 +39,44 @@
       </div>
       <div align="center">
         <br>
-        <table valign="bottom" class="ProductTable">          
-              <h3><nobr>ランキング</nobr></h3>
+         <!-- List -->
+      <div class="et_pb_module">
+        <button id="fuu" class='secList'>ランキング</button>
+      </div>
+      
+      <div class="et_pb_module">
+        <button id="euu" class='secList'>新着の語句</button>
+      </div>
+      
+      <!-- Sections -->
+      <div class="fuu section">
+        <h2>検索ランキング</h2>
+        <table id="table1"><!--valign="bottom" class="ProductTable"-->
+          <tr id="tr1">
+            <td id="td1">
               <th:block th:each="rank : ${session['rankingList']}">
-                <tr>
-                  <td>
-                    <a class="text_limit2 large" style="color:#fa8383" th:href="@{'/words/id/'+ ${rank}}"><span th:text="${rank}">test</span></a>
-                  </td>
-                </tr>
+                <a class="text_limit2 large" style="color:#fa8383" th:href="@{'/words/id/'+ ${rank}}"><span th:text="${rank}">test</span></a>
+                <br>
               </th:block>
-        </table>
-
-        <br>
-        <br>
-
-        <table valign="bottom" class="ProductTable">          
-          <h3>新着の語句</h3>
-          <th:block th:each="newWords : ${session['newWordsList']}">
-            <tr>
-              <td>
+            </td>
+          </tr>
+      </table>
+      </div>
+      
+      <div class="euu section">
+        <h2>新着の語句</h2>
+        <table table="table1"><!-- valign="bottom" class="ProductTable"-->
+          <tr id="tr1">
+            <td id="td1">
+              <th:block th:each="newWords : ${session['newWordsList']}">
                 <a class="text_limit2 large" style="color: #fa8383;" th:href="@{'/words/id/'+ ${newWords}}"><span th:text="${newWords}">メイン</span></a>
-              </td>                  
-            </tr>
-          </th:block>
+                <br>
+              </th:block>
+            </td>                  
+          </tr>
         </table>
+      </div>
+      </div>
 
       </div>
     </div>
@@ -75,9 +95,6 @@
     </div>
   </div>
 
-  <!--jqueryとか-->
-  <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
-  <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
-  <script th:src="@{/js/demo.js}"></script>
+
 </body>
 </html>
