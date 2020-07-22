@@ -55,8 +55,8 @@
           <div class="nomal">
             <table>
               <tr >                  
-                <td align="left" width="600">
-                  <a class="large item" th:href="@{'/words/can/'+ *{nameByURL}}"><span style="color:#bfd8d2;" th:text="*{name}">メイン</span></a>
+                <td>
+                  <a style="margin: 0 0 0 5%;" class="large item" th:href="@{'/words/can/'+ *{nameByURL}}"><span style="color:#bfd8d2;" th:text="*{name}">メイン</span></a>
                   <th:block th:if="${words.abbName.size()}">
                     <th:block th:each="abb, iterStat:*{abbName}"> <!-- ステータス変数はカンマ区切りで2つ目の引数として受け取れる -->
                       <span th:text="${abb}">略語</span>
@@ -68,7 +68,7 @@
               <tr>
                 <td align="left" width="600">
                   <!--//20文字以上の文章で[...]で省略-->
-                  <p class="text_limit" th:text="*{content}">test</p>
+                  <p style="margin: 0 0 0 5%;" class="text_limit" th:text="*{content}">test</p>
                 </td>
               </tr>
             </table>
@@ -94,7 +94,7 @@
             
             var len = /*[[${wordsList.size()}]]*/ '0';
 
-            if (4 < num && num%5==0 && num!=len) {
+            if (4 < num && num%7==0 && num!=len) {
                 document.write('</div>');
                 document.write('<div class="more">もっと見る</div>');
                 document.write('<div class="content">');                  
