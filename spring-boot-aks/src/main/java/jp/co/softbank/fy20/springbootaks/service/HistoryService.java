@@ -19,5 +19,6 @@ public interface HistoryService {
     List<String> findDayRankingTen();
 
     void sessionSet(HttpSession session);
+    void sessionSet(HttpSession session,String referer);
 
 }

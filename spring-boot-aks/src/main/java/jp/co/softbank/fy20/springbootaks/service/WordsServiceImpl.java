@@ -129,7 +129,7 @@ public class WordsServiceImpl implements WordsService {
             //replase
             for (int i=0; i<splitList.size() ; i++){
                 splitList.set(i, splitList.get(i).replace(dict, 
-                            "<a href=\"/words/id/"+dict+"\">"+dict+"</a>"));
+                            "<a href=\"/words/can/"+dict+"\">"+dict+"</a>"));
             }
             String tmp = "";
             //　くっつける //list[0] -> list2[0] -> list[1] -> list2[1] -> list[2]

@@ -65,10 +65,14 @@
   
       </table>
 
-
+    <div style="display:inline-flex">
     <input type="hidden" th:value="*{wordsList.get(0).id}" name="id">
     <input class="btn-border" type="submit" value="更新">
     </form>
+    <form action="index.html" th:action="@{backURL}">
+      <input class="btn-border" type="submit" value="戻る">
+    </form>
+    </div>
   </div>
 </div>
 </body>

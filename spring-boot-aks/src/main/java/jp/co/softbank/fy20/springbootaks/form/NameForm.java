@@ -23,7 +23,10 @@ public class NameForm {
         {   
             return false;
         }
-        return name.contains("%2F");
+        if (name.contains("%2F") || name.contains("〜")){
+            return true;
+        }
+        return false;
     }
 
 }
