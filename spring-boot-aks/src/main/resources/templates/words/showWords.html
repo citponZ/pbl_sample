@@ -73,6 +73,9 @@
           <input class="delete-button" type="submit" value="削除申請">
         </form>
       </th:block>
+      <form action="index.html" th:action="@{/words/backURL}">
+        <input class="btn-border" type="submit" value="戻る">
+      </form>
     </div>
     <p class="normal"><nobr>編集日時：<span th:text="${#temporals.format(wordsList.get(0).updatedDate, 'yyyy/MM/dd HH:mm')}">メイン</span></nobr></p>
   

@@ -53,11 +53,15 @@
       <td><textarea name="content" cols="40" rows="8" th:field="*{content}"></textarea></td>
 
     </table>
-
+    <div style="display:inline-flex">
     <input type="hidden" th:value="${name}" name="name">
     <!--<input type="hidden" th:value="admin" name="userID">-->
     <input class="btn-border" type="submit" value="追加">
     </form>
+    <form action="index.html" th:action="@{backURL}">
+      <input class="btn-border" type="submit" value="戻る">
+    </form>
+    </div>
   </div>
 
 </div>
