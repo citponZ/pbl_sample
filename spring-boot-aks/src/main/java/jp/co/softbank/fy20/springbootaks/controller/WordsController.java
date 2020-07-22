@@ -85,7 +85,8 @@ public class WordsController {
             attributes.addFlashAttribute("message", null);
             //return "redirect:id/"+name;
             historyService.sessionSet(session);
-            return "redirect:id/"+ URLEncoder.encode(name.replace(" ", "_"), "UTF-8");
+            //return "redirect:can/"+ URLEncoder.encode(name.replace(" ", "_"), "UTF-8");
+            return "redirect:can/" + URLEncode(name);
         }
 
         List<WordsByAbb> wordsList = wordsService.findByNameAsInclude(name);
@@ -115,16 +116,43 @@ public class WordsController {
         return new AntPathMatcher().extractPathWithinPattern(bestMatchPattern, path);
     }
     
-    //「/」で区切られている語句に対応
-    //「%2F」(/をエンコードした際に出る文字)が語句に入っているとうまくいかない
-    //単語ページ
-    @RequestMapping("/id/**")
-    public String showWord(HttpServletRequest request, @ModelAttribute("message") String message, 
+    //履歴追加パターン
+    @RequestMapping("/can/**")
+    public String redirectWordsWithH(HttpServletRequest request, 
                             Model model, HttpSession session) throws UnsupportedEncodingException{
         final String name = extractPathFromPattern(request);
         //半角スペースがあった場合、アンダーバーに置換してリダイレクト
         if(name.contains(" ")){
-            return "redirect:/words/id/"+ URLEncoder.encode(name.replace(" ", "_"), "UTF-8").replace("%2F", "/");
+            return "redirect:/words/can/"+ URLEncode(name);
+        }
+        List<WordsByAbb> wordsList = wordsService.findByName(name);
+        if (wordsList.size() == 0){
+            historyService.sessionSet(session);
+            return "redirect:/";
+        }
+        //userIDは現状1を入力しているが本来はsessonからログイン情報を入手して代入
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        historyService.findInsert(auth.getName(), wordsList.get(0).getId());
+        //return "redirect:/words/id/"+ URLEncoder.encode(name.replace(" ", "_"), "UTF-8").replace("%2F", "/").replace("%28", "(").replace("%29", ")");
+        return "redirect:/words/id/" + URLEncode(name);
+    }
+
+    private String URLEncode(String name) throws UnsupportedEncodingException{
+        return URLEncoder.encode(name.replace(" ", "_"), "UTF-8").replace("%2F", "/").replace("%28", "(").replace("%29", ")");
+    }
+
+
+    //「/」で区切られている語句に対応
+    //「%2F」(/をエンコードした際に出る文字)が語句に入っているとうまくいかない
+    //単語ページ
+    @RequestMapping("/id/**")
+    public String showWord(HttpServletRequest request, 
+                            Model model, HttpSession session) throws UnsupportedEncodingException{
+        final String name = extractPathFromPattern(request);
+        //半角スペースがあった場合、アンダーバーに置換してリダイレクト
+        if(name.contains(" ")){
+            //return "redirect:/words/id/"+ URLEncoder.encode(name.replace(" ", "_"), "UTF-8").replace("%2F", "/");
+            return "redirect:/words/id/" + URLEncode(name);
         }
         List<WordsByAbb> wordsList = wordsService.findByName(name);
         if (wordsList.size() == 0){
@@ -135,7 +163,7 @@ public class WordsController {
         List<String> dict = wordsService.findAllName();
         for (WordsByAbb words : wordsList){
             if (dict.contains(words.getAbbName())){
-                String tmp = "<a href=\"/words/id/"+words.getAbbName()+"\">"+words.getAbbName()+"</a>";
+                String tmp = "<a href=\"/words/can/"+words.getAbbName()+"\">"+words.getAbbName()+"</a>";
                 words.setAbbName(tmp);
             }
         }
@@ -147,7 +175,7 @@ public class WordsController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         DeleteRequest deleteRequest = deleteRequestService.find(name,auth.getName());
         model.addAttribute("deleteRequest", deleteRequest);
-        historyService.findInsert(auth.getName(), wordsList.get(0).getId());
+        //historyService.findInsert(auth.getName(), wordsList.get(0).getId());
         historyService.sessionSet(session);
         return "words/showWords";
     }
@@ -251,7 +279,8 @@ public class WordsController {
             }
         }
         historyService.sessionSet(session);
-        return "redirect:id/"+ URLEncoder.encode(name.replace(" ", "_"), "UTF-8").replace("%2F", "/");
+        //return "redirect:id/"+ URLEncoder.encode(name.replace(" ", "_"), "UTF-8").replace("%2F", "/");
+        return "redirect:id/" + URLEncode(name);
     }
 
     //updateMain
@@ -304,7 +333,8 @@ public class WordsController {
             }
         }
         historyService.sessionSet(session);
-        return "redirect:id/"+ URLEncoder.encode(name.replace(" ", "_"), "UTF-8").replace("%2F", "/");
+        //return "redirect:id/"+ URLEncoder.encode(name.replace(" ", "_"), "UTF-8").replace("%2F", "/");
+        return "redirect:id/" + URLEncode(name);
     }
 
     //削除依頼画面に遷移
@@ -320,7 +350,8 @@ public class WordsController {
     public String deleteRequestResult(@RequestParam String name, @RequestParam String reason, Model model) throws Exception {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         deleteRequestService.insert(new DeleteRequest(auth.getName(), name, reason));
-        return "redirect:id/"+ URLEncoder.encode(name.replace(" ", "_"), "UTF-8").replace("%2F", "/");
+        //return "redirect:id/"+ URLEncoder.encode(name.replace(" ", "_"), "UTF-8").replace("%2F", "/");
+        return "redirect:id/" + URLEncode(name);
     }
 
     //削除依頼を取り消して単語ページに戻す
@@ -328,7 +359,8 @@ public class WordsController {
     public String deleteRequestCancel(@RequestParam String name, Model model) throws Exception {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         deleteRequestService.delete(name, auth.getName());
-        return "redirect:id/"+ URLEncoder.encode(name.replace(" ", "_"), "UTF-8").replace("%2F", "/");
+        //return "redirect:id/"+ URLEncoder.encode(name.replace(" ", "_"), "UTF-8").replace("%2F", "/");
+        return "redirect:id/" + URLEncode(name);
     }
 
 
