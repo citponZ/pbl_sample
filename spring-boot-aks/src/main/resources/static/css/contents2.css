@@ -1,3 +1,6 @@
+/*スマホの時表示されるスタイルシート*/
+
+
 th {
     color: #535353;
 }
@@ -133,14 +136,14 @@ div#displayAll{
 
 }
 
-.contents {
+.contents{
     text-align: center;
     background-color: #ffffff;
     position: relative;
     top: 78px;
-    left: 25%;
-    width: 60%;    
+    width: 100%;
 }
+
 
 div#picture1{
     position:relative;
