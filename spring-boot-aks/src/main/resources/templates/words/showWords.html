@@ -70,7 +70,7 @@
       <th:block th:unless="${deleteRequest}">
         <form action="index.html" th:action="@{/words/deleterequest}" method="POST">
           <input type="hidden" name="name" th:value="${wordsList.get(0).name}">
-          <input class="delete-button" type="submit" value="削除申請">
+          <input style="margin: 0 10px 0 10px;" class="delete-button" type="submit" value="削除申請">
         </form>
       </th:block>
       <form action="index.html" th:action="@{/words/backwords}">

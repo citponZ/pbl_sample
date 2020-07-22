@@ -1,3 +1,4 @@
+/*
 .rankTable{
   position: absolute;
   top: 40%;
@@ -53,3 +54,46 @@
     border-color: #df744a;
     color: #fff;
   }
+  */
+  .et_pb_module {
+    display: inline-block;
+  }
+  
+  
+  .secList {
+    /*display: inline-block;*/
+    padding: 0.3em 1em;
+    text-decoration: none;
+    color: #67c5ff;
+    border: solid 2px #67c5ff;
+    border-radius: 3px;
+    transition: .4s;
+  }
+    
+  .secList:hover {
+    background: #67c5ff;
+    color: white;
+  }
+  
+  .et_pb_text_inner1 {
+    background-color: #EAD9FF;
+  }
+  
+  .et_pb_text_inner2 {
+    background-color: #FFD5EC;
+  }
+  
+  .et_pb_text_inner3 {
+    background-color: #FFDBC9;
+  }
+
+  #table1 {
+    /*border-collapse: collapse;
+    width: 500px;*/
+   }
+
+   #th1,#td1 {
+    /*border: solid 1px #ccc;*/
+    padding: 5px;
+   }
+
