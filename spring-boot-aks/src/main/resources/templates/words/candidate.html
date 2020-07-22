@@ -12,6 +12,7 @@
 <head>
   <script th:inline="javascript">
     /*<![CDATA[*/
+      var len = /*[[${wordsList.size()}]]*/ '0';
       document.title = /*[[${searchName}]]*/ 'error';
     /*]]>*/
   </script>
@@ -37,7 +38,7 @@
   <div layout:fragment="content">
     <div class="d-lg-none">
       <div align="center">
-        <form action="index.html" th:action="@{/words/searchName}" method="POST">
+        <form action="index.html" th:action="@{/words/searchName}">
           <input type="search" id="form-control2" class="mr-sm-2" placeholder="語句検索..." aria-label="語句検索..." name="name">
           <button type="submit" class="btn btn-outline-success my-2 my-sm-0">検索</button>
         </form>
@@ -91,9 +92,6 @@
           -->
           <script　th:inline="javascript">
             num=num+1;
-            
-            var len = /*[[${wordsList.size()}]]*/ '0';
-
             if (4 < num && num%7==0 && num!=len) {
                 document.write('</div>');
                 document.write('<div class="more">もっと見る</div>');
