@@ -40,46 +40,48 @@
       <div align="center">
         <br>
          <!-- List -->
-      <div class="et_pb_module">
-        <button id="fuu" class='secList'>ランキング</button>
-      </div>
+        <div class="et_pb_module">
+          <button id="fuu" class='secList'>ランキング</button>
+        </div>
       
-      <div class="et_pb_module">
-        <button id="euu" class='secList'>新着の語句</button>
-      </div>
+        <div class="et_pb_module">
+          <button id="euu" class='secList'>新着の語句</button>
+        </div>
       
-      <!-- Sections -->
-      <div class="fuu section">
-        <h2>検索ランキング</h2>
-        <table id="table1"><!--valign="bottom" class="ProductTable"-->
-          <tr id="tr1">
-            <td id="td1">
-              <th:block th:each="rank : ${session['rankingList']}">
-                <a class="text_limit2 large" style="color:#fa8383" th:href="@{'/words/id/'+ ${rank}}"><span th:text="${rank}">test</span></a>
-                <br>
-              </th:block>
-            </td>
-          </tr>
-      </table>
-      </div>
+        <!-- Sections -->
+        <div class="fuu section">
+          <h2>検索ランキング</h2>
+          <table id="table1"><!--valign="bottom" class="ProductTable"-->
+            <tr id="tr1">
+              <td id="td1">
+                <th:block th:each="rank : ${session['rankingList']}">
+                  <a class="text_limit2 large" style="color:#fa8383" th:href="@{'/words/id/'+ ${rank}}"><span th:text="${rank}">test</span></a>
+                  <br>
+                </th:block>
+              </td>
+            </tr>
+          </table>
+        </div>
       
-      <div class="euu section">
-        <h2>新着の語句</h2>
-        <table table="table1"><!-- valign="bottom" class="ProductTable"-->
-          <tr id="tr1">
-            <td id="td1">
-              <th:block th:each="newWords : ${session['newWordsList']}">
-                <a class="text_limit2 large" style="color: #fa8383;" th:href="@{'/words/id/'+ ${newWords}}"><span th:text="${newWords}">メイン</span></a>
-                <br>
-              </th:block>
-            </td>                  
-          </tr>
-        </table>
-      </div>
+        <div class="euu section">
+          <h2>新着の語句</h2>
+          <table table="table1"><!-- valign="bottom" class="ProductTable"-->
+            <tr id="tr1">
+              <td id="td1">
+                <th:block th:each="newWords : ${session['newWordsList']}">
+                  <a class="text_limit2 large" style="color: #fa8383;" th:href="@{'/words/id/'+ ${newWords}}"><span th:text="${newWords}">メイン</span></a>
+                  <br>
+                </th:block>
+              </td>                  
+            </tr>
+          </table>
+        </div>
       </div>
 
-      </div>
     </div>
+
+
+
     <div class="d-none d-lg-block">
       <div id="fontcolor">
         <font size="5">マニュアル</font><br><br>
