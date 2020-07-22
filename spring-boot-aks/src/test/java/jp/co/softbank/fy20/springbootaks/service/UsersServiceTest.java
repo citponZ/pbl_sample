@@ -21,8 +21,8 @@ public class UsersServiceTest {
 
         //新規追加のテスト
         System.out.println("==== 新規追加 ====");
-        //usersService.insert(new Users("admin","管理者","admin","admin"));
-        usersService.insert(new Users("user","ユーザー","user","user"));
+        usersService.insert(new Users("administrator","管理者","unyobe-ta0731","admin"));
+        //usersService.insert(new Users("user","ユーザー","user","user"));
 
         // 全件検索のテスト
         System.out.println("==== 全件検索 ====");
