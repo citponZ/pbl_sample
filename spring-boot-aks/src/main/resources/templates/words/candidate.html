@@ -52,15 +52,16 @@
           var num=0;
           var count=0;
         </script>
-        <tr th:each="words : ${wordsList}" th:object="${words}" class="items">
+        <tr th:each="words : ${wordsList}" th:object="${words}">
           <div class="nomal">
             <table>
               <tr >                  
                 <td>
-                  <a style="margin: 0 0 0 5%;" class="large item" th:href="@{'/words/can/'+ *{nameByURL}}"><span style="color:#bfd8d2;" th:text="*{name}">メイン</span></a>
+                  <a style="margin: 0 0 0 5%; color: #bfd8d2;" class="large" th:href="@{'/words/can/'+ *{nameByURL}}"><span style="color:#bfd8d2;" th:text="*{name}">メイン</span></a>
                   <th:block th:if="${words.abbName.size()}">
+                    <br>
                     <th:block th:each="abb, iterStat:*{abbName}"> <!-- ステータス変数はカンマ区切りで2つ目の引数として受け取れる -->
-                      <span th:text="${abb}">略語</span>
+                      <span th:text="${abb}" style="margin: 0 0 0 5%;">略語</span>
                       <span th:unless="${iterStat.last}">, </span><!-- last変数はループの最後でtrueを返します -->
                     </th:block>
                   </th:block>
@@ -101,6 +102,7 @@
               document.write('<a class="topButtonCor" href="#top">トップに戻る</a>');
             }
           </script>
+        <br>
         </tr>
   
       </div>
