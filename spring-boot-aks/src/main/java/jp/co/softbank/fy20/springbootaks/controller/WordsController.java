@@ -123,15 +123,16 @@ public class WordsController {
     public String redirectWordsWithH(HttpServletRequest request, 
                             Model model, HttpSession session) throws UnsupportedEncodingException{
         final String name = extractPathFromPattern(request);
-        //半角スペースがあった場合、アンダーバーに置換してリダイレクト
-        if(name.contains(" ")){
-            return "redirect:/words/can/"+ URLEncode(name);
-        }
         List<String> duplicationList = wordsService.findDuplication();
         if(!duplicationList.contains(name)){
             String tmp = wordsService.findNameByAbb(name);
+
             if(tmp != null){
                 return "redirect:/words/can/"+ URLEncode(tmp);
+            }
+            //半角スペースがあった場合、アンダーバーに置換してリダイレクト
+            if(name.contains(" ")){
+                return "redirect:/words/can/"+ URLEncode(name);
             }
         }
         else{
@@ -155,6 +156,11 @@ public class WordsController {
             historyService.sessionSet(session,referer);
             return "words/showWords";
 
+        }
+
+        //半角スペースがあった場合、アンダーバーに置換してリダイレクト
+        if(name.contains(" ")){
+            return "redirect:/words/can/"+ URLEncode(name);
         }
         List<WordsByAbb> wordsList = wordsService.findByName(name);
         if (wordsList.size() == 0){
@@ -212,10 +218,12 @@ public class WordsController {
             //return "redirect:/words/id/"+ URLEncoder.encode(name.replace(" ", "_"), "UTF-8").replace("%2F", "/");
             return "redirect:/words/id/" + URLEncode(name);
         }
+        System.out.println(name);
         
         List<WordsByAbb> wordsList;
         if(false ){
-            
+            //複数会ったら（直打ち用）
+            //ここからcanに戻す
         }
         else{
             //ない -> この後に進めば良い
