@@ -54,7 +54,7 @@
 
     <!--yyyy/MM/dd HH:mm:ss.SSSの表記を分までに短縮中-->
     <div align="right">
-      <div style="display:inline-flex">
+      <div style="display:inline-flex;">
 
       <form action="index.html" th:action="@{/words/updateSearch}" method="POST">
         <input type="hidden" name="name" th:value="${wordsList.get(0).name}">
@@ -64,7 +64,7 @@
       <th:block th:if="${deleteRequest}">
         <form action="index.html" th:action="@{/words/deleterequestcancel}" method="POST">
           <input type="hidden" name="name" th:value="${wordsList.get(0).name}">
-          <input onclick="return confirmDelete()" class="delete-button" type="submit" value="削除申請取消">
+          <input style="margin: 0 10px 0 10px;" onclick="return confirmDelete()" class="delete-button" type="submit" value="削除申請取消">
         </form>
       </th:block>
       <th:block th:unless="${deleteRequest}">
@@ -74,10 +74,10 @@
         </form>
       </th:block>
       <form action="index.html" th:action="@{/words/backwords}">
-        <input class="btn-border" type="submit" value="戻る">
+        <input class="btn-border" type="submit" value="戻る" style="margin: 0 10px 0 0px;">
       </form>
     </div>
-    <p class="normal"><nobr>編集日時：<span th:text="${#temporals.format(wordsList.get(0).updatedDate, 'yyyy/MM/dd HH:mm')}">メイン</span></nobr></p>
+    <p class="normal" style="margin: 0 10px 0 0px;"><nobr>編集日時：<span th:text="${#temporals.format(wordsList.get(0).updatedDate, 'yyyy/MM/dd HH:mm')}">メイン</span></nobr></p>
   
     </div>
 
