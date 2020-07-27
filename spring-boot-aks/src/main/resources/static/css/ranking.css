@@ -73,6 +73,8 @@
   .secList:hover {
     background: #67c5ff;
     color: white;
+    border: solid 2px #67c5ff;
+
   }
   
   .et_pb_text_inner1 {
