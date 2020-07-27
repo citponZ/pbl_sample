@@ -26,7 +26,7 @@ spec:
         - name: docker-reg-credential
       containers:
         - name: aks-sample
-          image: team4registory.azurecr.io/aks-sample/spring-boot-sample:0.1.7
+          image: team4registory.azurecr.io/aks-sample/spring-boot-sample:0.1.8
           env:
             - name: TZ
               value: JST-9
