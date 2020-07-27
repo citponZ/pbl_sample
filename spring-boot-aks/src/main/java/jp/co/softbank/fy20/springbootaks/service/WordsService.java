@@ -11,6 +11,8 @@ public interface WordsService {
 
     //List<Words> findByNameLike(String keyword);
 
+    List<String> findNameByAbbAndName(String name);
+
     void insert(Words words);
 
     boolean delete(Integer id, String userID);

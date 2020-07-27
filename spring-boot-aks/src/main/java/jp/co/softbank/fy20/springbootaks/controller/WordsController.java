@@ -156,6 +156,16 @@ public class WordsController {
             //return "redirect:/words/id/"+ URLEncoder.encode(name.replace(" ", "_"), "UTF-8").replace("%2F", "/");
             return "redirect:/words/id/" + URLEncode(name);
         }
+        //語句・同意語含めて重複があるかどうか
+        //ある->まとめページ
+        
+        //ない -> この後に進めば良い
+        //語句にある->そのまま
+        //同意語にある場合->リンクの時に語句に飛ばすようにしておく   ここでは考えなくて良い
+        //そもそもない->トップ
+
+
+
         List<WordsByAbb> wordsList = wordsService.findByName(name);
         if (wordsList.size() == 0){
             historyService.sessionSet(session,referer);
@@ -164,8 +174,16 @@ public class WordsController {
         String content = wordsService.makeLink(wordsList.get(0).getContent());
         List<String> dict = wordsService.findAllName();
         for (WordsByAbb words : wordsList){
+            List<String> duplicationList = wordsService.findNameByAbbAndName(words.getAbbName());
+            String data = null;
+            if (duplicationList.size() == 1) {
+                data = duplicationList.get(0);
+            }
+            else if (duplicationList.size() >= 2){
+                data = words.getAbbName();
+            }
             if (dict.contains(words.getAbbName())){
-                String tmp = "<a href=\"/words/can/"+words.getAbbName()+"\">"+words.getAbbName()+"</a>";
+                String tmp = "<a href=\"/words/can/"+data+"\">"+words.getAbbName()+"</a>";
                 words.setAbbName(tmp);
             }
         }

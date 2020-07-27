@@ -15,8 +15,15 @@ public interface WordsMapper {
     List<Words> findAll();
 
     //@Select("SELECT name FROM Words ORDER BY LEN(name)")
-    @Select("SELECT name FROM Words ORDER BY LEN(name) DESC")
+    //@Select("SELECT name FROM Words ORDER BY LEN(name) DESC")
+    @Select("SELECT name FROM (select name from Words union select name from Abbreviations where exists (select id from Words where wordID = id)) resultset "+
+    "ORDER BY LEN(name) DESC")
     List<String> findAllName();
+
+    //名前による同意語も含めた検索
+    //１つしかない場合は１つだけ
+    @Select("select name from Words where name = #{name} union select Words.name from Words, Abbreviations where id = wordID and Abbreviations.name = #{name}")
+    List<String> findNameByAbbAndName(String name);
 
     @Insert("INSERT INTO Words(name,userID,content,createdDate,updatedDate) " +
     "VALUES(#{name},#{userID},#{content},DATEADD(hour,9,GETDATE()),DATEADD(hour,9,GETDATE()))")
