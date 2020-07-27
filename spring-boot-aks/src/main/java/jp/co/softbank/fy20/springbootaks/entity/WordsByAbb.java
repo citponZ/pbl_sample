@@ -11,13 +11,13 @@ public class WordsByAbb {
 
     public WordsByAbb(){}
 
-    /*
+    
     public WordsByAbb(String name,String content){
         this.name = name;
         this.content = content;
         //this.createdDate = createdDate;
-        //this.updatedDate = updatedDate;
-    }*/
+        this.updatedDate = null;
+    }
     
     public Integer getId() {
         return id;

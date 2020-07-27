@@ -57,7 +57,7 @@
             <table>
               <tr >                  
                 <td>
-                  <a style="margin: 0 0 0 5%;" class="large item" th:href="@{'/words/can/'+ *{nameByURL}}"><span style="color:#bfd8d2;" th:text="*{name}">メイン</span></a>
+                  <a style="margin: 0 0 0 5%;" class="large item" th:href="@{'/words/cand/'+ *{nameByURL}}"><span style="color:#bfd8d2;" th:text="*{name}">メイン</span></a>
                   <th:block th:if="${words.abbName.size()}">
                     <th:block th:each="abb, iterStat:*{abbName}"> <!-- ステータス変数はカンマ区切りで2つ目の引数として受け取れる -->
                       <span th:text="${abb}">略語</span>

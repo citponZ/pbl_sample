@@ -41,9 +41,21 @@ public class WordsServiceImpl implements WordsService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<String> findNameByAbbAndName(String name){
-        List<String> nameList = wordsMapper.findNameByAbbAndName(name);
+    public List<Words> findNameByAbbAndName(String name){
+        return wordsMapper.findNameByAbbAndName(name);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<String> findDuplication(){
+        List<String> nameList = wordsMapper.findDuplication();
         return nameList;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public String findNameByAbb(String name){
+        return wordsMapper.findNameByAbb(name);
     }
 
     @Override
@@ -133,18 +145,10 @@ public class WordsServiceImpl implements WordsService {
             while (m.find()) {
                 tagList.add(m.group());
             }
-            List<String> duplicationList = findNameByAbbAndName(dict);
-            String data = null;
-            if (duplicationList.size() == 1) {
-                data = duplicationList.get(0);
-            }
-            else if (duplicationList.size() >= 2){
-                data = dict;
-            }
             //replase
             for (int i=0; i<splitList.size() ; i++){
                 splitList.set(i, splitList.get(i).replace(dict, 
-                            "<a href=\"/words/can/"+data+"\">"+dict+"</a>"));
+                            "<a href=\"/words/can/"+dict+"\">"+dict+"</a>"));
             }
             String tmp = "";
             //　くっつける //list[0] -> list2[0] -> list[1] -> list2[1] -> list[2]
