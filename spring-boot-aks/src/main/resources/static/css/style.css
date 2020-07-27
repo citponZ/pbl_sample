@@ -106,7 +106,7 @@ div#displayAll{
 }
 
 .grovalNavigation{
-    background-color: #bfd8d2;  
+    background-color: #ffffff;  
     color: #535353;
     text-align: center;    
     position: fixed;  
@@ -182,7 +182,7 @@ div#footer{
 }
 div#manu{
     text-align: left;
-    margin: 0px 0 0 150px;
+    /*margin: 0 0 0 270px;*/
 }
 
 div#fontcolor{ 

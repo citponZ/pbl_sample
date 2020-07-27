@@ -8,6 +8,7 @@
     
    .osare-table th {
     border: none !important;
+    text-align: center;
    }
     
    .osare-table tbody td {

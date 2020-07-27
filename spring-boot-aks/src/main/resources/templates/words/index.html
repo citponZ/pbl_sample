@@ -4,10 +4,10 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{words/common.html}">
 
-  <link rel="stylesheet" href="../../static/css/style.css"
-          th:href="@{/css/style.css}">
+  <!--<link rel="stylesheet" href="../../static/css/style.css"
+          th:href="@{/css/style.css}">-->
   <!-- Custom styles for this template -->
-  <link th:href="@{/css/sticky-footer.css}" rel="stylesheet">
+  <!--<link th:href="@{/css/sticky-footer.css}" rel="stylesheet">-->
   
 <head>
   <meta charset="UTF-8">
@@ -51,10 +51,10 @@
         <!-- Sections -->
         <div class="fuu section">
           <h2>検索ランキング</h2>
-          <table id="table1"><!--valign="bottom" class="ProductTable"-->
+          <table id="table1" width="200px"><!--valign="bottom" class="ProductTable"-->
             <tr id="tr1">
               <td id="td1">
-                <th:block th:each="rank : ${session['rankingList']}">
+                <th:block th:each="rank : ${session['rankingList']}"><!---->
                   <a class="text_limit2 large" style="color:#fa8383" th:href="@{'/words/id/'+ ${rank}}"><span th:text="${rank}">test</span></a>
                   <br>
                 </th:block>
@@ -65,7 +65,7 @@
       
         <div class="euu section">
           <h2>新着の語句</h2>
-          <table table="table1"><!-- valign="bottom" class="ProductTable"-->
+          <table table="table1" width="200px"><!-- valign="bottom" class="ProductTable"-->
             <tr id="tr1">
               <td id="td1">
                 <th:block th:each="newWords : ${session['newWordsList']}">
@@ -83,15 +83,37 @@
 
 
     <div class="d-none d-lg-block">
-      <div id="fontcolor">
+      <div id="fontcolor" align="center">
         <font size="5">マニュアル</font><br><br>
         <div id="manu">
+          <table align="center">
+            <tr>
+              <td>
+                ・ホーム：このページに戻ります。
+              </td>
+            </tr>
+            <tr>
+              <td>
+                ・検索：調べたい用語を調べることができます。
+              </td>
+            </tr>
+            <tr>
+              <td>
+                ・新規追加：追加したい用語を追加できます。
+              </td>
+            </tr>
+            <tr>
+              <td>
+                ・編集：内容を編集できます。
+              </td>
+            </tr>
+            <tr>
+              <td>
+                ・削除申請：削除したい用語の削除申請が送れます。
+              </td>
+            </tr>
+          </table>
           <!--・全表示：用語すべて表示します。<br>-->
-          ・ホーム：このページに戻ります。<br>
-          ・検索：調べたい用語を調べることができます。<br>
-          ・新規追加：追加したい用語を追加できます。<br>
-          ・編集：内容を編集できます。<br>
-          ・削除申請：削除したい用語の削除申請が送れます。<br>
         </div>
       </div>
     </div>
