@@ -11,6 +11,12 @@ public interface WordsService {
 
     //List<Words> findByNameLike(String keyword);
 
+    List<Words> findNameByAbbAndName(String name);
+
+    List<String> findDuplication();
+
+    String findNameByAbb(String name);
+
     void insert(Words words);
 
     boolean delete(Integer id, String userID);

@@ -21,6 +21,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -126,6 +127,61 @@ public class WordsController {
         if(name.contains(" ")){
             return "redirect:/words/can/"+ URLEncode(name);
         }
+        List<String> duplicationList = wordsService.findDuplication();
+        if(!duplicationList.contains(name)){
+            String tmp = wordsService.findNameByAbb(name);
+            if(tmp != null){
+                return "redirect:/words/can/"+ URLEncode(tmp);
+            }
+        }
+        else{
+            //重複あり
+            String referer = request.getHeader("Referer");
+            List<WordsByAbb> wordsList = new ArrayList<>();
+            List<Words> tmpList = wordsService.findNameByAbbAndName(name);
+            String str = "";
+            //名前だけリンク
+            for (Words words : tmpList){
+                String tmp = words.getContent();
+                int maxLength = (tmp.length() < 15)?tmp.length():15;
+                tmp = tmp.substring(0, maxLength);
+                str += "・<a href=\"/words/cand/"+words.getName()+"\">"+words.getName()+"</a> - " + tmp + "......<br>";
+            }
+            str += "<br>一つの語句が複数の意味を有するために、異なる用法を一覧にしてあります。<br>お探しの用語に一番近い記事を選んで下さい。";
+            wordsList.add(new WordsByAbb(name,str));  
+            //ページ名
+            model.addAttribute("pageName", name);
+            model.addAttribute("wordsList", wordsList);
+            historyService.sessionSet(session,referer);
+            return "words/showWords";
+
+        }
+        List<WordsByAbb> wordsList = wordsService.findByName(name);
+        if (wordsList.size() == 0){
+            historyService.sessionSet(session);
+            return "redirect:/";
+        }
+        //userIDは現状1を入力しているが本来はsessonからログイン情報を入手して代入
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        historyService.findInsert(auth.getName(), wordsList.get(0).getId());
+        //return "redirect:/words/id/"+ URLEncoder.encode(name.replace(" ", "_"), "UTF-8").replace("%2F", "/").replace("%28", "(").replace("%29", ")");
+        return "redirect:/words/id/" + URLEncode(name);
+    }
+
+        //履歴追加+曖昧ページに飛ばないパターン
+    @RequestMapping("/cand/**")
+    public String redirectWordsWithHT(HttpServletRequest request, 
+                                Model model, HttpSession session) throws UnsupportedEncodingException{
+        final String name = extractPathFromPattern(request);
+        //半角スペースがあった場合、アンダーバーに置換してリダイレクト
+        if(name.contains(" ")){
+            return "redirect:/words/cand/"+ URLEncode(name);
+        }
+        /*
+        String tmp = wordsService.findNameByAbb(name);
+        if(tmp != null){
+            return "redirect:/words/cand/"+ URLEncode(tmp);
+        }*/
         List<WordsByAbb> wordsList = wordsService.findByName(name);
         if (wordsList.size() == 0){
             historyService.sessionSet(session);
@@ -149,27 +205,47 @@ public class WordsController {
     @RequestMapping("/id/**")
     public String showWord(HttpServletRequest request, 
                             Model model, HttpSession session) throws UnsupportedEncodingException{
-        final String name = extractPathFromPattern(request);
+        String name = extractPathFromPattern(request);
         String referer = request.getHeader("Referer");
         //半角スペースがあった場合、アンダーバーに置換してリダイレクト
         if(name.contains(" ")){
             //return "redirect:/words/id/"+ URLEncoder.encode(name.replace(" ", "_"), "UTF-8").replace("%2F", "/");
             return "redirect:/words/id/" + URLEncode(name);
         }
-        List<WordsByAbb> wordsList = wordsService.findByName(name);
-        if (wordsList.size() == 0){
-            historyService.sessionSet(session,referer);
-            return "redirect:/";
+        
+        List<WordsByAbb> wordsList;
+        if(false ){
+            
         }
-        String content = wordsService.makeLink(wordsList.get(0).getContent());
-        List<String> dict = wordsService.findAllName();
-        for (WordsByAbb words : wordsList){
-            if (dict.contains(words.getAbbName())){
-                String tmp = "<a href=\"/words/can/"+words.getAbbName()+"\">"+words.getAbbName()+"</a>";
-                words.setAbbName(tmp);
+        else{
+            //ない -> この後に進めば良い
+            //語句にある->そのまま
+            //同意語にある場合->語句のデータで表示
+            //そもそもない->トップ
+            //同意語のとき
+            
+            String tmp = wordsService.findNameByAbb(name);
+            /*
+            if(tmp != null){
+                //nameを置き換える
+                name = tmp;
+            }*/
+            wordsList = wordsService.findByName(name);
+            if (wordsList.size() == 0){
+                historyService.sessionSet(session,referer);
+                return "redirect:/";
             }
+            String content = wordsService.makeLink(wordsList.get(0).getContent());
+            List<String> dict = wordsService.findAllName();
+            for (WordsByAbb words : wordsList){
+                if (dict.contains(words.getAbbName())){
+                    tmp = "<a href=\"/words/can/"+words.getAbbName()+"\">"+words.getAbbName()+"</a>";
+                    words.setAbbName(tmp);
+                }
+            }
+            wordsList.get(0).setContent(content);
         }
-        wordsList.get(0).setContent(content);
+
         //ページ名
         model.addAttribute("pageName", name);
         model.addAttribute("wordsList", wordsList);
@@ -177,7 +253,6 @@ public class WordsController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         DeleteRequest deleteRequest = deleteRequestService.find(name,auth.getName());
         model.addAttribute("deleteRequest", deleteRequest);
-        //historyService.findInsert(auth.getName(), wordsList.get(0).getId());
         historyService.sessionSet(session,referer);
         return "words/showWords";
     }

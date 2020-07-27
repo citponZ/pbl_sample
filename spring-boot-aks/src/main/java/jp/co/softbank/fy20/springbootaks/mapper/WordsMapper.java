@@ -15,8 +15,27 @@ public interface WordsMapper {
     List<Words> findAll();
 
     //@Select("SELECT name FROM Words ORDER BY LEN(name)")
-    @Select("SELECT name FROM Words ORDER BY LEN(name) DESC")
+    //@Select("SELECT name FROM Words ORDER BY LEN(name) DESC")
+    @Select("SELECT name FROM (select name from Words union select name from Abbreviations where exists (select id from Words where wordID = id)) resultset "+
+    "ORDER BY LEN(name) DESC")
     List<String> findAllName();
+
+
+    //名前による同意語も含めた検索
+    //１つしかない場合は１つだけ
+    @Select("select name,CAST(content AS NVARCHAR(MAX)) as content from Words where name = #{name} union select Words.name as name,CAST(Words.content AS NVARCHAR(MAX)) as content from Words, Abbreviations where id = wordID and Abbreviations.name = #{name}")
+    List<Words> findNameByAbbAndName(String name);
+
+    //名前による同意語からの検索
+    //１つしかとってこない前提
+    @Select("select Words.name from Words, Abbreviations where id = wordID and Abbreviations.name = #{name}")
+    String findNameByAbb(String name);
+
+    @Select("select name from (select name from Abbreviations where exists "+
+    "(select id from Words where wordID = id)) rs group by name having count(*) > 1 "+
+    "union select Words.name from Words, (select name from Abbreviations where exists "+
+    "(select id from Words where wordID = id)) rs where Words.name = rs.name")
+    List<String> findDuplication();
 
     @Insert("INSERT INTO Words(name,userID,content,createdDate,updatedDate) " +
     "VALUES(#{name},#{userID},#{content},DATEADD(hour,9,GETDATE()),DATEADD(hour,9,GETDATE()))")

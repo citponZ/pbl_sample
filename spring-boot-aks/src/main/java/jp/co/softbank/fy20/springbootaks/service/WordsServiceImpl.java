@@ -40,6 +40,25 @@ public class WordsServiceImpl implements WordsService {
     }
 
     @Override
+    @Transactional(readOnly = true)
+    public List<Words> findNameByAbbAndName(String name){
+        return wordsMapper.findNameByAbbAndName(name);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<String> findDuplication(){
+        List<String> nameList = wordsMapper.findDuplication();
+        return nameList;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public String findNameByAbb(String name){
+        return wordsMapper.findNameByAbb(name);
+    }
+
+    @Override
     @Transactional(readOnly = false)
     public void insert(Words words){
         wordsMapper.insert(words);
