@@ -31,9 +31,9 @@ public interface WordsMapper {
     @Select("select Words.name from Words, Abbreviations where id = wordID and Abbreviations.name = #{name}")
     String findNameByAbb(String name);
 
-    @Select("select name from (select name from Abbreviations where exists "+
+    @Select("select LOWER(name) from (select name from Abbreviations where exists "+
     "(select id from Words where wordID = id)) rs group by name having count(*) > 1 "+
-    "union select Words.name from Words, (select name from Abbreviations where exists "+
+    "union select LOWER(Words.name) from Words, (select name from Abbreviations where exists "+
     "(select id from Words where wordID = id)) rs where Words.name = rs.name")
     List<String> findDuplication();
 
