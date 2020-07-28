@@ -47,6 +47,7 @@ input#submit_button {
     font-weight: bold;
     border-radius: 4px;
     transition: .4s;
+    outline: none;
   }
   
   .delete-button:hover {
@@ -165,6 +166,7 @@ div#picture1{
     background-color: #df744a;
     border-color: #df744a;
     color: #fff;
+    outline: none;
 }
 
 div#footer-bk{

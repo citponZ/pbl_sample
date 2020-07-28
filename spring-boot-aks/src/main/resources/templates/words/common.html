@@ -83,7 +83,7 @@
               <th:block th:each="newWords : ${session['newWordsList']}">
                 <tr>
                   <td>
-                    <a class="text_limit2 large" style="color: #fa8383;" th:href="@{'/words/id/'+ ${newWords}}"><span th:text="${newWords}">メイン</span></a>
+                   <nobr><a class="text_limit2 large" style="color: #fa8383;" th:href="@{'/words/id/'+ ${newWords}}"><span th:text="${newWords}">メイン</span></a></nobr>
                   </td>                  
                 </tr>
               </th:block>
@@ -102,7 +102,7 @@
               <th:block th:each="rank : ${session['rankingList']}">
                 <tr>
                   <td>
-                    <a class="text_limit2 large" style="color:#fa8383" th:href="@{'/words/id/'+ ${rank}}"><span th:text="${rank}">test</span></a>
+                    <nobr><a class="text_limit2 large" style="color:#fa8383" th:href="@{'/words/id/'+ ${rank}}"><span th:text="${rank}">test</span></a></nobr>
                   </td>
                 </tr>
               </th:block>
