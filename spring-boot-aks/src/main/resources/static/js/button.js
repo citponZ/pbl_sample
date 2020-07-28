@@ -1,6 +1,8 @@
 
 $(document).on("click", ".add", function() {
     $(this).parent().clone(true).insertAfter($(this).parent());
+    var textForm = document.getElementById("firsttext");
+    textForm.value = '';
 });
 $(document).on("click", ".del", function() {
     var target = $(this).parent();
