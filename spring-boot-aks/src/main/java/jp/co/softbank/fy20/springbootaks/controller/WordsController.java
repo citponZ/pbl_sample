@@ -148,7 +148,8 @@ public class WordsController {
             //名前だけリンク
             for (Words words : tmpList){
                 String tmp = words.getContent();
-                int maxLength = (tmp.length() < 15)?tmp.length():15;
+                int Length = 20;
+                int maxLength = (tmp.length() < Length)?tmp.length():Length;
                 tmp = tmp.substring(0, maxLength);
                 str += "・<a href=\"/words/cand/"+words.getName()+"\">"+words.getName()+"</a> - " + tmp + "......<br>";
             }
@@ -159,7 +160,6 @@ public class WordsController {
             model.addAttribute("wordsList", wordsList);
             historyService.sessionSet(session,referer);
             return "words/showWords";
-
         }
 
         List<WordsByAbb> wordsList = wordsService.findByName(name);
