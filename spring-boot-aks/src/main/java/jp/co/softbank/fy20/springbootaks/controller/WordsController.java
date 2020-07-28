@@ -83,7 +83,7 @@ public class WordsController {
                                 RedirectAttributes attributes, HttpSession session)
                                     throws UnsupportedEncodingException {
         //語句名が同じものが存在したらその語句のページに遷移
-        if (wordsService.checkByName(name) != null || wordsService.findDuplication().contains(name)){
+        if (wordsService.checkByName(name) != null || wordsService.findDuplication().contains(name.toLowerCase())){
             //attributes.addFlashAttribute("message", null);
             //return "redirect:id/"+name;
             //historyService.sessionSet(session);
