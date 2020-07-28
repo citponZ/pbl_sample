@@ -61,7 +61,8 @@
                   <th:block th:if="${words.abbName.size()}">
                     <br>
                     <th:block th:each="abb, iterStat:*{abbName}"> <!-- ステータス変数はカンマ区切りで2つ目の引数として受け取れる -->
-                      <span th:text="${abb}" style="margin: 0 0 0 5%;">略語</span>
+                      <span th:if="${iterStat.first}" th:text="${abb}" style="margin: 0 0 0 5%;">略語</span>
+                      <span th:unless="${iterStat.first}" th:text="${abb}">略語</span>
                       <span th:unless="${iterStat.last}">, </span><!-- last変数はループの最後でtrueを返します -->
                     </th:block>
                   </th:block>

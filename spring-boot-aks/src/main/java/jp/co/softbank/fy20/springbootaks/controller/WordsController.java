@@ -123,23 +123,27 @@ public class WordsController {
     public String redirectWordsWithH(HttpServletRequest request, 
                             Model model, HttpSession session) throws UnsupportedEncodingException{
         final String name = extractPathFromPattern(request);
+        //半角スペースがあった場合、アンダーバーに置換してリダイレクト
+        if(name.contains(" ")){
+            return "redirect:/words/can/"+ URLEncode(name);
+        }
         List<String> duplicationList = wordsService.findDuplication();
-        if(!duplicationList.contains(name)){
+        List<String> duplicationList2 = new ArrayList<>();
+        for(String duplication: duplicationList){
+            duplicationList2.add(duplication.replace(" ", "_"));
+        }
+        if(!duplicationList2.contains(name.toLowerCase())){
             String tmp = wordsService.findNameByAbb(name);
-
             if(tmp != null){
                 return "redirect:/words/can/"+ URLEncode(tmp);
-            }
-            //半角スペースがあった場合、アンダーバーに置換してリダイレクト
-            if(name.contains(" ")){
-                return "redirect:/words/can/"+ URLEncode(name);
             }
         }
         else{
             //重複あり
             String referer = request.getHeader("Referer");
             List<WordsByAbb> wordsList = new ArrayList<>();
-            List<Words> tmpList = wordsService.findNameByAbbAndName(name);
+            String name2 = name.replace("_", " ");
+            List<Words> tmpList = wordsService.findNameByAbbAndName(name2);
             String str = "";
             //名前だけリンク
             for (Words words : tmpList){
@@ -149,19 +153,15 @@ public class WordsController {
                 str += "・<a href=\"/words/cand/"+words.getName()+"\">"+words.getName()+"</a> - " + tmp + "......<br>";
             }
             str += "<br>一つの語句が複数の意味を有するために、異なる用法を一覧にしてあります。<br>お探しの用語に一番近い記事を選んで下さい。";
-            wordsList.add(new WordsByAbb(name,str));  
+            wordsList.add(new WordsByAbb(name2,str));  
             //ページ名
-            model.addAttribute("pageName", name);
+            model.addAttribute("pageName", name2);
             model.addAttribute("wordsList", wordsList);
             historyService.sessionSet(session,referer);
             return "words/showWords";
 
         }
 
-        //半角スペースがあった場合、アンダーバーに置換してリダイレクト
-        if(name.contains(" ")){
-            return "redirect:/words/can/"+ URLEncode(name);
-        }
         List<WordsByAbb> wordsList = wordsService.findByName(name);
         if (wordsList.size() == 0){
             historyService.sessionSet(session);
@@ -218,8 +218,7 @@ public class WordsController {
             //return "redirect:/words/id/"+ URLEncoder.encode(name.replace(" ", "_"), "UTF-8").replace("%2F", "/");
             return "redirect:/words/id/" + URLEncode(name);
         }
-        System.out.println(name);
-        
+
         List<WordsByAbb> wordsList;
         if(false ){
             //複数会ったら（直打ち用）
@@ -232,7 +231,8 @@ public class WordsController {
             //そもそもない->トップ
             //同意語のとき
             
-            String tmp = wordsService.findNameByAbb(name);
+            //String tmp = wordsService.findNameByAbb(name);
+            String tmp;
             /*
             if(tmp != null){
                 //nameを置き換える
@@ -244,15 +244,18 @@ public class WordsController {
                 return "redirect:/";
             }
             String content = wordsService.makeLink(wordsList.get(0).getContent());
-            List<String> dict = wordsService.findAllName();
+            List<String> dict = wordsService.findDuplication();
             for (WordsByAbb words : wordsList){
-                if (dict.contains(words.getAbbName())){
-                    tmp = "<a href=\"/words/can/"+words.getAbbName()+"\">"+words.getAbbName()+"</a>";
-                    words.setAbbName(tmp);
+                if(words.getAbbName() != null){
+                    if (dict.contains(words.getAbbName().toLowerCase())){
+                        tmp = "<a href=\"/words/can/"+words.getAbbName()+"\">"+words.getAbbName()+"</a>";
+                        words.setAbbName(tmp);
+                    }
                 }
             }
             wordsList.get(0).setContent(content);
         }
+        
 
         //ページ名
         model.addAttribute("pageName", name);
