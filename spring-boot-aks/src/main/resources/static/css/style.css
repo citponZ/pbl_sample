@@ -230,11 +230,13 @@ background: #dcb239;
 color: #fff;
 width: 200px;
 text-align: center;
-padding: 8px 0px;
+padding: 8px 45px;
+/*padding: 8px 0px;*/
 }
 .topButtonCor:hover{
     text-decoration: none;
     color: #535353;
+    outline: none;
 }
 
 #page_top{
