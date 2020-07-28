@@ -106,32 +106,35 @@ div#displayAll{
     width: 100%;
 }
 
-.grovalNavigation{
-    background-color: #ffffff;  
-    color: #535353;
-    text-align: center;    
-    position: fixed;  
-    top: 78px;
-    min-height: 100vh;
-    right: 0;
-    width: 10%;   
-    color: #535353;
-}
+@media screen and (min-width:992px) {
 
-.localNavigation{
+    .grovalNavigation{
+        background-color: #ffffff;  
+        color: #535353;
+        text-align: center;    
+        position: fixed;  
+        top: 78px;
+        min-height: 100vh;
+        right: 0;
+        width: 10%;   
+        color: #535353;
+    }
 
-    color: #535353;
-    background-color: #fedcd2;
-    text-align: center;
-    position: fixed;
-    top: 78px;
-    height:100%;
-    overflow-y: scroll;
-    text-align: center;
-    background-color: #fedcd2;
-    width: 20%;
-    color: #535353;
+    .localNavigation{
 
+        color: #535353;
+        background-color: #fedcd2;
+        text-align: center;
+        position: fixed;
+        top: 78px;
+        height:100%;
+        overflow-y: scroll;
+        text-align: center;
+        background-color: #fedcd2;
+        width: 20%;
+        color: #535353;
+
+    }
 }
 
 .contents {
@@ -308,4 +311,16 @@ padding: 8px 45px;
 	border: 1px solid #da3c41;
 	outline: none;
 	box-shadow: 0 0 5px 1px rgba(218,60,65, .5);
+}
+
+@media screen and (min-width:1px) and ( max-width:991px) {
+
+    .contents{
+        text-align: center;
+        background-color: #ffffff;
+        position: relative;
+        top: 78px;
+    }
+
+
 }
