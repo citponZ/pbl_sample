@@ -55,7 +55,7 @@
             <tr id="tr1">
               <td id="td1">
                 <th:block th:each="rank : ${session['rankingList']}"><!---->
-                  <a class="text_limit2 large" style="color:#fa8383" th:href="@{'/words/id/'+ ${rank}}"><span th:text="${rank}">test</span></a>
+                  <nobr><a class="text_limit2 large" style="color:#fa8383" th:href="@{'/words/id/'+ ${rank}}"><span th:text="${rank}">test</span></a></nobr>
                   <br>
                 </th:block>
               </td>
@@ -69,7 +69,7 @@
             <tr id="tr1">
               <td id="td1">
                 <th:block th:each="newWords : ${session['newWordsList']}">
-                  <a class="text_limit2 large" style="color: #fa8383;" th:href="@{'/words/id/'+ ${newWords}}"><span th:text="${newWords}">メイン</span></a>
+                  <nobr><a class="text_limit2 large" style="color: #fa8383;" th:href="@{'/words/id/'+ ${newWords}}"><span th:text="${newWords}">メイン</span></a></nobr>
                   <br>
                 </th:block>
               </td>                  
@@ -83,7 +83,7 @@
 
 
     <div class="d-none d-lg-block">
-      <div id="fontcolor" align="center">
+      <div id="fontcolor">
         <font size="5">マニュアル</font><br><br>
         <div id="manu">
           <table align="center">
@@ -102,17 +102,28 @@
                 ・新規追加：追加したい用語を追加できます。
               </td>
             </tr>
-            <tr>
-              <td>
-                ・編集：内容を編集できます。
-              </td>
-            </tr>
-            <tr>
-              <td>
-                ・削除申請：削除したい用語の削除申請が送れます。
-              </td>
-            </tr>
           </table>
+         </div>
+          <br>
+          <font size="5">語句ページの操作方法</font><br><br>
+          <div id="manu">
+            <table align="center">
+              <tr>
+                <td>
+                  ・編集：内容を編集できます。
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  ・削除申請：削除したい用語の削除申請が送れます。
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  ・戻る：前のページに戻ります。
+                </td>
+              </tr>
+            </table>
           <!--・全表示：用語すべて表示します。<br>-->
         </div>
       </div>
