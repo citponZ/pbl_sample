@@ -83,6 +83,7 @@ public class WordsController {
             model.addAttribute("message", "「"+name+"」"+"の検索結果："+wordsAbbList.size()+"件");
         }
         model.addAttribute("searchName", name+" - 検索");
+        model.addAttribute("testname", name);
         historyService.sessionSet(session);
         return "words/candidate";
     }
