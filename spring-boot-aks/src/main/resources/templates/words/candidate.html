@@ -16,6 +16,12 @@
       document.title = /*[[${searchName}]]*/ 'error';
     /*]]>*/
   </script>
+  <script Language="JavaScript">
+    function send()
+    {
+      document.myFORM.submit();
+    }
+    </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
@@ -45,6 +51,12 @@
     </div>
     <div align="center">
       <h4 id="top"><p th:text="${message}">test</p></h4>
+      <th:block th:unless="${wordsList.size()}">
+        <form action="index.html" th:action="@{/words/inputContent}" method="POST" name="myFORM">
+          <input type="hidden" name="name" th:value="${testname}">
+        </form>
+        <h4 id="top">登録は<a href="javaScript:send()">こちら</a>から</h4>
+      </th:block>
 
       <div class="content">
         <script>
