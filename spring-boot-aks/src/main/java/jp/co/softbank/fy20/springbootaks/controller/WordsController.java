@@ -294,12 +294,17 @@ public class WordsController {
     @PostMapping("/inputContent")
     public String inputContent(@Validated NameForm nameForm, BindingResult bindingResult, 
                                 Model model, HttpServletRequest request, HttpSession session) {
+        String referer = request.getHeader("Referer");
+        String[] list = referer.split("/");
+        if(list[list.length-1].equals("inputContent")){
+            referer = (String)session.getAttribute("referer");
+        }
         // nameにブランク確認
         if (bindingResult.hasErrors()) {
-            historyService.sessionSet(session);
+            historyService.sessionSet(session,referer);
             return "words/insertMain";
         }
-        String referer = request.getHeader("Referer");
+        
         //語句名が同じものが存在したらその語句の更新ページに遷移
         model.addAttribute("name", nameForm.getName());
         if (wordsService.checkByName(nameForm.getName()) != null){
