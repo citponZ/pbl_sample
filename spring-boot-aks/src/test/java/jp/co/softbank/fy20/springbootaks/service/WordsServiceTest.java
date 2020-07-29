@@ -108,9 +108,9 @@ public class WordsServiceTest {
             System.out.println(test);
         }
 
-        System.out.println("==== link ====");
-        List2 = wordsService.findByName("APサーバー");
-        String test = wordsService.makeLink(List2.get(0).getContent());
+        //System.out.println("==== link ====");
+        //List2 = wordsService.findByName("APサーバー");
+        //String test = wordsService.makeLink(List2.get(0).getContent());
 
 
         //略語追加

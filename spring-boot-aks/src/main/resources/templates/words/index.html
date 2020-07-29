@@ -3,12 +3,6 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{words/common.html}">
-
-  <!--<link rel="stylesheet" href="../../static/css/style.css"
-          th:href="@{/css/style.css}">-->
-  <!-- Custom styles for this template -->
-  <!--<link th:href="@{/css/sticky-footer.css}" rel="stylesheet">-->
-  
 <head>
   <meta charset="UTF-8">
   <!--ブートストラップ-->
@@ -51,7 +45,7 @@
         <!-- Sections -->
         <div class="fuu section">
           <h2>検索ランキング</h2>
-          <table id="table1" width="200px"><!--valign="bottom" class="ProductTable"-->
+          <table id="table1" width="200px">
             <tr id="tr1">
               <td id="td1">
                 <th:block th:each="rank : ${session['rankingList']}"><!---->
@@ -65,7 +59,7 @@
       
         <div class="euu section">
           <h2>新着の語句</h2>
-          <table table="table1" width="200px"><!-- valign="bottom" class="ProductTable"-->
+          <table table="table1" width="200px">
             <tr id="tr1">
               <td id="td1">
                 <th:block th:each="newWords : ${session['newWordsList']}">
@@ -124,7 +118,6 @@
                 </td>
               </tr>
             </table>
-          <!--・全表示：用語すべて表示します。<br>-->
         </div>
       </div>
     </div>
