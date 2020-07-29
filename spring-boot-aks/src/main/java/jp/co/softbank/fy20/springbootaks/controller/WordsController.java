@@ -69,6 +69,7 @@ public class WordsController {
         return "words/index";
     }
 
+    /*
     //検索画面に移動
     @RequestMapping("/search")
     public String search(Model model, HttpSession session) {
@@ -77,6 +78,7 @@ public class WordsController {
         historyService.sessionSet(session);
         return "words/search";
     }
+    */
     //Name検索
     @RequestMapping("/searchName")
     public String searchName(@RequestParam String name, Model model, 
@@ -219,43 +221,11 @@ public class WordsController {
             return "redirect:/words/id/" + URLEncode(name);
         }
 
-        List<WordsByAbb> wordsList;
-        if(false ){
-            //複数会ったら（直打ち用）
-            //ここからcanに戻す
+        List<WordsByAbb> wordsList = wordsService.findByName(name);
+        if (wordsList.size() == 0){
+            return "redirect:/words/can/" + URLEncode(name);
         }
-        else{
-            //ない -> この後に進めば良い
-            //語句にある->そのまま
-            //同意語にある場合->語句のデータで表示
-            //そもそもない->トップ
-            //同意語のとき
-            
-            //String tmp = wordsService.findNameByAbb(name);
-            String tmp;
-            /*
-            if(tmp != null){
-                //nameを置き換える
-                name = tmp;
-            }*/
-            wordsList = wordsService.findByName(name);
-            if (wordsList.size() == 0){
-                historyService.sessionSet(session,referer);
-                return "redirect:/";
-            }
-            String content = wordsService.makeLink(wordsList.get(0).getContent());
-            List<String> dict = wordsService.findDuplication();
-            for (WordsByAbb words : wordsList){
-                if(words.getAbbName() != null){
-                    if (dict.contains(words.getAbbName().toLowerCase())){
-                        tmp = "<a href=\"/words/can/"+words.getAbbName()+"\">"+words.getAbbName()+"</a>";
-                        words.setAbbName(tmp);
-                    }
-                }
-            }
-            wordsList.get(0).setContent(content);
-        }
-        
+        wordsList = wordsService.makeLink(wordsList);
 
         //ページ名
         model.addAttribute("pageName", name);
