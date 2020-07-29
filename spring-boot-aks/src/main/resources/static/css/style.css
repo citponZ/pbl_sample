@@ -320,7 +320,9 @@ padding: 8px 45px;
         background-color: #ffffff;
         position: relative;
         top: 78px;
-        left:0;
+        left: 0;
+        right: 0;
+        margin: 0px 40px;
         width: 100%;
     }
     /*もっと見る関係の配色*/ 
