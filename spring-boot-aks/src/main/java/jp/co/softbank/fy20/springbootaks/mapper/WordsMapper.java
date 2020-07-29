@@ -23,12 +23,12 @@ public interface WordsMapper {
 
     //名前による同意語も含めた検索
     //１つしかない場合は１つだけ
-    @Select("select name,CAST(content AS NVARCHAR(MAX)) as content from Words where name = #{name} union select Words.name as name,CAST(Words.content AS NVARCHAR(MAX)) as content from Words, Abbreviations where id = wordID and Abbreviations.name = #{name}")
+    @Select("select name,CAST(content AS NVARCHAR(MAX)) as content from Words where name like #{name} union select Words.name as name,CAST(Words.content AS NVARCHAR(MAX)) as content from Words, Abbreviations where id = wordID and Abbreviations.name like #{name}")
     List<Words> findNameByAbbAndName(String name);
 
     //名前による同意語からの検索
     //１つしかとってこない前提
-    @Select("select Words.name from Words, Abbreviations where id = wordID and Abbreviations.name = #{name}")
+    @Select("select Words.name from Words, Abbreviations where id = wordID and Abbreviations.name like #{name}")
     String findNameByAbb(String name);
 
     @Select("select LOWER(name) from (select name from Abbreviations where exists "+
