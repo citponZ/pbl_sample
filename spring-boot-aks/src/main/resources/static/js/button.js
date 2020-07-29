@@ -1,6 +1,8 @@
 
-$(document).on("click", ".add", function() {
-    $(this).parent().clone(true).insertAfter($(this).parent());
+$(document).on("click", ".add", function() {  
+    //$(this).parent().clone(true).insertAfter($(this).parent());
+    //$("#firsttext").clone(true).insertAfter($("#firsttext"));
+    $('#firsttext').parent().clone(true).insertAfter($('#firsttext').parent());
     var textForm = document.getElementById("firsttext");
     textForm.value = '';
 });
