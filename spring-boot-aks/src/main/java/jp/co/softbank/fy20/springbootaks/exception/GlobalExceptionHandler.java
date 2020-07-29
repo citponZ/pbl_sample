@@ -24,7 +24,7 @@ public class GlobalExceptionHandler {
     public String handleException(Exception e, Model model) {
         String message = e.getMessage();
         model.addAttribute("message", message);
-        return "exception/exception";
+        return "redirect:/";
     }
 
     /*
@@ -47,6 +47,6 @@ public class GlobalExceptionHandler {
     public String duplicateKeyException(DuplicateKeyException e, Model model) {
         String message = "この語句は登録されています。";
         model.addAttribute("message", message);
-        return "exception/exception";
+        return "redirect:/";
     }
 }
