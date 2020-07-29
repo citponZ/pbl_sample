@@ -134,8 +134,8 @@ public class WordsServiceImpl implements WordsService {
         List<String> dictList = findAllName();
         String content = wordsList.get(0).getContent();
         Pattern p = Pattern.compile("<a.*?<\\/a>");
-        //URLをaタグに変換
 
+        //URLをaタグに変換
         List<String> splitList = Arrays.asList(content.split("<a.*?<\\/a>",-1));
         Matcher m = p.matcher(content);
         List<String> tagList= new ArrayList<>();
@@ -157,7 +157,17 @@ public class WordsServiceImpl implements WordsService {
 
         //content = content.replaceAll("(http://|https://){1}[\\w\\.\\-/:]+", "<a target=\"_blank\" href='$0'>$0</a>");
 
+        List<String> abbList= new ArrayList<>();
+        for (WordsByAbb words : wordsList){
+            abbList.add(words.getAbbName());
+        }
+        //重複リスト
+        List<String> duplicationList = findDuplication();
+
         for (String dict : dictList){
+            if(!duplicationList.contains(dict.toLowerCase()) && (abbList.contains(dict) || wordsList.get(0).getName().equals(dict))){
+                continue;
+            }
             //aタグを使っていないところで比較
             //split分割
             splitList = Arrays.asList(content.split("<a.*?<\\/a>",-1));
@@ -181,10 +191,9 @@ public class WordsServiceImpl implements WordsService {
         }
         wordsList.get(0).setContent(content);
 
-        List<String> dict = findDuplication();
         for (WordsByAbb words : wordsList){
             if(words.getAbbName() != null){
-                if (dict.contains(words.getAbbName().toLowerCase())){
+                if (duplicationList.contains(words.getAbbName().toLowerCase())){
                     tmp = "<a href=\"/words/can/"+words.getAbbName()+"\">"+words.getAbbName()+"</a>";
                     words.setAbbName(tmp);
                 }
