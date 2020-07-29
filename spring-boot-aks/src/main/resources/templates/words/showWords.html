@@ -5,7 +5,6 @@
       layout:decorate="~{words/common.html}">
   <link rel="stylesheet" href="../../static/css/style.css"
           th:href="@{/css/style.css}">
-  <!-- Custom styles for this template -->
   <link th:href="@{/css/sticky-footer.css}" rel="stylesheet">
 
 <html>
@@ -14,11 +13,9 @@
   <script>
     function confirmDelete(){
       flag = confirm("削除依頼を取り消しますか？");
-
-      // 「はい」が押されたときの処理
       if ( flag == true ){
         return true;
-      }else{    // 「いいえ」が押されたときの処理
+      }else{
         return false;
       }
     };
@@ -51,8 +48,6 @@
       <!--スマホの時-->  
       <h4 align="left" class="normal" id="wordBlank"><span th:text="${wordsList.get(0).name}">メイン</span></h4><!--align="left"-->
     </div>
-
-    <!--yyyy/MM/dd HH:mm:ss.SSSの表記を分までに短縮中-->
     <div align="right">
       <div style="display:inline-flex;">
       <th:block th:if="${wordsList.get(0).updatedDate}">
@@ -91,12 +86,12 @@
   
       
     <div th:if="${wordsList.get(0).abbName}">
-      同意語：<th:block th:each="words, iterStat:${wordsList}"> <!-- ステータス変数はカンマ区切りで2つ目の引数として受け取れる -->
+      同意語：<th:block th:each="words, iterStat:${wordsList}">
       <script th:inline="javascript">
         var str = /*[[${words.abbName}]]*/ '同意語';
         document.write(str);
       </script>
-      <span th:unless="${iterStat.last}">, </span><!-- last変数はループの最後でtrueを返します -->
+      <span th:unless="${iterStat.last}">, </span>
       </th:block>
       <br>
       <br>
@@ -113,8 +108,6 @@
       <br>
       <br>
   </div>
-
-
   <!--jqueryとか-->
   <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
   <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>

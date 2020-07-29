@@ -20,11 +20,9 @@
 <script>
     function confirmDelete(){
       flag = confirm("削除依頼を申請しますか？");
-
-      // 「はい」が押されたときの処理
       if ( flag == true ){
         return true;
-      }else{    // 「いいえ」が押されたときの処理
+      }else{
         return false;
       }
     };
@@ -54,7 +52,6 @@
 
       <div style="display:inline-flex">
       <input type="hidden" th:value="${name}" name="name">
-      <!--<input type="hidden" th:value="admin" name="userID">-->
       <input onclick="return confirmDelete()" class="btn-border" type="submit" value="申請">
     </form>
     <form action="index.html" th:action="@{backURL}">
