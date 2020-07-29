@@ -60,25 +60,9 @@ public class WordsController {
     @RequestMapping("/index")
     public String index(Model model, HttpSession session) {
         historyService.sessionSet(session);
-
-        //ログインユーザを取得
-        //ログインしていない場合は「anonymousUser」となる
-        //Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        //Principalからログインユーザの情報を取得
-        //String userName = auth.getName();
         return "words/index";
     }
 
-    /*
-    //検索画面に移動
-    @RequestMapping("/search")
-    public String search(Model model, HttpSession session) {
-        model.addAttribute("words", null);
-        model.addAttribute("id", null);
-        historyService.sessionSet(session);
-        return "words/search";
-    }
-    */
     //Name検索
     @RequestMapping("/searchName")
     public String searchName(@RequestParam String name, Model model, 
@@ -86,17 +70,10 @@ public class WordsController {
                                     throws UnsupportedEncodingException {
         //語句名が同じものが存在したらその語句のページに遷移
         if (wordsService.checkByName(name) != null || wordsService.findDuplication().contains(name.toLowerCase())){
-            //attributes.addFlashAttribute("message", null);
-            //return "redirect:id/"+name;
-            //historyService.sessionSet(session);
-            //return "redirect:can/"+ URLEncoder.encode(name.replace(" ", "_"), "UTF-8");
             return "redirect:can/" + URLEncode(name);
         }
 
         List<WordsByAbb> wordsList = wordsService.findByNameAsInclude(name);
-
-        //List<WordsByAbb> -> List<WordsListAbb>
-        //name,content,List<Abb>
         List<WordsListAbb> wordsAbbList = wordsService.converToWordsListAbb(wordsList);
         model.addAttribute("wordsList", wordsAbbList);
         if(wordsAbbList.size()==0){
@@ -125,7 +102,6 @@ public class WordsController {
     public String redirectWordsWithH(HttpServletRequest request, 
                             Model model, HttpSession session) throws UnsupportedEncodingException{
         final String name = extractPathFromPattern(request);
-        //半角スペースがあった場合、アンダーバーに置換してリダイレクト
         if(name.contains(" ")){
             return "redirect:/words/can/"+ URLEncode(name);
         }
@@ -169,43 +145,32 @@ public class WordsController {
             historyService.sessionSet(session);
             return "redirect:/";
         }
-        //userIDは現状1を入力しているが本来はsessonからログイン情報を入手して代入
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         historyService.findInsert(auth.getName(), wordsList.get(0).getId());
-        //return "redirect:/words/id/"+ URLEncoder.encode(name.replace(" ", "_"), "UTF-8").replace("%2F", "/").replace("%28", "(").replace("%29", ")");
         return "redirect:/words/id/" + URLEncode(name);
     }
 
-        //履歴追加+曖昧ページに飛ばないパターン
+    //履歴追加+曖昧ページに飛ばないパターン
     @RequestMapping("/cand/**")
     public String redirectWordsWithHT(HttpServletRequest request, 
                                 Model model, HttpSession session) throws UnsupportedEncodingException{
         final String name = extractPathFromPattern(request);
-        //半角スペースがあった場合、アンダーバーに置換してリダイレクト
         if(name.contains(" ")){
             return "redirect:/words/cand/"+ URLEncode(name);
         }
-        /*
-        String tmp = wordsService.findNameByAbb(name);
-        if(tmp != null){
-            return "redirect:/words/cand/"+ URLEncode(tmp);
-        }*/
         List<WordsByAbb> wordsList = wordsService.findByName(name);
         if (wordsList.size() == 0){
             historyService.sessionSet(session);
             return "redirect:/";
         }
-        //userIDは現状1を入力しているが本来はsessonからログイン情報を入手して代入
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         historyService.findInsert(auth.getName(), wordsList.get(0).getId());
-        //return "redirect:/words/id/"+ URLEncoder.encode(name.replace(" ", "_"), "UTF-8").replace("%2F", "/").replace("%28", "(").replace("%29", ")");
         return "redirect:/words/id/" + URLEncode(name);
     }
 
     public static String URLEncode(String name) throws UnsupportedEncodingException{
         return URLEncoder.encode(name.replace(" ", "_"), "UTF-8").replace("%2F", "/").replace("%28", "(").replace("%29", ")");
     }
-
 
     //「/」で区切られている語句に対応
     //「%2F」(/をエンコードした際に出る文字)が語句に入っているとうまくいかない
@@ -215,9 +180,7 @@ public class WordsController {
                             Model model, HttpSession session) throws UnsupportedEncodingException{
         String name = extractPathFromPattern(request);
         String referer = request.getHeader("Referer");
-        //半角スペースがあった場合、アンダーバーに置換してリダイレクト
         if(name.contains(" ")){
-            //return "redirect:/words/id/"+ URLEncoder.encode(name.replace(" ", "_"), "UTF-8").replace("%2F", "/");
             return "redirect:/words/id/" + URLEncode(name);
         }
 
@@ -230,7 +193,6 @@ public class WordsController {
         //ページ名
         model.addAttribute("pageName", name);
         model.addAttribute("wordsList", wordsList);
-        //userIDは現状1を入力しているが本来はsessonからログイン情報を入手して代入
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         DeleteRequest deleteRequest = deleteRequestService.find(name,auth.getName());
         model.addAttribute("deleteRequest", deleteRequest);
@@ -258,7 +220,6 @@ public class WordsController {
         model.addAttribute("name", name);
         if (wordsService.checkByName(name) == null){
             //なかった時
-            //model.addAttribute("message", "この語句は存在しません。");
             attributes.addFlashAttribute("message", "この語句は存在しません。");
             historyService.sessionSet(session);
             return "redirect/words/deleteMain";
@@ -304,7 +265,6 @@ public class WordsController {
             historyService.sessionSet(session,referer);
             return "words/insertMain";
         }
-        
         //語句名が同じものが存在したらその語句の更新ページに遷移
         model.addAttribute("name", nameForm.getName());
         if (wordsService.checkByName(nameForm.getName()) != null){
@@ -330,7 +290,6 @@ public class WordsController {
             historyService.sessionSet(session);
             return "words/insertcontent";
         }
-
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         wordsForm.setUserID(auth.getName());
         Words words = wordsForm.convertToEntity();
@@ -343,22 +302,7 @@ public class WordsController {
             }
         }
         historyService.sessionSet(session);
-        //return "redirect:id/"+ URLEncoder.encode(name.replace(" ", "_"), "UTF-8").replace("%2F", "/");
         return "redirect:id/" + URLEncode(name);
-    }
-
-    //updateMain
-    @RequestMapping("/updateMain")
-    public String update(Model model, HttpSession session) {
-        return "redirect:/words/update";
-    }
-    //updateMain
-    @RequestMapping("/update")
-    public String update2(Model model, HttpSession session) {
-        model.addAttribute("name", null);
-        model.addAttribute("nameForm", new NameForm());
-        historyService.sessionSet(session);
-        return "words/updateMain";
     }
 
     //ID検索
@@ -381,7 +325,6 @@ public class WordsController {
     @PostMapping("/updateComplete")
     public String updateComplete(@RequestParam String id,@RequestParam String content,@RequestParam("array[]") List<String> abbList,
                                     Model model, HttpSession session) throws Exception {
-        //userIDは現状1を入力しているが本来はsessonからログイン情報を入手して代入
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         wordsService.update(content, Integer.parseInt(id), auth.getName());
         Words words = wordsService.find(Integer.parseInt(id));
@@ -398,7 +341,6 @@ public class WordsController {
             }
         }
         historyService.sessionSet(session);
-        //return "redirect:id/"+ URLEncoder.encode(name.replace(" ", "_"), "UTF-8").replace("%2F", "/");
         return "redirect:id/" + URLEncode(name);
     }
 
@@ -425,7 +367,6 @@ public class WordsController {
     public String deleteRequestCancel(@RequestParam String name, Model model) throws Exception {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         deleteRequestService.delete(name, auth.getName());
-        //return "redirect:id/"+ URLEncoder.encode(name.replace(" ", "_"), "UTF-8").replace("%2F", "/");
         return "redirect:id/" + URLEncode(name);
     }
 
@@ -455,26 +396,5 @@ public class WordsController {
         }
         return "redirect:" + referer;
     }
-
-
-
-    
-
-
-        //検索画面に移動
-        @RequestMapping("/ranking")
-        public String ranking(Model model) {
-            return "words/ranking";
-        }
-
-        //検索画面に移動
-        @RequestMapping("/word")
-        public String words(Model model) {
-            return "words/word";
-        }
-        @RequestMapping("/test")
-        public String test(Model model) {
-            return "words/test";
-        }
 
 }

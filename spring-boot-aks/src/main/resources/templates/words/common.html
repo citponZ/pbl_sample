@@ -7,21 +7,8 @@
 
     <link rel="stylesheet" href="../../static/css/style.css"
           th:href="@{/css/style.css}">
-
-
-    <!--
-    <link rel="stylesheet" href="../../static/css/style.css"
-          th:href="@{/css/style.css}"
-          media="screen and (min-width: 992px)">
-    <link rel="stylesheet" href="../../static/css/contents2.css"
-          th:href="@{/css/contents2.css}"
-          media="screen and (max-width: 991px">
-
-    -->
     <link rel="stylesheet" href="../../static/css/newWords.css"
           th:href="@{/css/newWords.css}">
-    <!--<link rel="stylesheet" href="../../static/css/newWords.css"
-          th:href="@{/css/test.css}">-->
     
     <!--トップに戻るボタンが三角になるやつ-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.4/css/all.css">
@@ -30,8 +17,7 @@
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"
   />
-<!--<html xmlns:th="http://www.thymeleaf.org"></html>-->
-<!-- (1)共通にしたいheadをfragment化する -->
+
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
 <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
@@ -41,7 +27,6 @@
 
 <body>
   <div class='fixed-top'>
-    <!-- (5)body内で共通化したい部品をfragment化する -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <a class="navbar-brand" th:href="@{/}">
         <img th:src="@{/images/logo.png}" width="100" height="50" class="d-inline-block align-top" alt="ブランド">
@@ -62,10 +47,6 @@
             <a class="nav-link" th:href="@{/words/insertMain}">新規追加 <span class="sr-only">(現位置)</span></a>
           </li>
         </ul>
-        <!--
-        <form class="form-inline my-2 my-lg-0" th:action="@{/logout}">
-          <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Sign out</button>
-        </form>-->
         <form class="form-inline my-2 my-lg-0" th:action="@{/words/searchName}">
           <input type="search" class="form-control mr-sm-2" placeholder="語句検索..." aria-label="語句検索.." name="name">
           <button type="submit" class="btn btn-outline-success my-2 my-sm-0">検索</button>
@@ -128,67 +109,15 @@
 
     <div class="contents">
       <img class="d-block mx-auto" th:src="@{/images/logo.png}" > 
-        <!--コンテンツ-->
-        <!--
-        <div class="d-block mx-auto">
-        <div class="search-wrapper">
-          <div class="input-holder">
-              <input type="text" class="search-input" placeholder="Type to search" />
-              <button class="search-icon" onclick="searchToggle(this, event);"><span></span></button>
-          </div>
-          <span class="close" onclick="searchToggle(this, event);"></span>
-        </div>
-      </div>
-      -->
         <div layout:fragment="content"></div>
     </div>
 
     <div class="d-none d-lg-block">
       <div class="grovalNavigation">
-
-      <!--
-      
-      //<p>グローバルナビゲーション</p>
-      <br>
-      <p>操作メニュー</p>
-      <div align="center">
-      <table>
-
-          <tr>
-            <td>
-              <form action="index.html" th:action="@{/words/insertMain}" method="POST">
-                <input type="submit" value="追加" id="submit_button" class="btn-border">
-              </form>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <form action="index.html" th:action="@{/words/updateMain}" method="POST">
-                <input type="submit" value="更新" id="submit_button" class="btn-border">
-              </form>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <form action="index.html" th:action="@{/words/delete}" method="POST">
-                <input type="submit" value="削除" id="submit_button" class="btn-border">
-              </form>
-            </td>
-          </tr>
-        
-      </table>
-      </div>
-       -->
       </div>
     </div>
- 
-     
-
-        
   </div>
-
   <div id="page_top"><a href="#"></a></div>
-
   <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
 </body>
 

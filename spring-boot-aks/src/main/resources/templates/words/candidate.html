@@ -21,7 +21,6 @@
   <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
   <link rel="shortcut icon" th:href="@{/images/favicon.ico}">
   <link th:href="@{/css/ranking.css}" rel="stylesheet">
-
   <!--jqueryとか-->
   <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.5/pagination.js"></script>
@@ -60,10 +59,10 @@
                   <a style="margin: 0 0 0 5%; color: #bfd8d2;" class="large" th:href="@{'/words/cand/'+ *{nameByURL}}"><span style="color:#bfd8d2;" th:text="*{name}">メイン</span></a>
                   <th:block th:if="${words.abbName.size()}">
                     <br>
-                    <th:block th:each="abb, iterStat:*{abbName}"> <!-- ステータス変数はカンマ区切りで2つ目の引数として受け取れる -->
+                    <th:block th:each="abb, iterStat:*{abbName}">
                       <span th:if="${iterStat.first}" th:text="${abb}" style="margin: 0 0 0 5%;">略語</span>
                       <span th:unless="${iterStat.first}" th:text="${abb}">略語</span>
-                      <span th:unless="${iterStat.last}">, </span><!-- last変数はループの最後でtrueを返します -->
+                      <span th:unless="${iterStat.last}">, </span>
                     </th:block>
                   </th:block>
                 </td>
@@ -95,9 +94,7 @@
           <script　th:inline="javascript">
             num=num+1;
             if (4 < num && num%7==0 && num!=len) {
-                document.write('</div>');
-                document.write('<div class="more">もっと見る</div>');
-                document.write('<div class="content">');                  
+                document.write('</div><div class="more">もっと見る</div><div class="content">');               
             } 
             if(num==len){
               document.write('<a class="topButtonCor" href="#">トップに戻る</a>');
