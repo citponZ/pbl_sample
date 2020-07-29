@@ -33,7 +33,7 @@ public interface WordsService {
 
     List<WordsListAbb> converToWordsListAbb(List<WordsByAbb> wordsAbbList);
 
-    String makeLink(String content);
+    List<WordsByAbb> makeLink(List<WordsByAbb> wordsList);
 
     //略語の追加
     void insertAbb(String wordName, String abbName);

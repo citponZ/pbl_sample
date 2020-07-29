@@ -17,15 +17,17 @@ public class SampleController {
   @Autowired
   SampleDao sampleDao;
 
+  
   /**
    * データベースを使用したサンプル・プログラムを実行します。
    *
    * @return 実行結果
    */
+  /*
   @GetMapping("/datasource")
   public String healthByDataSource() {
     return sampleDao.getHealth();
-  }
+  }*/
 
   /**
    * セッションを使用したサンプルを実行します。
@@ -34,6 +36,7 @@ public class SampleController {
    * @param session HTTP セッション
    * @return 実行結果
    */
+  /*
   @GetMapping("/hello/{name}")
   public String sayHello(@PathVariable String name, HttpSession session) {
     StringBuilder result = new StringBuilder();
@@ -46,6 +49,6 @@ public class SampleController {
     session.setAttribute("name", name);
 
     return result.toString();
-  }
+  }*/
 
 }

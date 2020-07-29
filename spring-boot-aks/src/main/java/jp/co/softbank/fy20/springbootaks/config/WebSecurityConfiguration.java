@@ -58,9 +58,10 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
               .mvcMatchers("/words/deleterequest**").permitAll()
               .mvcMatchers("/words/delete**").hasRole("ADMIN")
               .mvcMatchers("/words/**").permitAll()
-              .mvcMatchers("/datasource").authenticated()
+              //.mvcMatchers("/datasource").authenticated()
               //.mvcMatchers("/datasource").hasRole("ADMIN")
-              .anyRequest().authenticated();
+              //.anyRequest().authenticated();
+              .anyRequest().permitAll();
       http.logout()
               .logoutSuccessUrl("/");
   }  

@@ -130,18 +130,49 @@ public class WordsServiceImpl implements WordsService {
     }
 
     @Override
-    public String makeLink(String content){
+    public List<WordsByAbb> makeLink(List<WordsByAbb> wordsList){
         List<String> dictList = findAllName();
-        //URLをaタグに変換
-        content = content.replaceAll("(http://|https://){1}[\\w\\.\\-/:]+", "<a target=\"_blank\" href='$0'>$0</a>");
+        String content = wordsList.get(0).getContent();
         Pattern p = Pattern.compile("<a.*?<\\/a>");
 
+        //URLをaタグに変換
+        List<String> splitList = Arrays.asList(content.split("<a.*?<\\/a>",-1));
+        Matcher m = p.matcher(content);
+        List<String> tagList= new ArrayList<>();
+        while (m.find()) {
+            tagList.add(m.group());
+        }
+        //replase
+        for (int i=0; i<splitList.size() ; i++){
+            splitList.set(i, splitList.get(i).replaceAll("(http://|https://){1}[\\w\\.\\-/:]+", 
+                                                        "<a target=\"_blank\" href='$0'>$0</a>"));
+        }
+        String tmp = "";
+        //　くっつける //list[0] -> list2[0] -> list[1] -> list2[1] -> list[2]
+        for (int i=0; i<tagList.size() ; i++){
+            tmp += splitList.get(i) + tagList.get(i);
+        }
+        tmp += splitList.get(splitList.size()-1);
+        content = tmp;
+
+        //content = content.replaceAll("(http://|https://){1}[\\w\\.\\-/:]+", "<a target=\"_blank\" href='$0'>$0</a>");
+
+        List<String> abbList= new ArrayList<>();
+        for (WordsByAbb words : wordsList){
+            abbList.add(words.getAbbName());
+        }
+        //重複リスト
+        List<String> duplicationList = findDuplication();
+
         for (String dict : dictList){
+            if(!duplicationList.contains(dict.toLowerCase()) && (abbList.contains(dict) || wordsList.get(0).getName().equals(dict))){
+                continue;
+            }
             //aタグを使っていないところで比較
             //split分割
-            List<String> splitList = Arrays.asList(content.split("<a.*?<\\/a>",-1));
-            Matcher m = p.matcher(content);
-            List<String> tagList= new ArrayList<>();
+            splitList = Arrays.asList(content.split("<a.*?<\\/a>",-1));
+            m = p.matcher(content);
+            tagList= new ArrayList<>();
             while (m.find()) {
                 tagList.add(m.group());
             }
@@ -150,7 +181,7 @@ public class WordsServiceImpl implements WordsService {
                 splitList.set(i, splitList.get(i).replace(dict, 
                             "<a href=\"/words/can/"+dict+"\">"+dict+"</a>"));
             }
-            String tmp = "";
+            tmp = "";
             //　くっつける //list[0] -> list2[0] -> list[1] -> list2[1] -> list[2]
             for (int i=0; i<tagList.size() ; i++){
                 tmp += splitList.get(i) + tagList.get(i);
@@ -158,7 +189,17 @@ public class WordsServiceImpl implements WordsService {
             tmp += splitList.get(splitList.size()-1);
             content = tmp;
         }
-        return content;
+        wordsList.get(0).setContent(content);
+
+        for (WordsByAbb words : wordsList){
+            if(words.getAbbName() != null){
+                if (duplicationList.contains(words.getAbbName().toLowerCase())){
+                    tmp = "<a href=\"/words/can/"+words.getAbbName()+"\">"+words.getAbbName()+"</a>";
+                    words.setAbbName(tmp);
+                }
+            }
+        }
+        return wordsList;
     }
 
     //略語の追加
