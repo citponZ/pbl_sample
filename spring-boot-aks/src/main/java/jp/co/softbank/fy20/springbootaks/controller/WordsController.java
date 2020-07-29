@@ -77,13 +77,14 @@ public class WordsController {
         List<WordsListAbb> wordsAbbList = wordsService.converToWordsListAbb(wordsList);
         model.addAttribute("wordsList", wordsAbbList);
         if(wordsAbbList.size()==0){
-            model.addAttribute("message", "「"+name+"」"+"との一致はありません。");
+            model.addAttribute("message", "「"+name+"」"+"との一致はありませんでした。");
+            model.addAttribute("inputname", name);
         }
         else{
             model.addAttribute("message", "「"+name+"」"+"の検索結果："+wordsAbbList.size()+"件");
         }
         model.addAttribute("searchName", name+" - 検索");
-        model.addAttribute("testname", name);
+        
         historyService.sessionSet(session);
         return "words/candidate";
     }

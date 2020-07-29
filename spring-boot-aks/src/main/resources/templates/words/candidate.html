@@ -16,12 +16,6 @@
       document.title = /*[[${searchName}]]*/ 'error';
     /*]]>*/
   </script>
-  <script Language="JavaScript">
-    function send()
-    {
-      document.myFORM.submit();
-    }
-    </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
@@ -50,12 +44,18 @@
       </div>
     </div>
     <div align="center">
-      <h4 id="top"><p th:text="${message}">test</p></h4>
+      <h4 id="top"><p th:text="${message}">test</p></h4><br>
       <th:block th:unless="${wordsList.size()}">
+        <h4 id="top contentBlank" style="text-align: left;">検索のヒント</h4>
+        <h6 id="top contentBlank" style="text-align: left;">・キーワードに誤字・脱字がないか確かめて下さい。</h6>
+        <h6 id="top contentBlank" style="text-align: left;">・違うキーワードを使ってみてください。</h6>
+        <h6 id="top contentBlank" style="text-align: left;">・より一般的な言葉を使ってみてください。</h6>
+        <br>
+        <h4 id="top contentBlank" style="text-align: left;">それでも見つからない場合は</h4>
         <form action="index.html" th:action="@{/words/inputContent}" method="POST" name="myFORM">
-          <input type="hidden" name="name" th:value="${testname}">
-        </form>
-        <h4 id="top">登録は<a href="javaScript:send()">こちら</a>から</h4>
+          <input type="hidden" name="name" th:value="${inputname}">
+        <h6 id="top contentBlank" style="text-align: left;">　新規語句の追加は<a href="#" onClick="document.myFORM.submit();">こちら</a></h6>
+      </form>
       </th:block>
 
       <div class="content">
