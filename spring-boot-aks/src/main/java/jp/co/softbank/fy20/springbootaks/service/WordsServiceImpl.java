@@ -133,6 +133,7 @@ public class WordsServiceImpl implements WordsService {
     public List<WordsByAbb> makeLink(List<WordsByAbb> wordsList){
         List<String> dictList = findAllName();
         String content = wordsList.get(0).getContent();
+        //content = content.replace("&", "&amp;");
         Pattern p = Pattern.compile("<a.*?<\\/a>");
 
         //URLをaタグに変換
@@ -187,18 +188,64 @@ public class WordsServiceImpl implements WordsService {
                 tmp += splitList.get(i) + tagList.get(i);
             }
             tmp += splitList.get(splitList.size()-1);
+            //tmp = tmp.replace("<script>", "&lt;script&gt;");
+            //tmp = tmp.replace("</script>", "&lt;/script&gt;");
+            //tmp = tmp.replace(">", "&gt;");
+            //tmp = tmp.replace("<", "&lt;");
+            //tmp = tmp.replace("\"", "&quot;");
+            //tmp = tmp.replace("\'", "&#x27;");
+            //tmp = tmp.replace("`", "&#x60;");
             content = tmp;
         }
+
+        splitList = Arrays.asList(content.split("<a.*?<\\/a>",-1));
+        m = p.matcher(content);
+        tagList= new ArrayList<>();
+        while (m.find()) {
+            tagList.add(m.group());
+        }
+        //replase
+        for (int i=0; i<splitList.size() ; i++){
+            splitList.set(i, htmlEscape(splitList.get(i)));
+        }
+        tmp = "";
+        //　くっつける //list[0] -> list2[0] -> list[1] -> list2[1] -> list[2]
+        for (int i=0; i<tagList.size() ; i++){
+            tmp += splitList.get(i) + tagList.get(i);
+        }
+        tmp += splitList.get(splitList.size()-1);
+        content = tmp;
+
         wordsList.get(0).setContent(content);
 
         for (WordsByAbb words : wordsList){
             if(words.getAbbName() != null){
+                tmp = words.getAbbName();
                 if (duplicationList.contains(words.getAbbName().toLowerCase())){
-                    tmp = "<a href=\"/words/can/"+words.getAbbName()+"\">"+words.getAbbName()+"</a>";
-                    words.setAbbName(tmp);
+                    tmp = "<a href=\"/words/can/"+tmp+"\">"+tmp+"</a>";
                 }
+
+                splitList = Arrays.asList(tmp.split("<a.*?<\\/a>",-1));
+                m = p.matcher(tmp);
+                tagList= new ArrayList<>();
+                while (m.find()) {
+                    tagList.add(m.group());
+                }
+                //replase
+                for (int i=0; i<splitList.size() ; i++){
+                    splitList.set(i, htmlEscape(splitList.get(i)));
+                }
+                tmp = "";
+                //　くっつける //list[0] -> list2[0] -> list[1] -> list2[1] -> list[2]
+                for (int i=0; i<tagList.size() ; i++){
+                    tmp += splitList.get(i) + tagList.get(i);
+                }
+                tmp += splitList.get(splitList.size()-1);
+                words.setAbbName(tmp);
             }
         }
+
+        wordsList.get(0).setName((wordsList.get(0).getName()));
         return wordsList;
     }
 
@@ -229,4 +276,40 @@ public class WordsServiceImpl implements WordsService {
     public List<String> findAllByNameAbb(String wordName){
         return wordsMapper.findAllByNameAbb(wordName);
     }
+
+    /**
+     * <p>[概 要] HTMLエスケープ処理</p>
+     * <p>[詳 細] </p>
+     * <p>[備 考] </p>
+     * @param  str 文字列
+     * @return HTMLエスケープ後の文字列
+     */
+	public String htmlEscape(String str){
+		StringBuffer result = new StringBuffer();
+		for(char c : str.toCharArray()) {
+			switch (c) {
+			case '&' :
+				result.append("&amp;");
+				break;
+			case '<' :
+				result.append("&lt;");
+				break;
+			case '>' :
+				result.append("&gt;");
+				break;
+			case '"' :
+				result.append("&quot;");
+				break;
+            /*
+			case ' ' :
+				result.append("&nbsp;");
+				break;*/
+			default :
+				result.append(c);
+				break;
+			}
+		}
+		return result.toString();
+	}
+
 }

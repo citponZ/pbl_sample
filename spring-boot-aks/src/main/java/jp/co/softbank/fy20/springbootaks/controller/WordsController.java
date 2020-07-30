@@ -10,8 +10,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.AntPathMatcher;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
+//import org.springframework.web.bind.annotation.GetMapping;
+//import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,7 +19,7 @@ import org.springframework.web.servlet.HandlerMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PathVariable;
+//import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -130,8 +130,9 @@ public class WordsController {
                 String tmp = words.getContent();
                 int Length = 20;
                 int maxLength = (tmp.length() < Length)?tmp.length():Length;
-                tmp = tmp.substring(0, maxLength);
-                str += "・<a href=\"/words/cand/"+words.getName()+"\">"+words.getName()+"</a> - " + tmp + "......<br>";
+                tmp = wordsService.htmlEscape(tmp.substring(0, maxLength)).replace("\n", "");
+                String showName = wordsService.htmlEscape(words.getName());
+                str += "・<a href=\"/words/cand/"+words.getName()+"\">"+showName+"</a> - " + tmp + "......<br>";
             }
             str += "<br>一つの語句が複数の意味を有するために、異なる用法を一覧にしてあります。<br>お探しの用語に一番近い記事を選んで下さい。";
             wordsList.add(new WordsByAbb(name2,str));  
@@ -171,7 +172,9 @@ public class WordsController {
     }
 
     public static String URLEncode(String name) throws UnsupportedEncodingException{
-        return URLEncoder.encode(name.replace(" ", "_"), "UTF-8").replace("%2F", "/").replace("%28", "(").replace("%29", ")");
+
+        String tmp = URLEncoder.encode(name.replace(" ", "_"), "UTF-8").replace("%2F", "/").replace("%28", "(").replace("%29", ")").replace("%2C", ",").replace("%27", "'").replace("%60", "`");
+        return tmp;
     }
 
     //「/」で区切られている語句に対応
@@ -190,13 +193,18 @@ public class WordsController {
         if (wordsList.size() == 0){
             return "redirect:/words/can/" + URLEncode(name);
         }
+
         wordsList = wordsService.makeLink(wordsList);
 
+        //name = name.replace("<script>", "&lt;script&gt;");
+        //name = name.replace("</script>", "&lt;/script&gt;");
         //ページ名
         model.addAttribute("pageName", name);
         model.addAttribute("wordsList", wordsList);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         DeleteRequest deleteRequest = deleteRequestService.find(name,auth.getName());
+        System.out.println(deleteRequest);
+        System.out.println(name);
         model.addAttribute("deleteRequest", deleteRequest);
         historyService.sessionSet(session,referer);
         return "words/showWords";

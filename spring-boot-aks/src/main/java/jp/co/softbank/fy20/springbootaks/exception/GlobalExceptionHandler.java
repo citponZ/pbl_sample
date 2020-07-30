@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import jp.co.softbank.fy20.springbootaks.service.WordsService;
-
 @ControllerAdvice
 public class GlobalExceptionHandler {
     /*private final WordsService wordsService;

@@ -47,4 +47,6 @@ public interface WordsService {
 
     //略語全取得
     List<String> findAllByNameAbb(String wordName);
+
+    String htmlEscape(String str);
 }
