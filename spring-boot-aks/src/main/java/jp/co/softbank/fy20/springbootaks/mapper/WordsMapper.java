@@ -64,7 +64,7 @@ public interface WordsMapper {
     "Words LEFT OUTER JOIN Abbreviations ON Words.id = Abbreviations.wordID where Words.id = rs.id")
     List<WordsByAbb> findByNameAsInclude(String name);
 
-    @Select("SELECT TOP (1) * FROM Words WHERE name like #{name}")
+    @Select("SELECT TOP (1) * FROM Words WHERE name=#{name}")
     Words checkByName(String name);
 
     //略語の追加
