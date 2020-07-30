@@ -6,7 +6,6 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Update;
 import java.util.List;
 
 @Mapper
@@ -27,7 +26,7 @@ public interface DeleteRequestMapper {
     List<DeleteRequest> findByName(String name);
 
     //wordIDとuserIDの一致する１つを検索
-    @Select("SELECT * FROM DeleteRequest WHERE wordName=#{wordName} and userID=#{userID}")
+    @Select("SELECT * FROM DeleteRequest WHERE wordName like #{wordName} and userID like #{userID}")
     DeleteRequest find(String wordName, String userID);
 
     //IDの一致する１つを検索
@@ -35,11 +34,11 @@ public interface DeleteRequestMapper {
     DeleteRequest findId(Integer id);
 
     //wordIDのものをずべて削除
-    @Delete("DELETE FROM DeleteRequest WHERE wordName=#{wordName}")
+    @Delete("DELETE FROM DeleteRequest WHERE wordName like #{wordName}")
     boolean deleteWord(String wordName);
 
     //wordIDとuserIDの一致する１つを削除
-    @Delete("DELETE FROM DeleteRequest WHERE wordName=#{wordName} and userID=#{userID}")
+    @Delete("DELETE FROM DeleteRequest WHERE wordName like #{wordName} and userID like #{userID}")
     boolean delete(String wordName, String userID);
 
     //IDの一致する１つを削除
