@@ -37,7 +37,7 @@ http://[自分のPCのIPアドレス]:8080/
 
 
 ## ソフぺディアコンテナを立ち上げない場合
-' /Users/sofpedia/Desktop/pbl_sample/spring-boot-aks/src/main/java/jp/co/softbank/fy20/springbootaks/SampleApplication.java '
+> /Users/sofpedia/Desktop/pbl_sample/spring-boot-aks/src/main/java/jp/co/softbank/fy20/springbootaks/SampleApplication.java
 を実行
 
 http/localhost:8080/にアクセスし接続できていれば成功
