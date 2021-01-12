@@ -6,13 +6,13 @@ git clone
 
 ## SQL Serverを起動するシェルを編集
 
-''' sh:pbl_sample/spring-boot-aks/sql.sh
+```sh:pbl_sample/spring-boot-aks/sql.sh
 
 
 #SQLサーバーにログイン 172.20.10.9　と　sql.shのパス　の部分は各自変更
 sqlcmd -S 172.20.10.9,1433 -U SA -P password123@ < /Users/sofpedia/Desktop/pbl_sample/spring-boot-aks/sql/ddl.sql
 
-'''
+```
 
 
 ## SQLServerを起動
